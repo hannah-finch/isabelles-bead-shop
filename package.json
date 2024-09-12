@@ -1,0 +1,12 @@
+{
+  "name": "isabelles-bead-shop",
+  "version": "1.0.0",
+  "description": "E-commerce site for a small jewelry shop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
