@@ -1,8 +1,11 @@
 # isabellesbeadshop
 E-commerce site for a small jewelry shop
 
+- [isabellesbeadshop](#isabellesbeadshop)
+  - [Installation](#installation)
+  - [Resources](#resources)
 
-## installation
+## Installation
 
 1. download and install node
 2. clone the repository 
@@ -10,7 +13,7 @@ E-commerce site for a small jewelry shop
 4. enter the following command to install all the dependencies `npm run install`
 5. enter the following command to run the program `npm run dev`
 
-## resources
+## Resources
 
 - tailwindcss: https://tailwindcss.com
 - Material Tailwind : https://www.material-tailwind.com
