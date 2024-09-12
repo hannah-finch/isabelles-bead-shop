@@ -21,6 +21,7 @@ const startApolloServer = async () => {
     "/graphql",
     expressMiddleware(
       server
+      // TODO enable this when implementing auth middleware
       //   {
       //   // TODO enable this
       //   context:authMiddleware
