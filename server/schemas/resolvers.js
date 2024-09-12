@@ -1,5 +1,3 @@
-
-
 const { User, Product } = require("../models");
 
 //TODO import auths
