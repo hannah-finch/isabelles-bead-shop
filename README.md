@@ -14,4 +14,4 @@ E-commerce site for a small jewelry shop
 
 - tailwindcss: https://tailwindcss.com
 - Material Tailwind : https://www.material-tailwind.com
-- Hannah's big brain : [https://www.https://github.com/hannahschwen](https://github.com/hannahschwen)
+- Hannah's big brain : [https://github.com/hannahschwen](https://github.com/hannahschwen)
