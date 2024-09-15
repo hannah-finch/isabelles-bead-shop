@@ -8,7 +8,12 @@ type Query {
 
 type Mutation {
     createUser(userName: String!, email: String!, password: String!, clientName: String!): User
+    login(userName: String!, password: String!): Auth
     createProduct(name: String!, price: Int!, description: String!, imageURL: String!, category: String!, quantity: Int!): Product
+}
+type Auth {
+    token: ID!,
+    user: User
 }
 
 type User {
