@@ -22,10 +22,11 @@ const resolvers = {
     },
     //* Product Mutations
     //********************************* */
+    
     createProduct: async (_, input) => {
       const product = await Product.create(input);
       return product;
-    },
+    }
   },
 };
 
