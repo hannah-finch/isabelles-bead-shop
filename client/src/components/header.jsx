@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
-    <header>
+    <>
       <nav>
         {/* these page routes aren't made yet */}
         <NavLink to={'/about'} className={({ isActive }) => (isActive ? "active-link" : "")}>
@@ -21,12 +21,14 @@ function Header() {
           <div className="cart-num">8</div>
         </NavLink>
       </nav>
-      <div className="logo-container">
-        <h1>Isabelle&apos;s Bead Shop</h1>
-        <img></img>
-      </div>
-    </header>
-
+      
+      <header>
+        <div className="logo-container">
+          <h1>Isabelle&apos;s Bead Shop</h1>
+          <img></img>
+        </div>
+      </header>
+    </>
   )
 }
 

@@ -14,10 +14,9 @@ module.exports = {
   }),
   authMiddleware: function ({}) {
     //TODO implement your own authentication logic
-    
   },
-  signToken: function ({ userName, password }) {
-    const payload = { userName, password };
+  signToken: function ({ username, password }) {
+    const payload = { username, password };
 
     return jwt.sign(payload, secret, { expiresIn: expiration });
   },
