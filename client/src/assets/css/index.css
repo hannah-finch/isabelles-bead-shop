@@ -1,6 +1,30 @@
+:root {
+  --white: #ffffff;
+  --whitish: #f7f7f7;
+  --blackish: #373737;
+  --gray: #8a8a8a;
+  --cream: #e8e1d1;
+  --teal: #86b5b7;
+  --mint: #c9dad0;
+  --green: #b5b986;
+  --blue: #accbe0;
+  --pink: #e0b4b4;
+  --yellow: #e6cd8c;
+}
+
+
+
+
 /* just here so I know it exists, change later */
 .vertical-line {
   width:100px;
   height: 100px;
   background-color: #000000;
+}
+
+
+
+/* Header Styles -------------------------- */
+nav {
+  background-color: ;
 }
