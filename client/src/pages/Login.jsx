@@ -1,7 +1,88 @@
+// Login is temporarily saving username and password with state, send that to back end on form submit
+
+import { useState } from 'react';
+
+const LoginForm = (() => {
+  // use state to save login input
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [usernameMessage, setUsernameMessage] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+
+  const handleInputChange = (e) => {
+    // Getting the value and name of the input which triggered the change
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+
+    // set the state based on input type
+    if (inputType === 'username') {
+      setUsername(inputValue);
+    } else {
+      setPassword(inputValue);
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+
+    if (inputType === 'username') {
+      inputValue === '' ? setUsernameMessage('Username is required') : setUsernameMessage('');
+    } else {
+      inputValue === '' ? setPasswordMessage('Password is required') : setPasswordMessage('');
+    }
+  };
+
+  // TODO: Write logic for form submit
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+
+
+    // AFTER logging in, alert user and reset state
+    alert(`Welcome, ${username}!`);
+    setUsername('');
+    setPassword('');
+  }
+
+  return (
+    <form onSubmit={handleFormSubmit}>
+    <input
+      value={username}
+      name="username"
+      onChange={handleInputChange}
+      onBlur={handleBlur}
+      type="text"
+      placeholder="username"
+      required
+    />
+    <label htmlFor="username">{usernameMessage}</label><br></br>
+    <input
+      value={password}
+      name="password"
+      onChange={handleInputChange}
+      onBlur={handleBlur}
+      type="password"
+      placeholder="password"
+      required
+    />
+    <label htmlFor="password">{passwordMessage}</label><br></br>
+    <button className="submit-btn" type="submit">
+      Submit
+    </button>
+  </form>
+  )
+})
+
+
+
 function LoginPage() {
   return (
     <>
       <h1>This is a Login Page</h1>
+      <LoginForm />
     </>
   );
 }
