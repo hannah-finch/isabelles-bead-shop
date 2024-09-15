@@ -14,6 +14,7 @@ module.exports = {
   }),
   authMiddleware: function ({}) {
     //TODO implement your own authentication logic
+    
   },
   signToken: function ({ userName, password }) {
     const payload = { userName, password };
