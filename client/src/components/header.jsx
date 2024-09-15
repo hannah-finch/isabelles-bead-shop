@@ -12,8 +12,13 @@ function Header() {
           account
         </NavLink>
         <div className="vertical-line"></div>
+
+        {/* TODO: Change cart text to a cart icon */}
         <NavLink to={'/cart'} className={({ isActive }) => (isActive ? "active-link" : "")}>
           cart
+          {/* TODO: show cart.length here instead of 8 */}
+          {/* TODO: cart number should only render if cart.length */}
+          <div className="cart-num">8</div>
         </NavLink>
       </nav>
       <div className="logo-container">
