@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
-
+import Auth from "../utils/auth";
 const LoginForm = () => {
   // use state to save login input
   const [username, setUsername] = useState("");
@@ -53,6 +53,7 @@ const LoginForm = () => {
         variables: { username, password },
       });
       console.log(data);
+      Auth.login(data.login.token);
     } catch (err) {
       console.log(err);
     }

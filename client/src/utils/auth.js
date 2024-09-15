@@ -1,4 +1,4 @@
-import decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 class AuthService {
   login(idToken) {
@@ -16,7 +16,7 @@ class AuthService {
     return localStorage.getItem("id_token");
   }
   getProfile() {
-    return decode(localStorage.getItem("id_token"));
+    return jwtDecode(localStorage.getItem("id_token"));
   }
   //TODO: Figure out how to get ADMIN
   isAdmin() {

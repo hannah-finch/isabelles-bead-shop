@@ -2,7 +2,7 @@
 
 // Basic model is schema will have:
 // _id
-// userName (this is what we'll use to log in)
+// username (this is what we'll use to log in)
 // email (for any varification)
 // password
 // clientName

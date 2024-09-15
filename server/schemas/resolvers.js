@@ -29,8 +29,8 @@ const resolvers = {
     //* Sign In Mutation
     //********************************* */
     //TODO MAKE LOGIN ACCEPT EMAIL TOO
-    login: async (_, { userName, password }) => {
-      const user = await User.findOne({ userName });
+    login: async (_, { username, password }) => {
+      const user = await User.findOne({ username });
       if (!user) throw new Error("User not found");
       const valid = await user.validatePassword(password);
       if (!valid) throw new Error("Invalid password");
