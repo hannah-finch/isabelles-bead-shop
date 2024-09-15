@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { setContext } from "@apollo/client/link/context";
 
 import {
   ApolloClient,
@@ -6,7 +7,9 @@ import {
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+
+import Header from './components/header'
+import Footer from './components/footer'
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -30,7 +33,13 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Outlet />
+        <Header />
+
+        <main>
+          <Outlet />
+        </main>
+
+        <Footer />
       </ApolloProvider>
     </>
   );
