@@ -4,6 +4,9 @@ function Header() {
   return (
     <>
       <nav>
+        <NavLink to={'/'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+          shop
+        </NavLink>
         {/* these page routes aren't made yet */}
         <NavLink to={'/about'} className={({ isActive }) => (isActive ? "active-link" : "")}>
           about
@@ -21,11 +24,11 @@ function Header() {
           <div className="cart-num">8</div>
         </NavLink>
       </nav>
-      
+
       <header>
-        <div className="logo-container">
-          <h1>Isabelle&apos;s Bead Shop</h1>
-          <img></img>
+        <div>
+          <h1>Isabelle’s Bead Shop</h1>
+          <img src='/images/icon-zigzag.png'></img>
         </div>
       </header>
     </>

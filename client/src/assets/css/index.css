@@ -19,25 +19,46 @@
 
 body {
   background-color: var(--whitish);
-  color: var(var(--blackish));
+  color: var(--blackish);
+  font-family: Quicksand;
 }
 
 /*  General Styles ------------------------ */
 
 .vertical-line {
-  width:1px;
+  width: 2px;
   height: 20px;
   background-color: var(--blackish);
   margin: 0 20px;
 }
 
+.spacer {
+  height: 20px;
+}
+
 h1 {
   font-family: 'Leckerli One';
   font-size: 36px;
+  line-height: 1;
 }
 
 h2 {
   font-family: Salsa;
+}
+
+.btn-1 {
+  background-color: var(--blackish);
+  color: var(--whitish);
+  font-weight: bold;
+  padding: 6px 20px;
+  border-radius: 2px;
+  box-shadow: var(--shadow1);
+  transition: .2s;
+}
+
+.btn-1:hover {
+  /* background-color: var(--teal); */
+  opacity: 70%;
 }
 
 /* Header Styles -------------------------- */
@@ -52,9 +73,15 @@ nav {
 }
 
 nav a {
+  font-weight: bold;
   margin: 10px 20px;
+  border-bottom: 2px solid #00000000;
   display: flex;
   align-items: center;
+}
+
+.active-link {
+  border-bottom: 2px solid var(--blackish);
 }
 
 .cart-num {
@@ -78,4 +105,31 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+header img {
+  width: 130px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+/* Footer styles ---------------------------- */
+
+footer {
+  background-image: url("/images/banner-2.png");
+  background-size: cover;
+  background-position: 50% 50%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sub-footer {
+  background-color: var(--teal);
+  text-align: center;
+  padding: 40px 0;
+  font-weight: bold;
 }
