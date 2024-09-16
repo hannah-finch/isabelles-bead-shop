@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -26,10 +26,10 @@ function Header() {
       </nav>
 
       <header>
-        <div>
+        <Link to="/">
           <h1>Isabelle’s Bead Shop</h1>
           <img src='/images/icon-zigzag.png'></img>
-        </div>
+        </Link>
       </header>
     </>
   )
