@@ -9,7 +9,7 @@ type Query {
 type Mutation {
     createUser(username: String!, email: String!, password: String!, clientName: String!): User
     login(username: String!, password: String!): Auth
-    createProduct(name: String!, price: Int!, description: String!, imageURL: String!, category: String!, quantity: Int!): Product
+    createProduct(name: String!, price: Int!, description: String!, image: ImageDetailsInput, category: String!, quantity: Int!): Product
 }
 type Auth {
     token: ID!,
@@ -29,9 +29,21 @@ type Product {
     name: String!
     price: Int!
     description: String!
-    imageURL: String!
+    image: Image
     category: String!
     quantity: Int!
 }
+input ImageDetailsInput {
+    id: ID!
+    Url: String!
+    name: String!
+    description: String!
+}
+type Image {
+    id: ID!
+    Url: String!
+    name: String!
+    description: String!
+}    
 `;
 module.exports = typeDefs;
