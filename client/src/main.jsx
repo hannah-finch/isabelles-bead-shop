@@ -9,6 +9,7 @@ import "./index.css";
 //Importing pages
 import HomePage from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
+import Test from "./pages/test.jsx";
 
 import { ThemeProvider } from "@material-tailwind/react";
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
       },
       // Add more routes here...
     ],
