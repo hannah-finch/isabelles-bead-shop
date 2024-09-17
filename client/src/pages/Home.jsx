@@ -1,4 +1,5 @@
-import '../assets/css/shop.css'
+import "../assets/css/shop.css";
+import ProductCard from '../components/product-card'
 // import { Link } from 'react-router-dom'
 
 function HomePage() {
@@ -7,25 +8,25 @@ function HomePage() {
       <section className="category-banner">
         {/* TODO: Change the image source on hover to the color versions */}
         {/* TODO: Add functionality to get the items of the selected category to display in the grid below */}
-        <button >
+        <button>
           <div className="category-btn">
             <img src="/images/icon-circle.png"></img>
             Bracelets
           </div>
         </button>
-        <button >
+        <button>
           <div className="category-btn">
             <img src="/images/icon-squiggle.png"></img>
             Key chains
           </div>
         </button>
-        <button >
+        <button>
           <div className="category-btn">
             <img src="/images/icon-x.png"></img>
             Fidgets
           </div>
         </button>
-        <button >
+        <button>
           <div className="category-btn">
             <img src="/images/icon-flower.png"></img>
             Earrings
@@ -44,29 +45,14 @@ function HomePage() {
         <button className="category-link">key chains</button>|
         <button className="category-link">fidgets</button>|
         <button className="category-link">earrings</button>
-      
-      <section className="product-grid">
-        <div className="product-card">
-          {/* <div className="product-img" style="backgroundImage: url(/images/)"></div> */}
+        <section className="product-grid">
+          <ProductCard />
+        </section>
 
-        </div>
-
-
-        <div className="product-card"></div>
-        <div className="product-card"></div>
-
-
+        {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more. I think you can do this by editing the css of the grid (set the row template and then overflow hidden or something like that) */}
+        <button className="btn-2">Show More</button>
       </section>
-
-
-      {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more */}
-      <button className="btn-2">Show More</button>
-      
-      </section>
-
-
     </>
-
   );
 }
 

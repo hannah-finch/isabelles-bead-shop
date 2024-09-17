@@ -60,3 +60,7 @@
   background-color: var(--white);
   box-shadow: var(--shadow-1);
 }
+
+.product-img {
+  height: 200px;
+}
