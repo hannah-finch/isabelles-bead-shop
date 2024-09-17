@@ -21,8 +21,8 @@ const resolvers = {
       const products = await Product.find();
       return products;
     },
-    singleProduct: async (_, { _id }) => {
-      const product = await Product.findOne({ _id: _id});
+    singleProduct: async (_, { productId }) => {
+      const product = await Product.findOne({ _id: productId });
       return product;
     }
   },
