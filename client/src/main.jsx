@@ -9,8 +9,10 @@ import "./index.css";
 //Importing pages
 import HomePage from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
-import AboutPage from "./pages/About.jsx";import AccountPage from "./pages/account.jsx";
+import AboutPage from "./pages/About.jsx";
+import AccountPage from "./pages/account.jsx";
 import CartPage from "./pages/Cart.jsx";
+import Signup from "./pages/Signup.jsx";
 
 import { ThemeProvider } from "@material-tailwind/react";
 
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <CartPage />,
       },
+      {
+        path: "/signup",
+        element: <Signup />,
+      }
       // Add more routes here...
     ],
   },
