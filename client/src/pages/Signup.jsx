@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 
@@ -155,6 +156,9 @@ const SignupForm = () => {
             <button className="submit-btn" type="submit">
                 Submit
             </button>
+            <br />
+
+            <Link to="/login">Already signed up?</Link>
 
         </form>
     );

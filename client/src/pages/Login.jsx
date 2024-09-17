@@ -1,6 +1,7 @@
 // Login is temporarily saving username and password with state, send that to back end on form submit
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -88,9 +89,15 @@ const LoginForm = () => {
       />
       <label htmlFor="password">{passwordMessage}</label>
       <br></br>
+      
       <button className="submit-btn" type="submit">
         Submit
       </button>
+      <br />
+
+      <Link to="/signup">Need to sign up?</Link>
+
+
     </form>
   );
 };
