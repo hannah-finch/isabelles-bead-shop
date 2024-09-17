@@ -23,6 +23,10 @@ body {
   font-family: Quicksand;
 }
 
+section {
+  padding: 60px 10%;
+}
+
 /*  General Styles ------------------------ */
 
 .vertical-line {
@@ -50,7 +54,6 @@ h2 {
 .btn-1 {
   background-color: var(--blackish);
   color: var(--whitish);
-  font-weight: bold;
   padding: 6px 20px;
   border-radius: 2px;
   box-shadow: var(--shadow1);

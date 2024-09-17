@@ -45,7 +45,20 @@ function HomePage() {
         <button className="category-link">fidgets</button>|
         <button className="category-link">earrings</button>
       
-      <div></div>
+      <section className="product-grid">
+        <div className="product-card">
+          {/* <div className="product-img" style="backgroundImage: url(/images/)"></div> */}
+
+        </div>
+
+
+        <div className="product-card"></div>
+        <div className="product-card"></div>
+
+
+      </section>
+
+
       {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more */}
       <button className="btn-2">Show More</button>
       

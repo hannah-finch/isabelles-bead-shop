@@ -48,3 +48,15 @@
   border-bottom: 1px solid var(--blackish);
   margin: 10px;
 }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+}
+
+.product-card {
+  height: 40px;
+  background-color: var(--white);
+  box-shadow: var(--shadow-1);
+}
