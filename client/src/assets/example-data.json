@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": "aksdf234525",
+      "id": "idforexample1",
       "category": "bracelets",
       "description": "Here's a description. ailsdjfkl;ajfeiah dsfkaj dk fjak jfio ajwdlk jakl sdjf klajsdfkl jsdklfjalksdjfl;kaj lskdfjlk jasdfk j",
       "image": {
@@ -15,7 +15,7 @@
       "name": "Example product 1"
     },
     {
-      "id": "aksdsd34525",
+      "id": "idforexample2",
       "category": "fidgets",
       "description": "Here's a description. ailsdjfkl;ajfeiah dsfkaj dk fjak jfio ajwdlk jakl sdjf klajsdfkl jsdklfjalksdjfl;kaj lskdfjlk jasdfk j",
       "image": {
@@ -27,6 +27,20 @@
       "quantity": 6,
       "price": 5.00,
       "name": "Example product 2"
+    },
+    {
+      "id": "idforexample3",
+      "category": "bracelets",
+      "description": "Here's a description. ailsdjfkl;ajfeiah dsfkaj dk fjak jfio ajwdlk jakl sdjf klajsdfkl jsdklfjalksdjfl;kaj lskdfjlk jasdfk j",
+      "image": {
+          "url": "client/public/images/tempPictures/IMG_4268.jpg",
+          "description": "Image description",
+          "id": "img#",
+          "name": "Image Name"
+      },
+      "quantity": 6,
+      "price": 5.99,
+      "name": "Example product 3"
     }
   ]
 }

@@ -8,7 +8,9 @@ function ProductCard() {
     return (
       <Link to={`/product/${product.id}`} key={product.id} data-category={product.category} data-stock={product.quantity}>
         <div className="product-card">
-          <div className="product-image"></div>
+          <div className="product-image">
+            {/* TODO: put image here... in css it'll be the background image of the div so I can automatically crop it */}
+          </div>
           <p>{product.name}</p>
           <p>${product.price}</p>
         </div>
