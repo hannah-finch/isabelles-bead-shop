@@ -59,9 +59,26 @@ const SignupForm = () => {
             const { data } = await addUser({
                 variables: { ...formState },
             });
-            Auth.login(data.addUser.token);
+            console.log("Mutation response:", data);
+
+            if (data && data.createUser && data.createUser.token) {
+                Auth.login(data.createUser.token);
+            } else {
+                console.error("Token not found in the response");
+            }
+            
         }catch (err) {
-            console.error(err);
+            // I used some stock error handling code from the Apollo docs to try and trace the error
+            // we can probaby get rid of most of this
+            console.error("Error during mutation:", err);
+            if (err.networkError) {
+                console.error("Network error details:", err.networkError.result.errors);
+            }
+            if (err.graphQLErrors) {
+                err.graphQLErrors.forEach(({ message, locations, path }) =>
+                    console.error(`GraphQL error: Message: ${message}, Location: ${locations}, Path: ${path}`)
+                );
+            }
         }
 
         // AFTER signing up, alert user and reset state
@@ -70,7 +87,11 @@ const SignupForm = () => {
             username: "",
             email: "",
             password: "",
-            passwordConfirm: ""
+            passwordConfirm: "",
+            usernameMessage: "",
+            emailMessage: "",
+            passwordMessage: "",
+            passwordConfirmMessage: ""
         });
         // TODO: redirect to home or wherever
     };
