@@ -12,7 +12,7 @@
 
 .category-btn {
   background-color: var(--white);
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--shadow1);
   width: 160px;
   padding: 30px;
   text-align: center;
@@ -30,7 +30,7 @@
 .sub-category-banner {
   background-color: var(--mint);
   height: 45px;
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--shadow1);
 }
 
 /* Shop section styles ---------------------- */
@@ -53,14 +53,4 @@
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 10px;
-}
-
-.product-card {
-  height: 40px;
-  background-color: var(--white);
-  box-shadow: var(--shadow-1);
-}
-
-.product-img {
-  height: 200px;
 }
