@@ -12,8 +12,21 @@ module.exports = {
       message: "You need to be authenticated to access this resource.",
     },
   }),
-  authMiddleware: function ({}) {
-    //TODO implement your own authentication logic
+  authMiddleware: function ({ req }) {
+    let token = req.body.token || req.query.token || req.headers.authorization;
+    if (req.headers.authorization) {
+      token = token.split(" ").pop().trim();
+    }
+    if (!token) {
+      return req;
+    }
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch {
+      console.log("Invalid token");
+    }
+    return req;
   },
   signToken: function ({ username, password }) {
     const payload = { username, password };
