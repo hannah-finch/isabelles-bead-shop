@@ -2,6 +2,7 @@
 // the users query is dummy data.... must be changed
 const typeDefs = `
 type Query {
+    me: User
     users: [User]
     products: [Product]
 }
