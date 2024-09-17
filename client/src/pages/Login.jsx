@@ -61,6 +61,7 @@ const LoginForm = () => {
     alert(`Welcome, ${username}!`);
     setUsername("");
     setPassword("");
+    // TODO: redirect to home or wherever
   };
 
   return (
