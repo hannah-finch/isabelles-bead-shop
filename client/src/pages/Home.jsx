@@ -1,3 +1,6 @@
+// To get products to show according to category, we can either add a category table to the db that the products belong to (maybe) and then get all for that category... OR to keep db as is, we can conditionally render the products by mapping (on product-card.jsx currently) and then if product.category === "the category", return that card. I wonder if we would need to make a separate function then for each category.. doesn't seem very dry.. come back to this thought later... BETTER THOUGHT... I just added data-category attribute to the card, so that will be WAY easier to filter
+
+
 import "../assets/css/shop.css";
 import ProductCard from "../components/product-card";
 // import { Link } from 'react-router-dom'
