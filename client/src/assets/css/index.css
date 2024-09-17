@@ -77,7 +77,21 @@ h2 {
 .btn-2:hover {
   background-color: var(--blackish);
   color: var(--whitish);
-  /* opacity: 70%; */
+}
+
+.btn-del {
+  height: 40px;
+  width: 40px;
+  color: var(--blackish);
+  border: 1px solid var(--blackish);
+  border-radius: 2px;
+  box-shadow: var(--shadow1);
+  transition: .2s;
+}
+
+.btn-del:hover {
+  background-color: var(--blackish);
+  color: var(--whitish);
 }
 
 /* Header Styles -------------------------- */
