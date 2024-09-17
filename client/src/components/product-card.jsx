@@ -1,15 +1,20 @@
 import exampleData from '../assets/example-data.json'
 
 function ProductCard() {
-  return (
-    <>
-    <div className="product-card">
-{/* <div className="product-img" style={{backgroundImage: url(client/public/images/tempPictures/IMG_4268.jpg)}}></div> */}
-</div>
-    
-    
-    </>
-  )
-}
+  const Card = (exampleData.products.map((product, index) => {
+    return (
+      <div key={index}>
+        <p>{product.name}</p>
+        <p>{product.category}</p>
+        <p>{product.description}</p>
+        <p>{product.quantity}</p>
+        <p>{product.price}</p>
+        <h1>thing</h1>
+      </div>
+    )
+  }));
+  return(Card)
+  }
+
 
 export default ProductCard;

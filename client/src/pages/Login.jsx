@@ -89,15 +89,13 @@ const LoginForm = () => {
       />
       <label htmlFor="password">{passwordMessage}</label>
       <br></br>
-      
+
       <button className="submit-btn" type="submit">
         Submit
       </button>
       <br />
 
       <Link to="/signup">Need to sign up?</Link>
-
-
     </form>
   );
 };
