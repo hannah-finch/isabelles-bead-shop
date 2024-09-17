@@ -5,6 +5,7 @@ type Query {
     me: User
     users: [User]
     products: [Product]
+    singleProduct(_id: String): Product
 }
 
 type Mutation {

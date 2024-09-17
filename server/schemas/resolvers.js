@@ -21,6 +21,10 @@ const resolvers = {
       const products = await Product.find();
       return products;
     },
+    singleProduct: async (_, { _id }) => {
+      const product = await Product.findOne({ _id: _id});
+      return product;
+    }
   },
 
   //! MUTATIONS
