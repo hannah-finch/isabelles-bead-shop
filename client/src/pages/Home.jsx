@@ -1,5 +1,8 @@
+// To get products to show according to category, we can either add a category table to the db that the products belong to (maybe) and then get all for that category... OR to keep db as is, we can conditionally render the products by mapping (on product-card.jsx currently) and then if product.category === "the category", return that card. I wonder if we would need to make a separate function then for each category.. doesn't seem very dry.. come back to this thought later... BETTER THOUGHT... I just added data-category attribute to the card, so that will be WAY easier to filter
+
+
 import "../assets/css/shop.css";
-import ProductCard from '../components/product-card'
+import ProductCard from "../components/product-card";
 // import { Link } from 'react-router-dom'
 
 function HomePage() {
@@ -48,7 +51,6 @@ function HomePage() {
         <section className="product-grid">
           <ProductCard />
         </section>
-
         {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more. I think you can do this by editing the css of the grid (set the row template and then overflow hidden or something like that) */}
         <button className="btn-2">Show More</button>
       </section>
