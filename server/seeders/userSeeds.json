@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "60d5ec49f1b2c72b9c8e4d2c",
+        "email": "testing@gmail.com",
+        "password": "password",
+        "username": "SlickRick"
+    },
+    {
+        "_id": "60d5ec49f1b2c72b9c8e4d2d",
+        "email": "testest@hotmail.com",
+        "password": "password",
+        "username": "RolliePollie"
+    },
+    {
+        "_id": "60d5ec49f1b2c72b9c8e4d2e",
+        "email": "testetst@gmail.com",
+        "password": "password",
+        "username": "username"
+    }
+]
