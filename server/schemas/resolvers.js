@@ -22,18 +22,20 @@ const resolvers = {
     //********************************* */
     //* Sign Up Mutation
     //********************************* */
-    createUser: async (_, input) => {
-      const user = await User.create(input);
-      return user;
+    createUser: async (_, { username, email, password } ) => {
+      const user = await User.create( { username, email, password } );
+      const token = signToken(user);
+
+      return { token, user };
     },
     //* Sign In Mutation
     //********************************* */
     //TODO MAKE LOGIN ACCEPT EMAIL TOO
     login: async (_, { username, password }) => {
       const user = await User.findOne({ username });
-      if (!user) throw new Error("User not found");
+      if (!user) throw AuthenticationError;
       const valid = await user.validatePassword(password);
-      if (!valid) throw new Error("Invalid password");
+      if (!valid) throw AuthenticationError;
       const token = signToken(user);
       return { token, user };
     },

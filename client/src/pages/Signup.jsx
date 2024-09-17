@@ -6,78 +6,49 @@ import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 const SignupForm = () => {
-    // use state to save form data
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
-    
-    const [usernameMessage, setUsernameMessage] = useState("");
-    const [emailMessage, setEmailMessage] = useState("");
-    const [passwordMessage, setPasswordMessage] = useState("");
-    const [passwordConfirmMessage, setPasswordConfirmMessage] = useState("");
+    const [formState, setFormState] = useState({    username: "",
+                                                    email: "",
+                                                    password: "",
+                                                    passwordConfirm: "",
+                                                    usernameMessage: "",
+                                                    emailMessage: "",
+                                                    passwordMessage: "",
+                                                    passwordConfirmMessage: ""
+                                              });
 
     const [addUser] = useMutation(ADD_USER);
     
-    const handleInputChange = (e) => {
-        // Getting the value and name of the input which triggered the change
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
-    
-        // set the state based on input type    
-        switch (inputType) {
-            case "username":
-                setUsername(inputValue);
-                break;
-            case "email":
-                setEmail(inputValue);
-                break;
-            case "password":
-                setPassword(inputValue);
-                break;
-            case "passwordConfirm":
-                setPasswordConfirm(inputValue);
-                break;
-            default:
-                break;
-        }
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
     };
 
-    const handleBlur = (e) => {
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
+    const handleBlur = (event) => {
+        const { name, value } = event.target;
+        
+        const validationMessages = {
+            username: "Username is required",
+            email: "Email is required",
+            password: "Password is required",
+            passwordConfirm: "Password confirmation is required"
+        };
 
-        // set the state based on input type
-        switch (inputType) {
-            case "username":
-                inputValue === ""
-                    ? setUsernameMessage("Username is required")
-                    : setUsernameMessage("");
-                break;
-            case "email":
-                inputValue === ""
-                    ? setEmailMessage("Email is required")
-                    : setEmailMessage("");
-                break;
-            case "password":
-                inputValue === ""
-                    ? setPasswordMessage("Password is required")
-                    : setPasswordMessage("");
-                break;
-            case "passwordConfirm":
-                inputValue === ""
-                    ? setPasswordConfirmMessage("Password confirmation is required")
-                    : setPasswordConfirmMessage("");
-                break;
-            default:
-                break;
-        }
+        // set the appropriate message
+        setFormState({
+            ...formState,
+            [`${name}Message`]: value === "" ? validationMessages[name] : ""
+        });
     };
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+
+        const { username, password, passwordConfirm } = formState;
 
         if (password !== passwordConfirm) {
             console.error("Passwords do not match");
@@ -86,19 +57,21 @@ const SignupForm = () => {
 
         try {
             const { data } = await addUser({
-                variables: { username, email, password },
+                variables: { ...formState },
             });
-            console.log(data);
             Auth.login(data.addUser.token);
         }catch (err) {
             console.error(err);
         }
+
         // AFTER signing up, alert user and reset state
-                alert(`Welcome, ${username}!`);
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setPasswordConfirm("");
+        alert(`Welcome, ${username}!`);
+        setFormState({
+            username: "",
+            email: "",
+            password: "",
+            passwordConfirm: ""
+        });
         // TODO: redirect to home or wherever
     };
 
@@ -106,7 +79,7 @@ const SignupForm = () => {
         <form onSubmit={handleFormSubmit}>
             
             <input
-                value={username}
+                value={formState.username}
                 name="username"
                 onChange={handleInputChange}
                 onBlur={handleBlur}
@@ -114,11 +87,11 @@ const SignupForm = () => {
                 placeholder="username"
                 required
             />
-            <label htmlFor="username">{usernameMessage}</label>
+            <label htmlFor="username">{formState.usernameMessage}</label>
             <br />
 
             <input
-                value={email}
+                value={formState.email}
                 name="email"
                 onChange={handleInputChange}
                 onBlur={handleBlur}
@@ -126,11 +99,11 @@ const SignupForm = () => {
                 placeholder="email"
                 required
             />
-            <label htmlFor="email">{emailMessage}</label>
+            <label htmlFor="email">{formState.emailMessage}</label>
             <br />
 
             <input
-                value={password}
+                value={formState.password}
                 name="password"
                 onChange={handleInputChange}
                 onBlur={handleBlur}
@@ -138,11 +111,11 @@ const SignupForm = () => {
                 placeholder="password"
                 required
             />
-            <label htmlFor="password">{passwordMessage}</label>
+            <label htmlFor="password">{formState.passwordMessage}</label>
             <br />
 
             <input
-                value={passwordConfirm}
+                value={formState.passwordConfirm}
                 name="passwordConfirm"
                 onChange={handleInputChange}
                 onBlur={handleBlur}
@@ -150,7 +123,7 @@ const SignupForm = () => {
                 placeholder="confirm password"
                 required
             />
-            <label htmlFor="passwordConfirm">{passwordConfirmMessage}</label>
+            <label htmlFor="passwordConfirm">{formState.passwordConfirmMessage}</label>
             <br />
                 
             <button className="submit-btn" type="submit">
