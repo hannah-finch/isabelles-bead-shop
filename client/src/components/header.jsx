@@ -13,7 +13,10 @@ function Header() {
         <NavLink to={'/about'} className={({ isActive }) => (isActive ? "active-link" : "")}>
           about
         </NavLink>
-        <NavLink to={'/account'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+        {/* TODO: put the logged in user's Id in href here */}
+        {/* TODO: conditionally renter the account link to only show when logged in. */}
+        {/* TODO: when not logged in, show a log in link */}
+        <NavLink to={'/account/userId'} className={({ isActive }) => (isActive ? "active-link" : "")}>
           account
         </NavLink>
         <div className="vertical-line"></div>
