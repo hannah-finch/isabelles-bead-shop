@@ -23,15 +23,23 @@
   display: flex;
   align-items: center;
   border: 10px solid var(--white);
-  box-shadow: var(--shadow1)
+  box-shadow: var(--shadow1);
+  margin-right: 40px;
+  max-width: 50%;
  
-}
-
-.product-info {
-
 }
 
 .price {
   color: var(--yellow);
   font-weight: bold;
+}
+
+.product-info p {
+  margin: 20px 0;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 10px;
 }
