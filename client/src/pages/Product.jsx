@@ -10,17 +10,47 @@ function ProductPage() {
   // destructure it
   const { id, category, description, image, quantity, price, name }  = product
 
+  const InStock = (() => {
+    if (quantity < 0) {
+      return 'OUT OF STOCK'
+    } else {
+      return 'OUT OF STOCK'
+    }
+  })
+
   return (
     <>
-    <h2>Product page</h2>
+      <section className="product-section">
+        <figure className="product-img">
+          <img src="/images/tempPictures/IMG_4268.jpg"></img>
+        </figure>
 
-    <p>{id}</p>
+        <div className="product-info">
+          <h2>{name}</h2>
+          <InStock />
+          <p>Price: <span className="price">${price}</span></p>
+
+        </div>
+      </section>
+
+
+
+    <h2>{name}</h2>
+
+
     <p>{category}</p>
     <p>{description}</p>
     <p>{image.url}</p>
-    <p>{quantity}</p>
+
     <p>{price}</p>
-    <p>{name}</p>
+
+
+{/* I put some product info here just in case we want it to show if admin is logged in */}
+    <div>
+      Product info for Admin: <br></br>
+      Number in stock: {quantity} <br></br>
+      Product id: {id}
+    </div>
 
     </>
   )

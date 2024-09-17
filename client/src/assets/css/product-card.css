@@ -1,3 +1,5 @@
+/* Project card styles ------------------ */
+
 .product-card {
   background-color: var(--white);
   box-shadow: var(--shadow1);
@@ -8,4 +10,28 @@
   background-color: #000000;
   aspect-ratio: 1/1;
   margin-bottom: 10px;
+}
+
+/* Project page styles -------------- */
+.product-section {
+ display: flex;
+}
+
+.product-img {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow1)
+ 
+}
+
+.product-info {
+
+}
+
+.price {
+  color: var(--yellow);
+  font-weight: bold;
 }
