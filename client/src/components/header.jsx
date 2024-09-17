@@ -1,5 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 
+import Auth from '../utils/auth';
+
 function Header() {
   return (
     <>
@@ -23,6 +25,16 @@ function Header() {
           {/* TODO: cart number should only render if cart.length */}
           <div className="cart-num">8</div>
         </NavLink>
+
+        {/* TODO: TESTING LOGIN/LOGOUT*/}
+        {Auth.isLoggedIn() ? (
+          <button onClick={Auth.logout}>logout</button>
+        ) : (
+          <NavLink to={'/login'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+            login
+          </NavLink>
+        )}
+
       </nav>
 
       <header>
