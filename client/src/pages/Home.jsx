@@ -88,36 +88,36 @@ function HomePage() {
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("bracelets")}
+          onClick={() => setSelectedCategory("bracelet")}
           className={
-            selectedCategory === "bracelets" ? "category-link-active" : ""
+            selectedCategory === "bracelet" ? "category-link-active" : ""
           }
         >
           bracelets
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("key chains")}
+          onClick={() => setSelectedCategory("keychain")}
           className={
-            selectedCategory === "key chains" ? "category-link-active" : ""
+            selectedCategory === "keychain" ? "category-link-active" : ""
           }
         >
           key chains
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("fidgets")}
+          onClick={() => setSelectedCategory("fidget")}
           className={
-            selectedCategory === "fidgets" ? "category-link-active" : ""
+            selectedCategory === "fidget" ? "category-link-active" : ""
           }
         >
           fidgets
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("earrings")}
+          onClick={() => setSelectedCategory("earring")}
           className={
-            selectedCategory === "earrings" ? "category-link-active" : ""
+            selectedCategory === "earring" ? "category-link-active" : ""
           }
         >
           earrings
@@ -126,7 +126,11 @@ function HomePage() {
           {/* This checks if the product query is empty and done loading.*/}
           {filteredProducts && filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <ProductCard product={product} key={product._id} />
+              <ProductCard
+                product={product}
+                key={product._id}
+                selected={selectedCategory}
+              />
             ))
           ) : (
             <p>No products available</p>
