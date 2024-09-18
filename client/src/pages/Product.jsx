@@ -1,8 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
-import exampleData from "../assets/example-data.json";
-import ProductCard from "../components/product-card.jsx";
+import { useContext } from "react";
+// import exampleData from "../assets/example-data.json";
+// import ProductCard from "../components/product-card.jsx";
+
+import { ShoppingCartContext } from '../utils/ProductsContext.jsx'
 
 function ProductPage() {
   // get product id from url
@@ -10,6 +13,8 @@ function ProductPage() {
   const { loading, data } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { productId },
   });
+
+  const { addToCart } = useContext(ShoppingCartContext);
 
   const product = data ? data.singleProduct : [];
   console.log(product);
@@ -46,7 +51,7 @@ function ProductPage() {
           <p>Quantity:{quantity}</p>
 
           <div className="button-container">
-            <button className="btn-1">Add to Cart</button>
+            <button onClick={() => addToCart(product)} className="btn-1">Add to Cart</button>
             <button className="btn-2">Leave a Review</button>
           </div>
         </div>

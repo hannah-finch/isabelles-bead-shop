@@ -1,14 +1,21 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import "../assets/css/cart.css";
+import { useContext } from "react";
+import ShoppingCart from "../components/ShoppingCart";
+import CheckoutButton from "../components/CheckoutButton";
+import { ShoppingCartContext } from "../utils/ProductsContext";
 
-function CartPage() {
+export default function Cart() {
+  const { cartItems, removeFromCart } = useContext(ShoppingCartContext);
   return (
     <>
       <section className="cart-section">
         <h2>Shopping cart</h2>
+        <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart}/>
+        <CheckoutButton />
 
         {/* TODO: create one of these div's for each item in the cart, using correct data in {} */}
-        <div className="cart-item">
+        {/* <div className="cart-item">
           <figure className="product-img-cart">
             <img src="images/tempPictures/defaultProductImage.jpg"></img>
           </figure>
@@ -37,10 +44,9 @@ function CartPage() {
         </div>
 
         <p className="total">TOTAL: $15.00</p>
-        <button className="btn-1">Check Out</button>
+        <button className="btn-1">Check Out</button> */}
       </section>
     </>
   );
 }
 
-export default CartPage;

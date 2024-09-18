@@ -11,7 +11,7 @@ import HomePage from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import AboutPage from "./pages/About.jsx";
 import AccountPage from "./pages/account.jsx";
-import CartPage from "./pages/Cart.jsx";
+import Cart from "./pages/Cart.jsx";
 import Signup from "./pages/Signup.jsx";
 import ProductPage from "./pages/Product.jsx";
 
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <CartPage />,
+        element: <Cart />,
       },
       {
         path: "/signup",
