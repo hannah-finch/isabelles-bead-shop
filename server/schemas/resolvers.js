@@ -6,11 +6,11 @@ const resolvers = {
   //! QUERIES
   Query: {
     me: async (parent, args, context) => {
-      console.log(context);
+      console.log(context.user.username);
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ username: context.user.username });
       } else {
-        throw new AuthenticationError("You must be logged in to view this.");
+        throw AuthenticationError;
       }
     },
     users: async (_) => {
@@ -24,7 +24,7 @@ const resolvers = {
     singleProduct: async (_, { productId }) => {
       const product = await Product.findOne({ _id: productId });
       return product;
-    }
+    },
   },
 
   //! MUTATIONS
@@ -34,8 +34,8 @@ const resolvers = {
     //********************************* */
     //* Sign Up Mutation
     //********************************* */
-    createUser: async (_, { username, email, password } ) => {
-      const user = await User.create( { username, email, password } );
+    createUser: async (_, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
 
       return { token, user };

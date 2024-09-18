@@ -4,7 +4,6 @@ import "../assets/css/product-card.css";
 // import exampleData from "../assets/example-data.json";
 
 function ProductCard(product) {
-  console.log(product.product);
   const { _id, category, image, name, price, quantity } = product.product;
   return (
     <Link to={`/product/${_id}`} data-category={category} data-stock={quantity}>
