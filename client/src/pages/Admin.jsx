@@ -1,41 +1,41 @@
-import '../assets/css/admin.css'
+import "../assets/css/admin.css";
 import { useState } from "react";
-import exampleData from "../assets/example-data.json"
-
+import exampleData from "../assets/example-data.json";
 
 function AdminPage() {
-  const ProductList = (exampleData.products.map((product) => {
-    console.log(product.name)
-    return(
+  const ProductList = exampleData.products.map((product) => {
+    console.log(product.name);
+    return (
       <>
         <div className="product-admin">
           <figure className="product-img-admin">
             <img src="images/tempPictures/defaultProductImage.jpg"></img>
           </figure>
           <div className="item-text-box-admin">
-            <p><span className="bold">Name: </span>
+            <p>
+              <span className="bold">Name: </span>
               {product.name}
             </p>
-            <p><span className="bold">Price: </span>
+            <p>
+              <span className="bold">Price: </span>
               {product.price}
             </p>
-            <p><span className="bold">Category: </span>
+            <p>
+              <span className="bold">Category: </span>
               {product.category}
             </p>
-            <p><span className="bold">Number in stock: </span>
+            <p>
+              <span className="bold">Number in stock: </span>
               {product.quantity}
             </p>
             <button className="btn-1">Edit product</button>
           </div>
-          
         </div>
-        
       </>
-    )
-  }))
+    );
+  });
 
   const NewProductForm = () => {
-
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
@@ -45,14 +45,12 @@ function AdminPage() {
     const [imageName, setImageName] = useState("");
     const [imageDescription, setImageDescription] = useState("");
 
-    function handleFormSubmit() {
-
-    }
+    function handleFormSubmit() {}
 
     return (
       <>
-        <form onSubmit={handleFormSubmit}>
-        <h2>Add new product</h2>
+        <form onSubmit={handleFormSubmit} className="new-product-form">
+          <h2>Add new product</h2>
           <input
             value={name}
             name="name"
@@ -101,30 +99,24 @@ function AdminPage() {
           <button className="btn-1" type="submit">
             Submit
           </button>
-          
+
           <div className="form-footer"></div>
         </form>
       </>
     );
   };
 
-
   return (
     <>
       <section className="admin-product-section">
-        <NewProductForm/>
+        <NewProductForm />
 
         <div className="white-container">
-        <h2>Products:</h2>
-        {ProductList}
+          <h2>Products:</h2>
+          {ProductList}
         </div>
-
-        
-
       </section>
 
-
-      
       {/* <NewProductForm />
       <UpdateProductForm /> */}
     </>
