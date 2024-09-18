@@ -44,6 +44,13 @@ section {
   font-weight: bold;
 }
 
+.white-container {
+  background-color: var(--white);
+  box-shadow: var(--shadow1);
+  padding: 40px;
+
+}
+
 h1 {
   font-family: 'Leckerli One';
   font-size: 36px;
