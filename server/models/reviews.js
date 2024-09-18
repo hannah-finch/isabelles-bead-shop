@@ -1,6 +1,6 @@
 //TODO
 const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
+const { User } = require("./User");
 
 const reviewSchema = new Schema(
     {
@@ -9,10 +9,7 @@ const reviewSchema = new Schema(
             required: true,
             unique: true,
         },
-        username: {
-            type: String,
-            required: true,
-        },
+        username: User,
         content: {
             type: String,
             required: true,
