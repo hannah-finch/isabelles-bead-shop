@@ -167,7 +167,6 @@ function ProductPage() {
   if (loading) {
     return <h1>Loading</h1>;
   }
-  console.log(image.Url);
   return (
     <>
       <section className="product-section">
