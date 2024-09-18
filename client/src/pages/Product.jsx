@@ -72,8 +72,9 @@ function ProductPage() {
 
       return (
         <>
-          <form onSubmit={""} className="narrow">
+          <form onSubmit={""}>
           <h2>Edit product</h2>
+          <label htmlFor="name">Name:</label>
             <input
               value={newName}
               name="name"
@@ -81,6 +82,7 @@ function ProductPage() {
               type="text"
               placeholder="Product name"
             ></input>
+            <label htmlFor="price">Price:</label>
             <input
               value={newPrice}
               name="price"
@@ -88,6 +90,7 @@ function ProductPage() {
               type="number"
               placeholder="Price"
             ></input>
+            <label htmlFor="quantity">Number in stock:</label>
             <input
               value={newQuantity}
               name="quantity"
@@ -96,6 +99,7 @@ function ProductPage() {
               min="0"
               placeholder="Stock"
             ></input>
+            <label htmlFor="category">Category:</label>
             <input
               value={newCategory}
               name="category"
@@ -103,6 +107,7 @@ function ProductPage() {
               type="text"
               placeholder="Category"
             ></input>
+            <label htmlFor="description">Description:</label>
             <textarea
               value={newDescription}
               name="description"
@@ -110,12 +115,14 @@ function ProductPage() {
               type="text"
               placeholder="Description"
             ></textarea>
+            <label htmlFor="image">Image:</label>
             <input
               value={newImage}
               name="image"
               onChange={handleInputChange}
               type="file"
             ></input>
+           <label htmlFor="imageName">Image title:</label>
             <input
               value={newImageName}
               name="imageName"
@@ -123,6 +130,7 @@ function ProductPage() {
               type="text"
               placeholder="Image title"
             ></input>
+            <label htmlFor="imageDescription">Image Caption:</label>
             <input
               value={newImageDescription}
               name="imageDescription"
@@ -185,10 +193,6 @@ function ProductPage() {
 
       <AdminStuff />
 
-      {/* I put some product info here just in case we want it to show if admin is logged in */}
-      <div>
-        Product info for Admin: <br></br>
-      </div>
     </>
   );
 }

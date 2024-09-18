@@ -110,7 +110,7 @@ const SignupForm = () => {
         placeholder="username"
         required
       />
-      <label htmlFor="username">{formState.usernameMessage}</label>
+      <p>{formState.usernameMessage}</p>
 
       <input
         value={formState.email}
@@ -121,7 +121,7 @@ const SignupForm = () => {
         placeholder="email"
         required
       />
-      <label htmlFor="email">{formState.emailMessage}</label>
+      <p>{formState.emailMessage}</p>
 
       <input
         value={formState.password}
@@ -132,7 +132,7 @@ const SignupForm = () => {
         placeholder="password"
         required
       />
-      <label htmlFor="password">{formState.passwordMessage}</label>
+      <p>{formState.passwordMessage}</p>
 
       <input
         value={formState.passwordConfirm}
@@ -143,9 +143,9 @@ const SignupForm = () => {
         placeholder="confirm password"
         required
       />
-      <label htmlFor="passwordConfirm">
+      <p>
         {formState.passwordConfirmMessage}
-      </label>
+      </p>
 
       <button className="btn-1" type="submit">
         Submit

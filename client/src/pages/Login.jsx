@@ -77,7 +77,8 @@ const LoginForm = () => {
         placeholder="username"
         required
       />
-      <label htmlFor="username">{usernameMessage}</label>
+      <p>{usernameMessage}</p>
+
       <input
         value={password}
         name="password"
@@ -87,14 +88,16 @@ const LoginForm = () => {
         placeholder="password"
         required
       />
-      <label htmlFor="password">{passwordMessage}</label>
+      <p>{passwordMessage}</p>
 
       <button className="btn-1" type="submit">
         Submit
       </button>
 
       <div className="form-footer">
-        <Link to="/signup">No account? <span className="underline bold">Sign up</span></Link>
+        <Link to="/signup">
+          No account? <span className="underline bold">Sign up</span>
+        </Link>
       </div>
     </form>
   );
