@@ -66,7 +66,8 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} className="narrow">
+      <h2>Log in</h2>
       <input
         value={username}
         name="username"
@@ -77,7 +78,6 @@ const LoginForm = () => {
         required
       />
       <label htmlFor="username">{usernameMessage}</label>
-      <br></br>
       <input
         value={password}
         name="password"
@@ -88,14 +88,14 @@ const LoginForm = () => {
         required
       />
       <label htmlFor="password">{passwordMessage}</label>
-      <br></br>
 
-      <button className="submit-btn" type="submit">
+      <button className="btn-1" type="submit">
         Submit
       </button>
-      <br />
 
-      <Link to="/signup">Need to sign up?</Link>
+      <div className="form-footer">
+        <Link to="/signup">No account? <span className="underline bold">Sign up</span></Link>
+      </div>
     </form>
   );
 };
@@ -103,8 +103,9 @@ const LoginForm = () => {
 function LoginPage() {
   return (
     <>
-      <h1>This is a Login Page</h1>
-      <LoginForm />
+      <section>
+        <LoginForm />
+      </section>
     </>
   );
 }

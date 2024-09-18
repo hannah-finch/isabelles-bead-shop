@@ -72,8 +72,8 @@ function ProductPage() {
 
       return (
         <>
-          <h2>Form to edit product</h2>
-          <form onSubmit={""}>
+          <form onSubmit={""} className="narrow">
+          <h2>Edit product</h2>
             <input
               value={newName}
               name="name"
@@ -131,10 +131,11 @@ function ProductPage() {
               placeholder="Image caption"
             ></input>
 
-            <button className="btn-2" type="submit">
+            <button className="btn-1" type="submit">
               Submit
             </button>
-            <br />
+
+            <div className="form-footer"></div>
           </form>
         </>
       );
