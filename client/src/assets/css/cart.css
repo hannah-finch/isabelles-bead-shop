@@ -1,0 +1,34 @@
+.product-img-cart {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow1);
+  width: 100px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px auto 100px;
+  align-items: center;
+  gap: 40px;
+  border-bottom: 1px solid var(--gray);
+  padding: 20px 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+.item-text-box {
+  width: 100%;
+}
+
+.cart-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total {
+  margin: 40px 0 10px;
+}
