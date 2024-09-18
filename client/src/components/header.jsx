@@ -1,4 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+
+import Auth from '../utils/auth';
 
 function Header() {
   return (
@@ -11,7 +13,10 @@ function Header() {
         <NavLink to={'/about'} className={({ isActive }) => (isActive ? "active-link" : "")}>
           about
         </NavLink>
-        <NavLink to={'/account'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+        {/* TODO: put the logged in user's Id in href here */}
+        {/* TODO: conditionally renter the account link to only show when logged in. */}
+        {/* TODO: when not logged in, show a log in link */}
+        <NavLink to={'/account/userId'} className={({ isActive }) => (isActive ? "active-link" : "")}>
           account
         </NavLink>
         <div className="vertical-line"></div>
@@ -23,13 +28,23 @@ function Header() {
           {/* TODO: cart number should only render if cart.length */}
           <div className="cart-num">8</div>
         </NavLink>
+
+        {/* TODO: TESTING LOGIN/LOGOUT*/}
+        {Auth.isLoggedIn() ? (
+          <button onClick={Auth.logout}>logout</button>
+        ) : (
+          <NavLink to={'/login'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+            login
+          </NavLink>
+        )}
+
       </nav>
 
       <header>
-        <div>
+        <Link to="/">
           <h1>Isabelle’s Bead Shop</h1>
           <img src='/images/icon-zigzag.png'></img>
-        </div>
+        </Link>
       </header>
     </>
   )

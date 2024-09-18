@@ -1,0 +1,56 @@
+/* Category banner styles --------------------------- */
+
+.category-banner {
+  height: 300px;
+  background-image: url("/images/banner-1.png");
+  background-size: cover;
+  background-position: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-btn {
+  background-color: var(--white);
+  box-shadow: var(--shadow1);
+  width: 160px;
+  padding: 30px;
+  text-align: center;
+  margin: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category-btn img {
+  width: 60px;
+  padding-bottom: 6px;
+}
+
+.sub-category-banner {
+  background-color: var(--mint);
+  height: 45px;
+  box-shadow: var(--shadow1);
+}
+
+/* Shop section styles ---------------------- */
+
+.shop-section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.category-link {
+  margin: 10px;
+}
+
+.category-link-active {
+  border-bottom: 1px solid var(--blackish);
+  margin: 10px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+}

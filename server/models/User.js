@@ -27,10 +27,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    clientName: {
-      type: String,
-      required: true,
-    },
+    // clientName: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   {
     toJSON: {
