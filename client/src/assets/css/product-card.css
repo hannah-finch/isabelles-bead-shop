@@ -38,8 +38,3 @@
   margin: 20px 0;
 }
 
-.button-container {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  gap: 10px;
-}
