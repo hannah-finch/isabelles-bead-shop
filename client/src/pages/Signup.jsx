@@ -60,7 +60,6 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-      console.log("Mutation response:", data);
 
       if (data && data.createUser && data.createUser.token) {
         Auth.login(data.createUser.token);
@@ -143,16 +142,16 @@ const SignupForm = () => {
         placeholder="confirm password"
         required
       />
-      <p>
-        {formState.passwordConfirmMessage}
-      </p>
+      <p>{formState.passwordConfirmMessage}</p>
 
       <button className="btn-1" type="submit">
         Submit
       </button>
 
       <div className="form-footer">
-        <Link to="/login">Already signed up? <span className="underline bold">Log in</span></Link>
+        <Link to="/login">
+          Already signed up? <span className="underline bold">Log in</span>
+        </Link>
       </div>
     </form>
   );

@@ -4,12 +4,19 @@ import { useEffect, useState, useContext } from "react";
 import "../assets/css/shop.css";
 import ProductCard from "../components/product-card";
 // import { Link } from 'react-router-dom'
+
+import Auth from "../utils/auth";
 // import { GET_All_PRODUCTS } from "../utils/queries";
 // import { useQuery } from "@apollo/client";
 
 import { ProductsContext } from "../utils/ProductsContext";
 
 function HomePage() {
+  //* testing admin, client, and not logged in
+  if (Auth.isLoggedIn()) {
+    console.log("admin: " + Auth.isAdmin());
+    console.log("client: " + Auth.isClient());
+  }
   //const { loading, data } = useQuery(GET_All_PRODUCTS);
   //const productsData = data ? data.products : [];
   //console.log(productsData);
