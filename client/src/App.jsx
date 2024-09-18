@@ -12,8 +12,6 @@ import { ProductsProvider } from "./utils/ProductsContext.jsx";
 
 import Header from "./components/header";
 import Footer from "./components/footer";
-import Header from "./components/header";
-import Footer from "./components/footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
