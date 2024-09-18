@@ -21,113 +21,139 @@ function ProductPage() {
     }
   };
 
-  // const updateForm = (() => {
-  //   return(
-  //     <h1>Test</h1>
-  //   )
-  // })
-
   const AdminStuff = () => {
-    const UpdateForm = (() => {
+    const UpdateForm = () => {
+
       const [newName, setName] = useState(name);
       const [newPrice, setPrice] = useState(price);
       const [newCategory, setCategory] = useState(category);
       const [newDescription, setDescription] = useState(description);
       const [newQuantity, setQuantity] = useState(quantity);
-      const [newImage, setImgae] = useState(image.URL);
+      const [newImage, setImage] = useState(image.URL);
       const [newImageName, setImageName] = useState(image.name);
-      const [newImageDescription, setImageDescription] = useState(image.description);
+      const [newImageDescription, setImageDescription] = useState(
+        image.description
+      );
 
       const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { target } = e;
         const inputType = target.name;
         const inputValue = target.value;
-    
+
         // set the state based on input type
-        if (inputType === "name") {
-          setName(inputValue);
-        }
-        if (inputType === "price") {
-          setPrice(inputValue);
+        switch (inputType) {
+          case "name":
+            setName(inputValue);
+            break;
+          case "price":
+            setPrice(inputValue);
+            break;
+          case "category":
+            setCategory(inputValue);
+            break;
+          case "description":
+            setDescription(inputValue);
+            break;
+          case "quantity":
+            setQuantity(inputValue);
+            break;
+          case "image":
+            setImage(inputValue);
+            break;
+          case "imageName":
+            setImageName(inputValue);
+            break;
+          case "imageDescription":
+            setImageDescription(inputValue);
+            break;
         }
       };
-    
-      return (
-      <>
-      <h2>Form to edit product</h2>
-        <form onSubmit={""}>
-          <input
-            value={newName}
-            name="name"
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Product name"
-          ></input>
-          <input
-            value={newPrice}
-            name="price"
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Price"
-          ></input>
-          <input
-            value={newQuantity}
-            name="quantity"
-            onChange={handleInputChange}
-            type="number"
-            min="0"
-            placeholder="Stock"
-          ></input>
-          <input
-            value={newCategory}
-            name="category"
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Category"
-          ></input>
-          <textarea
-            value={newDescription}
-            name="description"
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Description"
-          ></textarea>
-          <input value={image.URL} name="image" type="file"></input>
-          <input
-            value={newImageName}
-            name="category"
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Image title"
-          ></input>
-          <input
-            value={newImageDescription}
-            name="imageDescription"
-            onChange={handleInputChange}
-            type="text"
-            placeholder="Image caption"
-          ></input>
 
-          <button className="btn-2" type="submit">
-            Submit
-          </button>
-          <br />
-        </form>
-      </>
-      )
-    })
+      return (
+        <>
+          <h2>Form to edit product</h2>
+          <form onSubmit={""}>
+            <input
+              value={newName}
+              name="name"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Product name"
+            ></input>
+            <input
+              value={newPrice}
+              name="price"
+              onChange={handleInputChange}
+              type="number"
+              placeholder="Price"
+            ></input>
+            <input
+              value={newQuantity}
+              name="quantity"
+              onChange={handleInputChange}
+              type="number"
+              min="0"
+              placeholder="Stock"
+            ></input>
+            <input
+              value={newCategory}
+              name="category"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Category"
+            ></input>
+            <textarea
+              value={newDescription}
+              name="description"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Description"
+            ></textarea>
+            <input
+              value={newImage}
+              name="image"
+              onChange={handleInputChange}
+              type="file"
+            ></input>
+            <input
+              value={newImageName}
+              name="imageName"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Image title"
+            ></input>
+            <input
+              value={newImageDescription}
+              name="imageDescription"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Image caption"
+            ></input>
+
+            <button className="btn-2" type="submit">
+              Submit
+            </button>
+            <br />
+          </form>
+        </>
+      );
+    };
+
     return (
       <section>
         Number in stock: {quantity} <br></br>
         Product id: {productId} <br></br>
-        <button className="btn-1" onClick={""}>Edit Product</button>
-        <button className="btn-1" onClick={""}>Delete Product</button>
-
-        <UpdateForm/>
+        <button className="btn-1" onClick={""}>
+          Edit Product
+        </button>
+        <button className="btn-1" onClick={""}>
+          Delete Product
+        </button>
+        <UpdateForm />
       </section>
-    )
-  }
+    );
+  };
 
   if (loading) {
     return <h1>Loading</h1>;
@@ -161,7 +187,6 @@ function ProductPage() {
       {/* I put some product info here just in case we want it to show if admin is logged in */}
       <div>
         Product info for Admin: <br></br>
-
       </div>
     </>
   );
