@@ -7,9 +7,13 @@ import { GET_All_PRODUCTS } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 function HomePage() {
-  console.log(Auth.getProfile());
   const { loading, data } = useQuery(GET_All_PRODUCTS);
   const productsData = data ? data.products : [];
+  //* testing admin, client, and not logged in
+  if (Auth.isLoggedIn()) {
+    console.log("admin: " + Auth.isAdmin());
+    console.log("client: " + Auth.isClient());
+  }
   return (
     <>
       <section className="category-banner">

@@ -59,7 +59,6 @@ const SignupForm = () => {
             const { data } = await addUser({
                 variables: { ...formState },
             });
-            console.log("Mutation response:", data);
 
             if (data && data.createUser && data.createUser.token) {
                 Auth.login(data.createUser.token);

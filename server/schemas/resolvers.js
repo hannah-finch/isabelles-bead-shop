@@ -34,8 +34,8 @@ const resolvers = {
     //********************************* */
     //* Sign Up Mutation
     //********************************* */
-    createUser: async (_, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    createUser: async (_, input) => {
+      const user = await User.create(input);
       const token = signToken(user);
 
       return { token, user };
