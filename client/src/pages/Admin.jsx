@@ -1,5 +1,6 @@
 import "../assets/css/admin.css";
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 import exampleData from "../assets/example-data.json";
 
 function AdminPage() {
@@ -28,7 +29,8 @@ function AdminPage() {
               <span className="bold">Number in stock: </span>
               {product.quantity}
             </p>
-            <button className="btn-1">Edit product</button>
+
+            <Link to="/product/PUT-PRODUCT_ID_HERE" className="btn-3">View / Edit</Link>
           </div>
         </div>
       </>
@@ -41,9 +43,44 @@ function AdminPage() {
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [quantity, setQuantity] = useState("");
-    const [image, setImgae] = useState("");
+    const [image, setImage] = useState("");
     const [imageName, setImageName] = useState("");
     const [imageDescription, setImageDescription] = useState("");
+
+    const handleInputChange = (e) => {
+      // Getting the value and name of the input which triggered the change
+      const { target } = e;
+      const inputType = target.name;
+      const inputValue = target.value;
+
+      // set the state based on input type
+      switch (inputType) {
+        case "name":
+          setName(inputValue);
+          break;
+        case "price":
+          setPrice(inputValue);
+          break;
+        case "category":
+          setCategory(inputValue);
+          break;
+        case "description":
+          setDescription(inputValue);
+          break;
+        case "quantity":
+          setQuantity(inputValue);
+          break;
+        case "image":
+          setImage(inputValue);
+          break;
+        case "imageName":
+          setImageName(inputValue);
+          break;
+        case "imageDescription":
+          setImageDescription(inputValue);
+          break;
+      }
+    };
 
     function handleFormSubmit() {}
 
@@ -54,18 +91,21 @@ function AdminPage() {
           <input
             value={name}
             name="name"
+            onChange={handleInputChange}
             type="text"
             placeholder="Product name"
           ></input>
           <input
             value={price}
             name="price"
-            type="text"
+            onChange={handleInputChange}
+            type="number"
             placeholder="Price"
           ></input>
           <input
-            // value={quantity}
+            value={quantity}
             name="quantity"
+            onChange={handleInputChange}
             type="number"
             min="0"
             placeholder="Stock"
@@ -73,25 +113,34 @@ function AdminPage() {
           <input
             value={category}
             name="category"
+            onChange={handleInputChange}
             type="text"
             placeholder="Category"
           ></input>
           <textarea
             value={description}
             name="description"
+            onChange={handleInputChange}
             type="text"
             placeholder="Description"
           ></textarea>
-          <input value={image} name="image" type="file"></input>
+          <input
+            value={image}
+            name="image"
+            onChange={handleInputChange}
+            type="file"
+          ></input>
           <input
             value={imageName}
-            name="category"
+            name="imageName"
+            onChange={handleInputChange}
             type="text"
             placeholder="Image title"
           ></input>
           <input
             value={imageDescription}
             name="imageDescription"
+            onChange={handleInputChange}
             type="text"
             placeholder="Image caption"
           ></input>
