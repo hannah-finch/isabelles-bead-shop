@@ -1,200 +1,129 @@
+import '../assets/css/admin.css'
 import { useState } from "react";
 import exampleData from "../assets/example-data.json"
+
 
 function AdminPage() {
   const ProductList = (exampleData.products.map((product) => {
     console.log(product.name)
     return(
       <>
-        <div className="cart-item">
-          <figure className="product-img-cart">
+        <div className="product-admin">
+          <figure className="product-img-admin">
             <img src="images/tempPictures/defaultProductImage.jpg"></img>
           </figure>
-          <div className="item-text-box">
+          <div className="item-text-box-admin">
             <p><span className="bold">Name: </span>
               {product.name}
             </p>
             <p><span className="bold">Price: </span>
-              {product.description}
+              {product.price}
             </p>
             <p><span className="bold">Category: </span>
-              {product.description}
-            </p>
-            <p><span className="bold">Description: </span>
-              {product.description}
-            </p>
-            <p><span className="bold">Image Title: </span>
-              {product.description}
-            </p>
-            <p><span className="bold">Image Caption: </span>
-              {product.description}
+              {product.category}
             </p>
             <p><span className="bold">Number in stock: </span>
               {product.quantity}
             </p>
+            <button className="btn-1">Edit product</button>
           </div>
-          <button className="btn-del">x</button>
+          
         </div>
+        
       </>
     )
   }))
 
-  // const NewProductForm = () => {
+  const NewProductForm = () => {
 
-  //   const [name, setName] = useState("");
-  //   const [price, setPrice] = useState("");
-  //   const [category, setCategory] = useState("");
-  //   const [description, setDescription] = useState("");
-  //   const [quantity, setQuantity] = useState("");
-  //   const [image, setImgae] = useState("");
-  //   const [imageName, setImageName] = useState("");
-  //   const [imageDescription, setImageDescription] = useState("");
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [image, setImgae] = useState("");
+    const [imageName, setImageName] = useState("");
+    const [imageDescription, setImageDescription] = useState("");
 
-  //   function handleFormSubmit() {
+    function handleFormSubmit() {
 
-  //   }
+    }
 
-  //   return (
-  //     <>
-  //     <h2>Form to add new product</h2>
-  //       <form onSubmit={handleFormSubmit}>
-  //         <input
-  //           value={name}
-  //           name="name"
-  //           type="text"
-  //           placeholder="Product name"
-  //         ></input>
-  //         <input
-  //           value={price}
-  //           name="price"
-  //           type="text"
-  //           placeholder="Price"
-  //         ></input>
-  //         <input
-  //           // value={quantity}
-  //           name="quantity"
-  //           type="number"
-  //           min="0"
-  //           placeholder="Stock"
-  //         ></input>
-  //         <input
-  //           value={category}
-  //           name="category"
-  //           type="text"
-  //           placeholder="Category"
-  //         ></input>
-  //         <textarea
-  //           value={description}
-  //           name="description"
-  //           type="text"
-  //           placeholder="Description"
-  //         ></textarea>
-  //         <input value={image} name="image" type="file"></input>
-  //         <input
-  //           value={imageName}
-  //           name="category"
-  //           type="text"
-  //           placeholder="Image title"
-  //         ></input>
-  //         <input
-  //           value={imageDescription}
-  //           name="imageDescription"
-  //           type="text"
-  //           placeholder="Image caption"
-  //         ></input>
+    return (
+      <>
+        <form onSubmit={handleFormSubmit}>
+        <h2>Add new product</h2>
+          <input
+            value={name}
+            name="name"
+            type="text"
+            placeholder="Product name"
+          ></input>
+          <input
+            value={price}
+            name="price"
+            type="text"
+            placeholder="Price"
+          ></input>
+          <input
+            // value={quantity}
+            name="quantity"
+            type="number"
+            min="0"
+            placeholder="Stock"
+          ></input>
+          <input
+            value={category}
+            name="category"
+            type="text"
+            placeholder="Category"
+          ></input>
+          <textarea
+            value={description}
+            name="description"
+            type="text"
+            placeholder="Description"
+          ></textarea>
+          <input value={image} name="image" type="file"></input>
+          <input
+            value={imageName}
+            name="category"
+            type="text"
+            placeholder="Image title"
+          ></input>
+          <input
+            value={imageDescription}
+            name="imageDescription"
+            type="text"
+            placeholder="Image caption"
+          ></input>
 
-  //         <button className="btn-2" type="submit">
-  //           Submit
-  //         </button>
-  //         <br />
-  //       </form>
-  //     </>
-  //   );
-  // };
+          <button className="btn-1" type="submit">
+            Submit
+          </button>
+          
+          <div className="form-footer"></div>
+        </form>
+      </>
+    );
+  };
 
-  // const UpdateProductForm = () => {
-  //   // ideas.... 
-
-  //   const [name, setName] = useState("");
-  //   const [price, setPrice] = useState("");
-  //   const [category, setCategory] = useState("");
-  //   const [description, setDescription] = useState("");
-  //   const [quantity, setQuantity] = useState("");
-  //   const [image, setImgae] = useState("");
-  //   const [imageName, setImageName] = useState("");
-  //   const [imageDescription, setImageDescription] = useState("");
-
-  //   function handleFormSubmit() {
-
-  //   }
-
-  //   return (
-  //     <>
-  //     <h2>Form to update product</h2>
-  //       <form onSubmit={handleFormSubmit}>
-  //         <input
-  //           value={name}
-  //           name="name"
-  //           type="text"
-  //           placeholder="Product name"
-  //         ></input>
-  //         <input
-  //           value={price}
-  //           name="price"
-  //           type="text"
-  //           placeholder="Price"
-  //         ></input>
-  //         <input
-  //           // value={quantity}
-  //           name="quantity"
-  //           type="number"
-  //           min="0"
-  //           placeholder="Stock"
-  //         ></input>
-  //         <input
-  //           value={category}
-  //           name="category"
-  //           type="text"
-  //           placeholder="Category"
-  //         ></input>
-  //         <textarea
-  //           value={description}
-  //           name="description"
-  //           type="text"
-  //           placeholder="Description"
-  //         ></textarea>
-  //         <input value={image} name="image" type="file"></input>
-  //         <input
-  //           value={imageName}
-  //           name="category"
-  //           type="text"
-  //           placeholder="Image title"
-  //         ></input>
-  //         <input
-  //           value={imageDescription}
-  //           name="imageDescription"
-  //           type="text"
-  //           placeholder="Image caption"
-  //         ></input>
-
-  //         <button className="btn-2" type="submit">
-  //           Submit
-  //         </button>
-  //         <br />
-  //       </form>
-  //     </>
-  //   );
-  // };
-
-  // const UpdateProduct = (e) => {
-  //   // this'll be a function that takes the product id of the button clicked to populate the data in updateProductForm...and un hides the form
-  // }
 
   return (
     <>
-      <h2>Admin page</h2>
-      <h2>Products:</h2>
-      {ProductList}
+      <section className="admin-product-section">
+        <NewProductForm/>
+
+        <div className="white-container">
+        <h2>Products:</h2>
+        {ProductList}
+        </div>
+
+        
+
+      </section>
+
+
       
       {/* <NewProductForm />
       <UpdateProductForm /> */}

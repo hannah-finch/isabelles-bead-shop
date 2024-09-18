@@ -1,0 +1,37 @@
+.product-img-admin {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow1);
+  width: 135px;
+}
+
+.product-admin {
+  display: grid;
+  grid-template-columns: 135px auto;
+  /* align-items: center; */
+  gap: 10px;
+  border-bottom: 1px solid var(--gray);
+  padding: 20px 0;
+  width: 400px;
+}
+
+.item-text-box-admin {
+
+}
+
+.admin-product-section {
+  display: grid;
+  grid-template-columns: 480px 480px;
+  align-items: start;
+  gap: 40px;
+  
+}
+
+.product-admin button {
+  padding: 0 6px;
+  margin-top: 5px;
+  background-color: var(--blue);
+}
