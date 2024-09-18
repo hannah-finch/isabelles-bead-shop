@@ -8,15 +8,15 @@ import {
   createHttpLink,
 } from "@apollo/client";
 
-import Header from './components/header'
-import Footer from './components/footer'
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
