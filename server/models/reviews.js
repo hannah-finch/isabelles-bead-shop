@@ -9,7 +9,7 @@ const reviewSchema = new Schema(
             required: true,
             unique: true,
         },
-        username: User,
+        username: User._id,
         content: {
             type: String,
             required: true,
