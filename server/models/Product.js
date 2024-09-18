@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const imageSchema = require("./Image");
+const reviewSchema = require("./reviews")
 const productSchema = new Schema(
   {
     name: {
@@ -29,6 +30,9 @@ const productSchema = new Schema(
     quantity: {
       type: Number,
       required: true,
+    },
+    reviews: {
+      type: reviewSchema,
     },
   },
   {
