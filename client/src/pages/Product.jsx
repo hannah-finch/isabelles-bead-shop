@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
-import exampleData from "../assets/example-data.json";
-import ProductCard from "../components/product-card.jsx";
 
 function ProductPage() {
   // get product id from url
@@ -13,10 +11,6 @@ function ProductPage() {
   });
 
   const product = data ? data.singleProduct : [];
-  console.log(product);
-  // get product from json by id (get from db later)
-  // const [product] = exampleData.products.filter((p) => p.id === productId);
-  // destructure it
   const { id, category, description, image, quantity, price, name } = product;
 
   const InStock = () => {
