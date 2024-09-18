@@ -5,11 +5,11 @@ import ProductCard from "../components/product-card";
 // import { Link } from 'react-router-dom'
 import { GET_All_PRODUCTS } from "../utils/queries";
 import { useQuery } from "@apollo/client";
-
+import Auth from "../utils/auth";
 function HomePage() {
+  console.log(Auth.getProfile());
   const { loading, data } = useQuery(GET_All_PRODUCTS);
   const productsData = data ? data.products : [];
-  console.log(productsData);
   return (
     <>
       <section className="category-banner">
