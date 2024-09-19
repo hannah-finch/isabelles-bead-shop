@@ -1,11 +1,24 @@
 import "../assets/css/admin.css";
 import { useState } from "react";
-import { Link } from 'react-router-dom'
-import exampleData from "../assets/example-data.json";
+import { Link } from "react-router-dom";
+// import exampleData from "../assets/example-data.json";
+import Auth from "../utils/auth";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_All_PRODUCTS } from "../utils/queries";
+import { toDecimal } from "../utils/math";
+import { ADD_PRODUCT } from "../utils/mutations";
 
 function AdminPage() {
-  const ProductList = exampleData.products.map((product) => {
-    console.log(product.name);
+  const { data } = useQuery(GET_All_PRODUCTS);
+  //* return if you are not logged in, if you are the client, and if you are not admin
+  if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
+    return <h1>you are not authorized to view this page</h1>;
+  }
+  const [addProduct] = useMutation(ADD_PRODUCT);
+  const { products } = data ? data : [];
+  console.log(products);
+
+  const ProductList = products.map((product) => {
     return (
       <>
         <div className="product-admin">
@@ -18,8 +31,7 @@ function AdminPage() {
               {product.name}
             </p>
             <p>
-              <span className="bold">Price: </span>
-              {product.price}
+              <span className="bold">Price: </span>${toDecimal(product.price)}
             </p>
             <p>
               <span className="bold">Category: </span>
@@ -30,115 +42,107 @@ function AdminPage() {
               {product.quantity}
             </p>
 
-            <Link to="/product/PUT-PRODUCT_ID_HERE" className="btn-3">View / Edit</Link>
+            <Link to="/product/PUT-PRODUCT_ID_HERE" className="btn-3">
+              View / Edit
+            </Link>
           </div>
         </div>
       </>
     );
   });
-
+  // TODO SEND INT TO DATABASE
   const NewProductForm = () => {
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [category, setCategory] = useState("");
-    const [description, setDescription] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [image, setImage] = useState("");
-    const [imageName, setImageName] = useState("");
-    const [imageDescription, setImageDescription] = useState("");
-
+    const [formState, setFormState] = useState({
+      name: "",
+      price: "",
+      category: "",
+      description: "",
+      quantity: "",
+      image: undefined,
+      imageName: undefined,
+    });
     const handleInputChange = (e) => {
-      // Getting the value and name of the input which triggered the change
-      const { target } = e;
-      const inputType = target.name;
-      const inputValue = target.value;
+      const { name, value } = e.target;
 
-      // set the state based on input type
-      switch (inputType) {
-        case "name":
-          setName(inputValue);
-          break;
-        case "price":
-          setPrice(inputValue);
-          break;
-        case "category":
-          setCategory(inputValue);
-          break;
-        case "description":
-          setDescription(inputValue);
-          break;
-        case "quantity":
-          setQuantity(inputValue);
-          break;
-        case "image":
-          setImage(inputValue);
-          break;
-        case "imageName":
-          setImageName(inputValue);
-          break;
-        case "imageDescription":
-          setImageDescription(inputValue);
-          break;
-      }
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
     };
 
-    function handleFormSubmit() {}
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
+
+      const { name, price, category, description, quantity } = formState;
+      console.log(formState);
+      try {
+        const { data } = addProduct({
+          variables: { name, price, category, description, quantity },
+        });
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     return (
       <>
         <form onSubmit={handleFormSubmit} className="new-product-form">
           <h2>Add new product</h2>
           <input
-            value={name}
+            value={formState.name}
             name="name"
             onChange={handleInputChange}
             type="text"
             placeholder="Product name"
           ></input>
+          {/* //TODO FORCE THIS INTO DECIMAL AND MAKE FUNCTION TO CONVERT INTO DATABASE SHTUFF */}
           <input
-            value={price}
+            value={formState.price}
             name="price"
             onChange={handleInputChange}
             type="number"
             placeholder="Price"
+            min="0"
           ></input>
           <input
-            value={quantity}
+            value={formState.quantity}
             name="quantity"
             onChange={handleInputChange}
             type="number"
             min="0"
             placeholder="Stock"
           ></input>
+          {/* //TODO MAKE this a dropdown to limit CATEGORIES */}
           <input
-            value={category}
+            value={formState.category}
             name="category"
             onChange={handleInputChange}
             type="text"
             placeholder="Category"
           ></input>
           <textarea
-            value={description}
+            value={formState.description}
             name="description"
             onChange={handleInputChange}
             type="text"
             placeholder="Description"
           ></textarea>
           <input
-            value={image}
+            value={formState.image}
             name="image"
             onChange={handleInputChange}
             type="file"
           ></input>
           <input
-            value={imageName}
+            value={formState.imageName}
             name="imageName"
             onChange={handleInputChange}
             type="text"
             placeholder="Image title"
           ></input>
           <input
-            value={imageDescription}
+            value={formState.imageDescription}
             name="imageDescription"
             onChange={handleInputChange}
             type="text"
