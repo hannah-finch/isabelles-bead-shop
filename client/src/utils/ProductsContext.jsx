@@ -2,9 +2,11 @@ import { createContext, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "./queries";
 
-export const ProductsContext = createContext();
+const ProductsContext = createContext();
+const ShoppingCartContext = createContext();
 
-export const ProductsProvider = ({ children }) => {
+const ProductsProvider = ({ children }) => {
+  // Products state
   const { data, loading, error } = useQuery(GET_All_PRODUCTS);
   const [allProducts, setAllProducts] = useState([]);
 
@@ -14,6 +16,16 @@ export const ProductsProvider = ({ children }) => {
     }
   }, [data]);
 
+  // Shopping cart state
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+    console.log(cartItems); 
+  };
+
+  
+
   if (loading) {
     return <h1>Loading...</h1>;
   } else if (error) {
@@ -22,7 +34,11 @@ export const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider value={{ allProducts }}>
-      {children}
+      <ShoppingCartContext.Provider value={{ cartItems, setCartItems, addToCart }}>
+        {children}
+      </ShoppingCartContext.Provider>
     </ProductsContext.Provider>
   );
 };
+
+export { ProductsContext, ShoppingCartContext, ProductsProvider };
