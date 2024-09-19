@@ -78,11 +78,11 @@ function HomePage() {
         <h2>
           {selectedCategory === "all"
             ? "Shop All"
-            : capitalizeWords(selectedCategory)}
+            : `${capitalizeWords(selectedCategory)}s`}
         </h2>
         <button
           onClick={() => setSelectedCategory("all")}
-          className={selectedCategory === "all" ? "category-link-active" : ""}
+          className={selectedCategory === "all" ? "category-link-active" : "category-link"}
         >
           shop all
         </button>
@@ -90,7 +90,7 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("bracelet")}
           className={
-            selectedCategory === "bracelet" ? "category-link-active" : ""
+            selectedCategory === "bracelet" ? "category-link-active" : "category-link"
           }
         >
           bracelets
@@ -99,7 +99,7 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("keychain")}
           className={
-            selectedCategory === "keychain" ? "category-link-active" : ""
+            selectedCategory === "keychain" ? "category-link-active" : "category-link"
           }
         >
           key chains
@@ -108,7 +108,7 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("fidget")}
           className={
-            selectedCategory === "fidget" ? "category-link-active" : ""
+            selectedCategory === "fidget" ? "category-link-active" : "category-link"
           }
         >
           fidgets
@@ -117,7 +117,7 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("earring")}
           className={
-            selectedCategory === "earring" ? "category-link-active" : ""
+            selectedCategory === "earring" ? "category-link-active" : "category-link"
           }
         >
           earrings
