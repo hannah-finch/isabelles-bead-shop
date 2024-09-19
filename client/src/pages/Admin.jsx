@@ -1,9 +1,13 @@
 import "../assets/css/admin.css";
 import { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import exampleData from "../assets/example-data.json";
-
+import Auth from "../utils/auth";
 function AdminPage() {
+  if (!Auth.isLoggedIn() || Auth.isClient()) {
+    return <h1>you are not authorized to view this page</h1>;
+  }
+
   const ProductList = exampleData.products.map((product) => {
     console.log(product.name);
     return (
@@ -30,7 +34,9 @@ function AdminPage() {
               {product.quantity}
             </p>
 
-            <Link to="/product/PUT-PRODUCT_ID_HERE" className="btn-3">View / Edit</Link>
+            <Link to="/product/PUT-PRODUCT_ID_HERE" className="btn-3">
+              View / Edit
+            </Link>
           </div>
         </div>
       </>
