@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-
+import { toDecimal } from "../utils/math";
 import "../assets/css/product-card.css";
 // import exampleData from "../assets/example-data.json";
 
 function ProductCard(prop) {
   const { _id, category, image, name, price, quantity } = prop.product;
-  console.log(prop.selected);
   if (prop.selected == category || prop.selected == "all") {
     return (
       <Link
@@ -19,7 +18,7 @@ function ProductCard(prop) {
             <img src={image.Url} alt={image.description} />
           </div>
           <p>{name}</p>
-          <p>${price}</p>
+          <p>${toDecimal(price)}</p>
         </div>
       </Link>
     );
