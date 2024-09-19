@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "../utils/queries";
+import { toDecimal } from "../utils/math";
+
 function AdminPage() {
   const { data } = useQuery(GET_All_PRODUCTS);
   //* return if you are not logged in, if you are the client, and if you are not admin
@@ -29,7 +31,7 @@ function AdminPage() {
             </p>
             <p>
               <span className="bold">Price: </span>
-              {product.price}
+              ${toDecimal(product.price)}
             </p>
             <p>
               <span className="bold">Category: </span>
