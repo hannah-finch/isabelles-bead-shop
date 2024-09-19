@@ -30,7 +30,7 @@ section {
 /*  General Styles ------------------------ */
 
 .vertical-line {
-  width: 2px;
+  width: 1.5px;
   height: 20px;
   background-color: var(--blackish);
   margin: 0 20px;
@@ -121,7 +121,7 @@ nav {
   padding: 0 5%;
 }
 
-nav a {
+nav a, nav button {
   font-weight: bold;
   margin: 10px 20px;
   border-bottom: 2px solid #00000000;
