@@ -106,9 +106,12 @@ h2 {
 }
 
 .button-container {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 50% 50%;
-  gap: 10px;
+  gap: 10px; */
+
+  display: flex;
+  gap: 12px
 }
 
 /* Header Styles -------------------------- */

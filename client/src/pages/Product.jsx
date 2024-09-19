@@ -171,14 +171,14 @@ function ProductPage() {
     <>
       <section className="product-section">
         <figure className="product-img">
-          <img src={`../${image.Url}`}></img>
+          <img src={`../${image.Url}`} className="crop-img"></img>
         </figure>
 
         <div className="product-info">
           <h2>{name}</h2>
           <p>
-            Price: <span className="price">${toDecimal(price)}</span>{" "}
-            <InStock />{" "}
+            Price: <span className="price">${toDecimal(price)}</span>
+            <InStock />
           </p>
           <p>{description}</p>
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
