@@ -30,8 +30,7 @@ function AdminPage() {
               {product.name}
             </p>
             <p>
-              <span className="bold">Price: </span>
-              ${toDecimal(product.price)}
+              <span className="bold">Price: </span>${toDecimal(product.price)}
             </p>
             <p>
               <span className="bold">Category: </span>
@@ -52,48 +51,22 @@ function AdminPage() {
   });
 
   const NewProductForm = () => {
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [category, setCategory] = useState("");
-    const [description, setDescription] = useState("");
-    const [quantity, setQuantity] = useState("");
-    const [image, setImage] = useState("");
-    const [imageName, setImageName] = useState("");
-    const [imageDescription, setImageDescription] = useState("");
-
+    const [formState, setFormState] = useState({
+      name: "",
+      price: "",
+      category: "",
+      description: "",
+      quantity: "",
+      image: "",
+      imageName: "",
+    });
     const handleInputChange = (e) => {
-      // Getting the value and name of the input which triggered the change
-      const { target } = e;
-      const inputType = target.name;
-      const inputValue = target.value;
+      const { name, value } = e.target;
 
-      // set the state based on input type
-      switch (inputType) {
-        case "name":
-          setName(inputValue);
-          break;
-        case "price":
-          setPrice(inputValue);
-          break;
-        case "category":
-          setCategory(inputValue);
-          break;
-        case "description":
-          setDescription(inputValue);
-          break;
-        case "quantity":
-          setQuantity(inputValue);
-          break;
-        case "image":
-          setImage(inputValue);
-          break;
-        case "imageName":
-          setImageName(inputValue);
-          break;
-        case "imageDescription":
-          setImageDescription(inputValue);
-          break;
-      }
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
     };
 
     function handleFormSubmit() {}
@@ -103,21 +76,21 @@ function AdminPage() {
         <form onSubmit={handleFormSubmit} className="new-product-form">
           <h2>Add new product</h2>
           <input
-            value={name}
+            value={formState.name}
             name="name"
             onChange={handleInputChange}
             type="text"
             placeholder="Product name"
           ></input>
           <input
-            value={price}
+            value={formState.price}
             name="price"
             onChange={handleInputChange}
             type="number"
             placeholder="Price"
           ></input>
           <input
-            value={quantity}
+            value={formState.quantity}
             name="quantity"
             onChange={handleInputChange}
             type="number"
@@ -125,34 +98,34 @@ function AdminPage() {
             placeholder="Stock"
           ></input>
           <input
-            value={category}
+            value={formState.category}
             name="category"
             onChange={handleInputChange}
             type="text"
             placeholder="Category"
           ></input>
           <textarea
-            value={description}
+            value={formState.description}
             name="description"
             onChange={handleInputChange}
             type="text"
             placeholder="Description"
           ></textarea>
           <input
-            value={image}
+            value={formState.image}
             name="image"
             onChange={handleInputChange}
             type="file"
           ></input>
           <input
-            value={imageName}
+            value={formState.imageName}
             name="imageName"
             onChange={handleInputChange}
             type="text"
             placeholder="Image title"
           ></input>
           <input
-            value={imageDescription}
+            value={formState.imageDescription}
             name="imageDescription"
             onChange={handleInputChange}
             type="text"
