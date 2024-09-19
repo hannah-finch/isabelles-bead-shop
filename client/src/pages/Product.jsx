@@ -182,7 +182,8 @@ function ProductPage() {
           </p>
           <p>{description}</p>
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
-          <p>Quantity:{quantity}</p>
+          {/* This quantity is number to add to cart, not number in stock */}
+          <p>Quantity:</p>
 
           <div className="button-container">
             <button className="btn-1">Add to Cart</button>

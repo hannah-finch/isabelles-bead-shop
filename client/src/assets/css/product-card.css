@@ -21,6 +21,7 @@
  display: grid;
  grid-template-columns: 400px auto;
  gap: 40px;
+ justify-content: center;
 }
 
 .product-img {
@@ -43,4 +44,5 @@
 .product-info {
   display: flex;
   flex-direction: column;
+  max-width: 600px;
 }
