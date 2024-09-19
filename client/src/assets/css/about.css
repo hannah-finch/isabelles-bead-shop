@@ -1,0 +1,35 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.about-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.about-text-container p {
+  margin: 16px 0;
+  max-width: 400px;
+}
+
+.about-text-container img {
+  width: 80px;
+  margin: 16px;
+}
+
+.img-square-1 {
+  background-image: url(/images/banner-3.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.img-square-2 {
+  background-image: url(/images/banner-4.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
