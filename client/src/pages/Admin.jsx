@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import exampleData from "../assets/example-data.json";
 import Auth from "../utils/auth";
 function AdminPage() {
-  if (!Auth.isLoggedIn() || Auth.isClient()) {
+  if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
   }
 
