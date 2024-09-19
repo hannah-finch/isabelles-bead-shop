@@ -30,6 +30,7 @@ export default function CheckoutButton({ cartItems }) {
       } else {
         acc[item._id] = { ...item, quantity: 1 };
       }
+      console.log(acc);
       return acc;
     }, {});
 

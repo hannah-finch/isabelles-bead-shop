@@ -78,7 +78,8 @@ function ProductPage() {
 
       return (
         <>
-          <form onSubmit={""}>
+          <form onSubmit={""}> 
+            {/* TODO: needs a function */}
             <h2>Edit product</h2>
             <label htmlFor="name">Name:</label>
             <input

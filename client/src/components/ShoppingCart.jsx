@@ -1,19 +1,34 @@
 // TODO: this is a lot of duplicate, non stateful code. 
-
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ShoppingCart = ({ cartItems, removeFromCart }) => {
+  const [groupedItemsArray, setGroupedItemsArray] = useState([]);
+  const [total, setTotal] = useState(0);
+  
   // add a quantity property to each item in the cart and group items by ID
-  const groupedItems = cartItems.reduce((acc, item) => {
-    if (acc[item._id]) {
-      acc[item._id].quantity += 1;
-    } else {
-      acc[item._id] = { ...item, quantity: 1 };
-    }
-    return acc;
-  }, {});
+  const groupItems = (items) => {
+    const groupedItems = items.reduce((acc, item) => {
+      if (acc[item._id]) {
+        acc[item._id].quantity += 1;
+      } else {
+        acc[item._id] = { ...item, quantity: 1 };
+      }
+      return acc;
+    }, {});
+    return Object.values(groupedItems);
+  };
 
-  // convert grouped items into an array of objects
-  const groupedItemsArray = Object.values(groupedItems);
+    // calculate the total price
+  const calculateTotal = (items) => {
+    return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  };
+
+  useEffect(() => {
+    const grouped = groupItems(cartItems);
+    setGroupedItemsArray(grouped);
+    setTotal(calculateTotal(grouped));
+  }, [cartItems]);
 
   return (
     <>
@@ -21,21 +36,31 @@ const ShoppingCart = ({ cartItems, removeFromCart }) => {
       <div>
         {groupedItemsArray.length > 0 ? (
           groupedItemsArray.map((item) => (
-            <div key={item.index} className="border border-blue-500 rounded-lg m-4">
-              <h3>{item.name}</h3>
-              <p>Price: ${item.price/100}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Total: ${item.price * item.quantity/100}</p>
-
-              <button className="m-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => removeFromCart(item._id)}>
-                Remove from cart
-              </button>
+            <div key={item.index} className="cart-item-wrapper">
+              <div className="cart-item">
+                <figure className="product-img-cart">
+                  <img src="images/tempPictures/defaultProductImage.jpg"></img>
+                </figure>
+                <div className="item-text-box">
+                <Link to="/product/{item._Id}" className="bold">
+                  {item.name}
+                </Link>
+                  <p>Quantity: {item.quantity}</p>
+                  <p>${item.price/100} each</p>
+                  <p>Total: ${item.price * item.quantity/100}</p>
+                </div>
+                <button className="btn-del" onClick={() => removeFromCart(item._id)}>
+                  x
+                </button>
+              </div>
+              
             </div>
           ))
         ) : (
           <p>Your cart is empty</p>
         )}
       </div>
+      <p className="total">TOTAL: ${total.toFixed(2)/100}</p>
     </>
   );
 };

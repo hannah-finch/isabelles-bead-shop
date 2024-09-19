@@ -28,6 +28,29 @@ const ProductsProvider = ({ children }) => {
     setCartItems(cartItems.filter((item) => item._id !== productId));
   };
 
+  const incrementCartItem = (productId) => {
+    const updatedCart = cartItems.map((item) => {
+      if (item._id === productId) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+
+    setCartItems(updatedCart);
+  };
+
+  const decrementCartItem = (productId) => {
+    const updatedCart = cartItems.map((item) => {
+      if (item._id === productId) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    // Remove item if quantity is 0 (only keeps items with quantity > 0)
+    const filteredCart = updatedCart.filter((item) => item.quantity > 0);
+    setCartItems(filteredCart);
+  }
+
   if (loading) {
     return <h1>Loading...</h1>;
   } else if (error) {
@@ -36,7 +59,7 @@ const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider value={{ allProducts }}>
-      <ShoppingCartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+      <ShoppingCartContext.Provider value={{ cartItems, addToCart, removeFromCart, incrementCartItem, decrementCartItem }}>
         {children}
       </ShoppingCartContext.Provider>
     </ProductsContext.Provider>
