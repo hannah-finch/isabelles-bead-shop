@@ -1,15 +1,21 @@
 import "../assets/css/admin.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import exampleData from "../assets/example-data.json";
+// import exampleData from "../assets/example-data.json";
 import Auth from "../utils/auth";
+import { useQuery } from "@apollo/client";
+import { GET_All_PRODUCTS } from "../utils/queries";
 function AdminPage() {
+  const { data } = useQuery(GET_All_PRODUCTS);
+  //* return if you are not logged in, if you are the client, and if you are not admin
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
   }
 
-  const ProductList = exampleData.products.map((product) => {
-    console.log(product.name);
+  const { products } = data ? data : [];
+  console.log(products);
+
+  const ProductList = products.map((product) => {
     return (
       <>
         <div className="product-admin">
