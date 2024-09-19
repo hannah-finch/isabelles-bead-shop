@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
 import { toDecimal } from "../utils/math.js";
+import { useContext } from "react";
+
+
+import { ShoppingCartContext } from '../utils/ProductsContext.jsx'
 
 function ProductPage() {
   // get product id from url
@@ -10,6 +14,8 @@ function ProductPage() {
   const { loading, data } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { productId },
   });
+
+  const { addToCart } = useContext(ShoppingCartContext);
 
   const product = data ? data.singleProduct : [];
   const { id, category, description, image, quantity, price, name } = product;
@@ -91,7 +97,8 @@ function ProductPage() {
 
       return (
         <>
-          <form onSubmit={""}>
+          <form onSubmit={""}> 
+            {/* TODO: needs a function */}
             <h2>Edit product</h2>
             <label htmlFor="name">Name:</label>
             <input
@@ -205,7 +212,7 @@ function ProductPage() {
           <p>Quantity:</p>
 
           <div className="button-container">
-            <button className="btn-1">Add to Cart</button>
+            <button onClick={() => addToCart(product)} className="btn-1">Add to Cart</button>
             <button className="btn-2">Leave a Review</button>
           </div>
         </div>
