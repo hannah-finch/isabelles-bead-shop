@@ -12,7 +12,7 @@ export default function Cart() {
       <section className="cart-section">
         <h2>Shopping cart</h2>
         <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart}/>
-        <CheckoutButton />
+        <CheckoutButton cartItems={cartItems}/>
 
         {/* TODO: create one of these div's for each item in the cart, using correct data in {} */}
         {/* <div className="cart-item">

@@ -1,0 +1,36 @@
+.product-img-admin {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow1);
+  width: 135px;
+}
+
+.product-admin {
+  display: grid;
+  grid-template-columns: 135px auto;
+  gap: 10px;
+  border-bottom: 1px solid var(--gray);
+  padding: 20px 0;
+}
+
+.admin-product-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.btn-3 {
+  padding: 2px 6px;
+  background-color: var(--blue);
+  line-height: 2.5
+}
+
+.new-product-form {
+  /* remove auto margin */
+  margin: 0;
+  margin-right: 20px;
+  flex-shrink: 5;
+}

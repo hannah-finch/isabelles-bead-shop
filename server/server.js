@@ -46,24 +46,22 @@ const startApolloServer = async () => {
   // STRIPE CHECKOUT ROUTES
   app.post("/create-checkout-session", async (req, res) => {
     try {
-      const { priceId } = await req.body;
+      const { items } = await req.body;
 
-      if (!priceId) {
-        throw new Error("priceId is missing or invalid");
+      if (!items) {
+        throw new Error("items is missing or invalid");
       }
   
-      console.log("Received priceId:", priceId); 
+      console.log("Received items:", items); 
   
       const session = await stripe.checkout.sessions.create({
         ui_mode: "embedded",
-        line_items: [
-          {
-            price: priceId,
-            quantity: 1,
-          },
-        ],
+        line_items: items,
         mode: "payment",
-        return_url: `${req.headers.origin}/return?session_id={CHECKOUT_SESSION_ID}`,
+        shipping_address_collection: {
+          allowed_countries: ['US', 'CA'], // Add any country codes where you ship
+        },
+        return_url: `${req.headers.origin}/`, // TODO: create a /success page or something to redirect to after payment
       });
       res.json({ clientSecret: session.client_secret });
     } catch (err) {

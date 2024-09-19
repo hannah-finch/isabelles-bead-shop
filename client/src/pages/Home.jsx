@@ -4,12 +4,19 @@ import { useEffect, useState, useContext } from "react";
 import "../assets/css/shop.css";
 import ProductCard from "../components/product-card";
 // import { Link } from 'react-router-dom'
+
+import Auth from "../utils/auth";
 // import { GET_All_PRODUCTS } from "../utils/queries";
 // import { useQuery } from "@apollo/client";
 
 import { ProductsContext } from "../utils/ProductsContext";
 
 function HomePage() {
+  //* testing admin, client, and not logged in
+  if (Auth.isLoggedIn()) {
+    console.log("admin: " + Auth.isAdmin());
+    console.log("client: " + Auth.isClient());
+  }
   //const { loading, data } = useQuery(GET_All_PRODUCTS);
   //const productsData = data ? data.products : [];
   //console.log(productsData);
@@ -81,36 +88,36 @@ function HomePage() {
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("bracelets")}
+          onClick={() => setSelectedCategory("bracelet")}
           className={
-            selectedCategory === "bracelets" ? "category-link-active" : ""
+            selectedCategory === "bracelet" ? "category-link-active" : ""
           }
         >
           bracelets
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("key chains")}
+          onClick={() => setSelectedCategory("keychain")}
           className={
-            selectedCategory === "key chains" ? "category-link-active" : ""
+            selectedCategory === "keychain" ? "category-link-active" : ""
           }
         >
           key chains
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("fidgets")}
+          onClick={() => setSelectedCategory("fidget")}
           className={
-            selectedCategory === "fidgets" ? "category-link-active" : ""
+            selectedCategory === "fidget" ? "category-link-active" : ""
           }
         >
           fidgets
         </button>
         |
         <button
-          onClick={() => setSelectedCategory("earrings")}
+          onClick={() => setSelectedCategory("earring")}
           className={
-            selectedCategory === "earrings" ? "category-link-active" : ""
+            selectedCategory === "earring" ? "category-link-active" : ""
           }
         >
           earrings
@@ -119,7 +126,11 @@ function HomePage() {
           {/* This checks if the product query is empty and done loading.*/}
           {filteredProducts && filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <ProductCard product={product} key={product._id} />
+              <ProductCard
+                product={product}
+                key={product._id}
+                selected={selectedCategory}
+              />
             ))
           ) : (
             <p>No products available</p>
