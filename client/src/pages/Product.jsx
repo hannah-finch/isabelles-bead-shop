@@ -15,18 +15,22 @@ function ProductPage() {
   const { id, category, description, image, quantity, price, name } = product;
 
   // just some fake review data to delete later --------------------
-  const exampleReviewerName = "Reviewer Name";
-  const exampleReviewText =
-    "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj";
-  const exampleStarsNumber = 5;
+  const exampleReview = {
+    name: "Reviewer Name",
+    text: "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj",
+    stars: 5
+  }
   // --------------------------------------------------------------
 
-  const ReviewCard = () => {
+  const ReviewCard = (prop) => {
+    const { stars, text, name } = prop.review
     return(
       <div className="review-card">
-        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
-        <p>&quot; {exampleReviewText} &quot;</p>
-        <p className="bold">- {exampleReviewerName}</p>
+        <div className="block">
+          <img src={`/images/stars-${stars}.png`}></img>
+          <p>&quot; {text} &quot;</p>
+          <p className="bold">- {name}</p>
+        </div>
       </div>
     )
   }
@@ -213,23 +217,8 @@ function ProductPage() {
         <h2>Reviews</h2>
         <div className="review-grid">
 
-          {/* make one of these for each review */}
-          <ReviewCard/>
-          <div className="review-card">
-        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
-        <p>&quot; {exampleReviewText} &quot;</p>
-        <p className="bold">- {exampleReviewerName}</p>
-      </div>
-      <div className="review-card">
-        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
-        <p>&quot; sdfgadfoiasudf nasd klsdakjsk ldjlkjaalksdfj  &quot;</p>
-        <p className="bold">- {exampleReviewerName}</p>
-      </div>
-      <div className="review-card">
-        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
-        <p>&quot; {exampleReviewText} &quot;</p>
-        <p className="bold">- {exampleReviewerName}</p>
-      </div>
+          {/* map through reviews and pass in info to make one card per review */}
+          <ReviewCard review={exampleReview}/>
 
         </div>
       </section>
