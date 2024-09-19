@@ -9,7 +9,10 @@ const reviewSchema = new Schema(
             required: true,
             unique: true,
         },
-        username: User._id,
+        username: {
+            type: Schema.Types.ObjectID, 
+            ref: User,
+        },
         content: {
             type: String,
             required: true,
@@ -24,6 +27,4 @@ const reviewSchema = new Schema(
     }
 )
 
-const Review = model("Review", reviewSchema)
-
-module.exports = Review;
+module.exports = reviewSchema;
