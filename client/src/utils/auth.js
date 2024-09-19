@@ -48,14 +48,14 @@ class AuthService {
   //   return jwtDecode(localStorage.getItem("id_token"));
   // }
   // //TODO: Figure out how to get ADMIN
-  // isAdmin() {
-  //   const profile = this.getProfile();
-  //   return profile.role === "admin";
-  // }
-  // isClient() {
-  //   const profile = this.getProfile();
-  //   return profile.role === "client";
-  // }
+  isAdmin() {
+    const profile = this.getProfile();
+    return profile.data.role === "admin";
+  }
+  isClient() {
+    const profile = this.getProfile();
+    return profile.data.role === "client";
+  }
 }
 
 export default new AuthService();

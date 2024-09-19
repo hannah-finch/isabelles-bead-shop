@@ -8,15 +8,18 @@ import {
   createHttpLink,
 } from "@apollo/client";
 
-import Header from './components/header'
-import Footer from './components/footer'
+import { ProductsProvider } from "./utils/ProductsContext.jsx";
+
+import Header from "./components/header";
+import Footer from "./components/footer";
+import ScrollToTop from "./utils/scroll-to-top.jsx";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
@@ -33,13 +36,16 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Header />
+        <ProductsProvider>
+          <ScrollToTop />
+          <Header />
 
-        <main>
-          <Outlet />
-        </main>
+          <main>
+            <Outlet />
+          </main>
 
-        <Footer />
+          <Footer />
+        </ProductsProvider>
       </ApolloProvider>
     </>
   );

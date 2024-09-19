@@ -10,10 +10,11 @@ import "./index.css";
 import HomePage from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import AboutPage from "./pages/About.jsx";
-import AccountPage from "./pages/account.jsx";
+import AccountPage from "./pages/Account.jsx";
 import CartPage from "./pages/Cart.jsx";
 import Signup from "./pages/Signup.jsx";
 import ProductPage from "./pages/Product.jsx";
+import AdminPage from "./pages/Admin.jsx";
 
 import { ThemeProvider } from "@material-tailwind/react";
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:productId",
         element: <ProductPage />,
+      },
+      {
+        path: "/admin",
+        element: <AdminPage />,
       }
       // Add more routes here...
     ],

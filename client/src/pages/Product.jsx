@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
-import exampleData from "../assets/example-data.json";
-import ProductCard from "../components/product-card.jsx";
+import { toDecimal } from "../utils/math.js";
 
 function ProductPage() {
   // get product id from url
@@ -12,38 +12,197 @@ function ProductPage() {
   });
 
   const product = data ? data.singleProduct : [];
-  console.log(product);
-  // get product from json by id (get from db later)
-  // const [product] = exampleData.products.filter((p) => p.id === productId);
-  // destructure it
   const { id, category, description, image, quantity, price, name } = product;
+
+  // just some fake review data to delete later --------------------
+  const exampleReview = {
+    name: "Reviewer Name",
+    text: "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj",
+    stars: 5
+  }
+  // --------------------------------------------------------------
+
+  const ReviewCard = (prop) => {
+    const { stars, text, name } = prop.review
+    return(
+      <div className="review-card">
+        <div className="block">
+          <img src={`/images/stars-${stars}.png`}></img>
+          <p>&quot; {text} &quot;</p>
+          <p className="bold">- {name}</p>
+        </div>
+      </div>
+    )
+  }
 
   const InStock = () => {
     if (quantity < 0) {
-      return "OUT OF STOCK";
-    } else {
-      return;
+      return " OUT OF STOCK";
     }
   };
+
+  const AdminStuff = () => {
+    const UpdateForm = () => {
+      const [newName, setName] = useState(name);
+      const [newPrice, setPrice] = useState(price);
+      const [newCategory, setCategory] = useState(category);
+      const [newDescription, setDescription] = useState(description);
+      const [newQuantity, setQuantity] = useState(quantity);
+      const [newImage, setImage] = useState(image.URL);
+      const [newImageName, setImageName] = useState(image.name);
+      const [newImageDescription, setImageDescription] = useState(
+        image.description
+      );
+
+      const handleInputChange = (e) => {
+        // Getting the value and name of the input which triggered the change
+        const { target } = e;
+        const inputType = target.name;
+        const inputValue = target.value;
+
+        // set the state based on input type
+        switch (inputType) {
+          case "name":
+            setName(inputValue);
+            break;
+          case "price":
+            setPrice(inputValue);
+            break;
+          case "category":
+            setCategory(inputValue);
+            break;
+          case "description":
+            setDescription(inputValue);
+            break;
+          case "quantity":
+            setQuantity(inputValue);
+            break;
+          case "image":
+            setImage(inputValue);
+            break;
+          case "imageName":
+            setImageName(inputValue);
+            break;
+          case "imageDescription":
+            setImageDescription(inputValue);
+            break;
+        }
+      };
+
+      return (
+        <>
+          <form onSubmit={""}>
+            <h2>Edit product</h2>
+            <label htmlFor="name">Name:</label>
+            <input
+              value={newName}
+              name="name"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Product name"
+            ></input>
+            <label htmlFor="price">Price:</label>
+            <input
+              value={newPrice}
+              name="price"
+              onChange={handleInputChange}
+              type="number"
+              placeholder="Price"
+            ></input>
+            <label htmlFor="quantity">Number in stock:</label>
+            <input
+              value={newQuantity}
+              name="quantity"
+              onChange={handleInputChange}
+              type="number"
+              min="0"
+              placeholder="Stock"
+            ></input>
+            <label htmlFor="category">Category:</label>
+            <input
+              value={newCategory}
+              name="category"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Category"
+            ></input>
+            <label htmlFor="description">Description:</label>
+            <textarea
+              value={newDescription}
+              name="description"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Description"
+            ></textarea>
+            <label htmlFor="image">Image:</label>
+            <input
+              value={newImage}
+              name="image"
+              onChange={handleInputChange}
+              type="file"
+            ></input>
+            <label htmlFor="imageName">Image title:</label>
+            <input
+              value={newImageName}
+              name="imageName"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Image title"
+            ></input>
+            <label htmlFor="imageDescription">Image Caption:</label>
+            <input
+              value={newImageDescription}
+              name="imageDescription"
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Image caption"
+            ></input>
+
+            <button className="btn-1" type="submit">
+              Submit
+            </button>
+
+            <div className="form-footer"></div>
+          </form>
+        </>
+      );
+    };
+
+    return (
+      <section>
+        Number in stock: {quantity} <br></br>
+        Product id: {productId} <br></br>
+        <button className="btn-1" onClick={""}>
+          Edit Product
+        </button>
+        <button className="btn-1" onClick={""}>
+          Delete Product
+        </button>
+        <UpdateForm />
+      </section>
+    );
+  };
+
   if (loading) {
     return <h1>Loading</h1>;
   }
-  console.log(image.Url);
   return (
     <>
       <section className="product-section">
         <figure className="product-img">
-          <img src={`../${image.Url}`}></img>
+          <img src={`../${image.Url}`} className="crop-img"></img>
         </figure>
 
         <div className="product-info">
           <h2>{name}</h2>
           <p>
-            Price: <span className="price">${price}</span> <InStock />{" "}
+            Price: <span className="price">${toDecimal(price)}</span>
+            <InStock />
           </p>
           <p>{description}</p>
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
-          <p>Quantity:{quantity}</p>
+          {/* This quantity is number to add to cart, not number in stock */}
+          <p>Quantity:</p>
 
           <div className="button-container">
             <button className="btn-1">Add to Cart</button>
@@ -52,12 +211,19 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* I put some product info here just in case we want it to show if admin is logged in */}
-      <div>
-        Product info for Admin: <br></br>
-        Number in stock: {quantity} <br></br>
-        Product id: {id}
-      </div>
+      <div className="sub-banner"></div>
+
+      <section className="review-section">
+        <h2>Reviews</h2>
+        <div className="review-grid">
+
+          {/* map through reviews and pass in info to make one card per review */}
+          <ReviewCard review={exampleReview}/>
+
+        </div>
+      </section>
+
+      <AdminStuff />
     </>
   );
 }
