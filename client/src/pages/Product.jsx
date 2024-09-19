@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
+import { toDecimal } from "../utils/math.js";
 
 function ProductPage() {
   // get product id from url
@@ -23,7 +24,6 @@ function ProductPage() {
 
   const AdminStuff = () => {
     const UpdateForm = () => {
-
       const [newName, setName] = useState(name);
       const [newPrice, setPrice] = useState(price);
       const [newCategory, setCategory] = useState(category);
@@ -73,8 +73,8 @@ function ProductPage() {
       return (
         <>
           <form onSubmit={""}>
-          <h2>Edit product</h2>
-          <label htmlFor="name">Name:</label>
+            <h2>Edit product</h2>
+            <label htmlFor="name">Name:</label>
             <input
               value={newName}
               name="name"
@@ -122,7 +122,7 @@ function ProductPage() {
               onChange={handleInputChange}
               type="file"
             ></input>
-           <label htmlFor="imageName">Image title:</label>
+            <label htmlFor="imageName">Image title:</label>
             <input
               value={newImageName}
               name="imageName"
@@ -177,7 +177,8 @@ function ProductPage() {
         <div className="product-info">
           <h2>{name}</h2>
           <p>
-            Price: <span className="price">${price}</span> <InStock />{" "}
+            Price: <span className="price">${toDecimal(price)}</span>{" "}
+            <InStock />{" "}
           </p>
           <p>{description}</p>
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
@@ -191,7 +192,6 @@ function ProductPage() {
       </section>
 
       <AdminStuff />
-
     </>
   );
 }
