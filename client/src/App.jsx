@@ -12,6 +12,7 @@ import { ProductsProvider } from "./utils/ProductsContext.jsx";
 
 import Header from "./components/header";
 import Footer from "./components/footer";
+import ScrollToTop from "./utils/scroll-to-top.jsx";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -36,6 +37,7 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <ProductsProvider>
+          <ScrollToTop />
           <Header />
 
           <main>
