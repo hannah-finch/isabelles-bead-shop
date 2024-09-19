@@ -17,6 +17,7 @@
 }
 
 /* Project page styles -------------- */
+
 .product-section {
  display: grid;
  grid-template-columns: 400px auto;
@@ -38,11 +39,52 @@
 }
 
 .product-info p {
-  margin: 20px 0;
+  margin: 12px 0;
 }
 
 .product-info {
   display: flex;
   flex-direction: column;
   max-width: 600px;
+}
+
+/* Review section styles -------------------------- */
+
+.review-section h2 {
+  text-align: center;
+}
+
+.review-grid {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: masonry; */
+
+  column-count: 3;
+  column-gap: 20px;
+  column-fill: balance;
+
+
+
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-top: 30px;
+  justify-content: center;
+  align-items: flex-start; */
+}
+
+.review-card {
+  background-color: var(--white);
+  box-shadow: var(--shadow1);
+    display: inline-block;
+
+  width: 100%;
+
+  margin-bottom: 20px;
+  padding: 40px;
+
+}
+
+.review-card p {
+  margin-top: 30px;
 }

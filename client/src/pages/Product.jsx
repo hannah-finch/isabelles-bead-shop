@@ -14,11 +14,26 @@ function ProductPage() {
   const product = data ? data.singleProduct : [];
   const { id, category, description, image, quantity, price, name } = product;
 
+  // just some fake review data to delete later --------------------
+  const exampleReviewerName = "Reviewer Name";
+  const exampleReviewText =
+    "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj";
+  const exampleStarsNumber = 5;
+  // --------------------------------------------------------------
+
+  const ReviewCard = () => {
+    return(
+      <div className="review-card">
+        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
+        <p>&quot; {exampleReviewText} &quot;</p>
+        <p className="bold">- {exampleReviewerName}</p>
+      </div>
+    )
+  }
+
   const InStock = () => {
     if (quantity < 0) {
-      return "OUT OF STOCK";
-    } else {
-      return;
+      return " OUT OF STOCK";
     }
   };
 
@@ -189,6 +204,33 @@ function ProductPage() {
             <button className="btn-1">Add to Cart</button>
             <button className="btn-2">Leave a Review</button>
           </div>
+        </div>
+      </section>
+
+      <div className="sub-banner"></div>
+
+      <section className="review-section">
+        <h2>Reviews</h2>
+        <div className="review-grid">
+
+          {/* make one of these for each review */}
+          <ReviewCard/>
+          <div className="review-card">
+        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
+        <p>&quot; {exampleReviewText} &quot;</p>
+        <p className="bold">- {exampleReviewerName}</p>
+      </div>
+      <div className="review-card">
+        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
+        <p>&quot; sdfgadfoiasudf nasd klsdakjsk ldjlkjaalksdfj  &quot;</p>
+        <p className="bold">- {exampleReviewerName}</p>
+      </div>
+      <div className="review-card">
+        <img src={`/images/stars-${exampleStarsNumber}.png`}></img>
+        <p>&quot; {exampleReviewText} &quot;</p>
+        <p className="bold">- {exampleReviewerName}</p>
+      </div>
+
         </div>
       </section>
 

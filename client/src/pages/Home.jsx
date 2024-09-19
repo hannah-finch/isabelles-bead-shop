@@ -71,7 +71,7 @@ function HomePage() {
           </div>
         </button>
       </section>
-      <div className="sub-category-banner"></div>
+      <div className="sub-banner"></div>
 
       <section className="shop-section">
         {/* TODO: show a button for each category in the db, so if she adds a category, it'll automatically be here (These are just examples atm, don't forget the | at the end)*/}
@@ -82,7 +82,11 @@ function HomePage() {
         </h2>
         <button
           onClick={() => setSelectedCategory("all")}
-          className={selectedCategory === "all" ? "category-link-active" : "category-link"}
+          className={
+            selectedCategory === "all"
+              ? "category-link-active"
+              : "category-link"
+          }
         >
           shop all
         </button>
@@ -90,7 +94,9 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("bracelet")}
           className={
-            selectedCategory === "bracelet" ? "category-link-active" : "category-link"
+            selectedCategory === "bracelet"
+              ? "category-link-active"
+              : "category-link"
           }
         >
           bracelets
@@ -99,7 +105,9 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("keychain")}
           className={
-            selectedCategory === "keychain" ? "category-link-active" : "category-link"
+            selectedCategory === "keychain"
+              ? "category-link-active"
+              : "category-link"
           }
         >
           key chains
@@ -108,7 +116,9 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("fidget")}
           className={
-            selectedCategory === "fidget" ? "category-link-active" : "category-link"
+            selectedCategory === "fidget"
+              ? "category-link-active"
+              : "category-link"
           }
         >
           fidgets
@@ -117,7 +127,9 @@ function HomePage() {
         <button
           onClick={() => setSelectedCategory("earring")}
           className={
-            selectedCategory === "earring" ? "category-link-active" : "category-link"
+            selectedCategory === "earring"
+              ? "category-link-active"
+              : "category-link"
           }
         >
           earrings
