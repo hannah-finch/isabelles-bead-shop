@@ -20,11 +20,30 @@ function ProductPage() {
   const product = data ? data.singleProduct : [];
   const { id, category, description, image, quantity, price, name } = product;
 
+  // just some fake review data to delete later --------------------
+  const exampleReview = {
+    name: "Reviewer Name",
+    text: "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj",
+    stars: 5
+  }
+  // --------------------------------------------------------------
+
+  const ReviewCard = (prop) => {
+    const { stars, text, name } = prop.review
+    return(
+      <div className="review-card">
+        <div className="block">
+          <img src={`/images/stars-${stars}.png`}></img>
+          <p>&quot; {text} &quot;</p>
+          <p className="bold">- {name}</p>
+        </div>
+      </div>
+    )
+  }
+
   const InStock = () => {
     if (quantity < 0) {
-      return "OUT OF STOCK";
-    } else {
-      return;
+      return " OUT OF STOCK";
     }
   };
 
@@ -178,23 +197,36 @@ function ProductPage() {
     <>
       <section className="product-section">
         <figure className="product-img">
-          <img src={`../${image.Url}`}></img>
+          <img src={`../${image.Url}`} className="crop-img"></img>
         </figure>
 
         <div className="product-info">
           <h2>{name}</h2>
           <p>
-            Price: <span className="price">${toDecimal(price)}</span>{" "}
-            <InStock />{" "}
+            Price: <span className="price">${toDecimal(price)}</span>
+            <InStock />
           </p>
           <p>{description}</p>
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
-          <p>Quantity:{quantity}</p>
+          {/* This quantity is number to add to cart, not number in stock */}
+          <p>Quantity:</p>
 
           <div className="button-container">
             <button onClick={() => addToCart(product)} className="btn-1">Add to Cart</button>
             <button className="btn-2">Leave a Review</button>
           </div>
+        </div>
+      </section>
+
+      <div className="sub-banner"></div>
+
+      <section className="review-section">
+        <h2>Reviews</h2>
+        <div className="review-grid">
+
+          {/* map through reviews and pass in info to make one card per review */}
+          <ReviewCard review={exampleReview}/>
+
         </div>
       </section>
 

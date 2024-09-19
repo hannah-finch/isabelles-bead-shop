@@ -6,27 +6,31 @@
   padding-bottom: 10px;
 }
 
-/* .product-image {
-  background-color: #000000;
+.card-image {
   aspect-ratio: 1/1;
-  margin-bottom: 10px;
-} */
+}
+
+.crop-img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
 
 /* Project page styles -------------- */
+
 .product-section {
- display: flex;
+  display: grid;
+  grid-template-columns: 400px auto;
+  gap: 40px;
+  justify-content: center;
 }
 
 .product-img {
   aspect-ratio: 1/1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
   border: 10px solid var(--white);
   box-shadow: var(--shadow1);
   margin-right: 40px;
-  max-width: 50%;
- 
+  width: 400px;
 }
 
 .price {
@@ -35,6 +39,41 @@
 }
 
 .product-info p {
-  margin: 20px 0;
+  margin: 12px 0;
 }
 
+.product-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+/* Review section styles -------------------------- */
+
+.review-section h2 {
+  text-align: center;
+}
+
+.review-grid {
+  margin-top: 30px;
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.review-card {
+  background-color: var(--white);
+  box-shadow: var(--shadow1);
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 40px;
+}
+
+.review-card p {
+  margin-top: 30px;
+}
+
+/* necessary for the card content to stay together */
+.block {
+  display: inline-block;
+}

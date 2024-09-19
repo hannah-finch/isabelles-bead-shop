@@ -17,7 +17,10 @@ export default function Cart() {
         {/* TODO: create one of these div's for each item in the cart, using correct data in {} */}
         {/* <div className="cart-item">
           <figure className="product-img-cart">
-            <img src="images/tempPictures/defaultProductImage.jpg"></img>
+            <img
+              src="images/tempPictures/defaultProductImage.jpg"
+              className="crop-img"
+            ></img>
           </figure>
           <div className="item-text-box">
             <Link to="/product/PUTproductIdHERE" className="bold">
@@ -31,7 +34,10 @@ export default function Cart() {
 
         <div className="cart-item">
           <figure className="product-img-cart">
-            <img src="images/tempPictures/defaultProductImage.jpg"></img>
+            <img
+              src="images/tempPictures/defaultProductImage.jpg"
+              className="crop-img"
+            ></img>
           </figure>
           <div className="item-text-box">
             <Link to="/product/PUTproductIdHERE" className="bold">

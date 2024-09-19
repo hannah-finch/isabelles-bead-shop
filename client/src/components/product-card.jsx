@@ -13,9 +13,12 @@ function ProductCard(prop) {
         data-stock={quantity}
       >
         <div className="product-card">
-          <div className="product-image">
-            {/* TODO: put image here... in css it'll be the background image of the div so I can automatically crop it */}
-            <img src={image.Url} alt={image.description} />
+          <div className="card-image">
+            <img
+              src={image.Url}
+              alt={image.description}
+              className="crop-img"
+            ></img>
           </div>
           <p>{name}</p>
           <p>${toDecimal(price)}</p>
