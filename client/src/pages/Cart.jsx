@@ -6,12 +6,12 @@ import CheckoutButton from "../components/CheckoutButton";
 import { ShoppingCartContext } from "../utils/ProductsContext";
 
 export default function Cart() {
-  const { cartItems, removeFromCart } = useContext(ShoppingCartContext);
+  const { cartItems, setCartItems } = useContext(ShoppingCartContext);
   return (
     <>
       <section className="cart-section">
         <h2>Shopping cart</h2>
-        <ShoppingCart cartItems={cartItems} removeFromCart={removeFromCart}/>
+        <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
         <CheckoutButton cartItems={cartItems}/>
 
         {/* TODO: create one of these div's for each item in the cart, using correct data in {} */}
