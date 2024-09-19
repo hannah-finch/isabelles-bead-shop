@@ -27,7 +27,7 @@
   padding-bottom: 6px;
 }
 
-.sub-category-banner {
+.sub-banner {
   background-color: var(--mint);
   height: 45px;
   box-shadow: var(--shadow1);
@@ -51,6 +51,6 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
