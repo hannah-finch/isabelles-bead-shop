@@ -47,7 +47,6 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     const { username, password, passwordConfirm } = formState;
 

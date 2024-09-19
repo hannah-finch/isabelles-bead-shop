@@ -12,7 +12,6 @@ function Header() {
         >
           shop
         </NavLink>
-        {/* these page routes aren't made yet */}
         <NavLink
           to={"/about"}
           className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -20,17 +19,29 @@ function Header() {
           about
         </NavLink>
 
-        {/* TODO: TESTING LOGIN/LOGOUT*/}
         {Auth.isLoggedIn() ? (
-          <>
+          Auth.isClient() ? (
             <NavLink
               to={"/account/userId"}
               className={({ isActive }) => (isActive ? "active-link" : "")}
             >
               account
             </NavLink>
-            <button onClick={Auth.logout}>logout</button>
-          </>
+          ) : null
+        ) : null}
+        {Auth.isLoggedIn() ? (
+          Auth.isAdmin() ? (
+            <NavLink
+              to={"/admin"}
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              admin
+            </NavLink>
+          ) : null
+        ) : null}
+
+        {Auth.isLoggedIn() ? (
+          <button onClick={Auth.logout}>logout</button>
         ) : (
           <NavLink
             to={"/login"}
