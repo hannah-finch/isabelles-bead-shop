@@ -47,25 +47,53 @@ function HomePage() {
       <section className="category-banner">
         {/* TODO: Change the image source on hover to the color versions */}
         <button>
-          <div className="category-btn">
+          <div
+            onClick={() => setSelectedCategory("bracelet")}
+            className={`category-btn ${
+              selectedCategory === "bracelet"
+                ? "category-link-active"
+                : "category-link"
+            }`}
+          >
             <img src="/images/icon-circle.png"></img>
             Bracelets
           </div>
         </button>
         <button>
-          <div className="category-btn">
+          <div
+            onClick={() => setSelectedCategory("keychain")}
+            className={`category-btn ${
+              selectedCategory === "keychain"
+                ? "category-link-active"
+                : "category-link"
+            }`}
+          >
             <img src="/images/icon-squiggle.png"></img>
             Key chains
           </div>
         </button>
         <button>
-          <div className="category-btn">
+          <div
+            onClick={() => setSelectedCategory("fidget")}
+            className={`category-btn ${
+              selectedCategory === "fidget"
+                ? "category-link-active"
+                : "category-link"
+            }`}
+          >
             <img src="/images/icon-x.png"></img>
             Fidgets
           </div>
         </button>
         <button>
-          <div className="category-btn">
+          <div
+            onClick={() => setSelectedCategory("earring")}
+            className={`category-btn ${
+              selectedCategory === "earring"
+                ? "category-link-active"
+                : "category-link"
+            }`}
+          >
             <img src="/images/icon-flower.png"></img>
             Earrings
           </div>
