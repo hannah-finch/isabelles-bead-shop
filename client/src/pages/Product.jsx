@@ -28,24 +28,17 @@ function ProductPage() {
   }
 
   const product = data ? data.singleProduct : [];
-  const { id, category, description, image, quantity, price, name } = product;
-
-  // just some fake review data to delete later --------------------
-  const exampleReview = {
-    name: "Reviewer Name",
-    text: "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj",
-    stars: 5,
-  };
-  // --------------------------------------------------------------
-
+  const { id, category, description, image, quantity, price, name, reviews } =
+    product;
   const ReviewCard = (prop) => {
-    const { stars, text, name } = prop.review;
+    const { rating, content, username } = prop.review;
+
     return (
       <div className="review-card">
         <div className="block">
-          <img src={`/images/stars-${stars}.png`}></img>
-          <p>&quot; {text} &quot;</p>
-          <p className="bold">- {name}</p>
+          <img src={`/images/stars-${rating}.png`}></img>
+          <p>&quot; {content} &quot;</p>
+          <p className="bold">- {username}</p>
         </div>
       </div>
     );
@@ -100,7 +93,11 @@ function ProductPage() {
         <h2>Reviews</h2>
         <div className="review-grid">
           {/* map through reviews and pass in info to make one card per review */}
-          <ReviewCard review={exampleReview} />
+          {reviews.map((review, index) => {
+            return <ReviewCard review={review} key={index} />;
+          })}
+          {/* <ReviewCard review={reviews} /> */}
+
         </div>
       </section>
       {Auth.isLoggedIn() ? (
