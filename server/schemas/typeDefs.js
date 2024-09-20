@@ -15,6 +15,7 @@ type Mutation {
     login(username: String!, password: String!): Auth
     createProduct(name: String!, price: Int!, description: String!, image: ImageDetailsInput, category: String!, quantity: Int!): Product
     addOrder(products: [ID]!): Order
+    addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
 }
 type Auth {
     token: ID!,
@@ -29,6 +30,7 @@ type User {
     role: String
 }
 
+
 type Product {
     _id: ID!
     name: String!
@@ -37,8 +39,19 @@ type Product {
     image: Image
     category: String!
     quantity: Int!
+    reviews: [Review]
 }
-
+input ReviewDetailsInput {
+    username: String!
+    content: String!
+    rating: Int!
+}
+type Review {
+    _id: ID!
+    username: String!
+    content: String!
+    rating: Int!
+}
 input ProductInput {
   _id: ID!
   name: String!

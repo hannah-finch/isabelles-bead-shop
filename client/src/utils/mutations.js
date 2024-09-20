@@ -56,3 +56,21 @@ export const ADD_PRODUCT = gql`
     }
   }
 `;
+export const ADD_REVIEW = gql`
+  mutation AddReview($id: ID!, $reviewDetails: ReviewDetailsInput) {
+    addReview(_id: $id, ReviewDetails: $reviewDetails) {
+      _id
+      name
+      price
+      description
+      category
+      quantity
+      reviews {
+        _id
+        username
+        content
+        rating
+      }
+    }
+  }
+`;
