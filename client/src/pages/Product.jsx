@@ -19,16 +19,8 @@ function ProductPage() {
   const product = data ? data.singleProduct : [];
   const { id, category, description, image, quantity, price, name, reviews } =
     product;
-  // just some fake review data to delete later --------------------
-  const exampleReview = {
-    name: "Reviewer Name",
-    text: "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj",
-    stars: 5,
-  };
-  // --------------------------------------------------------------
-
-  const ReviewCard = ({review}) => {
-    const { rating, content, username } = review;
+  const ReviewCard = (prop) => {
+    const { rating, content, username } = prop.review;
     return (
       <div className="review-card">
         <div className="block">
@@ -46,6 +38,7 @@ function ProductPage() {
     }
   };
 
+  //TODO HANNAH REFACTOR THIS TO NEW COMP
   const AdminStuff = () => {
     const UpdateForm = () => {
       const [newName, setName] = useState(name);
