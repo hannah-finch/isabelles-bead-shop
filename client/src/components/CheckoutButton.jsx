@@ -28,7 +28,7 @@ export default function CheckoutButton({ cartItems }) {
       if (acc[item._id]) {
         acc[item._id].quantity += 1;
       } else {
-        acc[item._id] = { ...item, quantity: 1 };
+        acc[item._id] = { ...item, quantity: item.quantity };
       }
       console.log(acc);
       return acc;

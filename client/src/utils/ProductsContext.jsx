@@ -19,12 +19,18 @@ const ProductsProvider = ({ children }) => {
   // Shopping cart state
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
-    console.log(cartItems); 
+  // Add to cart function
+  const addToCart = (addItem) => {
+    const itemExists = cartItems.some((item) => item._id === addItem._id);
+    const updatedCartItems = itemExists
+      // If the item is already in the cart, increment the quantity
+      ? cartItems.map((item) =>
+          addItem._id === item._id ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      // Otherwise, add the item to the cart
+      : [...cartItems, { ...addItem, quantity: 1 }];
+    setCartItems(updatedCartItems);
   };
-
-  
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -34,7 +40,9 @@ const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider value={{ allProducts }}>
-      <ShoppingCartContext.Provider value={{ cartItems, setCartItems, addToCart }}>
+      <ShoppingCartContext.Provider
+        value={{ cartItems, setCartItems, addToCart }}
+      >
         {children}
       </ShoppingCartContext.Provider>
     </ProductsContext.Provider>
