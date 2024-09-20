@@ -63,7 +63,10 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
             <div key={item._id} className="cart-item-wrapper">
               <div className="cart-item">
                 <figure className="product-img-cart">
-                  <img src="images/tempPictures/defaultProductImage.jpg"></img>
+                  <img
+                    className="crop-img"
+                    src="images/tempPictures/defaultProductImage.jpg"
+                  ></img>
                   {/* TODO: fix the url */}
                 </figure>
                 <div className="item-text-box space-y-1">
