@@ -23,6 +23,39 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT = gql`
+  mutation addProduct(
+    $name: String!
+    $price: Int!
+    $description: String!
+    $category: String!
+    $quantity: Int!
+    $image: ImageDetailsInput
+  ) {
+    createProduct(
+      name: $name
+      price: $price
+      description: $description
+      category: $category
+      quantity: $quantity
+      image: $image
+    ) {
+      _id
+      name
+      price
+      description
+      image {
+        name
+        id
+        description
+        Url
+      }
+      category
+      quantity
+    }
+  }
+`;
 export const ADD_REVIEW = gql`
   mutation AddReview($id: ID!, $reviewDetails: ReviewDetailsInput) {
     addReview(_id: $id, ReviewDetails: $reviewDetails) {
