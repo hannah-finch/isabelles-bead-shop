@@ -7,7 +7,7 @@ import { useContext } from "react";
 import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
-import UpdateForm from "../components/UpdateForm.jsx";
+import UpdateForm from "../components/forms/UpdateForm.jsx";
 
 function ProductPage() {
   // get product id from url
