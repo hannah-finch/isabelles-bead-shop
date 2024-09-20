@@ -7,7 +7,7 @@ import { useContext } from "react";
 import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
-import AdminStuff from "../components/AdminStuff.jsx"
+import UpdateForm from "../components/UpdateForm.jsx";
 
 function ProductPage() {
   // get product id from url
@@ -57,7 +57,6 @@ function ProductPage() {
     }
   };
 
-
   if (loading) {
     return <h1>Loading</h1>;
   }
@@ -104,7 +103,13 @@ function ProductPage() {
           <ReviewCard review={exampleReview} />
         </div>
       </section>
-      {Auth.isLoggedIn() ? Auth.isAdmin() ? <AdminStuff product={product}/> : null : null}
+      {Auth.isLoggedIn() ? (
+        Auth.isAdmin() ? (
+          <section className="admin-stuff-section">
+            <UpdateForm product={product} />
+          </section>
+        ) : null
+      ) : null}
     </>
   );
 }
