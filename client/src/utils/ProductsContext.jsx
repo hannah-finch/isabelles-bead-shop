@@ -4,7 +4,6 @@ import { GET_All_PRODUCTS } from "./queries";
 
 const ProductsContext = createContext();
 const ShoppingCartContext = createContext();
-const CartCountContext = createContext();
 
 const ProductsProvider = ({ children }) => {
   // Products state
