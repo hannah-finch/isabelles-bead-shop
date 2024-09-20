@@ -75,30 +75,35 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                   </Link>
 
                   <div className="flex">
+                    <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-2 w-min ">
+                      <button
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
+                        onClick={() => decrementCartItem(item._id)}
+                      >
+                        -
+                      </button>
+                      <p className="mx-2 w-8 text-center">{item.quantity}</p>
+                      <button
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
+                        onClick={() => incrementCartItem(item._id)}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="flex items-center px-3">
                     <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-0 px-2 rounded"
-                      onClick={() => decrementCartItem(item._id)}
-                    >
-                      -
-                    </button>
-                    <p className="mx-2 w-3 text-center">{item.quantity}</p>
-                    <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-0 px-2 rounded"
-                      onClick={() => incrementCartItem(item._id)}
-                    >
-                      +
-                    </button>
-
-                    <button
-                      className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded ml-auto"
+                      className="underline"
                       onClick={() => removeFromCart(item._id)}
                     >
-                      x
+                      Remove
                     </button>
+                    </div>
                   </div>
 
                   <p>${item.price / 100} each</p>
-                  <p className="bold">Total: ${(item.price * item.quantity) / 100}</p>
+                  <p className="bold">
+                    Total: ${(item.price * item.quantity) / 100}
+                  </p>
                 </div>
                 <section className="flex flex-col space-y-1"></section>
               </div>
