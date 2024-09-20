@@ -1,7 +1,7 @@
 [
       {
         "_id": "60d5ec49f1b2c72b9c8e4d2a",
-        "category": "bracelets",
+        "category": "bracelet",
         "description": "Here's a description. ailsdjfkl;ajfeiah dsfkaj dk fjak jfio ajwdlk jakl sdjf klajsdfkl jsdklfjalksdjfl;kaj lskdfjlk jasdfk j",
         "image": {
             "Url": "/images/tempPictures/IMG_4288.jpg",
@@ -9,13 +9,13 @@
             "id": "img#",
             "name": "Image Name"
         },
-        "quantity": 6,
+        "quantity": 1,
         "price": 599,
         "name": "Example product 1"
       },
       {
         "_id": "60d5ec49f1b2c72b9c8e4d2b",
-        "category": "fidgets",
+        "category": "fidget",
         "description": "Here's a description. ailsdjfkl;ajfeiah dsfkaj dk fjak jfio ajwdlk jakl sdjf klajsdfkl jsdklfjalksdjfl;kaj lskdfjlk jasdfk j",
         "image": {
             "Url": "/images/tempPictures/IMG_4288.jpg",
@@ -23,13 +23,13 @@
             "id": "img#",
             "name": "Image Name"
         },
-        "quantity": 6,
+        "quantity": 1,
         "price": 500,
         "name": "Example product 2"
       },
       {
         "_id": "60d5ec49f1b2c72b9c8e4d2c",
-        "category": "bracelets",
+        "category": "bracelet",
         "description": "Here's a description. ailsdjfkl;ajfeiah dsfkaj dk fjak jfio ajwdlk jakl sdjf klajsdfkl jsdklfjalksdjfl;kaj lskdfjlk jasdfk j",
         "image": {
             "Url": "/images/tempPictures/IMG_4288.jpg",
@@ -37,7 +37,7 @@
             "id": "img#",
             "name": "Image Name"
         },
-        "quantity": 6,
+        "quantity": 1,
         "price": 599,
         "name": "Example product 3"
       }
