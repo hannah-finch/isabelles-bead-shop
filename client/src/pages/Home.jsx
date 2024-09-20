@@ -31,10 +31,11 @@ function HomePage() {
     return product.category;
   });
   const Categories = [...new Set(nonUniqCategories)];
-  
+
   function HomeBanner() {
     return (
       <section className="category-banner">
+        {/* TODO: Change the image source on hover to the color versions */}
         {Categories.map((category, key) => (
           <button key={key}>
             <div
@@ -55,7 +56,7 @@ function HomePage() {
   }
   function ShopSelection() {
     return (
-      <section className="shop-section">
+      <>
         <h2>
           {selectedCategory === "all"
             ? "Shop All"
@@ -86,7 +87,7 @@ function HomePage() {
             </button>
           );
         })}
-      </section>
+      </>
     );
   }
   function ProductsGrid() {
@@ -110,144 +111,9 @@ function HomePage() {
   return (
     <>
       <HomeBanner />
-      <ShopSelection />
-      <ProductsGrid />
-    </>
-  );
-  return (
-    <>
-      <section className="category-banner">
-        {/* TODO: Change the image source on hover to the color versions */}
-        <button>
-          <div
-            onClick={() => setSelectedCategory("bracelet")}
-            className={`category-btn ${
-              selectedCategory === "bracelet"
-                ? "category-link-active"
-                : "category-link"
-            }`}
-          >
-            <img src="/images/icon-circle.png"></img>
-            Bracelets
-          </div>
-        </button>
-        <button>
-          <div
-            onClick={() => setSelectedCategory("keychain")}
-            className={`category-btn ${
-              selectedCategory === "keychain"
-                ? "category-link-active"
-                : "category-link"
-            }`}
-          >
-            <img src="/images/icon-squiggle.png"></img>
-            Key chains
-          </div>
-        </button>
-        <button>
-          <div
-            onClick={() => setSelectedCategory("fidget")}
-            className={`category-btn ${
-              selectedCategory === "fidget"
-                ? "category-link-active"
-                : "category-link"
-            }`}
-          >
-            <img src="/images/icon-x.png"></img>
-            Fidgets
-          </div>
-        </button>
-        <button>
-          <div
-            onClick={() => setSelectedCategory("earring")}
-            className={`category-btn ${
-              selectedCategory === "earring"
-                ? "category-link-active"
-                : "category-link"
-            }`}
-          >
-            <img src="/images/icon-flower.png"></img>
-            Earrings
-          </div>
-        </button>
-      </section>
-      <div className="sub-banner"></div>
-
       <section className="shop-section">
-        {/* TODO: show a button for each category in the db, so if she adds a category, it'll automatically be here (These are just examples atm, don't forget the | at the end)*/}
-        <h2>
-          {selectedCategory === "all"
-            ? "Shop All"
-            : `${capitalizeWords(selectedCategory)}s`}
-        </h2>
-        <button
-          onClick={() => setSelectedCategory("all")}
-          className={
-            selectedCategory === "all"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          shop all
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("bracelet")}
-          className={
-            selectedCategory === "bracelet"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          bracelets
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("keychain")}
-          className={
-            selectedCategory === "keychain"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          key chains
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("fidget")}
-          className={
-            selectedCategory === "fidget"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          fidgets
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("earring")}
-          className={
-            selectedCategory === "earring"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          earrings
-        </button>
-        <section className="product-grid">
-          {/* This checks if the product query is empty and done loading.*/}
-          {filteredProducts && filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <ProductCard
-                product={product}
-                key={product._id}
-                selected={selectedCategory}
-              />
-            ))
-          ) : (
-            <p>No products available</p>
-          )}
-        </section>
+        <ShopSelection />
+        <ProductsGrid />
         {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more. I think you can do this by editing the css of the grid (set the row template and then overflow hidden or something like that) */}
         <button className="btn-2">Show More</button>
       </section>
