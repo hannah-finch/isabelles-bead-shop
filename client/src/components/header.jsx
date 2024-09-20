@@ -10,6 +10,19 @@ function Header() {
   return (
     <>
       <nav>
+        {Auth.isLoggedIn() ? (
+          Auth.isAdmin() ? (
+            <>
+              <NavLink
+                to={"/admin"}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Admin Panel
+              </NavLink>
+              <div className="vertical-line"></div>
+            </>
+          ) : null
+        ) : null}
         <NavLink
           to={"/"}
           className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -33,16 +46,6 @@ function Header() {
             </NavLink>
           ) : null
         ) : null}
-        {Auth.isLoggedIn() ? (
-          Auth.isAdmin() ? (
-            <NavLink
-              to={"/admin"}
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              admin
-            </NavLink>
-          ) : null
-        ) : null}
 
         {Auth.isLoggedIn() ? (
           <button onClick={Auth.logout}>logout</button>
@@ -63,9 +66,7 @@ function Header() {
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           cart
-          {/* TODO: show cart.length here instead of 8 */}
-          {/* TODO: cart number should only render if cart.length */}
-          <div className="cart-num">{ cartCounter }</div>
+          <div className="cart-num">{cartCounter}</div>
         </NavLink>
       </nav>
 

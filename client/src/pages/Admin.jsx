@@ -49,7 +49,6 @@ function AdminPage() {
       </>
     );
   });
-  // TODO SEND INT TO DATABASE
   const NewProductForm = () => {
     const [formState, setFormState] = useState({
       name: "",
@@ -63,16 +62,24 @@ function AdminPage() {
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       // if the value is suppose to be an int, make it an int
-      if (name == "price" || name == "quantity") {
-        setFormState({
-          ...formState,
-          [name]: +value,
-        });
-      } else {
-        setFormState({
-          ...formState,
-          [name]: value,
-        });
+      switch (name) {
+        case "price":
+          setFormState({
+            ...formState,
+            [name]: +value,
+          });
+          break;
+        case "quantity":
+          setFormState({
+            ...formState,
+            [name]: +value,
+          });
+          break;
+        default:
+          setFormState({
+            ...formState,
+            [name]: value,
+          });
       }
     };
 
@@ -117,6 +124,7 @@ function AdminPage() {
             onChange={handleInputChange}
             type="number"
             min="0"
+            pattern="[0-9]]{5}"
             placeholder="Stock"
           ></input>
           {/* //TODO MAKE this a dropdown to limit CATEGORIES */}
