@@ -15,6 +15,7 @@ type Mutation {
     login(username: String!, password: String!): Auth
     createProduct(name: String!, price: Int!, description: String!, image: ImageDetailsInput, category: String!, quantity: Int!): Product
     addOrder(products: [ID]!): Order
+    addReview(_id:ID!, ReviewDetails: ReviewDetailsInput): Product
 }
 type Auth {
     token: ID!,
@@ -79,5 +80,12 @@ input ImageInput {
     id: String
     name: String
   }
+
+input ReviewDetailsInput {
+    _id: ID!
+    username: User!
+    content: String!
+    rating: Number!
+}
 `;
 module.exports = typeDefs;
