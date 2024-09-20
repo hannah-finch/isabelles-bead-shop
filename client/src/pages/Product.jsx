@@ -7,7 +7,7 @@ import { useContext } from "react";
 import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
-import UpdateForm from "../components/UpdateForm.jsx";
+import UpdateForm from "../components/forms/UpdateForm.jsx";
 
 function ProductPage() {
   // get product id from url
@@ -69,11 +69,41 @@ function ProductPage() {
           <p>{description}</p>
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
           {/* This quantity is number to add to cart, not number in stock */}
-          <p>Quantity:</p>
+          <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-0 w-min mb-2">
+            
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
+              onClick={() => {
+                const quantityElement = document.getElementById("quantity");
+                let quantity = parseInt(quantityElement.innerText);
+                quantity = Math.max(quantity - 1, 1);
+                quantityElement.innerText = quantity;
+              }}
+            >
+              -
+            </button>
+            
+            <p id="quantity" className="mx-2 w-8 text-center">
+              1
+            </p>
+            
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
+              onClick={() => {
+                const quantityElement = document.getElementById("quantity");
+                let quantity = parseInt(quantityElement.innerText);
+                quantity = Math.min(quantity + 1, 10);
+                quantityElement.innerText = quantity;
+              }}
+            >
+              +
+            </button>
+
+          </div>
           <div className="button-container">
             <button
               onClick={() => {
-                addToCart(product);
+                addToCart(product, parseInt(document.getElementById("quantity").innerText));
                 delayClick();
               }}
               className="btn-1 add-cart-btn"
@@ -97,7 +127,6 @@ function ProductPage() {
             return <ReviewCard review={review} key={index} />;
           })}
           {/* <ReviewCard review={reviews} /> */}
-
         </div>
       </section>
       {Auth.isLoggedIn() ? (

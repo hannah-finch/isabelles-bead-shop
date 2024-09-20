@@ -12,7 +12,6 @@ import Login from "./pages/Login.jsx";
 import AboutPage from "./pages/About.jsx";
 import AccountPage from "./pages/Account.jsx";
 import Cart from "./pages/Cart.jsx";
-import Signup from "./pages/Signup.jsx";
 import ProductPage from "./pages/Product.jsx";
 import AdminPage from "./pages/Admin.jsx";
 
@@ -46,17 +45,12 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/signup",
-        element: <Signup />,
-      },
-      {
         path: "/product/:productId",
         element: <ProductPage />,
       },
       {
         path: "/admin",
         element: <AdminPage />,
-        
       }
       // Add more routes here...
     ],
