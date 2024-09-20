@@ -7,12 +7,13 @@ function NewProductForm() {
   // TODO SEND INT TO DATABASE
   const [formState, setFormState] = useState({
     name: "",
-    price: 0,
+    price: undefined,
     category: "",
     description: "",
     quantity: 1,
     image: undefined,
-    imageName: undefined,
+    imageName: "",
+    imageDescription: ""
   });
 
   const handleInputChange = (e) => {
@@ -58,64 +59,65 @@ function NewProductForm() {
     <>
       <form onSubmit={handleFormSubmit} className="new-product-form">
         <h2>Add new product</h2>
+        <label htmlFor="name">Name:</label>
         <input
           value={formState.name}
           name="name"
           onChange={handleInputChange}
           type="text"
-          placeholder="Product name"
         ></input>
         {/* //TODO FORCE THIS INTO DECIMAL AND MAKE FUNCTION TO CONVERT INTO DATABASE SHTUFF */}
+        <label htmlFor="price">Price:</label>
         <input
           value={formState.price}
           name="price"
           onChange={handleInputChange}
           type="number"
-          placeholder="Price"
           min="0"
         ></input>
+        <label htmlFor="quantity">Number in stock:</label>
         <input
           value={formState.quantity}
           name="quantity"
           onChange={handleInputChange}
           type="number"
           min="0"
-          placeholder="Stock"
         ></input>
+        <label htmlFor="category">Category:</label>
         {/* //TODO MAKE this a dropdown to limit CATEGORIES */}
         <input
           value={formState.category}
           name="category"
           onChange={handleInputChange}
           type="text"
-          placeholder="Category"
         ></input>
+        <label htmlFor="description">Description:</label>
         <textarea
           value={formState.description}
           name="description"
           onChange={handleInputChange}
           type="text"
-          placeholder="Description"
         ></textarea>
+        <label htmlFor="image">Image:</label>
         <input
           value={formState.image}
           name="image"
           onChange={handleInputChange}
           type="file"
         ></input>
+        <label htmlFor="imageName">Image Title:</label>
         <input
           value={formState.imageName}
           name="imageName"
           onChange={handleInputChange}
           type="text"
-          placeholder="Image title"
         ></input>
+        <label htmlFor="imageDescription">Image caption:</label>
         <input
           value={formState.imageDescription}
           name="imageDescription"
           onChange={handleInputChange}
           type="text"
-          placeholder="Image caption"
         ></input>
 
         <button className="btn-1" type="submit">
