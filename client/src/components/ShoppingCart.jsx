@@ -19,7 +19,6 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
     return Object.values(groupedItems);
   };
 
-
   const removeFromCart = (productId) => {
     const updatedCartItems = groupedItemsArray.filter(
       (item) => item._id !== productId
@@ -30,9 +29,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
 
   const incrementCartItem = (productId) => {
     const updatedCartItems = cartItems.map((item) =>
-      item._id === productId
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
+      item._id === productId ? { ...item, quantity: item.quantity + 1 } : item
     );
     setCartItems(updatedCartItems);
   };
@@ -75,11 +72,14 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
             <div key={item.index} className="cart-item-wrapper">
               <div className="cart-item">
                 <figure className="product-img-cart">
-                  <img src="images/tempPictures/defaultProductImage.jpg"></img>
+                  <img
+                    className="crop-img"
+                    src="images/tempPictures/defaultProductImage.jpg"
+                  ></img>
                   {/* TODO: fix the url */}
                 </figure>
                 <div className="item-text-box">
-                  <Link to="/product/{item._Id}" className="bold">
+                  <Link to={`/product/${item._Id}`} className="bold">
                     {item.name}
                   </Link>
                   <p>Quantity: {item.quantity}</p>
