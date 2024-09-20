@@ -1,12 +1,14 @@
 import { NavLink, Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShoppingCartContext } from "../utils/ProductsContext";
+import CartPreview from "./CartPreview";
+import "../assets/css/header.css";
 
 import Auth from "../utils/auth";
 
-function Header() {
-  const { cartCounter } = useContext(ShoppingCartContext);
-
+function Header( ) {
+  const { cartCounter, cartItems } = useContext(ShoppingCartContext);
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <>
       <nav>
@@ -60,13 +62,15 @@ function Header() {
 
         <div className="vertical-line"></div>
 
-        {/* TODO: Change cart text to a cart icon */}
         <NavLink
           to={"/cart"}
-          className={({ isActive }) => (isActive ? "active-link" : "")}
+          className={({ isActive }) => `${isActive ? "active-link" : ""} nav-link`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           cart
           <div className="cart-num">{cartCounter}</div>
+          {isHovered && <CartPreview items={cartItems} />}
         </NavLink>
       </nav>
 

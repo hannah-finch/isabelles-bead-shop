@@ -104,6 +104,7 @@ function ProductPage() {
             <button
               onClick={() => {
                 addToCart(product, parseInt(document.getElementById("quantity").innerText));
+                document.getElementById("quantity").innerText = 1;
                 delayClick();
               }}
               className="btn-1 add-cart-btn"
