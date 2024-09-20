@@ -13,13 +13,6 @@ export default function CheckoutButton({ cartItems }) {
   const [stripeItems, setStripeItems] = useState([]);
   const modalRef = useRef(null);
 
-  // TODO: dummy cata for testing cartItems
-  // const testItems = [
-  //   { name: "item1", price: 1000 },
-  //   { name: "item2", price: 2000 },
-  //   { name: "item3", price: 3000 },
-  // ];
-  // cartItems = testItems;
 
   // update stripeItems when cartItems changes
   useEffect(() => {

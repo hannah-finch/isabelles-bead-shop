@@ -40,6 +40,10 @@ section {
   height: 20px;
 }
 
+.center {
+  margin: auto
+}
+
 .bold {
   font-weight: bold;
 }

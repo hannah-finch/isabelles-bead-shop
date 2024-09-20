@@ -12,6 +12,19 @@ function Header( ) {
   return (
     <>
       <nav>
+        {Auth.isLoggedIn() ? (
+          Auth.isAdmin() ? (
+            <>
+              <NavLink
+                to={"/admin"}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Admin Panel
+              </NavLink>
+              <div className="vertical-line"></div>
+            </>
+          ) : null
+        ) : null}
         <NavLink
           to={"/"}
           className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -32,16 +45,6 @@ function Header( ) {
               className={({ isActive }) => (isActive ? "active-link" : "")}
             >
               account
-            </NavLink>
-          ) : null
-        ) : null}
-        {Auth.isLoggedIn() ? (
-          Auth.isAdmin() ? (
-            <NavLink
-              to={"/admin"}
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              admin
             </NavLink>
           ) : null
         ) : null}
