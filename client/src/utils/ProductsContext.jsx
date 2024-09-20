@@ -29,12 +29,12 @@ const ProductsProvider = ({ children }) => {
   , [cartItems]);
 
   // Add to cart function
-  const addToCart = (addItem) => {
+  const addToCart = (addItem, quantityToAdd) => {
     const itemExists = cartItems.some((item) => item._id === addItem._id);
     const updatedCartItems = itemExists
       // If the item is already in the cart, increment the quantity
       ? cartItems.map((item) =>
-          addItem._id === item._id ? { ...item, quantity: item.quantity + 1 } : item
+          addItem._id === item._id ? { ...item, quantity: item.quantity + quantityToAdd } : item
         )
       // Otherwise, add the item to the cart
       : [...cartItems, { ...addItem, quantity: 1 }];
