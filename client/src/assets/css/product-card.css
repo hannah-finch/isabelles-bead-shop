@@ -16,7 +16,7 @@
   width: 100%;
 }
 
-/* Project page styles -------------- */
+/* Product page styles -------------- */
 
 .product-section {
   display: grid;
@@ -76,4 +76,10 @@
 /* necessary for the card content to stay together */
 .block {
   display: inline-block;
+}
+
+/* Admin stuff styles ------------------ */
+
+.admin-stuff-section {
+  background-color: var(--blue);
 }

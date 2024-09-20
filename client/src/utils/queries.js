@@ -45,6 +45,12 @@ export const GET_SINGLE_PRODUCT = gql`
       }
       category
       quantity
+      reviews {
+      _id
+      username
+      content
+      rating
+    }
     }
   }
 `;

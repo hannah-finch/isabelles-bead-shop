@@ -1,4 +1,5 @@
 const { User, Product } = require("../models");
+const reviewSchema = require("../models/reviews");
 
 //TODO import auths
 const { signToken, AuthenticationError } = require("../utils/auth");
@@ -62,6 +63,20 @@ const resolvers = {
     createProduct: async (_, input) => {
       const product = await Product.create(input);
       return product;
+    },
+
+    addReview: async (_, { _id, ReviewDetails }) => {
+      console.log(ReviewDetails);
+      const updProduct = await Product.findByIdAndUpdate(
+        { _id: _id },
+        {
+          $addToSet: {
+            reviews: ReviewDetails,
+          },
+        },
+        { new: true, runValidators: true }
+      ).populate([{ path: "username", strictPopulate: false }]);
+      return updProduct;
     },
   },
 };

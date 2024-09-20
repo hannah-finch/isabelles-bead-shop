@@ -16,16 +16,13 @@ function Header() {
         >
           shop
         </NavLink>
-        {/* these page routes aren't made yet */}
         <NavLink
           to={"/about"}
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           about
         </NavLink>
-        {/* TODO: put the logged in user's Id in href here */}
-        {/* TODO: conditionally renter the account link to only show when logged in. */}
-        {/* TODO: when not logged in, show a log in link */}
+
         {Auth.isLoggedIn() ? (
           Auth.isClient() ? (
             <NavLink
@@ -47,6 +44,17 @@ function Header() {
           ) : null
         ) : null}
 
+        {Auth.isLoggedIn() ? (
+          <button onClick={Auth.logout}>logout</button>
+        ) : (
+          <NavLink
+            to={"/login"}
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
+            login
+          </NavLink>
+        )}
+
         <div className="vertical-line"></div>
 
         {/* TODO: Change cart text to a cart icon */}
@@ -59,18 +67,6 @@ function Header() {
           {/* TODO: cart number should only render if cart.length */}
           <div className="cart-num">{ cartCounter }</div>
         </NavLink>
-
-        {/* TODO: TESTING LOGIN/LOGOUT*/}
-        {Auth.isLoggedIn() ? (
-          <button onClick={Auth.logout}>logout</button>
-        ) : (
-          <NavLink
-            to={"/login"}
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            login
-          </NavLink>
-        )}
       </nav>
 
       <header>
