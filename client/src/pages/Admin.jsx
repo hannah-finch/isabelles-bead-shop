@@ -10,13 +10,12 @@ import { ADD_PRODUCT } from "../utils/mutations";
 
 function AdminPage() {
   const { data } = useQuery(GET_All_PRODUCTS);
+  const [addProduct] = useMutation(ADD_PRODUCT);
   //* return if you are not logged in, if you are the client, and if you are not admin
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
   }
-  const [addProduct] = useMutation(ADD_PRODUCT);
   const { products } = data ? data : [];
-  console.log(products);
 
   const ProductList = products.map((product) => {
     return (
@@ -63,11 +62,18 @@ function AdminPage() {
     });
     const handleInputChange = (e) => {
       const { name, value } = e.target;
-
-      setFormState({
-        ...formState,
-        [name]: value,
-      });
+      // if the value is suppose to be an int, make it an int
+      if (name == "price" || name == "quantity") {
+        setFormState({
+          ...formState,
+          [name]: +value,
+        });
+      } else {
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+      }
     };
 
     const handleFormSubmit = async (e) => {
