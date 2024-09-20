@@ -19,7 +19,6 @@ function ProductPage() {
   const product = data ? data.singleProduct : [];
   const { id, category, description, image, quantity, price, name, reviews } =
     product;
-  // console.log(reviews);
   // just some fake review data to delete later --------------------
   const exampleReview = {
     name: "Reviewer Name",
@@ -28,10 +27,8 @@ function ProductPage() {
   };
   // --------------------------------------------------------------
 
-  const ReviewCard = (prop) => {
-    console.log(prop.review[0]);
-
-    const { rating, content, username } = prop.review[0];
+  const ReviewCard = ({review}) => {
+    const { rating, content, username } = review;
     return (
       <div className="review-card">
         <div className="block">
@@ -228,7 +225,11 @@ function ProductPage() {
         <h2>Reviews</h2>
         <div className="review-grid">
           {/* map through reviews and pass in info to make one card per review */}
-          <ReviewCard review={reviews} />
+          {reviews.map((review, index) => {
+            console.log(review);
+            return <ReviewCard review={review} key={index} />;
+          })}
+          {/* <ReviewCard review={reviews} /> */}
         </div>
       </section>
 
