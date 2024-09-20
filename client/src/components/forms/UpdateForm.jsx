@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 function UpdateForm(prop) {
-  const { _id, description, category, image, name, price, quantity } =
-    prop.product;
+  const { description, category, image, name, price, quantity } = prop.product;
 
   const [formState, setFormState] = useState({
     name: name,
@@ -24,7 +23,10 @@ function UpdateForm(prop) {
     });
   };
 
-  const handleFormSubmit = (event) => {};
+  //TODO FINISH FUNCTION
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>

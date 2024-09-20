@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { toDecimal } from "../utils/math";
 import "../assets/css/product-card.css";
-// import exampleData from "../assets/example-data.json";
 
 function ProductCard(prop) {
   const { _id, category, image, name, price, quantity } = prop.product;
