@@ -1,9 +1,12 @@
 import { NavLink, Link } from "react-router-dom";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../utils/ProductsContext";
 
 import Auth from "../utils/auth";
-import auth from "../utils/auth";
 
 function Header() {
+  const { cartCounter } = useContext(ShoppingCartContext);
+
   return (
     <>
       <nav>
@@ -54,7 +57,7 @@ function Header() {
           cart
           {/* TODO: show cart.length here instead of 8 */}
           {/* TODO: cart number should only render if cart.length */}
-          <div className="cart-num">8</div>
+          <div className="cart-num">{ cartCounter }</div>
         </NavLink>
 
         {/* TODO: TESTING LOGIN/LOGOUT*/}

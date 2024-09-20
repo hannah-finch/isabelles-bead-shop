@@ -1,9 +1,10 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "./queries";
 
 const ProductsContext = createContext();
 const ShoppingCartContext = createContext();
+const CartCountContext = createContext();
 
 const ProductsProvider = ({ children }) => {
   // Products state
@@ -18,6 +19,14 @@ const ProductsProvider = ({ children }) => {
 
   // Shopping cart state
   const [cartItems, setCartItems] = useState([]);
+
+  const [cartCounter, setCartCounter] = useState(0);
+
+  useEffect(() => {
+    const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    setCartCounter(totalItems);
+  }
+  , [cartItems]);
 
   // Add to cart function
   const addToCart = (addItem) => {
@@ -41,7 +50,7 @@ const ProductsProvider = ({ children }) => {
   return (
     <ProductsContext.Provider value={{ allProducts }}>
       <ShoppingCartContext.Provider
-        value={{ cartItems, setCartItems, addToCart }}
+        value={{ cartItems, setCartItems, addToCart, cartCounter, setCartCounter }}
       >
         {children}
       </ShoppingCartContext.Provider>
