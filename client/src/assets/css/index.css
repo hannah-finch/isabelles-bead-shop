@@ -225,6 +225,10 @@ form button {
   margin: 30px 0;
 }
 
+form .button-container {
+  margin: 20px auto;
+}
+
 .form-footer {
   background-color: var(--green);
   height: 50px;
