@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
+import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
 
@@ -21,6 +22,7 @@ function ProductPage() {
     product;
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
+
     return (
       <div className="review-card">
         <div className="block">
@@ -160,9 +162,14 @@ function ProductPage() {
               placeholder="Image caption"
             ></input>
 
-            <button className="btn-1" type="submit">
-              Submit
-            </button>
+            <div className="button-container">
+              <button className="btn-2" type="submit">
+                Delete Product
+              </button>
+              <button className="btn-1" type="submit">
+                Save Changes
+              </button>
+            </div>
 
             <div className="form-footer"></div>
           </form>
@@ -171,7 +178,7 @@ function ProductPage() {
     };
     // TODO  ADD FUNCTIONS TO THE ON CLICKS
     return (
-      <section>
+      <section className="admin-stuff-section">
         Number in stock: {quantity} <br></br>
         Product id: {productId} <br></br>
         <button
@@ -235,10 +242,11 @@ function ProductPage() {
             return <ReviewCard review={review} key={index} />;
           })}
           {/* <ReviewCard review={reviews} /> */}
+
         </div>
       </section>
 
-      <AdminStuff />
+      {Auth.isLoggedIn() ? Auth.isAdmin() ? <AdminStuff /> : null : null}
     </>
   );
 }
