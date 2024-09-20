@@ -88,12 +88,6 @@ function LoginForm() {
       <button className="btn-1" type="submit">
         Submit
       </button>
-
-      <div className="form-footer">
-        <Link to="/signup">
-          No account? <span className="underline bold">Sign up</span>
-        </Link>
-      </div>
     </form>
   );
 }

@@ -145,12 +145,6 @@ function SignupForm() {
       <button className="btn-1" type="submit">
         Submit
       </button>
-
-      <div className="form-footer">
-        <Link to="/login">
-          Already signed up? <span className="underline bold">Log in</span>
-        </Link>
-      </div>
     </form>
   );
 };
