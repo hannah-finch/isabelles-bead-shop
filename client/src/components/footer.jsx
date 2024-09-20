@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Footer() {
+  const location = useLocation();
+
   return (
     <>
       <footer>
@@ -8,9 +10,11 @@ function Footer() {
           Made with love,<br></br> by Isabelle
         </h1>
         <div className="spacer"></div>
-        <Link className="btn-1" to="/about">
-          about
-        </Link>
+        {location.pathname !== "/about" && (
+          <Link className="btn-1" to="/about">
+            about
+          </Link>
+        )}
       </footer>
       <section className="sub-footer">
         {/* TODO: add our names and GitHub links */}
