@@ -27,7 +27,93 @@ function HomePage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
-  console.log(allProducts);
+  const nonUniqCategories = allProducts.map((product) => {
+    return product.category;
+  });
+  const Categories = [...new Set(nonUniqCategories)];
+  
+  function HomeBanner() {
+    return (
+      <section className="category-banner">
+        {Categories.map((category, key) => (
+          <button key={key}>
+            <div
+              onClick={() => setSelectedCategory(category)}
+              className={`category-btn ${
+                selectedCategory === category
+                  ? "category-link-active"
+                  : "category-link"
+              }`}
+            >
+              <img src="/images/icon-circle.png"></img>
+              {category}
+            </div>
+          </button>
+        ))}
+      </section>
+    );
+  }
+  function ShopSelection() {
+    return (
+      <section className="shop-section">
+        <h2>
+          {selectedCategory === "all"
+            ? "Shop All"
+            : `${capitalizeWords(selectedCategory)}s`}
+        </h2>
+        <button
+          onClick={() => setSelectedCategory("all")}
+          className={
+            selectedCategory === "all"
+              ? "category-link-active"
+              : "category-link"
+          }
+        >
+          shop all
+        </button>
+        {Categories.map((category, key) => {
+          return (
+            <button
+              key={key}
+              onClick={() => setSelectedCategory(category)}
+              className={
+                selectedCategory === category
+                  ? "category-link-active"
+                  : "category-link"
+              }
+            >
+              {category}
+            </button>
+          );
+        })}
+      </section>
+    );
+  }
+  function ProductsGrid() {
+    return (
+      <section className="product-grid">
+        {/* This checks if the product query is empty and done loading.*/}
+        {filteredProducts && filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <ProductCard
+              product={product}
+              key={product._id}
+              selected={selectedCategory}
+            />
+          ))
+        ) : (
+          <p>No products available</p>
+        )}
+      </section>
+    );
+  }
+  return (
+    <>
+      <HomeBanner />
+      <ShopSelection />
+      <ProductsGrid />
+    </>
+  );
   return (
     <>
       <section className="category-banner">
