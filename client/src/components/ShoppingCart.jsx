@@ -3,28 +3,23 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const ShoppingCart = ({ cartItems, setCartItems }) => {
-  const [groupedItemsArray, setGroupedItemsArray] = useState([]);
   const [total, setTotal] = useState(0);
 
-  // add a quantity property to each item in the cart and group items by ID
-  const groupItems = (items) => {
-    const groupedItems = items.reduce((acc, item) => {
-      if (acc[item._id]) {
-        acc[item._id].quantity += 1;
-      } else {
-        acc[item._id] = { ...item, quantity: 1 };
-      }
-      return acc;
-    }, {});
-    return Object.values(groupedItems);
-  };
+  // const groupItems = (items) => {
+  //   const groupedItems = items.reduce((acc, item) => {
+  //     if (acc[item._id]) {
+  //       acc[item._id].quantity += 1;
+  //     } else {
+  //       acc[item._id] = { ...item, quantity: 1 };
+  //     }
+  //     return acc;
+  //   }, {});
+  //   return Object.values(groupedItems);
+  // };
 
   const removeFromCart = (productId) => {
-    const updatedCartItems = groupedItemsArray.filter(
-      (item) => item._id !== productId
-    );
-    setGroupedItemsArray(updatedCartItems);
-    setCartItems(updatedCartItems); // Update cartItems as well
+    const updatedCartItems = cartItems.filter((item) => item._id !== productId);
+    setCartItems(updatedCartItems);
   };
 
   const incrementCartItem = (productId) => {
@@ -44,32 +39,28 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
     setCartItems(filteredCart);
   };
 
-  // calculate the total price
+  // Calculate the total price
   const calculateTotal = (items) => {
     return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
   useEffect(() => {
-    const grouped = groupItems(cartItems);
-    setGroupedItemsArray(grouped);
-    setTotal(calculateTotal(grouped));
-  }, []);
-
-  useEffect(() => {
-    //const grouped = groupItems(cartItems);
-    setGroupedItemsArray(cartItems);
     setTotal(calculateTotal(cartItems));
   }, [cartItems]);
 
-  console.log(groupedItemsArray);
+  // useEffect(() => {
+  //   setTotal(calculateTotal(cartItems));
+  // }, [cartItems]);
+
+  console.log(cartItems);
 
   return (
     <>
       <h1>Shopping Cart</h1>
       <div>
-        {groupedItemsArray.length > 0 ? (
-          groupedItemsArray.map((item) => (
-            <div key={item.index} className="cart-item-wrapper">
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => (
+            <div key={item._id} className="cart-item-wrapper">
               <div className="cart-item">
                 <figure className="product-img-cart">
                   <img
@@ -78,32 +69,38 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                   ></img>
                   {/* TODO: fix the url */}
                 </figure>
-                <div className="item-text-box">
-                  <Link to={`/product/${item._Id}`} className="bold">
+                <div className="item-text-box space-y-1">
+                  <Link to={`/product/${item._id}`} className="bold">
                     {item.name}
                   </Link>
-                  <p>Quantity: {item.quantity}</p>
+
+                  <div className="flex">
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-0 px-2 rounded"
+                      onClick={() => decrementCartItem(item._id)}
+                    >
+                      -
+                    </button>
+                    <p className="mx-2 w-3 text-center">{item.quantity}</p>
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-0 px-2 rounded"
+                      onClick={() => incrementCartItem(item._id)}
+                    >
+                      +
+                    </button>
+
+                    <button
+                      className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded ml-auto"
+                      onClick={() => removeFromCart(item._id)}
+                    >
+                      x
+                    </button>
+                  </div>
+
                   <p>${item.price / 100} each</p>
-                  <p>Total: ${(item.price * item.quantity) / 100}</p>
+                  <p className="bold">Total: ${(item.price * item.quantity) / 100}</p>
                 </div>
-                <button
-                  className="btn-del"
-                  onClick={() => incrementCartItem(item._id)}
-                >
-                  +
-                </button>
-                <button
-                  className="btn-del"
-                  onClick={() => decrementCartItem(item._id)}
-                >
-                  -
-                </button>
-                <button
-                  className="btn-del"
-                  onClick={() => removeFromCart(item._id)}
-                >
-                  x
-                </button>
+                <section className="flex flex-col space-y-1"></section>
               </div>
             </div>
           ))
