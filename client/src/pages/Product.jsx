@@ -86,11 +86,14 @@ function ProductPage() {
             break;
         }
       };
+      function HandleFormSubmit() {
+        // TODO
+      }
 
       return (
         <>
-          <form onSubmit={""}>
-            {/* TODO: needs a function */}
+          <form onSubmit={HandleFormSubmit}>
+            {() => HandleFormSubmit()}
             <h2>Edit product</h2>
             <label htmlFor="name">Name:</label>
             <input
@@ -166,15 +169,25 @@ function ProductPage() {
         </>
       );
     };
-
+    // TODO  ADD FUNCTIONS TO THE ON CLICKS
     return (
       <section>
         Number in stock: {quantity} <br></br>
         Product id: {productId} <br></br>
-        <button className="btn-1" onClick={""}>
+        <button
+          className="btn-1"
+          onClick={() => {
+            return "";
+          }}
+        >
           Edit Product
         </button>
-        <button className="btn-1" onClick={""}>
+        <button
+          className="btn-1"
+          onClick={() => {
+            return "";
+          }}
+        >
           Delete Product
         </button>
         <UpdateForm />
@@ -219,7 +232,6 @@ function ProductPage() {
         <div className="review-grid">
           {/* map through reviews and pass in info to make one card per review */}
           {reviews.map((review, index) => {
-            console.log(review);
             return <ReviewCard review={review} key={index} />;
           })}
           {/* <ReviewCard review={reviews} /> */}
