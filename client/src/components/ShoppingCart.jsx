@@ -5,30 +5,26 @@ import { useEffect, useState } from "react";
 const ShoppingCart = ({ cartItems, setCartItems }) => {
   const [total, setTotal] = useState(0);
 
-  const groupItems = (items) => {
-    const groupedItems = items.reduce((acc, item) => {
-      if (acc[item._id]) {
-        acc[item._id].quantity += 1;
-      } else {
-        acc[item._id] = { ...item, quantity: 1 };
-      }
-      return acc;
-    }, {});
-    return Object.values(groupedItems);
-  };
+  // const groupItems = (items) => {
+  //   const groupedItems = items.reduce((acc, item) => {
+  //     if (acc[item._id]) {
+  //       acc[item._id].quantity += 1;
+  //     } else {
+  //       acc[item._id] = { ...item, quantity: 1 };
+  //     }
+  //     return acc;
+  //   }, {});
+  //   return Object.values(groupedItems);
+  // };
 
   const removeFromCart = (productId) => {
-    const updatedCartItems = cartItems.filter(
-      (item) => item._id !== productId
-    );
+    const updatedCartItems = cartItems.filter((item) => item._id !== productId);
     setCartItems(updatedCartItems);
   };
 
   const incrementCartItem = (productId) => {
     const updatedCartItems = cartItems.map((item) =>
-      item._id === productId
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
+      item._id === productId ? { ...item, quantity: item.quantity + 1 } : item
     );
     setCartItems(updatedCartItems);
   };
@@ -70,32 +66,38 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                   <img src="images/tempPictures/defaultProductImage.jpg"></img>
                   {/* TODO: fix the url */}
                 </figure>
-                <div className="item-text-box">
+                <div className="item-text-box space-y-1">
                   <Link to={`/product/${item._id}`} className="bold">
                     {item.name}
                   </Link>
-                  <p>Quantity: {item.quantity}</p>
+
+                  <div className="flex">
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-0 px-2 rounded"
+                      onClick={() => decrementCartItem(item._id)}
+                    >
+                      -
+                    </button>
+                    <p className="mx-2 w-3 text-center">{item.quantity}</p>
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-0 px-2 rounded"
+                      onClick={() => incrementCartItem(item._id)}
+                    >
+                      +
+                    </button>
+
+                    <button
+                      className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded ml-auto"
+                      onClick={() => removeFromCart(item._id)}
+                    >
+                      x
+                    </button>
+                  </div>
+
                   <p>${item.price / 100} each</p>
-                  <p>Total: ${(item.price * item.quantity) / 100}</p>
+                  <p className="bold">Total: ${(item.price * item.quantity) / 100}</p>
                 </div>
-                <button
-                  className="btn-del"
-                  onClick={() => incrementCartItem(item._id)}
-                >
-                  +
-                </button>
-                <button
-                  className="btn-del"
-                  onClick={() => decrementCartItem(item._id)}
-                >
-                  -
-                </button>
-                <button
-                  className="btn-del"
-                  onClick={() => removeFromCart(item._id)}
-                >
-                  x
-                </button>
+                <section className="flex flex-col space-y-1"></section>
               </div>
             </div>
           ))

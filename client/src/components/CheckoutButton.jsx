@@ -68,11 +68,13 @@ export default function CheckoutButton({ cartItems }) {
   const handleCheckoutClick = () => {
     setShowCheckout(true);
     modalRef.current?.showModal();
+    document.body.classList.add('overflow-hidden');
   };
 
   const handleCloseModal = () => {
     setShowCheckout(false);
     modalRef.current?.close();
+    document.body.classList.remove('overflow-hidden');
   };
 
   // TODO: Button style required, the modal has a button too
@@ -81,13 +83,13 @@ export default function CheckoutButton({ cartItems }) {
       <button
         onClick={handleCheckoutClick}
         disabled={stripeItems.length === 0}
-        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+        className={`bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded ${
           stripeItems.length === 0 ? "opacity-50" : ""
         }`}
       >
         {stripeItems.length === 0 ? "Empty" : "Checkout"}
       </button>
-      <dialog ref={modalRef}>
+      <dialog ref={modalRef} className="w-auto bg-blue-100">
         {showCheckout && (
           <div>
             <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
@@ -95,8 +97,16 @@ export default function CheckoutButton({ cartItems }) {
             </EmbeddedCheckoutProvider>
           </div>
         )}
-        <form method="dialog">
-          <button onClick={handleCloseModal}>Close</button>
+        <form 
+          method="dialog"
+          className="bg-blue-100 p-1"  
+        >
+          <button
+            onClick={handleCloseModal}
+            className={`bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded`}
+          >
+            Close
+          </button>
         </form>
       </dialog>
     </div>
