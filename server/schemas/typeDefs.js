@@ -29,11 +29,7 @@ type User {
     password: String!
     role: String
 }
-input UserInput{
-    _id: ID!
-    username: String!
-    role: String
-}
+
 
 type Product {
     _id: ID!
@@ -46,13 +42,13 @@ type Product {
     reviews: [Review]
 }
 input ReviewDetailsInput {
-    username: UserInput
+    username: String!
     content: String!
     rating: Int!
 }
 type Review {
     _id: ID!
-    username: User!
+    username: String!
     content: String!
     rating: Int!
 }

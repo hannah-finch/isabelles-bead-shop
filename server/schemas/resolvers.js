@@ -66,6 +66,7 @@ const resolvers = {
     },
 
     addReview: async (_, { _id, ReviewDetails }) => {
+      console.log(ReviewDetails);
       const updProduct = await Product.findByIdAndUpdate(
         { _id: _id },
         {
@@ -74,7 +75,7 @@ const resolvers = {
           },
         },
         { new: true, runValidators: true }
-      ).populate([{ path: "User", strictPopulate: false }]);
+      ).populate([{ path: "username", strictPopulate: false }]);
       return updProduct;
     },
   },

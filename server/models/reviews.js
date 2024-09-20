@@ -3,14 +3,14 @@ const { Schema, model } = require("mongoose");
 const { User } = require("./User");
 
 const reviewSchema = new Schema({
-//   reviewID: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//   },
+  //   reviewID: {
+  //     type: String,
+  //     required: true,
+  //     unique: true,
+  //   },
   username: {
-    type: Schema.Types.ObjectID,
-    ref: "User",
+    type: String,
+    required: true,
   },
   content: {
     type: String,
@@ -23,7 +23,6 @@ const reviewSchema = new Schema({
     min: 1,
     max: 5,
   },
-},
-);
+});
 
 module.exports = reviewSchema;

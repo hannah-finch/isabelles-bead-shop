@@ -5,8 +5,7 @@ import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
 
-
-import { ShoppingCartContext } from '../utils/ProductsContext.jsx'
+import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
 
 function ProductPage() {
   // get product id from url
@@ -18,28 +17,31 @@ function ProductPage() {
   const { addToCart } = useContext(ShoppingCartContext);
 
   const product = data ? data.singleProduct : [];
-  const { id, category, description, image, quantity, price, name } = product;
-
+  const { id, category, description, image, quantity, price, name, reviews } =
+    product;
+  // console.log(reviews);
   // just some fake review data to delete later --------------------
   const exampleReview = {
     name: "Reviewer Name",
     text: "1asldjf;jkla dofj aklsdjf alkjs dflkaj sdflkjasdklf jaslkdfj klasjdfl;ka sjd fkl;jasdfgsd fgsdfgsdfgsdfg sfgsdfgsdfg sdfgsdfgs fs gfsg ssdjkljk l;kasdjflkasj dflkja sdlkfj akljd klja sdfklj akljasdjfa;kjsd lkfja klsdfj akljsd fklaj sdflkja lskdf jakljsiajwkldjf lkjs dfklj",
-    stars: 5
-  }
+    stars: 5,
+  };
   // --------------------------------------------------------------
 
   const ReviewCard = (prop) => {
-    const { stars, text, name } = prop.review
-    return(
+    console.log(prop.review[0]);
+
+    const { rating, content, username } = prop.review[0];
+    return (
       <div className="review-card">
         <div className="block">
-          <img src={`/images/stars-${stars}.png`}></img>
-          <p>&quot; {text} &quot;</p>
-          <p className="bold">- {name}</p>
+          <img src={`/images/stars-${rating}.png`}></img>
+          <p>&quot; {content} &quot;</p>
+          <p className="bold">- {username}</p>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const InStock = () => {
     if (quantity < 0) {
@@ -97,7 +99,7 @@ function ProductPage() {
 
       return (
         <>
-          <form onSubmit={""}> 
+          <form onSubmit={""}>
             {/* TODO: needs a function */}
             <h2>Edit product</h2>
             <label htmlFor="name">Name:</label>
@@ -212,7 +214,9 @@ function ProductPage() {
           <p>Quantity:</p>
 
           <div className="button-container">
-            <button onClick={() => addToCart(product)} className="btn-1">Add to Cart</button>
+            <button onClick={() => addToCart(product)} className="btn-1">
+              Add to Cart
+            </button>
             <button className="btn-2">Leave a Review</button>
           </div>
         </div>
@@ -223,10 +227,8 @@ function ProductPage() {
       <section className="review-section">
         <h2>Reviews</h2>
         <div className="review-grid">
-
           {/* map through reviews and pass in info to make one card per review */}
-          <ReviewCard review={exampleReview}/>
-
+          <ReviewCard review={reviews} />
         </div>
       </section>
 
