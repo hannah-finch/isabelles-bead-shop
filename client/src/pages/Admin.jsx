@@ -1,10 +1,9 @@
 import "../assets/css/admin.css";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "../utils/queries";
 import { toDecimal } from "../utils/math";
-import { ADD_PRODUCT } from "../utils/mutations";
 import NewProductForm from "../components/forms/NewProductForm";
 
 function AdminPage() {
@@ -13,7 +12,6 @@ function AdminPage() {
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
   }
-  // const [addProduct] = useMutation(ADD_PRODUCT);
   const { products } = data ? data : [];
   console.log(products);
 
@@ -62,8 +60,6 @@ function AdminPage() {
         </div>
       </section>
 
-      {/* <NewProductForm />
-      <UpdateProductForm /> */}
     </>
   );
 }

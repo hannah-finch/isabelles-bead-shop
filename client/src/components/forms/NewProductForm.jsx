@@ -17,11 +17,26 @@ function NewProductForm() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    // if the value is suppose to be an int, make it an int
+    switch (name) {
+      case "price":
+        setFormState({
+          ...formState,
+          [name]: +value,
+        });
+        break;
+      case "quantity":
+        setFormState({
+          ...formState,
+          [name]: +value,
+        });
+        break;
+      default:
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+    }
   };
 
   const handleFormSubmit = async (e) => {
