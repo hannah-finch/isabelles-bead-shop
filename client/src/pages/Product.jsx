@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
+import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
 
@@ -226,7 +227,7 @@ function ProductPage() {
         </div>
       </section>
 
-      <AdminStuff />
+      {Auth.isLoggedIn() ? Auth.isAdmin() ? <AdminStuff /> : null : null}
     </>
   );
 }
