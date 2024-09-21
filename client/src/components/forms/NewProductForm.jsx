@@ -5,6 +5,7 @@ import { ADD_PRODUCT } from "../../utils/mutations";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
+import { Button } from "@material-tailwind/react";
 function NewProductForm() {
   const [addProduct] = useMutation(ADD_PRODUCT);
   // TODO SEND INT TO DATABASE
@@ -81,6 +82,12 @@ function NewProductForm() {
       cloudName,
     },
   });
+  const updateImageForms = (e) => {
+    e.preventDefault();
+    console.log("test");
+    console.log(publicId);
+    console.log(formState);
+  };
 
   const myImage = cld.image(publicId);
   return (
@@ -127,11 +134,13 @@ function NewProductForm() {
           type="text"
         ></textarea>
         <label htmlFor="image">Image:</label>
+        {/* //! ALL THESE FORMS ARE INPUT DISABLED AND WILL AUTO POPULATE WITH BUTTON */}
         <input
           value={formState.image}
           name="image"
           onChange={handleInputChange}
           type="file"
+          disabled
         ></input>
         <label htmlFor="imageName">Image Title:</label>
         <input
@@ -139,6 +148,7 @@ function NewProductForm() {
           name="imageName"
           onChange={handleInputChange}
           type="text"
+          disabled
         ></input>
         <label htmlFor="imageDescription">Image caption:</label>
         <input
@@ -146,6 +156,7 @@ function NewProductForm() {
           name="imageDescription"
           onChange={handleInputChange}
           type="text"
+          disabled
         ></input>
 
         <button className="btn-1" type="submit">
@@ -161,6 +172,7 @@ function NewProductForm() {
           cldImg={myImage}
           plugins={[responsive(), placeholder()]}
         />
+        <Button onClick={updateImageForms}>Update Image Forms</Button>
       </div>
     </>
   );
