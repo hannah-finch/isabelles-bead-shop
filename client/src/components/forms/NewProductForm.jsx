@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../utils/mutations";
 
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
 function NewProductForm() {
   const [addProduct] = useMutation(ADD_PRODUCT);
   // TODO SEND INT TO DATABASE
@@ -13,9 +16,27 @@ function NewProductForm() {
     quantity: 1,
     image: undefined,
     imageName: "",
-    imageDescription: ""
+    imageDescription: "",
   });
 
+  const [publicId, setPublicId] = useState("");
+  const [cloudName] = useState(import.meta.env.VITE_CLOUDNAME);
+  const [uploadPreset] = useState("rpzhky6o");
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset,
+    // cropping: true, //add a cropping step
+    // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+    // sources: [ "local", "url"], // restrict the upload sources to URL and local files
+    // multiple: false,  //restrict upload to a single file
+    // folder: "user_images", //upload files to the specified folder
+    // tags: ["users", "profile"], //add the given tags to the uploaded files
+    // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+    // clientAllowedFormats: ["images"], //restrict uploading to image files only
+    // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+    // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+    // theme: "purple", //change to a purple theme
+  });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     // if the value is suppose to be an int, make it an int
@@ -55,6 +76,13 @@ function NewProductForm() {
     }
   };
 
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName,
+    },
+  });
+
+  const myImage = cld.image(publicId);
   return (
     <>
       <form onSubmit={handleFormSubmit} className="new-product-form">
@@ -126,6 +154,14 @@ function NewProductForm() {
 
         <div className="form-footer"></div>
       </form>
+      <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+      <div style={{ width: "200px" }}>
+        <AdvancedImage
+          style={{ maxWidth: "100%" }}
+          cldImg={myImage}
+          plugins={[responsive(), placeholder()]}
+        />
+      </div>
     </>
   );
 }
