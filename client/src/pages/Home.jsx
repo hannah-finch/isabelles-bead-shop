@@ -63,9 +63,7 @@ function HomePage() {
     return (
       <>
         <h2>
-          {selectedCategory === "all"
-            ? "Shop "
-            : ""}
+          {selectedCategory === "all" ? "Shop " : ""}
           {selectedCategory === "all" || selectedCategory === "other"
             ? `${capitalizeWords(selectedCategory)}`
             : `${capitalizeWords(selectedCategory)}s`}
@@ -99,21 +97,35 @@ function HomePage() {
     );
   }
   function ProductsGrid() {
+    const [displayNum, setDisplayNum] = useState(15);
+    const showMore = () => {
+      setDisplayNum(displayNum + 15);
+    };
     return (
-      <div className="product-grid">
-        {/* This checks if the product query is empty and done loading.*/}
-        {filteredProducts && filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard
-              product={product}
-              key={product._id}
-              selected={selectedCategory}
-            />
-          ))
-        ) : (
-          <p>No products available</p>
-        )}
-      </div>
+      <>
+        <div className="product-grid">
+          {/* This checks if the product query is empty and done loading.*/}
+          {filteredProducts && filteredProducts.length > 0 ? (
+            filteredProducts
+              .slice(0, displayNum)
+              .map((product) => (
+                <ProductCard
+                  product={product}
+                  key={product._id}
+                  selected={selectedCategory}
+                />
+              ))
+          ) : (
+            <p>No products available</p>
+          )}
+        </div>
+
+        {filteredProducts.length > displayNum ? (
+          <button onClick={showMore} className="btn-2">
+            Show More
+          </button>
+        ) : null}
+      </>
     );
   }
   return (
@@ -122,8 +134,6 @@ function HomePage() {
       <section className="shop-section">
         <ShopSelection />
         <ProductsGrid />
-        {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more. I think you can do this by editing the css of the grid (set the row template and then overflow hidden or something like that) */}
-        <button className="btn-2">Show More</button>
       </section>
     </>
   );
