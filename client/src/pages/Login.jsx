@@ -3,7 +3,7 @@ import SignupForm from "../components/forms/SignupForm";
 import LoginForm from "../components/forms/LoginForm";
 
 function LoginPage() {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
 
   const handleClick = () => {
     setShowForm(!showForm);
