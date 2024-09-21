@@ -40,7 +40,7 @@ function HomePage() {
           <button key={key}>
             <div
               onClick={() => setSelectedCategory(category)}
-              className='category-btn'
+              className="category-btn"
               onMouseEnter={() => setHoveredCategory(category)}
               onMouseLeave={() => setHoveredCategory("")}
             >
@@ -58,12 +58,16 @@ function HomePage() {
       </section>
     );
   }
+
   function ShopSelection() {
     return (
       <>
         <h2>
           {selectedCategory === "all"
-            ? "Shop All"
+            ? "Shop "
+            : ""}
+          {selectedCategory === "all" || selectedCategory === "other"
+            ? `${capitalizeWords(selectedCategory)}`
             : `${capitalizeWords(selectedCategory)}s`}
         </h2>
         <button
@@ -87,7 +91,7 @@ function HomePage() {
                   : "category-link"
               }
             >
-              {category}
+              {category === "other" ? category : `${category}s`}
             </button>
           );
         })}
