@@ -33,33 +33,39 @@ function HomePage() {
   const Categories = [...new Set(nonUniqCategories)];
 
   function HomeBanner() {
+    const [hoveredCategory, setHoveredCategory] = useState("");
     return (
       <section className="category-banner">
-        {/* TODO: Change the image source on hover to the color versions */}
         {Categories.map((category, key) => (
           <button key={key}>
             <div
               onClick={() => setSelectedCategory(category)}
-              className={`category-btn ${
-                selectedCategory === category
-                  ? "category-link-active"
-                  : "category-link"
-              }`}
+              className="category-btn"
+              onMouseEnter={() => setHoveredCategory(category)}
+              onMouseLeave={() => setHoveredCategory("")}
             >
-              <img src="/images/icon-circle.png"></img>
-              {category}
+              <img
+                src={
+                  hoveredCategory === category || selectedCategory === category
+                    ? `/images/icon-${category}-color.png`
+                    : `/images/icon-${category}.png`
+                }
+              ></img>
+              {category === "other" ? category : `${category}s`}
             </div>
           </button>
         ))}
       </section>
     );
   }
+
   function ShopSelection() {
     return (
       <>
         <h2>
-          {selectedCategory === "all"
-            ? "Shop All"
+          {selectedCategory === "all" ? "Shop " : ""}
+          {selectedCategory === "all" || selectedCategory === "other"
+            ? `${capitalizeWords(selectedCategory)}`
             : `${capitalizeWords(selectedCategory)}s`}
         </h2>
         <button
@@ -83,7 +89,7 @@ function HomePage() {
                   : "category-link"
               }
             >
-              {category}
+              {category === "other" ? category : `${category}s`}
             </button>
           );
         })}
@@ -91,21 +97,35 @@ function HomePage() {
     );
   }
   function ProductsGrid() {
+    const [displayNum, setDisplayNum] = useState(15);
+    const showMore = () => {
+      setDisplayNum(displayNum + 15);
+    };
     return (
-      <section className="product-grid">
-        {/* This checks if the product query is empty and done loading.*/}
-        {filteredProducts && filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard
-              product={product}
-              key={product._id}
-              selected={selectedCategory}
-            />
-          ))
-        ) : (
-          <p>No products available</p>
-        )}
-      </section>
+      <>
+        <div className="product-grid">
+          {/* This checks if the product query is empty and done loading.*/}
+          {filteredProducts && filteredProducts.length > 0 ? (
+            filteredProducts
+              .slice(0, displayNum)
+              .map((product) => (
+                <ProductCard
+                  product={product}
+                  key={product._id}
+                  selected={selectedCategory}
+                />
+              ))
+          ) : (
+            <p>No products available</p>
+          )}
+        </div>
+
+        {filteredProducts.length > displayNum ? (
+          <button onClick={showMore} className="btn-2">
+            Show More
+          </button>
+        ) : null}
+      </>
     );
   }
   return (
@@ -114,8 +134,6 @@ function HomePage() {
       <section className="shop-section">
         <ShopSelection />
         <ProductsGrid />
-        {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more. I think you can do this by editing the css of the grid (set the row template and then overflow hidden or something like that) */}
-        <button className="btn-2">Show More</button>
       </section>
     </>
   );

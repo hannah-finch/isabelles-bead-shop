@@ -36,7 +36,6 @@
 /* Shop section styles ---------------------- */
 
 .shop-section {
-  padding: 60px 0;
   text-align: center;
 }
 
@@ -53,4 +52,5 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
+  margin: 40px 0;
 }
