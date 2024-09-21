@@ -8,7 +8,6 @@ import NewProductForm from "../components/forms/NewProductForm";
 
 function AdminPage() {
   const { data } = useQuery(GET_All_PRODUCTS);
-  const [addProduct] = useMutation(ADD_PRODUCT);
   //* return if you are not logged in, if you are the client, and if you are not admin
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
