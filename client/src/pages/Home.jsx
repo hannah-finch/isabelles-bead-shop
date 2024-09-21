@@ -33,21 +33,25 @@ function HomePage() {
   const Categories = [...new Set(nonUniqCategories)];
 
   function HomeBanner() {
+    const [hoveredCategory, setHoveredCategory] = useState("");
     return (
       <section className="category-banner">
-        {/* TODO: Change the image source on hover to the color versions */}
         {Categories.map((category, key) => (
           <button key={key}>
             <div
               onClick={() => setSelectedCategory(category)}
-              className={`category-btn ${
-                selectedCategory === category
-                  ? "category-link-active"
-                  : "category-link"
-              }`}
+              className='category-btn'
+              onMouseEnter={() => setHoveredCategory(category)}
+              onMouseLeave={() => setHoveredCategory("")}
             >
-              <img src="/images/icon-circle.png"></img>
-              {category}
+              <img
+                src={
+                  hoveredCategory === category || selectedCategory === category
+                    ? `/images/icon-${category}-color.png`
+                    : `/images/icon-${category}.png`
+                }
+              ></img>
+              {category === "other" ? category : `${category}s`}
             </div>
           </button>
         ))}
@@ -92,7 +96,7 @@ function HomePage() {
   }
   function ProductsGrid() {
     return (
-      <section className="product-grid">
+      <div className="product-grid">
         {/* This checks if the product query is empty and done loading.*/}
         {filteredProducts && filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
@@ -105,7 +109,7 @@ function HomePage() {
         ) : (
           <p>No products available</p>
         )}
-      </section>
+      </div>
     );
   }
   return (
