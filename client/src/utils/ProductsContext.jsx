@@ -36,7 +36,7 @@ const ProductsProvider = ({ children }) => {
           addItem._id === item._id ? { ...item, quantity: item.quantity + quantityToAdd } : item
         )
       // Otherwise, add the item to the cart
-      : [...cartItems, { ...addItem, quantity: 1 }];
+      : [...cartItems, { ...addItem, quantity: quantityToAdd }];
     setCartItems(updatedCartItems);
   };
 
