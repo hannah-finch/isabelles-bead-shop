@@ -23,14 +23,14 @@ function Footer() {
           Hannah Schwen,
         </a>{" "}
         <a href="https://github.com/Kalink52" target="_blank">
-          Micah Cox,
+          Micah Cox, 
         </a>{" "}
         <a href="https://github.com/swokamoto" target="_blank">
           Scott Okamoto,
-        </a>{" "}
-        and{" "}
+        </a>
+        {" and "}
         <a href="https://github.com/TheLuckiestLlama" target="_blank">
-          Daniel (insert last name here... sorry Daniel, IDK)
+          Daniel Hudson
         </a>
       </section>
     </>
