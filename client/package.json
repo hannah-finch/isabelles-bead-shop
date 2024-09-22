@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.21.0",
     "@material-tailwind/react": "^2.1.10",
     "@stripe/react-stripe-js": "^2.8.0",
     "@stripe/stripe-js": "^4.5.0",

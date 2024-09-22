@@ -31,7 +31,7 @@ export const ADD_PRODUCT = gql`
     $description: String!
     $category: String!
     $quantity: Int!
-    $image: ImageDetailsInput
+    $image: String!
   ) {
     createProduct(
       name: $name
@@ -45,12 +45,7 @@ export const ADD_PRODUCT = gql`
       name
       price
       description
-      image {
-        name
-        id
-        description
-        Url
-      }
+      image 
       category
       quantity
     }

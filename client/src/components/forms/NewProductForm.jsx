@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../utils/mutations";
 
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
+import { Button } from "@material-tailwind/react";
+import { image } from "@cloudinary/url-gen/qualifiers/source";
 function NewProductForm() {
   const [addProduct] = useMutation(ADD_PRODUCT);
   // TODO SEND INT TO DATABASE
@@ -11,11 +16,27 @@ function NewProductForm() {
     category: "",
     description: "",
     quantity: 1,
-    image: undefined,
-    imageName: "",
-    imageDescription: ""
+    image: "",
   });
 
+  const [publicId, setPublicId] = useState("");
+  const [cloudName] = useState(import.meta.env.VITE_CLOUDNAME);
+  const [uploadPreset] = useState("rpzhky6o");
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset,
+    // cropping: true, //add a cropping step
+    // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+    // sources: [ "local", "url"], // restrict the upload sources to URL and local files
+    // multiple: false,  //restrict upload to a single file
+    // folder: "user_images", //upload files to the specified folder
+    // tags: ["users", "profile"], //add the given tags to the uploaded files
+    // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+    // clientAllowedFormats: ["images"], //restrict uploading to image files only
+    // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+    // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+    // theme: "purple", //change to a purple theme
+  });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     // if the value is suppose to be an int, make it an int
@@ -47,7 +68,14 @@ function NewProductForm() {
     console.log(formState);
     try {
       const { data } = addProduct({
-        variables: { name, price, category, description, quantity },
+        variables: {
+          name,
+          price,
+          category,
+          description,
+          quantity,
+          image: publicId,
+        },
       });
       console.log(data);
     } catch (err) {
@@ -55,6 +83,13 @@ function NewProductForm() {
     }
   };
 
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName,
+    },
+  });
+
+  const myImage = cld.image(publicId);
   return (
     <>
       <form onSubmit={handleFormSubmit} className="new-product-form">
@@ -98,28 +133,29 @@ function NewProductForm() {
           onChange={handleInputChange}
           type="text"
         ></textarea>
+        {/* //! IMAGE STUFF HERE */}
         <label htmlFor="image">Image:</label>
-        <input
-          value={formState.image}
-          name="image"
-          onChange={handleInputChange}
-          type="file"
-        ></input>
-        <label htmlFor="imageName">Image Title:</label>
-        <input
-          value={formState.imageName}
-          name="imageName"
-          onChange={handleInputChange}
-          type="text"
-        ></input>
-        <label htmlFor="imageDescription">Image caption:</label>
-        <input
-          value={formState.imageDescription}
-          name="imageDescription"
-          onChange={handleInputChange}
-          type="text"
-        ></input>
+        <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+        <div style={{ width: "200px" }}>
+          <AdvancedImage
+            style={{ maxWidth: "100%" }}
+            cldImg={myImage}
+            plugins={[responsive(), placeholder()]}
+          />
+        </div>
 
+        <label htmlFor="imageId">
+          ImageID: (you don&apos;t have to know what this means)
+        </label>
+        <input
+          type="text"
+          value={publicId}
+          onChange={handleInputChange}
+          name="image"
+          disabled
+        />
+
+        {/* <Button className="btn-1" onClick={updateImageForms}>Update Image Forms</Button> */}
         <button className="btn-1" type="submit">
           Submit
         </button>

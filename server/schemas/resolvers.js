@@ -1,13 +1,10 @@
 const { User, Product } = require("../models");
-const reviewSchema = require("../models/reviews");
-
 //TODO import auths
 const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   //! QUERIES
   Query: {
     me: async (parent, args, context) => {
-      console.log(context.user.username);
       if (context.user) {
         return User.findOne({ username: context.user.username });
       } else {
@@ -66,7 +63,6 @@ const resolvers = {
     },
 
     addReview: async (_, { _id, ReviewDetails }) => {
-      console.log(ReviewDetails);
       const updProduct = await Product.findByIdAndUpdate(
         { _id: _id },
         {
