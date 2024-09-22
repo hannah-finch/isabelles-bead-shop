@@ -1,3 +1,5 @@
+// TODO MARK FILE FOR DELETE
+
 const { Schema } = require("mongoose");
 
 const imageSchema = new Schema(

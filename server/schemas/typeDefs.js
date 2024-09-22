@@ -1,5 +1,3 @@
-//TODO
-// the users query is dummy data.... must be changed
 const typeDefs = `
 type Query {
     me: User
@@ -13,9 +11,9 @@ type Query {
 type Mutation {
     createUser(username: String!, email: String!, password: String!, role: String): Auth
     login(username: String!, password: String!): Auth
-    createProduct(name: String!, price: Int!, description: String!, image: ImageDetailsInput, category: String!, quantity: Int!): Product
+    createProduct(name: String!, price: Int!, description: String!, image: String!, category: String!, quantity: Int!): Product
     addOrder(products: [ID]!): Order
-    addReview(_id:ID!, ReviewDetails: ReviewDetailsInput): Product
+    addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
 }
 type Auth {
     token: ID!,
@@ -30,22 +28,35 @@ type User {
     role: String
 }
 
+
 type Product {
     _id: ID!
     name: String!
     price: Int!
     description: String!
-    image: Image
+    image: String!
+    imageURL: String!
     category: String!
     quantity: Int!
+    reviews: [Review]
 }
-
+input ReviewDetailsInput {
+    username: String!
+    content: String!
+    rating: Int!
+}
+type Review {
+    _id: ID!
+    username: String!
+    content: String!
+    rating: Int!
+}
 input ProductInput {
   _id: ID!
   name: String!
   price: Float!
   description: String!
-  image: ImageInput
+  image: String!
   category: String!
   quantity: Int!
 }
@@ -58,34 +69,6 @@ type Order {
 
 type Checkout {
     session: ID
-}
-
-input ImageDetailsInput {
-    id: ID!
-    Url: String!
-    name: String!
-    description: String!
-}
-
-type Image {
-    id: ID!
-    Url: String!
-    name: String!
-    description: String!
-}
-    
-input ImageInput {
-    Url: String!
-    description: String
-    id: String
-    name: String
-  }
-
-input ReviewDetailsInput {
-    _id: ID!
-    username: User!
-    content: String!
-    rating: Number!
 }
 `;
 module.exports = typeDefs;

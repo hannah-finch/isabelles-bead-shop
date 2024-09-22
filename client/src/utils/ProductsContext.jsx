@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "./queries";
 
@@ -19,12 +19,26 @@ const ProductsProvider = ({ children }) => {
   // Shopping cart state
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
-    console.log(cartItems); 
-  };
+  const [cartCounter, setCartCounter] = useState(0);
 
-  
+  useEffect(() => {
+    const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    setCartCounter(totalItems);
+  }
+  , [cartItems]);
+
+  // Add to cart function
+  const addToCart = (addItem, quantityToAdd) => {
+    const itemExists = cartItems.some((item) => item._id === addItem._id);
+    const updatedCartItems = itemExists
+      // If the item is already in the cart, increment the quantity
+      ? cartItems.map((item) =>
+          addItem._id === item._id ? { ...item, quantity: item.quantity + quantityToAdd } : item
+        )
+      // Otherwise, add the item to the cart
+      : [...cartItems, { ...addItem, quantity: quantityToAdd }];
+    setCartItems(updatedCartItems);
+  };
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -34,7 +48,9 @@ const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider value={{ allProducts }}>
-      <ShoppingCartContext.Provider value={{ cartItems, setCartItems, addToCart }}>
+      <ShoppingCartContext.Provider
+        value={{ cartItems, setCartItems, addToCart, cartCounter, setCartCounter }}
+      >
         {children}
       </ShoppingCartContext.Provider>
     </ProductsContext.Provider>

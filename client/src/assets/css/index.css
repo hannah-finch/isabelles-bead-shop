@@ -30,7 +30,7 @@ section {
 /*  General Styles ------------------------ */
 
 .vertical-line {
-  width: 2px;
+  width: 1.5px;
   height: 20px;
   background-color: var(--blackish);
   margin: 0 20px;
@@ -38,6 +38,10 @@ section {
 
 .spacer {
   height: 20px;
+}
+
+.center {
+  margin: auto
 }
 
 .bold {
@@ -121,7 +125,7 @@ nav {
   padding: 0 5%;
 }
 
-nav a {
+nav a, nav button {
   font-weight: bold;
   margin: 10px 20px;
   border-bottom: 2px solid #00000000;
@@ -179,8 +183,16 @@ footer {
 .sub-footer {
   background-color: var(--teal);
   text-align: center;
-  padding: 40px 0;
+  padding: 30px 0;
   font-weight: bold;
+}
+
+.sub-footer a {
+  padding: 2px;
+}
+
+.sub-footer a:hover {
+  border-bottom: 2px solid var(--blackish);
 }
 
 /* Form styles ------------------ */
@@ -215,6 +227,10 @@ form h2 {
 form button {
   align-self: center;
   margin: 30px 0;
+}
+
+form .button-container {
+  margin: 20px auto;
 }
 
 .form-footer {

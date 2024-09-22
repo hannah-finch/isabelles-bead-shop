@@ -3,23 +3,9 @@
 import { useEffect, useState, useContext } from "react";
 import "../assets/css/shop.css";
 import ProductCard from "../components/product-card";
-// import { Link } from 'react-router-dom'
-
-import Auth from "../utils/auth";
-// import { GET_All_PRODUCTS } from "../utils/queries";
-// import { useQuery } from "@apollo/client";
-
 import { ProductsContext } from "../utils/ProductsContext";
 
 function HomePage() {
-  //* testing admin, client, and not logged in
-  if (Auth.isLoggedIn()) {
-    console.log("admin: " + Auth.isAdmin());
-    console.log("client: " + Auth.isClient());
-  }
-  //const { loading, data } = useQuery(GET_All_PRODUCTS);
-  //const productsData = data ? data.products : [];
-  //console.log(productsData);
   const { allProducts } = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -41,43 +27,45 @@ function HomePage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
+  const nonUniqCategories = allProducts.map((product) => {
+    return product.category;
+  });
+  const Categories = [...new Set(nonUniqCategories)];
 
-  return (
-    <>
+  function HomeBanner() {
+    const [hoveredCategory, setHoveredCategory] = useState("");
+    return (
       <section className="category-banner">
-        {/* TODO: Change the image source on hover to the color versions */}
-        <button>
-          <div className="category-btn">
-            <img src="/images/icon-circle.png"></img>
-            Bracelets
-          </div>
-        </button>
-        <button>
-          <div className="category-btn">
-            <img src="/images/icon-squiggle.png"></img>
-            Key chains
-          </div>
-        </button>
-        <button>
-          <div className="category-btn">
-            <img src="/images/icon-x.png"></img>
-            Fidgets
-          </div>
-        </button>
-        <button>
-          <div className="category-btn">
-            <img src="/images/icon-flower.png"></img>
-            Earrings
-          </div>
-        </button>
+        {Categories.map((category, key) => (
+          <button key={key}>
+            <div
+              onClick={() => setSelectedCategory(category)}
+              className="category-btn"
+              onMouseEnter={() => setHoveredCategory(category)}
+              onMouseLeave={() => setHoveredCategory("")}
+            >
+              <img
+                src={
+                  hoveredCategory === category || selectedCategory === category
+                    ? `/images/icon-${category}-color.png`
+                    : `/images/icon-${category}.png`
+                }
+              ></img>
+              {category === "other" ? category : `${category}s`}
+            </div>
+          </button>
+        ))}
       </section>
-      <div className="sub-banner"></div>
+    );
+  }
 
-      <section className="shop-section">
-        {/* TODO: show a button for each category in the db, so if she adds a category, it'll automatically be here (These are just examples atm, don't forget the | at the end)*/}
+  function ShopSelection() {
+    return (
+      <>
         <h2>
-          {selectedCategory === "all"
-            ? "Shop All"
+          {selectedCategory === "all" ? "Shop " : ""}
+          {selectedCategory === "all" || selectedCategory === "other"
+            ? `${capitalizeWords(selectedCategory)}`
             : `${capitalizeWords(selectedCategory)}s`}
         </h2>
         <button
@@ -90,66 +78,62 @@ function HomePage() {
         >
           shop all
         </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("bracelet")}
-          className={
-            selectedCategory === "bracelet"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          bracelets
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("keychain")}
-          className={
-            selectedCategory === "keychain"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          key chains
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("fidget")}
-          className={
-            selectedCategory === "fidget"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          fidgets
-        </button>
-        |
-        <button
-          onClick={() => setSelectedCategory("earring")}
-          className={
-            selectedCategory === "earring"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          earrings
-        </button>
-        <section className="product-grid">
+        {Categories.map((category, key) => {
+          return (
+            <button
+              key={key}
+              onClick={() => setSelectedCategory(category)}
+              className={
+                selectedCategory === category
+                  ? "category-link-active"
+                  : "category-link"
+              }
+            >
+              {category === "other" ? category : `${category}s`}
+            </button>
+          );
+        })}
+      </>
+    );
+  }
+  function ProductsGrid() {
+    const [displayNum, setDisplayNum] = useState(15);
+    const showMore = () => {
+      setDisplayNum(displayNum + 15);
+    };
+    return (
+      <>
+        <div className="product-grid">
           {/* This checks if the product query is empty and done loading.*/}
           {filteredProducts && filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <ProductCard
-                product={product}
-                key={product._id}
-                selected={selectedCategory}
-              />
-            ))
+            filteredProducts
+              .slice(0, displayNum)
+              .map((product) => (
+                <ProductCard
+                  product={product}
+                  key={product._id}
+                  selected={selectedCategory}
+                />
+              ))
           ) : (
             <p>No products available</p>
           )}
-        </section>
-        {/* TODO: Optional, for now just focus on showing all the products, later show 12 or and give this button functionality to show 12 more. I think you can do this by editing the css of the grid (set the row template and then overflow hidden or something like that) */}
-        <button className="btn-2">Show More</button>
+        </div>
+
+        {filteredProducts.length > displayNum ? (
+          <button onClick={showMore} className="btn-2">
+            Show More
+          </button>
+        ) : null}
+      </>
+    );
+  }
+  return (
+    <>
+      <HomeBanner />
+      <section className="shop-section">
+        <ShopSelection />
+        <ProductsGrid />
       </section>
     </>
   );

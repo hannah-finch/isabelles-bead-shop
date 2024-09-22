@@ -1,12 +1,10 @@
 const { User, Product } = require("../models");
-
 //TODO import auths
 const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   //! QUERIES
   Query: {
     me: async (parent, args, context) => {
-      console.log(context.user.username);
       if (context.user) {
         return User.findOne({ username: context.user.username });
       } else {
@@ -64,14 +62,18 @@ const resolvers = {
       return product;
     },
 
-    addReview: async (_, input) => {
+    addReview: async (_, { _id, ReviewDetails }) => {
       const updProduct = await Product.findByIdAndUpdate(
-        {_id: input.id},
-        { $addToSet: {reviews: input.ReviewDetails}},
-        { new: true, runValidators: true}
-      );
+        { _id: _id },
+        {
+          $addToSet: {
+            reviews: ReviewDetails,
+          },
+        },
+        { new: true, runValidators: true }
+      ).populate([{ path: "username", strictPopulate: false }]);
       return updProduct;
-    }
+    },
   },
 };
 

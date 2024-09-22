@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../utils/mutations";
+import { ADD_USER } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
-import Auth from "../utils/auth";
-
-const SignupForm = () => {
+function SignupForm() {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -47,7 +45,6 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     const { username, password, passwordConfirm } = formState;
 
@@ -147,24 +144,8 @@ const SignupForm = () => {
       <button className="btn-1" type="submit">
         Submit
       </button>
-
-      <div className="form-footer">
-        <Link to="/login">
-          Already signed up? <span className="underline bold">Log in</span>
-        </Link>
-      </div>
     </form>
   );
 };
 
-function SignupPage() {
-  return (
-    <>
-      <section>
-        <SignupForm />
-      </section>
-    </>
-  );
-}
-
-export default SignupPage;
+export default SignupForm;

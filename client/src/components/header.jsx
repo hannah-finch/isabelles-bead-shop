@@ -1,54 +1,87 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { ShoppingCartContext } from "../utils/ProductsContext";
+import CartPreview from "./CartPreview";
+import "../assets/css/header.css";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
-function Header() {
+function Header( ) {
+  const { cartCounter, cartItems } = useContext(ShoppingCartContext);
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <>
       <nav>
-        <NavLink to={'/'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+        {Auth.isLoggedIn() ? (
+          Auth.isAdmin() ? (
+            <>
+              <NavLink
+                to={"/admin"}
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Admin Panel
+              </NavLink>
+              <div className="vertical-line"></div>
+            </>
+          ) : null
+        ) : null}
+        <NavLink
+          to={"/"}
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
           shop
         </NavLink>
-        {/* these page routes aren't made yet */}
-        <NavLink to={'/about'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+        <NavLink
+          to={"/about"}
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
           about
         </NavLink>
-        {/* TODO: put the logged in user's Id in href here */}
-        {/* TODO: conditionally renter the account link to only show when logged in. */}
-        {/* TODO: when not logged in, show a log in link */}
-        <NavLink to={'/account/userId'} className={({ isActive }) => (isActive ? "active-link" : "")}>
-          account
-        </NavLink>
-        <div className="vertical-line"></div>
 
-        {/* TODO: Change cart text to a cart icon */}
-        <NavLink to={'/cart'} className={({ isActive }) => (isActive ? "active-link" : "")}>
-          cart
-          {/* TODO: show cart.length here instead of 8 */}
-          {/* TODO: cart number should only render if cart.length */}
-          <div className="cart-num">8</div>
-        </NavLink>
+        {Auth.isLoggedIn() ? (
+          Auth.isClient() ? (
+            <NavLink
+              to={"/account/userId"}
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              account
+            </NavLink>
+          ) : null
+        ) : null}
 
-        {/* TODO: TESTING LOGIN/LOGOUT*/}
         {Auth.isLoggedIn() ? (
           <button onClick={Auth.logout}>logout</button>
         ) : (
-          <NavLink to={'/login'} className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink
+            to={"/login"}
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
             login
           </NavLink>
         )}
 
+        <div className="vertical-line"></div>
+
+        <NavLink
+          to={"/cart"}
+          className={({ isActive }) => `${isActive ? "active-link" : ""} nav-link`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          cart
+          <div className="cart-num">{cartCounter}</div>
+          {isHovered && <CartPreview items={cartItems} />}
+        </NavLink>
       </nav>
 
       <header>
         <Link to="/">
           <h1>Isabelle’s Bead Shop</h1>
-          <img src='/images/icon-zigzag.png'></img>
+          <img src="/images/icon-zigzag.png"></img>
         </Link>
       </header>
     </>
-  )
+  );
 }
 
-
-export default Header
+export default Header;
