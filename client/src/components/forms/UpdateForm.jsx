@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
 function UpdateForm(prop) {
   const { description, category, image, name, price, quantity } = prop.product;

@@ -45,7 +45,37 @@ export const ADD_PRODUCT = gql`
       name
       price
       description
-      image 
+      image
+      category
+      quantity
+    }
+  }
+`;
+export const UPDATE_PRODUCT = gql`
+  mutation UpdateProduct(
+    $name: String!
+    $price: Int!
+    $description: String!
+    $image: String!
+    $category: String!
+    $quantity: Int!
+    $id: ID!
+  ) {
+    updateProduct(
+      name: $name
+      price: $price
+      description: $description
+      image: $image
+      category: $category
+      quantity: $quantity
+      _id: $id
+    ) {
+      _id
+      name
+      price
+      description
+      image
+      imageURL
       category
       quantity
     }
