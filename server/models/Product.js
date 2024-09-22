@@ -36,6 +36,9 @@ const productSchema = new Schema(
     },
   }
 );
+productSchema.virtual("imageURL").get(function () {
+  return `https://res.cloudinary.com/dflvzyvkr/image/upload/v1726964474/${this.price}.jpg`;
+});
 
 const Product = model("Product", productSchema);
 

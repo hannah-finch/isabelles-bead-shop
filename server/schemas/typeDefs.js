@@ -1,4 +1,3 @@
-
 const typeDefs = `
 type Query {
     me: User
@@ -36,6 +35,7 @@ type Product {
     price: Int!
     description: String!
     image: String!
+    imageURL: String!
     category: String!
     quantity: Int!
     reviews: [Review]

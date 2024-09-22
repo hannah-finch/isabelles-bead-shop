@@ -3,7 +3,9 @@ import { toDecimal } from "../utils/math";
 import "../assets/css/product-card.css";
 
 function ProductCard(prop) {
-  const { _id, category, image, name, price, quantity } = prop.product;
+  console.log(prop.product);
+  const { _id, category, image, name, price, quantity, imageURL } =
+    prop.product;
   if (prop.selected == category || prop.selected == "all") {
     return (
       <Link
@@ -14,7 +16,7 @@ function ProductCard(prop) {
         <div className="product-card">
           <div className="card-image">
             <img
-              src={image.Url}
+              src={imageURL}
               alt={image.description}
               className="crop-img"
             ></img>

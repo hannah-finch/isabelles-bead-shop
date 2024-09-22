@@ -19,6 +19,7 @@ export const GET_All_PRODUCTS = gql`
       price
       description
       image 
+      imageURL
       category
       quantity
     }

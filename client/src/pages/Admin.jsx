@@ -19,7 +19,7 @@ function AdminPage() {
       <>
         <div className="product-admin">
           <figure className="product-img-admin">
-            <img src="images/tempPictures/defaultProductImage.jpg"></img>
+            <img src={`https://res.cloudinary.com/dflvzyvkr/image/upload/v1726964474/${product.image}.jpg`}></img>
           </figure>
           <div className="item-text-box-admin">
             <p>
