@@ -65,7 +65,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                 <figure className="product-img-cart">
                   <img
                     className="crop-img"
-                    src="images/tempPictures/defaultProductImage.jpg"
+                    src={item.imageURL}
                   ></img>
                   {/* TODO: fix the url */}
                 </figure>
