@@ -12,6 +12,7 @@ type Mutation {
     createUser(username: String!, email: String!, password: String!, role: String): Auth
     login(username: String!, password: String!): Auth
     createProduct(name: String!, price: Int!, description: String!, image: String!, category: String!, quantity: Int!): Product
+    updateProduct(_id:ID!, name: String!, price: Int!, description: String!, image: String!, category: String!, quantity: Int!): Product
     addOrder(products: [ID]!): Order
     addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
 }
