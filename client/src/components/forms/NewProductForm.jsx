@@ -6,6 +6,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
 import { Button } from "@material-tailwind/react";
+import { image } from "@cloudinary/url-gen/qualifiers/source";
 function NewProductForm() {
   const [addProduct] = useMutation(ADD_PRODUCT);
   // TODO SEND INT TO DATABASE
@@ -15,9 +16,7 @@ function NewProductForm() {
     category: "",
     description: "",
     quantity: 1,
-    image: undefined,
-    imageName: "",
-    imageDescription: "",
+    image: "",
   });
 
   const [publicId, setPublicId] = useState("");
@@ -69,7 +68,14 @@ function NewProductForm() {
     console.log(formState);
     try {
       const { data } = addProduct({
-        variables: { name, price, category, description, quantity },
+        variables: {
+          name,
+          price,
+          category,
+          description,
+          quantity,
+          image: publicId,
+        },
       });
       console.log(data);
     } catch (err) {
@@ -82,12 +88,6 @@ function NewProductForm() {
       cloudName,
     },
   });
-  const updateImageForms = (e) => {
-    e.preventDefault();
-    console.log("test");
-    console.log(publicId);
-    console.log(formState);
-  };
 
   const myImage = cld.image(publicId);
   return (
@@ -133,47 +133,35 @@ function NewProductForm() {
           onChange={handleInputChange}
           type="text"
         ></textarea>
+        {/* //! IMAGE STUFF HERE */}
         <label htmlFor="image">Image:</label>
-        {/* //! ALL THESE FORMS ARE INPUT DISABLED AND WILL AUTO POPULATE WITH BUTTON */}
-        <input
-          value={formState.image}
-          name="image"
-          onChange={handleInputChange}
-          type="file"
-          disabled
-        ></input>
-        <label htmlFor="imageName">Image Title:</label>
-        <input
-          value={formState.imageName}
-          name="imageName"
-          onChange={handleInputChange}
-          type="text"
-          disabled
-        ></input>
-        <label htmlFor="imageDescription">Image caption:</label>
-        <input
-          value={formState.imageDescription}
-          name="imageDescription"
-          onChange={handleInputChange}
-          type="text"
-          disabled
-        ></input>
+        <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+        <div style={{ width: "200px" }}>
+          <AdvancedImage
+            style={{ maxWidth: "100%" }}
+            cldImg={myImage}
+            plugins={[responsive(), placeholder()]}
+          />
+        </div>
 
+        <label htmlFor="imageId">
+          ImageID: (you don&apos;t have to know what this means)
+        </label>
+        <input
+          type="text"
+          value={publicId}
+          onChange={handleInputChange}
+          name="image"
+          disabled
+        />
+
+        {/* <Button className="btn-1" onClick={updateImageForms}>Update Image Forms</Button> */}
         <button className="btn-1" type="submit">
           Submit
         </button>
 
         <div className="form-footer"></div>
       </form>
-      <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
-      <div style={{ width: "200px" }}>
-        <AdvancedImage
-          style={{ maxWidth: "100%" }}
-          cldImg={myImage}
-          plugins={[responsive(), placeholder()]}
-        />
-        <Button onClick={updateImageForms}>Update Image Forms</Button>
-      </div>
     </>
   );
 }

@@ -18,12 +18,7 @@ export const GET_All_PRODUCTS = gql`
       name
       price
       description
-      image {
-        id
-        Url
-        name
-        description
-      }
+      image 
       category
       quantity
     }
@@ -37,12 +32,7 @@ export const GET_SINGLE_PRODUCT = gql`
       name
       price
       description
-      image {
-        id
-        Url
-        name
-        description
-      }
+      image 
       category
       quantity
       reviews {
