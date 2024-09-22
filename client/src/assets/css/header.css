@@ -4,8 +4,8 @@
 
 .cart-preview {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 150%;
+  right: 0;
   background-color: white;
   border: 1px solid #ccc;
   padding: 10px;
