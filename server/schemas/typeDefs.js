@@ -13,6 +13,7 @@ type Mutation {
     login(username: String!, password: String!): Auth
     createProduct(name: String!, price: Int!, description: String!, image: String!, category: String!, quantity: Int!): Product
     updateProduct(_id:ID!, name: String!, price: Int!, description: String!, image: String!, category: String!, quantity: Int!): Product
+    deleteProduct(_id:ID!): Product
     addOrder(products: [ID]!): Order
     addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
 }

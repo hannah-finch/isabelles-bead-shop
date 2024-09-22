@@ -65,7 +65,7 @@ function NewProductForm() {
     const { name, price, category, description, quantity } = formState;
     console.log(formState);
     try {
-      const { data } = addProduct({
+      const {data} = await addProduct({
         variables: {
           name,
           price,
@@ -76,6 +76,21 @@ function NewProductForm() {
         },
       });
       console.log(data);
+      if (!data) {
+        alert("form is invalid");
+      }
+      if (data) {
+        alert("Item ADDED");
+        //TODO FIX BUG FROM CAUSING FORMS FROM AUTO SUBMITTING
+        // setFormState({
+          // name: "",
+          // price: undefined,
+          // category: "",
+          // description: "",
+          // quantity: 1,
+          // image: "",
+        // });
+      }
     } catch (err) {
       console.log(err);
     }

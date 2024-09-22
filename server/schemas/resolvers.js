@@ -66,9 +66,13 @@ const resolvers = {
     ) => {
       const product = await Product.findByIdAndUpdate(
         { _id },
-        { name, price, description, image, category},
+        { name, price, description, image, category },
         { new: true }
       );
+      return product;
+    },
+    deleteProduct: async (_, { _id }) => {
+      const product = await Product.findByIdAndDelete({ _id });
       return product;
     },
 
