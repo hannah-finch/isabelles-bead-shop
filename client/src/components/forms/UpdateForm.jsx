@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { UPDATE_PRODUCT } from "../../utils/mutations";
+import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { description, category, image, name, price, quantity } = prop.product;
   const { productId } = useParams();
 
@@ -47,16 +48,26 @@ function UpdateForm(prop) {
     // console.log(formState);
     // const { name, price, description, image, category, quantity } = formState;
     try {
-      const UpdatedProduct = await UpdateProduct({
+      const { data } = await UpdateProduct({
         variables: formState,
       });
-
-      console.log(UpdatedProduct);
     } catch (err) {
       console.log(err);
     }
   };
-
+  const deleteItem = async (event) => {
+    event.preventDefault;
+    try {
+      const { data } = await DeleteProduct({
+        variables: { id: productId },
+      });
+      if (data.deleteProduct) {
+        window.location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <form onSubmit={handleFormSubmit}>
@@ -120,7 +131,7 @@ function UpdateForm(prop) {
         ></input>
 
         <div className="button-container">
-          <button className="btn-2" type="submit">
+          <button className="btn-2" onClick={deleteItem}>
             Delete Product
           </button>
           <button className="btn-1" type="submit">
