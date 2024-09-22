@@ -8,6 +8,7 @@ import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
 import UpdateForm from "../components/forms/UpdateForm.jsx";
+import ReviewForm from "../components/forms/ReviewForm.jsx";
 
 function ProductPage() {
   // get product id from url
@@ -130,6 +131,10 @@ function ProductPage() {
         </div>
       </section>
       <div className="sub-banner"></div>
+
+      < ReviewForm />
+
+
       <section className="review-section">
         <h2>Reviews</h2>
         <div className="review-grid">

@@ -202,14 +202,14 @@ form {
   flex-direction: column;
   background-color: var(--white);
   box-shadow: var(--shadow1);
-  padding-top: 40px;
+  padding: 40px;
   max-width: 800px;
   margin: auto;
 }
 
 input, textarea {
   background-color: var(--whitish);
-  margin: 6px 40px;
+  margin: 6px 0;
   padding: 6px 12px;
   outline: none;
   border: 2px solid var(--whitish);
@@ -226,7 +226,7 @@ form h2 {
 
 form button {
   align-self: center;
-  margin: 30px 0;
+  margin-top: 30px;
 }
 
 form .button-container {
