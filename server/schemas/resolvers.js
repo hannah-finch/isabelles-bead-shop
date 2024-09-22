@@ -1,4 +1,4 @@
-const { User, Product, Product } = require("../models");
+const { User, Product } = require("../models");
 
 //TODO import auths
 const { signToken, AuthenticationError } = require("../utils/auth");
