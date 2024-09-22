@@ -207,7 +207,7 @@ form {
   margin: auto;
 }
 
-input, textarea {
+input, textarea, select {
   background-color: var(--whitish);
   margin: 6px 0;
   padding: 6px 12px;
@@ -247,14 +247,14 @@ form .button-container {
 
 form p {
   align-self: flex-end;
-  padding-right: 40px;
+  /* padding-right: 40px; */
   font-size: 14px;
   padding-bottom: 6px;
   line-height:.5
 }
 
 form label {
-  margin: 8px 40px -6px;
+  margin: 8px 0px -6px;
   color: var(--gray);
   /* background-color: var(--whitish); */
   align-self: flex-start;
@@ -264,4 +264,8 @@ form label {
 textarea {
   height: 200px;
   resize: none;
+}
+
+select {
+  width: 70px;
 }

@@ -7,7 +7,14 @@ function ReviewForm() {
     rating: "",
   });
 
-  const handleInputChange = () => {};
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -25,16 +32,20 @@ function ReviewForm() {
           placeholder="Your name"
           required
         ></input>
-        <input
+        <label htmlFor="rating">Number of stars:</label>
+        <select
           value={formState.rating}
           name="rating"
           onChange={handleInputChange}
-          type="number"
           placeholder="Star rating (1-5)"
-          min="1"
-          max="5"
           required
-        ></input>
+        >
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
         <textarea
           value={formState.content}
           name="content"
@@ -43,9 +54,9 @@ function ReviewForm() {
           placeholder="Review text"
           required
         ></textarea>
-      <button className="btn-1" type="submit">
-        Send Review
-      </button>
+        <button className="btn-1" type="submit">
+          Send Review
+        </button>
       </form>
     </>
   );
