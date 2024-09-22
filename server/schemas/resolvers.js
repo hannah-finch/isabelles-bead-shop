@@ -49,8 +49,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    //* Sign Out Mutation
-    //********************************* */
+
     //* User Mutations
     //********************************* */
 
@@ -59,6 +58,21 @@ const resolvers = {
 
     createProduct: async (_, input) => {
       const product = await Product.create(input);
+      return product;
+    },
+    updateProduct: async (
+      _,
+      { _id, name, price, description, image, category }
+    ) => {
+      const product = await Product.findByIdAndUpdate(
+        { _id },
+        { name, price, description, image, category },
+        { new: true }
+      );
+      return product;
+    },
+    deleteProduct: async (_, { _id }) => {
+      const product = await Product.findByIdAndDelete({ _id });
       return product;
     },
 

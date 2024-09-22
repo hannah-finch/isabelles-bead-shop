@@ -1,37 +1,85 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
 
 function UpdateForm(prop) {
+  const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { description, category, image, name, price, quantity } = prop.product;
+  const { productId } = useParams();
 
   const [formState, setFormState] = useState({
+    id: productId,
     name: name,
     price: price,
     category: category,
     description: description,
     quantity: quantity,
-    image: image.URL,
-    imageName: image.name,
-    imageDescription: image.description,
+    image: image,
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    switch (name) {
+      case "price":
+        setFormState({
+          ...formState,
+          [name]: +value,
+        });
+        break;
+      case "quantity":
+        setFormState({
+          ...formState,
+          [name]: +value,
+        });
+        break;
+      default:
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+    }
   };
 
   //TODO FINISH FUNCTION
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
+    // console.log(formState);
+    // const { name, price, description, image, category, quantity } = formState;
+    try {
+      const { data } = await UpdateProduct({
+        variables: formState,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
-
+  const deleteItem = async (event) => {
+    event.preventDefault;
+    try {
+      const { data } = await DeleteProduct({
+        variables: { id: productId },
+      });
+      if (data.deleteProduct) {
+        window.location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <form onSubmit={handleFormSubmit}>
         <h2>Edit product</h2>
+        <label htmlFor="productId">Product ID:(editing disabled)</label>
+        <input
+          value={formState._id}
+          onChange={handleInputChange}
+          type="text"
+          placeholder="Product name"
+          disabled
+        ></input>
         <label htmlFor="name">Name:</label>
         <input
           value={formState.name}
@@ -73,32 +121,17 @@ function UpdateForm(prop) {
           type="text"
           placeholder="Description"
         ></textarea>
-        <label htmlFor="image">Image:</label>
+        <label htmlFor="image">Image:(editing disabled)</label>
         <input
           value={formState.image}
           name="image"
           onChange={handleInputChange}
-          type="file"
-        ></input>
-        <label htmlFor="imageName">Image title:</label>
-        <input
-          value={formState.imageName}
-          name="imageName"
-          onChange={handleInputChange}
           type="text"
-          placeholder="Image title"
-        ></input>
-        <label htmlFor="imageDescription">Image Caption:</label>
-        <input
-          value={formState.imageDescription}
-          name="imageDescription"
-          onChange={handleInputChange}
-          type="text"
-          placeholder="Image caption"
+          disabled
         ></input>
 
         <div className="button-container">
-          <button className="btn-2" type="submit">
+          <button className="btn-2" onClick={deleteItem}>
             Delete Product
           </button>
           <button className="btn-1" type="submit">

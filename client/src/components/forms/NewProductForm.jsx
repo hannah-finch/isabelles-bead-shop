@@ -5,8 +5,6 @@ import { ADD_PRODUCT } from "../../utils/mutations";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
-import { Button } from "@material-tailwind/react";
-import { image } from "@cloudinary/url-gen/qualifiers/source";
 function NewProductForm() {
   const [addProduct] = useMutation(ADD_PRODUCT);
   // TODO SEND INT TO DATABASE
@@ -67,7 +65,7 @@ function NewProductForm() {
     const { name, price, category, description, quantity } = formState;
     console.log(formState);
     try {
-      const { data } = addProduct({
+      const {data} = await addProduct({
         variables: {
           name,
           price,
@@ -78,6 +76,21 @@ function NewProductForm() {
         },
       });
       console.log(data);
+      if (!data) {
+        alert("form is invalid");
+      }
+      if (data) {
+        alert("Item ADDED");
+        //TODO FIX BUG FROM CAUSING FORMS FROM AUTO SUBMITTING
+        // setFormState({
+          // name: "",
+          // price: undefined,
+          // category: "",
+          // description: "",
+          // quantity: 1,
+          // image: "",
+        // });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -154,8 +167,6 @@ function NewProductForm() {
           name="image"
           disabled
         />
-
-        {/* <Button className="btn-1" onClick={updateImageForms}>Update Image Forms</Button> */}
         <button className="btn-1" type="submit">
           Submit
         </button>

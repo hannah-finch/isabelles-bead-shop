@@ -38,7 +38,7 @@ function AdminPage() {
               {product.quantity}
             </p>
 
-            <Link to="/product/PUT-PRODUCT_ID_HERE" className="btn-3">
+            <Link to={`/product/${product._id}`} className="btn-3">
               View / Edit
             </Link>
           </div>

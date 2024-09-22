@@ -49,14 +49,17 @@ function LoginForm() {
     } catch (err) {
       console.log(err);
     }
-    // AFTER logging in, alert user and reset state
-    alert(`Welcome, ${username}!`);
-    setFormState({
-      username: "",
-      password: "",
-      usernameMessage: "",
-      passwordMessage: "",
-    });
+    if (Auth.isLoggedIn()) {
+      alert(`Welcome, ${username}!`);
+    } else {
+      alert("Login failed. Please try again.");
+      setFormState({
+        username: "",
+        password: "",
+        usernameMessage: "",
+        passwordMessage: "",
+      });
+    }
   };
 
   return (
