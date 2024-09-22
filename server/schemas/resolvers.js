@@ -71,6 +71,10 @@ const resolvers = {
       );
       return product;
     },
+    deleteProduct: async (_,{_id}) => {
+      const product = await Product.findByIdAndDelete({_id})
+      return product
+    },
 
     addReview: async (_, { _id, ReviewDetails }) => {
       const updProduct = await Product.findByIdAndUpdate(
