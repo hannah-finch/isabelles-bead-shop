@@ -14,12 +14,12 @@ function AdminPage() {
   }
   const { products } = data ? data : [];
 
-  const ProductList = products.map((product) => {
+  const ProductList = products.map((product, key) => {
     return (
       <>
-        <div className="product-admin">
+        <div className="product-admin" key={key}>
           <figure className="product-img-admin">
-            <img src={`https://res.cloudinary.com/dflvzyvkr/image/upload/v1726964474/${product.image}.jpg`}></img>
+            <img src={product.imageURL}></img>
           </figure>
           <div className="item-text-box-admin">
             <p>
@@ -57,7 +57,6 @@ function AdminPage() {
           {ProductList}
         </div>
       </section>
-
     </>
   );
 }

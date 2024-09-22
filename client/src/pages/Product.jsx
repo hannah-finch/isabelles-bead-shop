@@ -28,8 +28,17 @@ function ProductPage() {
   }
 
   const product = data ? data.singleProduct : [];
-  const { id, category, description, image, quantity, price, name, reviews } =
-    product;
+  console.log(product);
+  const {
+    id,
+    category,
+    description,
+    imageURL,
+    quantity,
+    price,
+    name,
+    reviews,
+  } = product;
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
 
@@ -57,7 +66,7 @@ function ProductPage() {
     <>
       <section className="product-section">
         <figure className="product-img">
-          <img src={`../${image.Url}`} className="crop-img"></img>
+          <img src={imageURL} className="crop-img"></img>
         </figure>
 
         <div className="product-info">
@@ -70,7 +79,6 @@ function ProductPage() {
           {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
           {/* This quantity is number to add to cart, not number in stock */}
           <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-0 w-min mb-2">
-            
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
               onClick={() => {
@@ -82,11 +90,11 @@ function ProductPage() {
             >
               -
             </button>
-            
+
             <p id="quantity" className="mx-2 w-8 text-center">
               1
             </p>
-            
+
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
               onClick={() => {
@@ -98,12 +106,14 @@ function ProductPage() {
             >
               +
             </button>
-
           </div>
           <div className="button-container">
             <button
               onClick={() => {
-                addToCart(product, parseInt(document.getElementById("quantity").innerText));
+                addToCart(
+                  product,
+                  parseInt(document.getElementById("quantity").innerText)
+                );
                 document.getElementById("quantity").innerText = 1;
                 delayClick();
               }}

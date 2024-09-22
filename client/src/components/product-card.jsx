@@ -3,7 +3,6 @@ import { toDecimal } from "../utils/math";
 import "../assets/css/product-card.css";
 
 function ProductCard(prop) {
-  console.log(prop.product);
   const { _id, category, image, name, price, quantity, imageURL } =
     prop.product;
   if (prop.selected == category || prop.selected == "all") {
