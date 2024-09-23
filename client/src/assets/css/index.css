@@ -98,7 +98,7 @@ h2 {
 .btn-2 {
   color: var(--blackish);
   border: 1px solid var(--blackish);
-  padding: 6px 20px;
+  padding: 5px 19px;
   border-radius: 2px;
   box-shadow: var(--shadow1);
   transition: .2s;
@@ -110,9 +110,11 @@ h2 {
 }
 
 .btn-3 {
-  padding: 2px 6px;
+  padding: 6px 6px;
+  margin: 8px 0;
   background-color: var(--blue);
-  line-height: 2.5;
+  border-radius: 2px;
+  /* line-height: 2.5; */
   box-shadow: var(--shadow1);
 }
 
@@ -263,11 +265,13 @@ form .button-container {
 
 .form-footer {
   background-color: var(--green);
-  height: 50px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 800px;
+  padding: 20px;
+  box-shadow: var(--shadow1);
 }
 
 .narrow {

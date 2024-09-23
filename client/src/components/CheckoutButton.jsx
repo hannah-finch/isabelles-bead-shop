@@ -7,7 +7,7 @@ import { useCallback, useRef, useState, useEffect } from "react";
 
 export default function CheckoutButton({ cartItems }) {
   const stripePromise = loadStripe(
-    "pk_test_51Q0PNPRsgFYbL1k9OiuGur0KmNMcLfZuRTibSCBbdOhAxdDvW7mUAqKCSwkUHh4Zfj1EHEKiS0z0UmPspKr4iJLo009TPMkibs"
+    "pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7"
   );
   const [showCheckout, setShowCheckout] = useState(false);
   const [stripeItems, setStripeItems] = useState([]);

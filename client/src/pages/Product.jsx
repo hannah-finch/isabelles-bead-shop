@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
+import { DELETE_PRODUCT } from "../utils/mutations.js"
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
 import Auth from "../utils/auth";
@@ -18,6 +19,7 @@ function ProductPage() {
   const { loading, data } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { productId },
   });
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
 
   const { addToCart } = useContext(ShoppingCartContext);
   const [addClicked, setAddClicked] = useState(false);
@@ -62,6 +64,20 @@ function ProductPage() {
     );
   };
 
+  const deleteItem = async (event) => {
+    event.preventDefault;
+    try {
+      const { data } = await DeleteProduct({
+        variables: { id: productId },
+      });
+      if (data.deleteProduct) {
+        window.location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (loading) {
     return <h1>Loading</h1>;
   }
@@ -90,6 +106,9 @@ function ProductPage() {
                 <button className="btn-3" onClick={clickEdit}>
                   {showEdit ? "Cancel Edit" : "Edit Product"}
                 </button>
+                <button className="btn-2" onClick={deleteItem}>
+          Delete Product
+        </button>
               </>
             ) : null
           ) : (
