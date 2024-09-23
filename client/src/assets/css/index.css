@@ -46,6 +46,16 @@ section {
   margin: auto
 }
 
+.flex-row {
+  display: flex;
+  gap: 20px
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -236,6 +246,7 @@ form {
   padding: 40px;
   max-width: 800px;
   margin: auto;
+  color: var(--blackish)
 }
 
 input, textarea, select {
@@ -253,6 +264,7 @@ input:focus, textArea:focus {
 form h2 {
   padding-bottom: 20px;
   text-align: center;
+
 }
 
 form button {
@@ -301,5 +313,5 @@ textarea {
 }
 
 select {
-  width: 50%;
+  /* width: 50%; */
 }
