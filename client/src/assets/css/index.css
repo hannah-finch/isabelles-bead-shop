@@ -6,6 +6,7 @@
   --white: #ffffff;
   --whitish: #f7f7f7;
   --blackish: #373737;
+  --dark-teal: #3d5a60;
   --gray: #8a8a8a;
   --cream: #e8e1d1;
   --teal: #86b5b7;
@@ -70,14 +71,13 @@ h2 {
   background-color: var(--blackish);
   color: var(--whitish);
   padding: 6px 20px;
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow: var(--shadow1);
   transition: .2s;
 }
 
 .btn-1:hover {
-  /* background-color: var(--teal); */
-  opacity: 70%;
+  background-color: var(--dark-teal);
 }
 
 .btn-2 {

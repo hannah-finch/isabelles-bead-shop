@@ -1,5 +1,3 @@
-// To get products to show according to category, we can either add a category table to the db that the products belong to (maybe) and then get all for that category... OR to keep db as is, we can conditionally render the products by mapping (on product-card.jsx currently) and then if product.category === "the category", return that card. I wonder if we would need to make a separate function then for each category.. doesn't seem very dry.. come back to this thought later... BETTER THOUGHT... I just added data-category attribute to the card, so that will be WAY easier to filter
-
 import { useEffect, useState, useContext } from "react";
 import "../assets/css/shop.css";
 import ProductCard from "../components/product-card";
@@ -31,9 +29,31 @@ function HomePage() {
     return product.category;
   });
   const Categories = [...new Set(nonUniqCategories)];
+  const [hoveredCategory, setHoveredCategory] = useState("");
+
+  // This function sets the icon for categories, normal and hovered. If the category is not in categoriesToCheck, it will set the icon as a square
+  function iconSrc(category) {
+    const categoriesToCheck = new Set([
+      "bracelet",
+      "earring",
+      "fidget",
+      "keychain",
+      "necklace",
+      "other",
+    ]);
+
+    if (!categoriesToCheck.has(category)) {
+      return hoveredCategory === category || selectedCategory === category
+        ? `/images/icons/uncategorized-color.svg`
+        : `/images/icons/uncategorized.svg`;
+    } else {
+      return hoveredCategory === category || selectedCategory === category
+        ? `/images/icons/${category}-color.svg`
+        : `/images/icons/${category}.svg`;
+    }
+  }
 
   function HomeBanner() {
-    const [hoveredCategory, setHoveredCategory] = useState("");
     return (
       <section className="category-banner">
         {Categories.map((category, key) => (
@@ -44,13 +64,7 @@ function HomePage() {
               onMouseEnter={() => setHoveredCategory(category)}
               onMouseLeave={() => setHoveredCategory("")}
             >
-              <img
-                src={
-                  hoveredCategory === category || selectedCategory === category
-                    ? `/images/icon-${category}-color.png`
-                    : `/images/icon-${category}.png`
-                }
-              ></img>
+              <img src={iconSrc(category)}></img>
               {category === "other" ? category : `${category}s`}
             </div>
           </button>

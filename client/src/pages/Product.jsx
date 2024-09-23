@@ -47,7 +47,7 @@ function ProductPage() {
     return (
       <div className="review-card">
         <div className="block">
-          <img src={`/images/stars-${rating}.png`}></img>
+          <img src={`/images/stars/${rating}.svg`}></img>
           <p>&quot; {content} &quot;</p>
           <p className="bold">- {username}</p>
         </div>
