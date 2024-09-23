@@ -48,6 +48,10 @@ section {
   font-weight: bold;
 }
 
+.inline {
+  display: inline-block;
+}
+
 .white-container {
   background-color: var(--white);
   box-shadow: var(--shadow1);
@@ -66,6 +70,17 @@ h2 {
   font-size: 30px;;
 }
 
+.like-btn-2 {
+  border: 1px solid var(--blackish);
+  border-radius: 2px;
+  box-shadow: var(--shadow1);
+  height: 38px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn-1 {
   background-color: var(--blackish);
   color: var(--whitish);
@@ -76,7 +91,6 @@ h2 {
 }
 
 .btn-1:hover {
-  /* background-color: var(--teal); */
   opacity: 70%;
 }
 
@@ -111,7 +125,8 @@ h2 {
 
 .button-container {
   display: flex;
-  gap: 12px
+  gap: 12px;
+  align-items: center;
 }
 
 /* Header Styles -------------------------- */

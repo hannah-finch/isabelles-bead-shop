@@ -66,12 +66,16 @@ function ProductPage() {
         </figure>
 
         <div className="product-info">
-          <h2>{name}</h2>
+          <h2>
+            {name} {quantity}
+          </h2>
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
           </p>
           <p>{description}</p>
-          <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-0 w-min mb-2">
+          <div className="spacer"></div>
+
+          <div className="button-container">
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
               onClick={() => {
@@ -83,11 +87,11 @@ function ProductPage() {
             >
               -
             </button>
-
-            <p id="quantity" className="mx-2 w-8 text-center">
-              1
-            </p>
-
+            <div className="like-btn-2 ">
+              <p id="quantity" className="">
+                1
+              </p>
+            </div>
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
               onClick={() => {
@@ -99,8 +103,7 @@ function ProductPage() {
             >
               +
             </button>
-          </div>
-          <div className="button-container">
+
             {quantity < 0 ? (
               <p className="bold">OUT OF STOCK</p>
             ) : (
