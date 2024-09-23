@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
-import { DELETE_PRODUCT } from "../utils/mutations.js"
+import { DELETE_PRODUCT } from "../utils/mutations.js";
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
 import Auth from "../utils/auth";
@@ -24,6 +24,7 @@ function ProductPage() {
   const { addToCart } = useContext(ShoppingCartContext);
   const [addClicked, setAddClicked] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   function delayClick() {
     setAddClicked(true);
@@ -35,6 +36,10 @@ function ProductPage() {
 
   const clickEdit = () => {
     setShowEdit(!showEdit);
+  };
+
+  const clickConfirm = () => {
+    setShowConfirm(!showConfirm);
   };
 
   const product = data ? data.singleProduct : [];
@@ -68,6 +73,7 @@ function ProductPage() {
     } catch (error) {
       console.log(error);
     }
+    setShowConfirm(false);
   };
 
   if (loading) {
@@ -98,9 +104,25 @@ function ProductPage() {
                 <button className="btn-3" onClick={clickEdit}>
                   {showEdit ? "Cancel Edit" : "Edit Product"}
                 </button>
-                <button className="btn-2" onClick={deleteItem}>
-          Delete Product
-        </button>
+                {!showConfirm && (
+                  <button className="btn-2" onClick={clickConfirm}>
+                    Delete Product
+                  </button>
+                )}
+
+                {showConfirm && (
+                  <>
+                    <p>Are you sure? This can&apos;t be undone</p>
+                    <div className="button-container">
+                      <button className="btn-2" onClick={clickConfirm}>
+                        Never mind
+                      </button>
+                      <button className="btn-1" onClick={deleteItem}>
+                        Yes, Delete Product
+                      </button>
+                    </div>
+                  </>
+                )}
               </>
             ) : null
           ) : (
