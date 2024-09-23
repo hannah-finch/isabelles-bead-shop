@@ -202,14 +202,14 @@ form {
   flex-direction: column;
   background-color: var(--white);
   box-shadow: var(--shadow1);
-  padding-top: 40px;
+  padding: 40px;
   max-width: 800px;
   margin: auto;
 }
 
-input, textarea {
+input, textarea, select {
   background-color: var(--whitish);
-  margin: 6px 40px;
+  margin: 6px 0;
   padding: 6px 12px;
   outline: none;
   border: 2px solid var(--whitish);
@@ -226,7 +226,7 @@ form h2 {
 
 form button {
   align-self: center;
-  margin: 30px 0;
+  margin-top: 30px;
 }
 
 form .button-container {
@@ -239,6 +239,7 @@ form .button-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 800px;
 }
 
 .narrow {
@@ -247,14 +248,14 @@ form .button-container {
 
 form p {
   align-self: flex-end;
-  padding-right: 40px;
+  /* padding-right: 40px; */
   font-size: 14px;
   padding-bottom: 6px;
   line-height:.5
 }
 
 form label {
-  margin: 8px 40px -6px;
+  margin: 8px 0px -6px;
   color: var(--gray);
   /* background-color: var(--whitish); */
   align-self: flex-start;
@@ -264,4 +265,8 @@ form label {
 textarea {
   height: 200px;
   resize: none;
+}
+
+select {
+  width: 80px;
 }

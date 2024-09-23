@@ -8,6 +8,7 @@ import Auth from "../utils/auth";
 
 import { ShoppingCartContext } from "../utils/ProductsContext.jsx";
 import UpdateForm from "../components/forms/UpdateForm.jsx";
+import ReviewForm from "../components/forms/ReviewForm.jsx";
 
 function ProductPage() {
   // get product id from url
@@ -39,6 +40,7 @@ function ProductPage() {
     name,
     reviews,
   } = product;
+
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
 
@@ -51,12 +53,6 @@ function ProductPage() {
         </div>
       </div>
     );
-  };
-
-  const InStock = () => {
-    if (quantity < 0) {
-      return " OUT OF STOCK";
-    }
   };
 
   if (loading) {
@@ -73,11 +69,8 @@ function ProductPage() {
           <h2>{name}</h2>
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
-            <InStock />
           </p>
           <p>{description}</p>
-          {/* TODO: Make a dropdown or arrow selection thing to select quantity to add to cart */}
-          {/* This quantity is number to add to cart, not number in stock */}
           <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-0 w-min mb-2">
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
@@ -108,38 +101,49 @@ function ProductPage() {
             </button>
           </div>
           <div className="button-container">
-            <button
-              onClick={() => {
-                addToCart(
-                  product,
-                  parseInt(document.getElementById("quantity").innerText)
-                );
-                document.getElementById("quantity").innerText = 1;
-                delayClick();
-              }}
-              className="btn-1 add-cart-btn"
-              style={{
-                transition: ".5s",
-                backgroundColor: isClicked ? "var(--blue)" : "var(--blackish)",
-              }}
-            >
-              {isClicked ? "Added to Cart!" : "Add to Cart"}
-            </button>
-            <button className="btn-2">Leave a Review</button>
+            {quantity < 0 ? (
+              <p className="bold">OUT OF STOCK</p>
+            ) : (
+              <button
+                onClick={() => {
+                  addToCart(
+                    product,
+                    parseInt(document.getElementById("quantity").innerText)
+                  );
+                  document.getElementById("quantity").innerText = 1;
+                  delayClick();
+                }}
+                className="btn-1 add-cart-btn"
+                style={{
+                  transition: ".5s",
+                  backgroundColor: isClicked
+                    ? "var(--blue)"
+                    : "var(--blackish)",
+                }}
+              >
+                {isClicked ? "Added to Cart!" : "Add to Cart"}
+              </button>
+            )}
+            <ReviewForm />
           </div>
         </div>
       </section>
-      <div className="sub-banner"></div>
-      <section className="review-section">
-        <h2>Reviews</h2>
-        <div className="review-grid">
-          {/* map through reviews and pass in info to make one card per review */}
-          {reviews.map((review, index) => {
-            return <ReviewCard review={review} key={index} />;
-          })}
-          {/* <ReviewCard review={reviews} /> */}
-        </div>
-      </section>
+
+      {reviews.length ? (
+        <>
+          <div className="sub-banner"></div>
+          <section className="review-section">
+            <h2>Reviews</h2>
+            <div className="review-grid">
+              {/* map through reviews and pass in info to make one card per review */}
+              {reviews.map((review, index) => {
+                return <ReviewCard review={review} key={index} />;
+              })}
+            </div>
+          </section>
+        </>
+      ) : null}
+
       {Auth.isLoggedIn() ? (
         Auth.isAdmin() ? (
           <section className="admin-stuff-section">
