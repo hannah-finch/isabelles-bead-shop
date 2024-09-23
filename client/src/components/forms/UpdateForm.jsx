@@ -14,7 +14,7 @@ function UpdateForm(prop) {
     price: price,
     category: category,
     description: description,
-    quantity: quantity,
+    stock: stock,
     image: image,
   });
 
@@ -27,7 +27,7 @@ function UpdateForm(prop) {
           [name]: +value,
         });
         break;
-      case "quantity":
+      case "stock":
         setFormState({
           ...formState,
           [name]: +value,
@@ -41,6 +41,7 @@ function UpdateForm(prop) {
     }
   };
 
+  //TODO This function runs when you click the upload button when the page is first loaded
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -94,10 +95,10 @@ function UpdateForm(prop) {
           type="number"
           placeholder="Price"
         ></input>
-        <label htmlFor="quantity">Number in stock:</label>
+        <label htmlFor="stock">Number in stock:</label>
         <input
-          value={formState.quantity}
-          name="quantity"
+          value={formState.stock}
+          name="stock"
           onChange={handleInputChange}
           type="number"
           min="0"

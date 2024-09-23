@@ -21,7 +21,7 @@ export const GET_All_PRODUCTS = gql`
       image
       imageURL
       category
-      quantity
+      stock
     }
   }
 `;
@@ -36,7 +36,7 @@ export const GET_SINGLE_PRODUCT = gql`
       image
       imageURL
       category
-      quantity
+      stock
       reviews {
         _id
         username

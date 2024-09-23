@@ -24,7 +24,7 @@ const productSchema = new Schema(
       enum: ["bracelet", "fidget", "earring", "keychain", "necklace", "trinket", "other"],
       default: "other",
     },
-    quantity: {
+    stock: {
       type: Number,
       required: true,
     },
