@@ -80,7 +80,7 @@ function Header( ) {
       <header>
         <Link to="/">
           <h1>Isabelle’s Bead Shop</h1>
-          <img src="/images/icon-zigzag.png"></img>
+          <img src="/images/icons/zigzag.svg"></img>
         </Link>
       </header>
     </>

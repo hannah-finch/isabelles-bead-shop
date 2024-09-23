@@ -32,7 +32,7 @@ function HomePage() {
   const [hoveredCategory, setHoveredCategory] = useState("");
 
   // This function sets the icon for categories, normal and hovered. If the category is not in categoriesToCheck, it will set the icon as a square
-  function imgSrc(category) {
+  function iconSrc(category) {
     const categoriesToCheck = new Set([
       "bracelet",
       "earring",
@@ -41,14 +41,15 @@ function HomePage() {
       "necklace",
       "other",
     ]);
+
     if (!categoriesToCheck.has(category)) {
       return hoveredCategory === category || selectedCategory === category
-        ? `/images/icon-uncategorized-color.png`
-        : `/images/icon-uncategorized.png`;
+        ? `/images/icons/uncategorized-color.svg`
+        : `/images/icons/uncategorized.svg`;
     } else {
       return hoveredCategory === category || selectedCategory === category
-        ? `/images/icon-${category}-color.png`
-        : `/images/icon-${category}.png`;
+        ? `/images/icons/${category}-color.svg`
+        : `/images/icons/${category}.svg`;
     }
   }
 
@@ -63,7 +64,7 @@ function HomePage() {
               onMouseEnter={() => setHoveredCategory(category)}
               onMouseLeave={() => setHoveredCategory("")}
             >
-              <img src={imgSrc(category)}></img>
+              <img src={iconSrc(category)}></img>
               {category === "other" ? category : `${category}s`}
             </div>
           </button>
