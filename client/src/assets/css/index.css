@@ -12,6 +12,7 @@
   --teal: #86b5b7;
   --mint: #c9dad0;
   --green: #b5b986;
+  --light-blue: #dae8ed;
   --blue: #accbe0;
   --pink: #e0b4b4;
   --yellow: #e6cd8c;
@@ -300,5 +301,5 @@ textarea {
 }
 
 select {
-  width: 80px;
+  width: 50%;
 }

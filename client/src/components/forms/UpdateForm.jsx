@@ -69,15 +69,15 @@ function UpdateForm(prop) {
 
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} id="UpdateForm">
         <h2>Edit product</h2>
         
-        <label htmlFor="productId">Product ID:(editing disabled)</label>
+        <label htmlFor="productId">Product ID: (editing disabled)</label>
         <input
-          value={formState._id}
+          value={formState.id}
           onChange={handleInputChange}
           type="text"
-          placeholder="Product name"
+          placeholder="Product id"
           disabled
         ></input>
         <label htmlFor="name">Name:</label>
@@ -106,13 +106,19 @@ function UpdateForm(prop) {
           placeholder="Stock"
         ></input>
         <label htmlFor="category">Category:</label>
-        <input
+        <select
           value={formState.category}
           name="category"
           onChange={handleInputChange}
-          type="text"
-          placeholder="Category"
-        ></input>
+        >
+          <option value="bracelet">bracelet</option>
+          <option value="earring">earring</option>
+          <option value="fidget">fidget</option>
+          <option value="keychain">key chain</option>
+          <option value="necklace">necklace</option>
+          <option value="trinket">trinket</option>
+          <option value="other">other</option>
+        </select>
         <label htmlFor="description">Description:</label>
         <textarea
           value={formState.description}
@@ -121,7 +127,7 @@ function UpdateForm(prop) {
           type="text"
           placeholder="Description"
         ></textarea>
-        <label htmlFor="image">Image:(editing disabled)</label>
+        <label htmlFor="image">Image: (editing disabled)</label>
         <input
           value={formState.image}
           name="image"
@@ -137,7 +143,7 @@ function UpdateForm(prop) {
           <button className="btn-2" onClick={revertEdit}>
             Revert
           </button>
-          <button className="btn-1" type="submit">
+          <button className="btn-1" type="submit" form="UpdateForm">
             Save Changes
           </button>
         </div>
