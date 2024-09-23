@@ -13,15 +13,15 @@ function ProductCard(prop) {
         data-stock={quantity}
       >
         <div className="product-card">
-          <div className="card-image">
+          <figure className="card-image">
             <img
               src={imageURL}
               alt={image.description}
               className="crop-img"
             ></img>
-          </div>
-          <p>{name}</p>
-          <p>${toDecimal(price)}</p>
+          </figure>
+          <p >{name}</p>
+          <p className="card-price">${toDecimal(price)}</p>
         </div>
       </Link>
     );
