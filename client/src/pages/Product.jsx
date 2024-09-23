@@ -40,6 +40,7 @@ function ProductPage() {
     name,
     reviews,
   } = product;
+
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
 
@@ -126,13 +127,27 @@ function ProductPage() {
             >
               {isClicked ? "Added to Cart!" : "Add to Cart"}
             </button>
-            <button className="btn-2">Leave a Review</button>
+            < ReviewForm />
           </div>
         </div>
       </section>
       <div className="sub-banner"></div>
 
-      < ReviewForm />
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       <section className="review-section">
