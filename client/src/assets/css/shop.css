@@ -31,6 +31,9 @@
   background-color: var(--mint);
   height: 45px;
   box-shadow: var(--shadow1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Shop section styles ---------------------- */

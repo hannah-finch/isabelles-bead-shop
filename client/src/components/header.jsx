@@ -11,6 +11,9 @@ function Header( ) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <>
+    <div className="sub-banner">
+      <span className="bold">NOTICE: &nbsp;</span> This website is currently under construction. DON&apos;T USE IT
+    </div>
       <nav>
         {Auth.isLoggedIn() ? (
           Auth.isAdmin() ? (
