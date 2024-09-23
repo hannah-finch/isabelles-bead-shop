@@ -6,7 +6,7 @@ import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
   const [DeleteProduct] = useMutation(DELETE_PRODUCT);
-  const { description, category, image, name, price, quantity } = prop.product;
+  const { description, category, image, name, price, stock } = prop.product;
   const { productId } = useParams();
 
   const [formState, setFormState] = useState({
@@ -15,7 +15,7 @@ function UpdateForm(prop) {
     price: price,
     category: category,
     description: description,
-    quantity: quantity,
+    stock: stock,
     image: image,
   });
 
@@ -28,7 +28,7 @@ function UpdateForm(prop) {
           [name]: +value,
         });
         break;
-      case "quantity":
+      case "stock":
         setFormState({
           ...formState,
           [name]: +value,
@@ -42,11 +42,11 @@ function UpdateForm(prop) {
     }
   };
 
-  //TODO FINISH FUNCTION
+  //TODO This function runs when you click the upload button when the page is first loaded
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // console.log(formState);
-    // const { name, price, description, image, category, quantity } = formState;
+    // const { name, price, description, image, category, stock } = formState;
     try {
       const { data } = await UpdateProduct({
         variables: formState,
@@ -96,10 +96,10 @@ function UpdateForm(prop) {
           type="number"
           placeholder="Price"
         ></input>
-        <label htmlFor="quantity">Number in stock:</label>
+        <label htmlFor="stock">Number in stock:</label>
         <input
-          value={formState.quantity}
-          name="quantity"
+          value={formState.stock}
+          name="stock"
           onChange={handleInputChange}
           type="number"
           min="0"
@@ -131,7 +131,7 @@ function UpdateForm(prop) {
         ></input>
 
         <div className="button-container">
-          <button className="btn-2" onClick={deleteItem}>
+          <button className="btn-2" type="button" onClick={deleteItem}>
             Delete Product
           </button>
           <button className="btn-1" type="submit">

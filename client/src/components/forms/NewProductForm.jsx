@@ -13,7 +13,7 @@ function NewProductForm() {
     price: undefined,
     category: "",
     description: "",
-    quantity: 1,
+    stock: 1,
     image: "",
   });
 
@@ -45,7 +45,7 @@ function NewProductForm() {
           [name]: +value,
         });
         break;
-      case "quantity":
+      case "stock":
         setFormState({
           ...formState,
           [name]: +value,
@@ -62,16 +62,16 @@ function NewProductForm() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, price, category, description, quantity } = formState;
+    const { name, price, category, description, stock } = formState;
     console.log(formState);
     try {
-      const {data} = await addProduct({
+      const { data } = await addProduct({
         variables: {
           name,
           price,
           category,
           description,
-          quantity,
+          stock,
           image: publicId,
         },
       });
@@ -83,12 +83,12 @@ function NewProductForm() {
         alert("Item ADDED");
         //TODO FIX BUG FROM CAUSING FORMS FROM AUTO SUBMITTING
         // setFormState({
-          // name: "",
-          // price: undefined,
-          // category: "",
-          // description: "",
-          // quantity: 1,
-          // image: "",
+        // name: "",
+        // price: undefined,
+        // category: "",
+        // description: "",
+        // stock: 1,
+        // image: "",
         // });
       }
     } catch (err) {
@@ -123,10 +123,10 @@ function NewProductForm() {
           type="number"
           min="0"
         ></input>
-        <label htmlFor="quantity">Number in stock:</label>
+        <label htmlFor="stock">Number in stock:</label>
         <input
-          value={formState.quantity}
-          name="quantity"
+          value={formState.stock}
+          name="stock"
           onChange={handleInputChange}
           type="number"
           min="0"

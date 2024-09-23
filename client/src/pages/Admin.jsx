@@ -35,7 +35,7 @@ function AdminPage() {
             </p>
             <p>
               <span className="bold">Number in stock: </span>
-              {product.quantity}
+              {product.stock}
             </p>
 
             <Link to={`/product/${product._id}`} className="btn-3">

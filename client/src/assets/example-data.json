@@ -10,7 +10,7 @@
           "id": "img#",
           "name": "Image Name"
       },
-      "quantity": 6,
+      "stock": 6,
       "price": 5.99,
       "name": "Example product 1"
     },
@@ -24,7 +24,7 @@
           "id": "img#",
           "name": "Image Name"
       },
-      "quantity": 6,
+      "stock": 6,
       "price": 5.00,
       "name": "Example product 2"
     },
@@ -38,7 +38,7 @@
           "id": "img#",
           "name": "Image Name"
       },
-      "quantity": 6,
+      "stock": 6,
       "price": 5.99,
       "name": "Example product 3"
     }
