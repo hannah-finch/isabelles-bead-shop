@@ -63,7 +63,6 @@ function NewProductForm() {
     e.preventDefault();
 
     const { name, price, category, description, stock } = formState;
-    console.log(formState);
     try {
       const { data } = await addProduct({
         variables: {
@@ -75,21 +74,12 @@ function NewProductForm() {
           image: publicId,
         },
       });
-      console.log(data);
-      if (!data) {
-        alert("form is invalid");
-      }
-      if (data) {
+      if (data.createProduct != null) {
         alert("Item ADDED");
+
+        window.location.assign("/admin");
         //TODO FIX BUG FROM CAUSING FORMS FROM AUTO SUBMITTING
-        // setFormState({
-        // name: "",
-        // price: undefined,
-        // category: "",
-        // description: "",
-        // stock: 1,
-        // image: "",
-        // });
+
       }
     } catch (err) {
       console.log(err);
