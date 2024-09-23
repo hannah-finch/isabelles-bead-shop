@@ -22,12 +22,6 @@
   justify-content: center;
 }
 
-.btn-3 {
-  padding: 2px 6px;
-  background-color: var(--blue);
-  line-height: 2.5
-}
-
 .new-product-form {
   /* remove auto margin */
   margin: 0;

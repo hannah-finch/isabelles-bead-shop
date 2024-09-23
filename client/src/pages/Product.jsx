@@ -1,3 +1,5 @@
+// refactor/stockTest
+
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
@@ -18,15 +20,20 @@ function ProductPage() {
   });
 
   const { addToCart } = useContext(ShoppingCartContext);
-  const [isClicked, setIsClicked] = useState(false);
+  const [addClicked, setAddClicked] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   function delayClick() {
-    setIsClicked(true);
+    setAddClicked(true);
 
     setTimeout(() => {
-      setIsClicked(false);
+      setAddClicked(false);
     }, 2000);
   }
+
+  const clickEdit = () => {
+    setShowEdit(!showEdit);
+  };
 
   const product = data ? data.singleProduct : [];
   console.log(product);
@@ -69,68 +76,93 @@ function ProductPage() {
           <h2>
             {name} {quantity}
           </h2>
+
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
           </p>
           <p>{description}</p>
           <div className="spacer"></div>
 
-          <div className="button-container">
-            <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
-              onClick={() => {
-                const quantityElement = document.getElementById("quantity");
-                let quantity = parseInt(quantityElement.innerText);
-                quantity = Math.max(quantity - 1, 1);
-                quantityElement.innerText = quantity;
-              }}
-            >
-              -
-            </button>
-            <div className="like-btn-2 ">
-              <p id="quantity" className="">
-                1
-              </p>
-            </div>
-            <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
-              onClick={() => {
-                const quantityElement = document.getElementById("quantity");
-                let quantity = parseInt(quantityElement.innerText);
-                quantity = Math.min(quantity + 1, 10);
-                quantityElement.innerText = quantity;
-              }}
-            >
-              +
-            </button>
-
-            {quantity < 0 ? (
-              <p className="bold">OUT OF STOCK</p>
-            ) : (
+          {Auth.isLoggedIn() ? (
+            Auth.isAdmin() ? (
+              <>
+                <div className="spacer"></div>
+                <button className="btn-3" onClick={clickEdit}>
+                  {showEdit ? "Cancel Edit" : "Edit Product"}
+                </button>
+              </>
+            ) : null
+          ) : (
+            <div className="button-container">
               <button
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
                 onClick={() => {
-                  addToCart(
-                    product,
-                    parseInt(document.getElementById("quantity").innerText)
-                  );
-                  document.getElementById("quantity").innerText = 1;
-                  delayClick();
-                }}
-                className="btn-1 add-cart-btn"
-                style={{
-                  transition: ".5s",
-                  backgroundColor: isClicked
-                    ? "var(--blue)"
-                    : "var(--blackish)",
+                  const quantityElement = document.getElementById("quantity");
+                  let quantity = parseInt(quantityElement.innerText);
+                  quantity = Math.max(quantity - 1, 1);
+                  quantityElement.innerText = quantity;
                 }}
               >
-                {isClicked ? "Added to Cart!" : "Add to Cart"}
+                -
               </button>
-            )}
-            <ReviewForm />
-          </div>
+              <div className="like-btn-2 ">
+                <p id="quantity" className="">
+                  1
+                </p>
+              </div>
+              <button
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
+                onClick={() => {
+                  const quantityElement = document.getElementById("quantity");
+                  let quantity = parseInt(quantityElement.innerText);
+                  quantity = Math.min(quantity + 1, 10);
+                  quantityElement.innerText = quantity;
+                }}
+              >
+                +
+              </button>
+
+              {quantity < 0 ? (
+                <p className="bold">OUT OF STOCK</p>
+              ) : (
+                <button
+                  onClick={() => {
+                    addToCart(
+                      product,
+                      parseInt(document.getElementById("quantity").innerText)
+                    );
+                    document.getElementById("quantity").innerText = 1;
+                    delayClick();
+                  }}
+                  className="btn-1 add-cart-btn"
+                  style={{
+                    transition: ".5s",
+                    backgroundColor: addClicked
+                      ? "var(--blue)"
+                      : "var(--blackish)",
+                  }}
+                >
+                  {addClicked ? "Added to Cart!" : "Add to Cart"}
+                </button>
+              )}
+
+              <ReviewForm />
+            </div>
+          )}
         </div>
       </section>
+
+      {showEdit && (
+        <>
+          {Auth.isLoggedIn() ? (
+            Auth.isAdmin() ? (
+              <section className="admin-stuff-section">
+                <UpdateForm product={product} />
+              </section>
+            ) : null
+          ) : null}
+        </>
+      )}
 
       {reviews.length ? (
         <>
@@ -147,13 +179,13 @@ function ProductPage() {
         </>
       ) : null}
 
-      {Auth.isLoggedIn() ? (
+      {/* {Auth.isLoggedIn() ? (
         Auth.isAdmin() ? (
           <section className="admin-stuff-section">
             <UpdateForm product={product} />
           </section>
         ) : null
-      ) : null}
+      ) : null} */}
     </>
   );
 }
