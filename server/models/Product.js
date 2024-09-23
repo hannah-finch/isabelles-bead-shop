@@ -21,7 +21,7 @@ const productSchema = new Schema(
     category: {
       type: String,
       required: true,
-      enum: ["bracelet", "fidget", "earring", "keychain", "other"],
+      enum: ["bracelet", "fidget", "earring", "keychain", "necklace", "trinket", "other"],
       default: "other",
     },
     quantity: {

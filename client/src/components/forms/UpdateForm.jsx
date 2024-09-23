@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
+import { UPDATE_PRODUCT } from "../../utils/mutations";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
-  // const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { description, category, image, name, price, quantity } = prop.product;
   const { productId } = useParams();
 
@@ -42,7 +41,6 @@ function UpdateForm(prop) {
     }
   };
 
-  //TODO FINISH FUNCTION
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -71,7 +69,7 @@ function UpdateForm(prop) {
     <>
       <form onSubmit={handleFormSubmit} id="UpdateForm">
         <h2>Edit product</h2>
-        
+
         <label htmlFor="productId">Product ID: (editing disabled)</label>
         <input
           value={formState.id}
@@ -135,8 +133,6 @@ function UpdateForm(prop) {
           type="text"
           disabled
         ></input>
-
-
       </form>
       <div className="form-footer center">
         <div className="button-container">
