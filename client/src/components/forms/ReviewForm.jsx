@@ -86,7 +86,7 @@ function ReviewForm() {
             <button className="btn-2" onClick={handleOpen}>
               <span>Cancel</span>
             </button>
-            <button className="btn-1" type="submit">
+            <button className="btn-1" type="submit" onClick={handleOpen}>
               Send Review
             </button>
           </div>
