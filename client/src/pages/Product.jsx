@@ -88,7 +88,7 @@ function ProductPage() {
 
         <div className="product-info">
           <h2>
-            {name} {stock}
+            {name}
           </h2>
 
           <p>
@@ -130,26 +130,26 @@ function ProductPage() {
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
                 onClick={() => {
-                  const stockElement = document.getElementById("stock");
-                  let stock = parseInt(stockElement.innerText);
-                  stock = Math.max(stock - 1, 1);
-                  stockElement.innerText = stock;
+                  const quantityElement = document.getElementById("quantity");
+                  let quantity = parseInt(quantityElement.innerText);
+                  quantity = Math.max(quantity - 1, 1);
+                  quantityElement.innerText = quantity;
                 }}
               >
                 -
               </button>
               <div className="like-btn-2 ">
-                <p id="quantity" className="">
+                <p id="quantity">
                   1
                 </p>
               </div>
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
                 onClick={() => {
-                  const stockElement = document.getElementById("stock");
-                  let stock = parseInt(stockElement.innerText);
-                  stock = Math.min(stock + 1, 10);
-                  stockElement.innerText = stock;
+                  const quantityElement = document.getElementById("quantity");
+                  let quantity = parseInt(quantityElement.innerText);
+                  quantity = Math.min(quantity + 1, stock);
+                  quantityElement.innerText = quantity;
                 }}
               >
                 +
