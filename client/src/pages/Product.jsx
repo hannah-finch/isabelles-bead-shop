@@ -162,9 +162,9 @@ function ProductPage() {
                   onClick={() => {
                     addToCart(
                       product,
-                      parseInt(document.getElementById("stock").innerText)
+                      parseInt(document.getElementById("quantity").innerText)
                     );
-                    document.getElementById("stock").innerText = 1;
+                    document.getElementById("quantity").innerText = 1;
                     delayClick();
                   }}
                   className="btn-1 add-cart-btn"
