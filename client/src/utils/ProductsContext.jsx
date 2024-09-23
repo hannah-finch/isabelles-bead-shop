@@ -27,17 +27,18 @@ const ProductsProvider = ({ children }) => {
   }, [cartItems]);
 
   // Add to cart function
-  const addToCart = (addItem, stockToAdd) => {
+  const addToCart = (addItem, quantityToAdd) => {
     const itemExists = cartItems.some((item) => item._id === addItem._id);
+
     const updatedCartItems = itemExists
       ? // If the item is already in the cart, increment the stock
         cartItems.map((item) =>
           addItem._id === item._id
-            ? { ...item, stock: item.stock + stockToAdd }
+            ? { ...item, quantity: item.quantity + quantityToAdd }
             : item
         )
       : // Otherwise, add the item to the cart
-        [...cartItems, { ...addItem, stock: stockToAdd }];
+        [...cartItems, { ...addItem, quantity: quantityToAdd }];
     setCartItems(updatedCartItems);
   };
 

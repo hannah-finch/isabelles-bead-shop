@@ -20,7 +20,7 @@ export default function CheckoutButton({ cartItems }) {
       if (acc[item._id]) {
         acc[item._id].quantity += 1;
       } else {
-        acc[item._id] = { ...item, quantity: item.stock };
+        acc[item._id] = { ...item, quantity: item.quantity };
       }
       console.log(acc);
       return acc;
@@ -36,7 +36,7 @@ export default function CheckoutButton({ cartItems }) {
           },
           unit_amount: item.price,
         },
-        quantity: item.stock,
+        quantity: item.quantity,
       };
     });
     setStripeItems(newStripeItems);

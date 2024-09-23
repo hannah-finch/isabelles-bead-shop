@@ -87,9 +87,7 @@ function ProductPage() {
         </figure>
 
         <div className="product-info">
-          <h2>
-            {name}
-          </h2>
+          <h2>{name}</h2>
 
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
@@ -97,34 +95,32 @@ function ProductPage() {
           <p>{description}</p>
           <div className="spacer"></div>
 
-          {Auth.isLoggedIn() ? (
-            Auth.isAdmin() ? (
-              <>
-                <div className="spacer"></div>
-                <button className="btn-3" onClick={clickEdit}>
-                  {showEdit ? "Cancel Edit" : "Edit Product"}
+          {Auth.isLoggedIn() && Auth.isAdmin() ? (
+            <>
+              <div className="spacer"></div>
+              <button className="btn-3" onClick={clickEdit}>
+                {showEdit ? "Cancel Edit" : "Edit Product"}
+              </button>
+              {!showConfirm && (
+                <button className="btn-2" onClick={clickConfirm}>
+                  Delete Product
                 </button>
-                {!showConfirm && (
-                  <button className="btn-2" onClick={clickConfirm}>
-                    Delete Product
-                  </button>
-                )}
+              )}
 
-                {showConfirm && (
-                  <>
-                    <p>Are you sure? This can&apos;t be undone</p>
-                    <div className="button-container">
-                      <button className="btn-2" onClick={clickConfirm}>
-                        Never mind
-                      </button>
-                      <button className="btn-1" onClick={deleteItem}>
-                        Yes, Delete Product
-                      </button>
-                    </div>
-                  </>
-                )}
-              </>
-            ) : null
+              {showConfirm && (
+                <>
+                  <p>Are you sure? This can&apos;t be undone</p>
+                  <div className="button-container">
+                    <button className="btn-2" onClick={clickConfirm}>
+                      Never mind
+                    </button>
+                    <button className="btn-1" onClick={deleteItem}>
+                      Yes, Delete Product
+                    </button>
+                  </div>
+                </>
+              )}
+            </>
           ) : (
             <div className="button-container">
               <button
@@ -139,9 +135,7 @@ function ProductPage() {
                 -
               </button>
               <div className="like-btn-2 ">
-                <p id="quantity">
-                  1
-                </p>
+                <p id="quantity">1</p>
               </div>
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
