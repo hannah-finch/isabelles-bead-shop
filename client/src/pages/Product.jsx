@@ -30,16 +30,8 @@ function ProductPage() {
 
   const product = data ? data.singleProduct : [];
   console.log(product);
-  const {
-    id,
-    category,
-    description,
-    imageURL,
-    quantity,
-    price,
-    name,
-    reviews,
-  } = product;
+  const { id, category, description, imageURL, stock, price, name, reviews } =
+    product;
 
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
@@ -75,42 +67,42 @@ function ProductPage() {
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
               onClick={() => {
-                const quantityElement = document.getElementById("quantity");
-                let quantity = parseInt(quantityElement.innerText);
-                quantity = Math.max(quantity - 1, 1);
-                quantityElement.innerText = quantity;
+                const stockElement = document.getElementById("stock");
+                let stock = parseInt(stockElement.innerText);
+                stock = Math.max(stock - 1, 1);
+                stockElement.innerText = stock;
               }}
             >
               -
             </button>
 
-            <p id="quantity" className="mx-2 w-8 text-center">
+            <p id="stock" className="mx-2 w-8 text-center">
               1
             </p>
 
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
               onClick={() => {
-                const quantityElement = document.getElementById("quantity");
-                let quantity = parseInt(quantityElement.innerText);
-                quantity = Math.min(quantity + 1, 10);
-                quantityElement.innerText = quantity;
+                const stockElement = document.getElementById("stock");
+                let stock = parseInt(stockElement.innerText);
+                stock = Math.min(stock + 1, 10);
+                stockElement.innerText = stock;
               }}
             >
               +
             </button>
           </div>
           <div className="button-container">
-            {quantity < 0 ? (
+            {stock < 0 ? (
               <p className="bold">OUT OF STOCK</p>
             ) : (
               <button
                 onClick={() => {
                   addToCart(
                     product,
-                    parseInt(document.getElementById("quantity").innerText)
+                    parseInt(document.getElementById("stock").innerText)
                   );
-                  document.getElementById("quantity").innerText = 1;
+                  document.getElementById("stock").innerText = 1;
                   delayClick();
                 }}
                 className="btn-1 add-cart-btn"

@@ -22,21 +22,22 @@ const ProductsProvider = ({ children }) => {
   const [cartCounter, setCartCounter] = useState(0);
 
   useEffect(() => {
-    const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    const totalItems = cartItems.reduce((acc, item) => acc + item.stock, 0);
     setCartCounter(totalItems);
-  }
-  , [cartItems]);
+  }, [cartItems]);
 
   // Add to cart function
-  const addToCart = (addItem, quantityToAdd) => {
+  const addToCart = (addItem, stockToAdd) => {
     const itemExists = cartItems.some((item) => item._id === addItem._id);
     const updatedCartItems = itemExists
-      // If the item is already in the cart, increment the quantity
-      ? cartItems.map((item) =>
-          addItem._id === item._id ? { ...item, quantity: item.quantity + quantityToAdd } : item
+      ? // If the item is already in the cart, increment the stock
+        cartItems.map((item) =>
+          addItem._id === item._id
+            ? { ...item, stock: item.stock + stockToAdd }
+            : item
         )
-      // Otherwise, add the item to the cart
-      : [...cartItems, { ...addItem, quantity: quantityToAdd }];
+      : // Otherwise, add the item to the cart
+        [...cartItems, { ...addItem, stock: stockToAdd }];
     setCartItems(updatedCartItems);
   };
 
@@ -49,7 +50,13 @@ const ProductsProvider = ({ children }) => {
   return (
     <ProductsContext.Provider value={{ allProducts }}>
       <ShoppingCartContext.Provider
-        value={{ cartItems, setCartItems, addToCart, cartCounter, setCartCounter }}
+        value={{
+          cartItems,
+          setCartItems,
+          addToCart,
+          cartCounter,
+          setCartCounter,
+        }}
       >
         {children}
       </ShoppingCartContext.Provider>

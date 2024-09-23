@@ -30,7 +30,7 @@ export const ADD_PRODUCT = gql`
     $price: Int!
     $description: String!
     $category: String!
-    $quantity: Int!
+    $stock: Int!
     $image: String!
   ) {
     createProduct(
@@ -38,7 +38,7 @@ export const ADD_PRODUCT = gql`
       price: $price
       description: $description
       category: $category
-      quantity: $quantity
+      stock: $stock
       image: $image
     ) {
       _id
@@ -47,7 +47,7 @@ export const ADD_PRODUCT = gql`
       description
       image
       category
-      quantity
+      stock
     }
   }
 `;
@@ -58,7 +58,7 @@ export const UPDATE_PRODUCT = gql`
     $description: String!
     $image: String!
     $category: String!
-    $quantity: Int!
+    $stock: Int!
     $id: ID!
   ) {
     updateProduct(
@@ -67,7 +67,7 @@ export const UPDATE_PRODUCT = gql`
       description: $description
       image: $image
       category: $category
-      quantity: $quantity
+      stock: $stock
       _id: $id
     ) {
       _id
@@ -77,7 +77,7 @@ export const UPDATE_PRODUCT = gql`
       image
       imageURL
       category
-      quantity
+      stock
     }
   }
 `;
@@ -97,7 +97,7 @@ export const ADD_REVIEW = gql`
       price
       description
       category
-      quantity
+      stock
       reviews {
         _id
         username

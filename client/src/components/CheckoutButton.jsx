@@ -13,15 +13,14 @@ export default function CheckoutButton({ cartItems }) {
   const [stripeItems, setStripeItems] = useState([]);
   const modalRef = useRef(null);
 
-
   // update stripeItems when cartItems changes
   useEffect(() => {
     // Group items by ID and calculate quantities
     const groupedItems = cartItems.reduce((acc, item) => {
       if (acc[item._id]) {
-        acc[item._id].quantity += 1;
+        acc[item._id].stock += 1;
       } else {
-        acc[item._id] = { ...item, quantity: item.quantity };
+        acc[item._id] = { ...item, stock: item.stock };
       }
       console.log(acc);
       return acc;
@@ -35,9 +34,9 @@ export default function CheckoutButton({ cartItems }) {
           product_data: {
             name: item.name,
           },
-          unit_amount: item.price
+          unit_amount: item.price,
         },
-        quantity: item.quantity,
+        stock: item.stock,
       };
     });
     setStripeItems(newStripeItems);
@@ -61,13 +60,13 @@ export default function CheckoutButton({ cartItems }) {
   const handleCheckoutClick = () => {
     setShowCheckout(true);
     modalRef.current?.showModal();
-    document.body.classList.add('overflow-hidden');
+    document.body.classList.add("overflow-hidden");
   };
 
   const handleCloseModal = () => {
     setShowCheckout(false);
     modalRef.current?.close();
-    document.body.classList.remove('overflow-hidden');
+    document.body.classList.remove("overflow-hidden");
   };
 
   // TODO: Button style required, the modal has a button too
@@ -90,10 +89,7 @@ export default function CheckoutButton({ cartItems }) {
             </EmbeddedCheckoutProvider>
           </div>
         )}
-        <form 
-          method="dialog"
-          className="bg-blue-100 p-1"  
-        >
+        <form method="dialog" className="bg-blue-100 p-1">
           <button
             onClick={handleCloseModal}
             className={`bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded`}

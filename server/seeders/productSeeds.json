@@ -2,7 +2,7 @@
       {
         "name": "Pink Beaded Bracelet for Teens",
         "price": 1299,
-        "quantity": 1,
+        "stock": 1,
         "category": "bracelet",
         "description": "Shine bright with this trendy pink beaded bracelet, perfect for teen girls who love to accessorize in style. Adjustable and fun to wear!",
         "image":"20240917_172958_iivasc"
@@ -10,7 +10,7 @@
       {
         "name": "Bright Duo: Pink & Yellow Beaded Bracelet",
         "price": 1499,
-        "quantity": 1,
+        "stock": 1,
         "category": "bracelet",
         "description": "Bold and vibrant, this pink and yellow beaded bracelet adds a pop of color to any outfit. A must-have accessory for fun-loving teens!",
         "image":"20240917_173050_qdezcn"
@@ -18,7 +18,7 @@
       {
         "name": "Blob the keychain",
         "price": 599,
-        "quantity": 1,
+        "stock": 1,
         "category": "keychain",
         "description": "Meet Blob! A cute and squishy keychain in fun pastel colors, perfect for adding charm to your keys or backpack. Teens will love its playful vibe!",
         "image":"20240917_173108_2_huwvrt"
@@ -26,7 +26,7 @@
       {
         "name": "Teal Teardrop Earrings",
         "price": 1199,
-        "quantity": 1,
+        "stock": 1,
         "category": "earring",
         "description": "These elegant teal teardrop earrings bring a touch of grace to any look. Lightweight and stylish, they're ideal for teens who love to stand out.",
         "image":"20240917_173123_wmmaxo"
@@ -34,7 +34,7 @@
       {
         "name": "Sunny Yellow Necklace",
         "price": 999,
-        "quantity": 1,
+        "stock": 1,
         "category": "other",
         "description": "Brighten up your style with this cheerful yellow necklace. Its sleek and simple design adds a sunny vibe to any outfit, perfect for teens!",
         "image":"20240918_205442_ifzruu"
