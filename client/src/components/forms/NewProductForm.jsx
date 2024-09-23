@@ -64,7 +64,7 @@ function NewProductForm() {
 
     const { name, price, category, description, stock } = formState;
     try {
-      const { data } = await addProduct({
+      const { data:{createProduct} } = await addProduct({
         variables: {
           name,
           price,
@@ -74,7 +74,7 @@ function NewProductForm() {
           image: publicId,
         },
       });
-      if (data.createProduct != null) {
+      if (createProduct != null) {
         alert("Item ADDED");
 
         window.location.assign("/admin");
