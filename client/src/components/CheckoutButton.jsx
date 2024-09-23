@@ -7,7 +7,7 @@ import { useCallback, useRef, useState, useEffect } from "react";
 
 export default function CheckoutButton({ cartItems }) {
   const stripePromise = loadStripe(
-    "pk_test_51Q0PNPRsgFYbL1k9OiuGur0KmNMcLfZuRTibSCBbdOhAxdDvW7mUAqKCSwkUHh4Zfj1EHEKiS0z0UmPspKr4iJLo009TPMkibs"
+    "pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7"
   );
   const [showCheckout, setShowCheckout] = useState(false);
   const [stripeItems, setStripeItems] = useState([]);
@@ -18,9 +18,9 @@ export default function CheckoutButton({ cartItems }) {
     // Group items by ID and calculate quantities
     const groupedItems = cartItems.reduce((acc, item) => {
       if (acc[item._id]) {
-        acc[item._id].stock += 1;
+        acc[item._id].quantity += 1;
       } else {
-        acc[item._id] = { ...item, stock: item.stock };
+        acc[item._id] = { ...item, quantity: item.stock };
       }
       console.log(acc);
       return acc;
@@ -36,7 +36,7 @@ export default function CheckoutButton({ cartItems }) {
           },
           unit_amount: item.price,
         },
-        stock: item.stock,
+        quantity: item.stock,
       };
     });
     setStripeItems(newStripeItems);
