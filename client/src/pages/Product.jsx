@@ -1,7 +1,10 @@
+// refactor/stockTest
+
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
+import { DELETE_PRODUCT } from "../utils/mutations.js";
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
 import Auth from "../utils/auth";
@@ -16,17 +19,28 @@ function ProductPage() {
   const { loading, data } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { productId },
   });
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
 
   const { addToCart } = useContext(ShoppingCartContext);
-  const [isClicked, setIsClicked] = useState(false);
+  const [addClicked, setAddClicked] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   function delayClick() {
-    setIsClicked(true);
+    setAddClicked(true);
 
     setTimeout(() => {
-      setIsClicked(false);
+      setAddClicked(false);
     }, 2000);
   }
+
+  const clickEdit = () => {
+    setShowEdit(!showEdit);
+  };
+
+  const clickConfirm = () => {
+    setShowConfirm(!showConfirm);
+  };
 
   const product = data ? data.singleProduct : [];
   console.log(product);
@@ -47,6 +61,21 @@ function ProductPage() {
     );
   };
 
+  const deleteItem = async (event) => {
+    event.preventDefault;
+    try {
+      const { data } = await DeleteProduct({
+        variables: { id: productId },
+      });
+      if (data.deleteProduct) {
+        window.location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setShowConfirm(false);
+  };
+
   if (loading) {
     return <h1>Loading</h1>;
   }
@@ -58,68 +87,115 @@ function ProductPage() {
         </figure>
 
         <div className="product-info">
-          <h2>{name}</h2>
+          <h2>
+            {name}
+          </h2>
+
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
           </p>
           <p>{description}</p>
-          <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-0 w-min mb-2">
-            <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
-              onClick={() => {
-                const stockElement = document.getElementById("stock");
-                let stock = parseInt(stockElement.innerText);
-                stock = Math.max(stock - 1, 1);
-                stockElement.innerText = stock;
-              }}
-            >
-              -
-            </button>
+          <div className="spacer"></div>
 
-            <p id="stock" className="mx-2 w-8 text-center">
-              1
-            </p>
+          {Auth.isLoggedIn() ? (
+            Auth.isAdmin() ? (
+              <>
+                <div className="spacer"></div>
+                <button className="btn-3" onClick={clickEdit}>
+                  {showEdit ? "Cancel Edit" : "Edit Product"}
+                </button>
+                {!showConfirm && (
+                  <button className="btn-2" onClick={clickConfirm}>
+                    Delete Product
+                  </button>
+                )}
 
-            <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
-              onClick={() => {
-                const stockElement = document.getElementById("stock");
-                let stock = parseInt(stockElement.innerText);
-                stock = Math.min(stock + 1, 10);
-                stockElement.innerText = stock;
-              }}
-            >
-              +
-            </button>
-          </div>
-          <div className="button-container">
-            {stock < 0 ? (
-              <p className="bold">OUT OF STOCK</p>
-            ) : (
+                {showConfirm && (
+                  <>
+                    <p>Are you sure? This can&apos;t be undone</p>
+                    <div className="button-container">
+                      <button className="btn-2" onClick={clickConfirm}>
+                        Never mind
+                      </button>
+                      <button className="btn-1" onClick={deleteItem}>
+                        Yes, Delete Product
+                      </button>
+                    </div>
+                  </>
+                )}
+              </>
+            ) : null
+          ) : (
+            <div className="button-container">
               <button
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
                 onClick={() => {
-                  addToCart(
-                    product,
-                    parseInt(document.getElementById("stock").innerText)
-                  );
-                  document.getElementById("stock").innerText = 1;
-                  delayClick();
-                }}
-                className="btn-1 add-cart-btn"
-                style={{
-                  transition: ".5s",
-                  backgroundColor: isClicked
-                    ? "var(--blue)"
-                    : "var(--blackish)",
+                  const quantityElement = document.getElementById("quantity");
+                  let quantity = parseInt(quantityElement.innerText);
+                  quantity = Math.max(quantity - 1, 1);
+                  quantityElement.innerText = quantity;
                 }}
               >
-                {isClicked ? "Added to Cart!" : "Add to Cart"}
+                -
               </button>
-            )}
-            <ReviewForm />
-          </div>
+              <div className="like-btn-2 ">
+                <p id="quantity">
+                  1
+                </p>
+              </div>
+              <button
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
+                onClick={() => {
+                  const quantityElement = document.getElementById("quantity");
+                  let quantity = parseInt(quantityElement.innerText);
+                  quantity = Math.min(quantity + 1, stock);
+                  quantityElement.innerText = quantity;
+                }}
+              >
+                +
+              </button>
+
+              {stock < 0 ? (
+                <p className="bold">OUT OF STOCK</p>
+              ) : (
+                <button
+                  onClick={() => {
+                    addToCart(
+                      product,
+                      parseInt(document.getElementById("quantity").innerText)
+                    );
+                    document.getElementById("quantity").innerText = 1;
+                    delayClick();
+                  }}
+                  className="btn-1 add-cart-btn"
+                  style={{
+                    transition: ".5s",
+                    backgroundColor: addClicked
+                      ? "var(--blue)"
+                      : "var(--blackish)",
+                  }}
+                >
+                  {addClicked ? "Added to Cart!" : "Add to Cart"}
+                </button>
+              )}
+
+              <ReviewForm />
+            </div>
+          )}
         </div>
       </section>
+
+      {showEdit && (
+        <>
+          {Auth.isLoggedIn() ? (
+            Auth.isAdmin() ? (
+              <section className="admin-stuff-section">
+                <UpdateForm product={product} />
+              </section>
+            ) : null
+          ) : null}
+        </>
+      )}
 
       {reviews.length ? (
         <>
@@ -136,13 +212,13 @@ function ProductPage() {
         </>
       ) : null}
 
-      {Auth.isLoggedIn() ? (
+      {/* {Auth.isLoggedIn() ? (
         Auth.isAdmin() ? (
           <section className="admin-stuff-section">
             <UpdateForm product={product} />
           </section>
         ) : null
-      ) : null}
+      ) : null} */}
     </>
   );
 }

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../../utils/mutations";
+import { UPDATE_PRODUCT } from "../../utils/mutations";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
-  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { description, category, image, name, price, stock } = prop.product;
   const { productId } = useParams();
 
@@ -45,8 +44,7 @@ function UpdateForm(prop) {
   //TODO This function runs when you click the upload button when the page is first loaded
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // console.log(formState);
-    // const { name, price, description, image, category, stock } = formState;
+
     try {
       const { data } = await UpdateProduct({
         variables: formState,
@@ -55,29 +53,30 @@ function UpdateForm(prop) {
       console.log(err);
     }
   };
-  const deleteItem = async (event) => {
-    event.preventDefault;
-    try {
-      const { data } = await DeleteProduct({
-        variables: { id: productId },
-      });
-      if (data.deleteProduct) {
-        window.location.assign("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  function revertEdit() {
+    setFormState({
+      id: productId,
+      name: name,
+      price: price,
+      category: category,
+      description: description,
+      stock: stock,
+      image: image,
+    });
+  }
+
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} id="UpdateForm">
         <h2>Edit product</h2>
-        <label htmlFor="productId">Product ID:(editing disabled)</label>
+
+        <label htmlFor="productId">Product ID: (editing disabled)</label>
         <input
-          value={formState._id}
+          value={formState.id}
           onChange={handleInputChange}
           type="text"
-          placeholder="Product name"
+          placeholder="Product id"
           disabled
         ></input>
         <label htmlFor="name">Name:</label>
@@ -106,13 +105,19 @@ function UpdateForm(prop) {
           placeholder="Stock"
         ></input>
         <label htmlFor="category">Category:</label>
-        <input
+        <select
           value={formState.category}
           name="category"
           onChange={handleInputChange}
-          type="text"
-          placeholder="Category"
-        ></input>
+        >
+          <option value="bracelet">bracelet</option>
+          <option value="earring">earring</option>
+          <option value="fidget">fidget</option>
+          <option value="keychain">key chain</option>
+          <option value="necklace">necklace</option>
+          <option value="trinket">trinket</option>
+          <option value="other">other</option>
+        </select>
         <label htmlFor="description">Description:</label>
         <textarea
           value={formState.description}
@@ -121,7 +126,7 @@ function UpdateForm(prop) {
           type="text"
           placeholder="Description"
         ></textarea>
-        <label htmlFor="image">Image:(editing disabled)</label>
+        <label htmlFor="image">Image: (editing disabled)</label>
         <input
           value={formState.image}
           name="image"
@@ -129,18 +134,17 @@ function UpdateForm(prop) {
           type="text"
           disabled
         ></input>
-
+      </form>
+      <div className="form-footer center">
         <div className="button-container">
-          <button className="btn-2" type="button" onClick={deleteItem}>
-            Delete Product
+          <button className="btn-2" onClick={revertEdit}>
+            Revert
           </button>
-          <button className="btn-1" type="submit">
+          <button className="btn-1" type="submit" form="UpdateForm">
             Save Changes
           </button>
         </div>
-
-        <div className="form-footer"></div>
-      </form>
+      </div>
     </>
   );
 }

@@ -49,31 +49,37 @@ function ReviewForm() {
       </button>
 
       <Dialog open={open} handler={handleOpen}>
-        <form onSubmit={handleFormSubmit} className="">
+        <form onSubmit={handleFormSubmit} id="ReviewForm">
           <h2>Leave a Review</h2>
-          <label htmlFor="username">Your name:</label>
-          <input
-            value={formState.username}
-            name="username"
-            onChange={handleInputChange}
-            type="text"
-            required
-          ></input>
-          <label htmlFor="rating">Number of stars:</label>
-          <select
-            value={formState.rating}
-            name="rating"
-            type="number"
-            onChange={handleInputChange}
-            required
-          >
-            <option value=""></option>
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-          </select>
+          <div className="flex-row">
+            <div className="flex-col">
+              <label htmlFor="username">Your name:</label>
+              <input
+                value={formState.username}
+                name="username"
+                onChange={handleInputChange}
+                type="text"
+                required
+              ></input>
+            </div>
+            <div className="flex-col">
+              <label htmlFor="rating">Number of stars:</label>
+              <select
+                value={formState.rating}
+                name="rating"
+                type="number"
+                onChange={handleInputChange}
+                required
+              >
+                <option value=""></option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+          </div>
           <label htmlFor="content">Review text:</label>
           <textarea
             value={formState.content}
@@ -82,15 +88,22 @@ function ReviewForm() {
             type="text"
             required
           ></textarea>
+        </form>
+        <div className="form-footer">
           <div className="button-container">
             <button className="btn-2" onClick={handleOpen}>
               <span>Cancel</span>
             </button>
-            <button className="btn-1" type="submit">
+            <button
+              className="btn-1"
+              type="submit"
+              onClick={handleOpen}
+              form="ReviewForm"
+            >
               Send Review
             </button>
           </div>
-        </form>
+        </div>
       </Dialog>
     </>
   );

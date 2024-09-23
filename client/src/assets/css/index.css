@@ -12,6 +12,7 @@
   --teal: #86b5b7;
   --mint: #c9dad0;
   --green: #b5b986;
+  --light-blue: #dae8ed;
   --blue: #accbe0;
   --pink: #e0b4b4;
   --yellow: #e6cd8c;
@@ -45,8 +46,22 @@ section {
   margin: auto
 }
 
+.flex-row {
+  display: flex;
+  gap: 20px
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .bold {
   font-weight: bold;
+}
+
+.inline {
+  display: inline-block;
 }
 
 .white-container {
@@ -67,6 +82,17 @@ h2 {
   font-size: 30px;;
 }
 
+.like-btn-2 {
+  border: 1px solid var(--blackish);
+  border-radius: 2px;
+  box-shadow: var(--shadow1);
+  height: 38px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn-1 {
   background-color: var(--blackish);
   color: var(--whitish);
@@ -83,7 +109,7 @@ h2 {
 .btn-2 {
   color: var(--blackish);
   border: 1px solid var(--blackish);
-  padding: 6px 20px;
+  padding: 5px 19px;
   border-radius: 2px;
   box-shadow: var(--shadow1);
   transition: .2s;
@@ -92,6 +118,19 @@ h2 {
 .btn-2:hover {
   background-color: var(--blackish);
   color: var(--whitish);
+}
+
+.btn-3 {
+  padding: 6px 6px;
+  margin: 8px 0;
+  background-color: var(--blue);
+  border-radius: 2px;
+  /* line-height: 2.5; */
+  box-shadow: var(--shadow1);
+}
+
+.btn-3:hover {
+  background-color: var(--teal);
 }
 
 .btn-del {
@@ -111,7 +150,9 @@ h2 {
 
 .button-container {
   display: flex;
-  gap: 12px
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Header Styles -------------------------- */
@@ -205,6 +246,7 @@ form {
   padding: 40px;
   max-width: 800px;
   margin: auto;
+  color: var(--blackish)
 }
 
 input, textarea, select {
@@ -222,6 +264,7 @@ input:focus, textArea:focus {
 form h2 {
   padding-bottom: 20px;
   text-align: center;
+
 }
 
 form button {
@@ -235,11 +278,13 @@ form .button-container {
 
 .form-footer {
   background-color: var(--green);
-  height: 50px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 800px;
+  padding: 20px;
+  box-shadow: var(--shadow1);
 }
 
 .narrow {
@@ -268,5 +313,5 @@ textarea {
 }
 
 select {
-  width: 80px;
+  /* width: 50%; */
 }
