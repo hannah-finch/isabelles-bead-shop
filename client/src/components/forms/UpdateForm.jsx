@@ -5,7 +5,7 @@ import { UPDATE_PRODUCT } from "../../utils/mutations";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
-  const { description, category, image, name, price, quantity } = prop.product;
+  const { description, category, image, name, price, stock } = prop.product;
   const { productId } = useParams();
 
   const [formState, setFormState] = useState({
@@ -61,7 +61,7 @@ function UpdateForm(prop) {
       price: price,
       category: category,
       description: description,
-      quantity: quantity,
+      stock: stock,
       image: image,
     });
   }
