@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../utils/mutations";
+import { IntToCurrency, currencyToInt } from "../../utils/math";
 
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
@@ -10,7 +11,7 @@ function NewProductForm() {
   // TODO SEND INT TO DATABASE
   const [formState, setFormState] = useState({
     name: "",
-    price: undefined,
+    price: 2.0,
     category: "",
     description: "",
     stock: 1,
@@ -37,12 +38,13 @@ function NewProductForm() {
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(formState);
     // if the value is suppose to be an int, make it an int
     switch (name) {
       case "price":
         setFormState({
           ...formState,
-          [name]: +value,
+          [name]: value,
         });
         break;
       case "stock":
@@ -69,7 +71,7 @@ function NewProductForm() {
       } = await addProduct({
         variables: {
           name,
-          price,
+          price: currencyToInt(price),
           category,
           description,
           stock,
@@ -111,7 +113,12 @@ function NewProductForm() {
           value={formState.price}
           name="price"
           onChange={handleInputChange}
-          type="number"
+          onBlur={(event) => {
+            const { value } = event.target;
+            setFormState({ ...formState, price: IntToCurrency(value) });
+          }}
+          type="string"
+          max={2147483647}
           min="0"
         ></input>
         <label htmlFor="stock">Number in stock:</label>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../../utils/mutations";
+import { IntToCurrency, currencyToInt } from "../../utils/math.js";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
@@ -11,7 +12,7 @@ function UpdateForm(prop) {
   const [formState, setFormState] = useState({
     id: productId,
     name: name,
-    price: price,
+    price: IntToCurrency(price / 100),
     category: category,
     description: description,
     stock: stock,
@@ -24,7 +25,7 @@ function UpdateForm(prop) {
       case "price":
         setFormState({
           ...formState,
-          [name]: +value,
+          [name]: value,
         });
         break;
       case "stock":
@@ -44,11 +45,21 @@ function UpdateForm(prop) {
   //TODO This function runs when you click the upload button when the page is first loaded
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("submit");
+    const { name, price, category, description, stock, image } = formState;
     try {
       const { data } = await UpdateProduct({
-        variables: formState,
+        variables: {
+          id: productId,
+          name,
+          price: currencyToInt(price),
+          category,
+          description,
+          stock,
+          image,
+        },
       });
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -92,7 +103,11 @@ function UpdateForm(prop) {
           value={formState.price}
           name="price"
           onChange={handleInputChange}
-          type="number"
+          onBlur={(event) => {
+            const { value } = event.target;
+            setFormState({ ...formState, price: IntToCurrency(value) });
+          }}
+          type="text"
           placeholder="Price"
         ></input>
         <label htmlFor="stock">Number in stock:</label>
