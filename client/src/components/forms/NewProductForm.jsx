@@ -64,7 +64,9 @@ function NewProductForm() {
 
     const { name, price, category, description, stock } = formState;
     try {
-      const { data:{createProduct} } = await addProduct({
+      const {
+        data: { createProduct },
+      } = await addProduct({
         variables: {
           name,
           price,
@@ -79,7 +81,6 @@ function NewProductForm() {
 
         window.location.assign("/admin");
         //TODO FIX BUG FROM CAUSING FORMS FROM AUTO SUBMITTING
-
       }
     } catch (err) {
       console.log(err);
@@ -95,7 +96,7 @@ function NewProductForm() {
   const myImage = cld.image(publicId);
   return (
     <>
-      <form onSubmit={handleFormSubmit} className="new-product-form">
+      <form onSubmit={(e) => e.preventDefault()} className="new-product-form">
         <h2>Add new product</h2>
         <label htmlFor="name">Name:</label>
         <input
@@ -157,7 +158,7 @@ function NewProductForm() {
           name="image"
           disabled
         />
-        <button className="btn-1" type="submit">
+        <button className="btn-1" onClick={handleFormSubmit}>
           Submit
         </button>
 
