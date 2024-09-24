@@ -43,7 +43,7 @@ const ProductsProvider = ({ children }) => {
   };
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <div className="loading">Loading...</div>;
   } else if (error) {
     return <h1>Error: {error.message}</h1>;
   }
