@@ -71,16 +71,24 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
       <div>
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <div key={item._id} className="cart-item-wrapper">
-              <div className="cart-item">
+              <div key={item._id} className="cart-item cart-item-wrapper">
                 <figure className="product-img-cart">
                   <img className="crop-img" src={item.imageURL}></img>
-                  {/* TODO: fix the url */}
                 </figure>
                 <div className="item-text-box space-y-1">
-                  <Link to={`/product/${item._id}`} className="bold">
-                    {item.name} {item.stock}
-                  </Link>
+                  <div>
+                    <Link to={`/product/${item._id}`} className="bold">
+                      {item.name}
+                    </Link>
+                    <p className="mb-2 center">( {item.stock} left in stock )</p>
+                    <p>${item.price / 100} each</p>
+                    <p className="bold">
+                      Total: ${(item.price * item.quantity) / 100}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="cart-button-container">
 
                   <div className="button-container">
                     <button
@@ -102,49 +110,16 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                     >
                       +
                     </button>
-
-                    <button
-                      className="underline"
-                      onClick={() => removeFromCart(item._id)}
-                    >
-                      Remove
-                    </button>
                   </div>
 
-                  {/* <div className="flex">
-                    <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-2 w-min ">
-                      <button
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
-                        onClick={() => decrementCartItem(item._id)}
-                      >
-                        -
-                      </button>
-                      <p className="mx-2 w-8 text-center">{item.stock}</p>
-                      <button
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
-                        onClick={() => incrementCartItem(item._id)}
-                      >
-                        +
-                      </button>
-                    </div>
-                    <div className="flex items-center px-3">
-                      <button
-                        className="underline"
-                        onClick={() => removeFromCart(item._id)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div> */}
-
-                  <p>${item.price / 100} each</p>
-                  <p className="bold">
-                    Total: ${(item.price * item.quantity) / 100}
-                  </p>
+                  <button
+                    className="underline mt-1"
+                    onClick={() => removeFromCart(item._id)}
+                  >
+                    Remove All
+                  </button>
                 </div>
-                <section className="flex flex-col space-y-1"></section>
               </div>
-            </div>
           ))
         ) : (
           <p>Your cart is empty</p>
