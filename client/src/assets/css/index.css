@@ -17,12 +17,14 @@
   --pink: #e0b4b4;
   --yellow: #e6cd8c;
   --shadow1: 0 0 3px #8d8d8d3f;
+  --shadow2: 0 0 16px #8d8d8d3f;
 }
 
 body {
   background-color: var(--whitish);
   color: var(--blackish);
   font-family: Quicksand;
+  min-height: 100vh;
 }
 
 section {
@@ -157,7 +159,7 @@ h2 {
 
 /* Header Styles -------------------------- */
 
-nav {
+/* nav {
   background-color: var(--teal);
   box-shadow: var(--shadow1);
   display: flex;
@@ -205,7 +207,7 @@ header img {
   width: 130px;
   margin: auto;
   margin-top: 10px;
-}
+} */
 
 /* Footer styles ---------------------------- */
 

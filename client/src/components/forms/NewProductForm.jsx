@@ -19,7 +19,7 @@ function NewProductForm() {
   });
 
   const [publicId, setPublicId] = useState("");
-  const [cloudName] = useState(import.meta.env.VITE_CLOUDNAME);
+  const [cloudName] = useState("dflvzyvkr");
   const [uploadPreset] = useState("rpzhky6o");
   const [uwConfig] = useState({
     cloudName,
