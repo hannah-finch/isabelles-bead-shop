@@ -44,10 +44,9 @@ function ProductPage() {
 
   // set current available stock when the product is first rendered. (stock - quantity in cart)
   useEffect(() => {
-    if (cartItems.length) {
-      const inCart = cartItems.find((item) => item._id === productId);
-      const quantityInCart = inCart.quantity || 0;
-      setCurrentAvailable(stock - quantityInCart);
+    const checkCart = cartItems.find((item) => item._id === productId);
+    if (checkCart){
+      setCurrentAvailable(stock - checkCart.quantity);
     } else {
       setCurrentAvailable(stock);
     }
@@ -175,9 +174,15 @@ function ProductPage() {
               >
                 -
               </button>
-              <div className="like-btn-2 ">
-                <p id="quantity">{quantityToAdd}</p>
-              </div>
+
+              {stock > 0 ? (
+                <div className="like-btn-2 ">
+                  <p id="quantity">{quantityToAdd}</p>
+                </div>
+              ) : (
+                <p className="bold">OUT OF STOCK</p>
+              )}
+
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
                 onClick={() => {
@@ -187,8 +192,8 @@ function ProductPage() {
                 +
               </button>
 
-              {stock < 0 ? (
-                <p className="bold">OUT OF STOCK</p>
+              {currentAvailable == 0 ? (
+                <p className="bold">NO MORE AVAIABLE</p>
               ) : (
                 <button
                   onClick={() => {
