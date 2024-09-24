@@ -16,34 +16,32 @@ function AdminPage() {
 
   const ProductList = products.map((product, key) => {
     return (
-      <>
-        <div className="product-admin" key={key}>
-          <figure className="product-img-admin">
-            <img src={product.imageURL}></img>
-          </figure>
-          <div className="item-text-box-admin">
-            <p>
-              <span className="bold">Name: </span>
-              {product.name}
-            </p>
-            <p>
-              <span className="bold">Price: </span>${toDecimal(product.price)}
-            </p>
-            <p>
-              <span className="bold">Category: </span>
-              {product.category}
-            </p>
-            <p>
-              <span className="bold">Number in stock: </span>
-              {product.stock}
-            </p>
+      <div className="product-admin" key={key}>
+        <figure className="product-img-admin">
+          <img src={product.imageURL}></img>
+        </figure>
+        <div className="item-text-box-admin">
+          <p>
+            <span className="bold">Name: </span>
+            {product.name}
+          </p>
+          <p>
+            <span className="bold">Price: </span>${toDecimal(product.price)}
+          </p>
+          <p>
+            <span className="bold">Category: </span>
+            {product.category}
+          </p>
+          <p>
+            <span className="bold">Number in stock: </span>
+            {product.stock}
+          </p>
 
-            <Link to={`/product/${product._id}`} className="btn-3">
-              View / Edit
-            </Link>
-          </div>
+          <Link to={`/product/${product._id}`} className="btn-3">
+            View / Edit
+          </Link>
         </div>
-      </>
+      </div>
     );
   });
 
