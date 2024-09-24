@@ -21,9 +21,13 @@ export function IntToCurrency(v) {
   if (!cents) {
     cents = "00";
   }
-  if (cents.split("").length > 2) {
+  const cent = cents.split("");
+  if (cent.length > 2) {
     const cent = cents.split("");
     cents = `${cent[0]}${cent[1]}`;
+  }
+  if (cent.length == 1) {
+    cents = `${cent[0]}0`;
   }
   if (dollar.replace(/,/g, "") > maxDollarAmount) {
     dollar = `${maxDollarAmount}`;
