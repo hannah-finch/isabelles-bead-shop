@@ -10,7 +10,7 @@ import {
 
 import { ProductsProvider } from "./utils/ProductsContext.jsx";
 
-import Header from "./components/header";
+import Header from "./components/header-things/header";
 import Footer from "./components/footer";
 import ScrollToTop from "./utils/scroll-to-top.jsx";
 

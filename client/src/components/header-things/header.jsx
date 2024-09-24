@@ -1,17 +1,34 @@
+// Header should bring in navbar, banner, home banner, shop announcement and arrange
+
+import Announcement from "./Announcement";
+import BannerHome from "./BannerHome";
+import Navbar from "./Navbar";
+import Banner from "./Banner";
+
 import { NavLink, Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { ShoppingCartContext } from "../utils/ProductsContext";
-import CartPreview from "./CartPreview";
-import "../assets/css/header.css";
+import { ShoppingCartContext } from "../../utils/ProductsContext";
+import CartPreview from "../CartPreview";
+import "../../assets/css/header.css";
 
-import Auth from "../utils/auth";
+import Auth from "../../utils/auth";
 
 function Header( ) {
   const { cartCounter, cartItems } = useContext(ShoppingCartContext);
   const [isHovered, setIsHovered] = useState(false);
   return (
     <>
-    <div className="sub-banner">
+      <Announcement />
+      <Navbar />
+      <BannerHome />
+
+      <Banner />
+
+
+
+
+
+    {/* <div className="sub-banner">
       <span className="bold">NOTICE: &nbsp;</span> This website is currently under construction. DON&apos;T USE IT
     </div>
       <nav>
@@ -82,7 +99,7 @@ function Header( ) {
           <h1>Isabelle’s Bead Shop</h1>
           <img src="/images/icons/zigzag.svg"></img>
         </Link>
-      </header>
+      </header> */}
     </>
   );
 }
