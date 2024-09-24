@@ -7,7 +7,7 @@ function Announcement() {
   if (announcement !== "") {
     return (
       <>
-        <div className="sub-banner">
+        <div className="announcement">
           <span className="bold">{announcementTitle}&nbsp;</span> {announcement}
         </div>
       </>
