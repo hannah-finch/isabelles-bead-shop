@@ -1,6 +1,6 @@
 // refactor/stockTest
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
@@ -19,12 +19,38 @@ function ProductPage() {
   const { loading, data } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { productId },
   });
-  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
 
-  const { addToCart } = useContext(ShoppingCartContext);
+  const product = data
+    ? data.singleProduct
+    : {
+        id: "",
+        category: "",
+        description: "",
+        imageURL: "",
+        stock: 0,
+        price: 0,
+        name: "",
+        reviews: [],
+      };
+
+  const { description, imageURL, stock, price, name, reviews } = product;
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
+  const { addToCart, cartItems } = useContext(ShoppingCartContext);
   const [addClicked, setAddClicked] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [currentAvailable, setCurrentAvailable] = useState(stock);
+  const [quantityToAdd, setQuantityToAdd] = useState(1);
+
+  // set current available stock when the product is first rendered. (stock - quantity in cart)
+  useEffect(() => {
+    const checkCart = cartItems.find((item) => item._id === productId);
+    if (checkCart){
+      setCurrentAvailable(stock - checkCart.quantity);
+    } else {
+      setCurrentAvailable(stock);
+    }
+  }, [stock, productId, cartItems]);
 
   function delayClick() {
     setAddClicked(true);
@@ -42,10 +68,27 @@ function ProductPage() {
     setShowConfirm(!showConfirm);
   };
 
-  const product = data ? data.singleProduct : [];
-  console.log(product);
-  const { id, category, description, imageURL, stock, price, name, reviews } =
-    product;
+  const handleIncrement = () => {
+    if (quantityToAdd < currentAvailable) {
+      setQuantityToAdd(quantityToAdd + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantityToAdd > 1) {
+      setQuantityToAdd(quantityToAdd - 1);
+    }
+  };
+
+  // add product to cart
+  // update available stock
+  // reset quantity to add
+  const handleAddToCart = () => {
+    addToCart(product, parseInt(quantityToAdd, 10));
+    setCurrentAvailable(currentAvailable - quantityToAdd);
+    setQuantityToAdd(1);
+    delayClick();
+  };
 
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
@@ -126,40 +169,35 @@ function ProductPage() {
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
                 onClick={() => {
-                  const quantityElement = document.getElementById("quantity");
-                  let quantity = parseInt(quantityElement.innerText);
-                  quantity = Math.max(quantity - 1, 1);
-                  quantityElement.innerText = quantity;
+                  handleDecrement();
                 }}
               >
                 -
               </button>
-              <div className="like-btn-2 ">
-                <p id="quantity">1</p>
-              </div>
+
+              {stock > 0 ? (
+                <div className="like-btn-2 ">
+                  <p id="quantity">{quantityToAdd}</p>
+                </div>
+              ) : (
+                <p className="bold">OUT OF STOCK</p>
+              )}
+
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
                 onClick={() => {
-                  const quantityElement = document.getElementById("quantity");
-                  let quantity = parseInt(quantityElement.innerText);
-                  quantity = Math.min(quantity + 1, stock);
-                  quantityElement.innerText = quantity;
+                  handleIncrement();
                 }}
               >
                 +
               </button>
 
-              {stock < 0 ? (
-                <p className="bold">OUT OF STOCK</p>
+              {currentAvailable == 0 ? (
+                <p className="bold">NO MORE AVAIABLE</p>
               ) : (
                 <button
                   onClick={() => {
-                    addToCart(
-                      product,
-                      parseInt(document.getElementById("quantity").innerText)
-                    );
-                    document.getElementById("quantity").innerText = 1;
-                    delayClick();
+                    handleAddToCart();
                   }}
                   className="btn-1 add-cart-btn"
                   style={{

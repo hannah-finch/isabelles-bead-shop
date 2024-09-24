@@ -20,9 +20,9 @@ const CartPreview = ({ items }) => {
                   <p className="font-semibold truncate">{item.name}</p>
                 </div>
                 <div className="flex justify-between items-center">
-                  <p className="text-sm text-gray-600">Quantity {item.stock}</p>
+                  <p className="text-sm text-gray-600">Quantity {item.quantity}</p>
                   <p className="text-sm text-gray-600">
-                    Total ${((item.price * item.stock) / 100).toFixed(2)}
+                    Total ${((item.price * item.quantity) / 100).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -33,7 +33,7 @@ const CartPreview = ({ items }) => {
             <p className="text-sm">
               $
               {(
-                items.reduce((acc, item) => acc + item.price * item.stock, 0) /
+                items.reduce((acc, item) => acc + item.price * item.quantity, 0) /
                 100
               ).toFixed(2)}
             </p>
