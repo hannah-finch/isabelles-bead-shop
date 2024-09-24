@@ -10,17 +10,22 @@
 
 .cart-item {
   display: grid;
-  grid-template-columns: 100px auto 100px;
+  grid-template-columns: 100px auto 130px;
   align-items: center;
   gap: 40px;
   border-bottom: 1px solid var(--gray);
   padding: 20px 0;
-  width: 100%;
-  max-width: 800px;
 }
 
 .item-text-box {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
+}
+
+.cart-button-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-section {
@@ -31,4 +36,6 @@
 
 .total {
   margin: 40px 0 10px;
+  font-size: 18px;
+  font-weight: 600;
 }

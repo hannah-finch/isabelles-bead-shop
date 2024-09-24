@@ -17,6 +17,16 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
   //   return Object.values(groupedItems);
   // };
 
+  function stockCheck() {
+    cartItems.map((item) => {
+      if (item.quantity > item.stock) {
+        item.quantity = item.stock;
+      }
+    });
+  }
+
+  stockCheck();
+
   const removeFromCart = (productId) => {
     const updatedCartItems = cartItems.filter((item) => item._id !== productId);
     setCartItems(updatedCartItems);
@@ -24,24 +34,26 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
 
   const incrementCartItem = (productId) => {
     const updatedCartItems = cartItems.map((item) =>
-      item._id === productId ? { ...item, stock: item.stock + 1 } : item
+      item._id === productId && item.quantity < item.stock
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
     );
     setCartItems(updatedCartItems);
   };
 
   const decrementCartItem = (productId) => {
     const updatedCartItems = cartItems.map((item) =>
-      item._id === productId && item.stock > 1
-        ? { ...item, stock: item.stock - 1 }
+      item._id === productId && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
         : item
     );
-    const filteredCart = updatedCartItems.filter((item) => item.stock > 0);
+    const filteredCart = updatedCartItems.filter((item) => item.quantity > 0);
     setCartItems(filteredCart);
   };
 
   // Calculate the total price
   const calculateTotal = (items) => {
-    return items.reduce((acc, item) => acc + item.price * item.stock, 0);
+    return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   };
 
   useEffect(() => {
@@ -56,53 +68,55 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
 
   return (
     <>
-      <h1>Shopping Cart</h1>
       <div>
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <div key={item._id} className="cart-item-wrapper">
-              <div className="cart-item">
-                <figure className="product-img-cart">
-                  <img className="crop-img" src={item.imageURL}></img>
-                  {/* TODO: fix the url */}
-                </figure>
-                <div className="item-text-box space-y-1">
+            <div key={item._id} className="cart-item cart-item-wrapper">
+              <figure className="product-img-cart">
+                <img className="crop-img" src={item.imageURL}></img>
+              </figure>
+              <div className="item-text-box space-y-1">
+                <div>
                   <Link to={`/product/${item._id}`} className="bold">
                     {item.name}
                   </Link>
-
-                  <div className="flex">
-                    <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-2 w-min ">
-                      <button
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
-                        onClick={() => decrementCartItem(item._id)}
-                      >
-                        -
-                      </button>
-                      <p className="mx-2 w-8 text-center">{item.stock}</p>
-                      <button
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
-                        onClick={() => incrementCartItem(item._id)}
-                      >
-                        +
-                      </button>
-                    </div>
-                    <div className="flex items-center px-3">
-                      <button
-                        className="underline"
-                        onClick={() => removeFromCart(item._id)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-
+                  <p className="mb-2 center">( {item.stock} left in stock )</p>
                   <p>${item.price / 100} each</p>
                   <p className="bold">
-                    Total: ${(item.price * item.stock) / 100}
+                    Total: ${(item.price * item.quantity) / 100}
                   </p>
                 </div>
-                <section className="flex flex-col space-y-1"></section>
+              </div>
+
+              <div className="cart-button-container">
+                <div className="button-container">
+                  <button
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
+                    onClick={() => {
+                      decrementCartItem(item._id);
+                    }}
+                  >
+                    -
+                  </button>
+                  <div className="like-btn-2 ">
+                    <p id="quantity">{item.quantity}</p>
+                  </div>
+                  <button
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
+                    onClick={() => {
+                      incrementCartItem(item._id);
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <button
+                  className="underline mt-1"
+                  onClick={() => removeFromCart(item._id)}
+                >
+                  Remove All
+                </button>
               </div>
             </div>
           ))
