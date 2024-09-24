@@ -24,7 +24,7 @@ body {
   background-color: var(--whitish);
   color: var(--blackish);
   font-family: Quicksand;
-  min-height: 100vh;
+  min-height: 520px;
 }
 
 section {
@@ -64,6 +64,19 @@ section {
 
 .inline {
   display: inline-block;
+}
+
+.loading {
+  color: var(--gray);
+  background-color: var(--white);
+  width: 200px;
+  height: 100px;
+  margin: 220px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: var(--shadow1);
 }
 
 .white-container {
