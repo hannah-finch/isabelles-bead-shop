@@ -1,3 +1,5 @@
+/* Navbar Styles ------------------ */
+
 .nav-link {
   position: relative;
 }
@@ -24,4 +26,19 @@
 
 .cart-preview-item:last-child {
   margin-bottom: 0;
+}
+
+/* Banner styles -------------- */
+
+.banner {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow2);
+}
+
+.banner a {
+  margin: 60px;
+  width: 200px;
 }

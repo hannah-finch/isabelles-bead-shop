@@ -20,7 +20,7 @@ function Header( ) {
     <>
       <Announcement />
       <Navbar />
-      <BannerHome />
+      {/* <BannerHome /> */}
 
       <Banner />
 
