@@ -11,7 +11,7 @@ function NewProductForm() {
   // TODO SEND INT TO DATABASE
   const [formState, setFormState] = useState({
     name: "",
-    price: 2.0,
+    price: IntToCurrency(5.99),
     category: "",
     description: "",
     stock: 1,
