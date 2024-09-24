@@ -39,7 +39,6 @@
   grid-template-columns: 400px auto;
   gap: 40px;
   justify-content: center;
-  /* min-height: 520px; */
 }
 
 .product-img {

@@ -7,8 +7,12 @@ function Announcement() {
   if (announcement !== "") {
     return (
       <>
-        <div className="announcement">
-          <span className="bold">{announcementTitle}&nbsp;</span> {announcement}
+        {/* this hack div gets shadow to show */}
+        <div className="hack">
+          <div className="announcement">
+            <span className="bold">{announcementTitle}&nbsp;</span>{" "}
+            {announcement}
+          </div>
         </div>
       </>
     );

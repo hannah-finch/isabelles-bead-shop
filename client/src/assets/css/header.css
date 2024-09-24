@@ -6,6 +6,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  box-shadow: var(--shadow3)
+}
+
+/* The only point of this is to get announcement shadow to show*/
+.hack {
+  margin-bottom: -1px;
+  position: relative;
 }
 
 /* Navbar Styles ------------------ */
@@ -34,7 +42,6 @@ nav button {
   width: 16px;
   height: 16px;
   background-color: var(--whitish);
-  display: inline-flex;
   border-radius: 100%;
   margin-left: 4px;
   display: flex;
@@ -44,21 +51,6 @@ nav button {
   font-weight: bold;
 }
 
-/* header {
-  background-color: var(--white);
-  box-shadow: var(--shadow1);
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-header img {
-  width: 130px;
-  margin: auto;
-  margin-top: 10px;
-} */
-
 /* This is for the cart hover */
 .nav-link {
   position: relative;
@@ -66,14 +58,14 @@ header img {
 
 .cart-preview {
   position: absolute;
-  top: 150%;
+  top: 130%;
   right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+  padding: 26px;
+  box-shadow: var(--shadow2);
   z-index: 1000;
-  display: none;
+  width: 300px;
+  /* display: none; */
 }
 
 .nav-link:hover .cart-preview {

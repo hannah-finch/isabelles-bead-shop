@@ -1,6 +1,6 @@
 const CartPreview = ({ items }) => {
   return (
-    <div className="cart-preview bg-white border border-gray-300 p-4 rounded-lg shadow-lg w-64">
+    <div className="cart-preview rounded-lg">
       {items.length > 0 ? (
         <>
           {items.map((item) => (
@@ -30,7 +30,7 @@ const CartPreview = ({ items }) => {
           ))}
           <div className="flex justify-between items-center mt-4">
             <p className="text-sm text-gray-600">Total</p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm">
               $
               {(
                 items.reduce((acc, item) => acc + item.price * item.stock, 0) /
