@@ -22,7 +22,7 @@ const ProductsProvider = ({ children }) => {
   const [cartCounter, setCartCounter] = useState(0);
 
   useEffect(() => {
-    const totalItems = cartItems.reduce((acc, item) => acc + item.stock, 0);
+    const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     setCartCounter(totalItems);
   }, [cartItems]);
 
