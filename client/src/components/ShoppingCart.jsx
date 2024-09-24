@@ -17,6 +17,16 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
   //   return Object.values(groupedItems);
   // };
 
+  function stockCheck() {
+    cartItems.map((item) => {
+      if (item.quantity > item.stock) {
+        item.quantity = item.stock;
+      }
+    });
+  }
+
+  stockCheck();
+
   const removeFromCart = (productId) => {
     const updatedCartItems = cartItems.filter((item) => item._id !== productId);
     setCartItems(updatedCartItems);
@@ -24,7 +34,9 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
 
   const incrementCartItem = (productId) => {
     const updatedCartItems = cartItems.map((item) =>
-      item._id === productId && item.quantity < item.stock ? { ...item, quantity: item.quantity + 1 } : item
+      item._id === productId && item.quantity < item.stock
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
     );
     setCartItems(updatedCartItems);
   };
@@ -74,7 +86,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                     <button
                       className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
                       onClick={() => {
-                        decrementCartItem(item._id)
+                        decrementCartItem(item._id);
                       }}
                     >
                       -
@@ -85,7 +97,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                     <button
                       className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
                       onClick={() => {
-                        incrementCartItem(item._id)
+                        incrementCartItem(item._id);
                       }}
                     >
                       +
@@ -98,9 +110,6 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                       Remove
                     </button>
                   </div>
-
-
-
 
                   {/* <div className="flex">
                     <div className="flex items-center border-solid border-gray-500 border-2 rounded-full px-5 py-2 w-min ">
