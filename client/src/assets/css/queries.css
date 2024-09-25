@@ -10,6 +10,10 @@
   .product-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+
+  .review-grid {
+    column-count: 3;
+  }
 }
 
 /* Smaller screens ------------------------- */
@@ -17,6 +21,10 @@
 @media screen and (max-width: 700px) {
   body {
     background-color: red;
+  }
+
+  section {
+    padding: 40px;
   }
 
   /* Header --------- */
@@ -70,7 +78,24 @@
     padding: 20px;
   }
 
+  /* Product page -------- */
 
+  .product-section {
+    flex-direction: column;
+  }
+
+  .product-img {
+    align-self: center;
+    margin-bottom: 40px;
+  }
+
+  .review-card {
+    padding: 20px;
+  }
+
+  .review-card p {
+    margin-top: 16px;
+  }
 }
 
 /* Phone screens */
@@ -79,13 +104,28 @@
   body {
     background-color: green;
   }
- 
-  section {
-    padding: 40px 5%;
+
+  .product-img {
+    margin-bottom: 20px;
   }
 
   footer {
     height: 240px;
   }
 
+  .banner a {
+    margin: 20px;
+  }
+
+  .button-container-product {
+    margin: 0 -20px;
+  }
+
+  .flex-row {
+    flex-direction: column;
+  }
+
+  .review-grid {
+    column-count: 1;
+  }
 }

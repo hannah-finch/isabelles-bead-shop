@@ -166,6 +166,10 @@ h2 {
   flex-wrap: wrap;
 }
 
+.button-container-product {
+  flex-wrap: nowrap;
+}
+
 /* Footer styles ---------------------------- */
 
 footer {
@@ -206,7 +210,7 @@ form {
   max-width: 800px;
   margin: auto;
   color: var(--blackish);
-  font-size: 18px;
+  font-size: 16px;
   font-family: Quicksand;
 }
 
@@ -272,6 +276,6 @@ form label {
 }
 
 textarea {
-  height: 200px;
+  height: 160px;
   resize: none;
 }

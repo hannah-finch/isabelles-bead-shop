@@ -45,7 +45,7 @@ function ReviewForm() {
   return (
     <>
       <button onClick={handleOpen} className="btn-2">
-        Leave a Review
+        Review Item
       </button>
 
       <Dialog open={open} handler={handleOpen}>
@@ -63,7 +63,7 @@ function ReviewForm() {
               ></input>
             </div>
             <div className="flex-col">
-              <label htmlFor="rating">Number of stars:</label>
+              <label htmlFor="rating">Stars:</label>
               <select
                 value={formState.rating}
                 name="rating"

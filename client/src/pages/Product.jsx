@@ -165,7 +165,7 @@ function ProductPage() {
               )}
             </>
           ) : (
-            <div className="button-container">
+            <div className="button-container button-container-product">
               <button
                 className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
                 onClick={() => {
