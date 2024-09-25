@@ -7,6 +7,7 @@ const { authMiddleware } = require("./utils/auth");
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
+const { add } = require("./models/reviews");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
@@ -16,8 +17,11 @@ const server = new ApolloServer({
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// TODO: make sure this is connecting to the front-end on LIVE server
-app.use(cors({ origin: 'http://localhost:3000' }));
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_RL,
+};
+
+app.use(cors(corsOptions));
 
 const startApolloServer = async () => {
   await server.start();
@@ -46,39 +50,36 @@ const startApolloServer = async () => {
   // STRIPE CHECKOUT ROUTES
   app.post("/create-checkout-session", async (req, res) => {
     try {
-      const { items } = await req.body;
-
-      if (!items) {
-        throw new Error("items is missing or invalid");
-      }
-  
-      console.log("Received items:", items); 
-  
+      console.log("line_items", req.body.items);
       const session = await stripe.checkout.sessions.create({
-        ui_mode: "embedded",
-        line_items: items,
+        payment_method_types: ["card"],
+        line_items: req.body.items,
         mode: "payment",
         shipping_address_collection: {
-          allowed_countries: ['US', 'CA'], // Add any country codes where you ship
+          allowed_countries: ["US", "CA"], // Specify the allowed countries for shipping
         },
-        return_url: `${req.headers.origin}/`, // TODO: create a /success page or something to redirect to after payment
+        success_url: `${req.headers.origin}/return?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/cart`,
       });
-      res.json({ clientSecret: session.client_secret });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: "Unable to create checkout session" });
+      res.json({ sessionId: session.id });
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   });
 
-  app.get("/session-status", async (req, res) => {
-    const session = await stripe.checkout.sessions.retrieve(
-      req.query.session_id
-    );
+  app.get("/retrieve-checkout-session/:sessionId", async (req, res) => {
+    const sessionId = req.params.sessionId;
 
-    res.send({
-      status: session.status,
-      customer_email: session.customer_details.email,
-    });
+    try {
+      const session = await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ["line_items"],
+      });
+      res.json(session);
+    } catch (error) {
+      console.error("Error retrieving session:", error);
+      res.status(500).json({ error: error.message });
+    }
   });
 
   db.once("open", () => {

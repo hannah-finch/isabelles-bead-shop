@@ -107,3 +107,9 @@ export const ADD_REVIEW = gql`
     }
   }
 `;
+
+export const UPDATE_STOCK = gql`
+  mutation UpdateStock($products: [UpdateStockInput!]!) {
+    updateStock(products: $products)
+  }
+`;
