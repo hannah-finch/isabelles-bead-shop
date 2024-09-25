@@ -44,7 +44,7 @@ function App() {
             <Outlet />
           </main>
 
-          <Footer />
+          {/* <Footer /> */}
         </ProductsProvider>
       </ApolloProvider>
     </>

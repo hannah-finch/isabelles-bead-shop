@@ -30,13 +30,13 @@ function AdminPage() {
   const clickShowForm = () => {
     setShowProducts(false);
     setShowForm(!showForm);
-    !showForm ? scrollToPoint() : null;
+    // !showForm ? scrollToPoint() : null;
   };
 
   const clickShowProducts = () => {
     setShowForm(false);
     setShowProducts(!showProducts);
-    !showProducts ? scrollToPoint() : null;
+    // !showProducts ? scrollToPoint() : null;
   };
 
   const ProductList = products.map((product, key) => {
@@ -62,16 +62,18 @@ function AdminPage() {
             {product.stock}
           </p>
 
-          <Link to={`/product/${product._id}`} className="btn-3">
+
+        </div>
+        <Link to={`/product/${product._id}`} className="btn-3">
             View / Edit
           </Link>
-        </div>
       </div>
     );
   });
 
   return (
     <>
+    <section className="admin-page">
       <section  className="admin-welcome-section">
         <h1>Hi Isabelle!</h1>
 
@@ -86,8 +88,11 @@ function AdminPage() {
             Edit Products
           </button>
           <button className="btn-big">View Orders</button>
+          <button className="btn-big" onClick={clickShowProducts}>
+            Edit Products
+          </button>
         </div>
-        <img src="/images/icons/cluster-1.svg"></img>
+        {/* <img src="/images/icons/cluster-1.svg"></img> */}
       </section>
 
       {/* <div ref={scrollPoint}></div> */}
@@ -106,7 +111,7 @@ function AdminPage() {
         </section>
       )}
 
-      <div className="thing"></div>
+
       {/* {showProducts && (
         <section className="admin-stuff-section">
           <div className="white-container">
@@ -115,6 +120,7 @@ function AdminPage() {
           </div>
         </section>
       )} */}
+      </section>
     </>
   );
 }

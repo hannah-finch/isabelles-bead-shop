@@ -5,13 +5,13 @@
   align-items: center;
   border: 10px solid var(--white);
   box-shadow: var(--shadow1);
-  width: 135px;
+  width: 100px;
 }
 
 .product-admin {
   display: grid;
-  grid-template-columns: 135px auto;
-  gap: 10px;
+  grid-template-columns: 100px auto  100px;
+  gap: 20px;
   border-bottom: 1px solid var(--gray);
   padding: 20px 0;
 }
@@ -33,12 +33,19 @@
   background-color: var(--light-blue);
 }
 
+.admin-page {
+  background-color: var(--light-blue);
+  padding: 0;
+  height: 100vh;
+}
+
 .admin-welcome-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 10%;
   box-shadow: var(--shadow1);
+  background-color: var(--white);
+  padding: 20px 10%;
 }
 
 .admin-welcome-section img {
@@ -48,10 +55,4 @@
 
 .admin-stuff-section {
   background-color: var(--light-blue);
-}
-
-.thing {
-  background-image: url(/images/banner-3.png);
-  background-size: cover;
-  height: 400px;
 }
