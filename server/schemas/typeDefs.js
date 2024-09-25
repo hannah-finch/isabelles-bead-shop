@@ -16,6 +16,7 @@ type Mutation {
     deleteProduct(_id:ID!): Product
     addOrder(products: [ID]!): Order
     addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
+    updateStock(products: [UpdateStockInput!]!): Boolean
 }
 type Auth {
     token: ID!,
@@ -72,5 +73,10 @@ type Order {
 type Checkout {
     session: ID
 }
+
+input UpdateStockInput {
+    name: String!
+    quantity: Int!
+  }
 `;
 module.exports = typeDefs;
