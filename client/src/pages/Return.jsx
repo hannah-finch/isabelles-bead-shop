@@ -12,7 +12,7 @@ const ReturnPage = () => {
     const sessionId = query.get("session_id");
 
     if (sessionId) {
-      fetch(`${window.location.origin.replace('3000', '3001')}/create-checkout-session/${sessionId}`)
+      fetch(`${window.location.origin.replace('3000', '3001')}/retrieve-checkout-session/${sessionId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -20,6 +20,7 @@ const ReturnPage = () => {
           return response.json();
         })
         .then((data) => {
+          console.log("response data", data); // Log the parsed JSON data
           setSession(data);
           setLoading(false); // Set loading to false after successful fetch
         })
