@@ -5,8 +5,8 @@ import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "../utils/queries";
 import { toDecimal } from "../utils/math";
 import NewProductForm from "../components/forms/NewProductForm";
-import EditButton from "../components/EditButton.jsx";
 import UpdateForm from "../components/forms/UpdateForm.jsx";
+import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
 
 function AdminPage() {
   const [showForm, setShowForm] = useState(false);
@@ -14,7 +14,8 @@ function AdminPage() {
   const [showProducts, setShowProducts] = useState(true);
   const { data } = useQuery(GET_All_PRODUCTS);
 
-  const [product, setProduct] = useState()
+  const [product, setProduct] = useState();
+
   //* return if you are not logged in, if you are the client, and if you are not admin
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
@@ -24,37 +25,21 @@ function AdminPage() {
   const clickShowForm = () => {
     setShowProducts(false);
     setShowForm(true);
-    setShowEdit(false)
+    setShowEdit(false);
   };
 
   const clickShowProducts = () => {
     setShowProducts(true);
     setShowForm(false);
-    setShowEdit(false)
+    setShowEdit(false);
   };
 
-  const clickShowEdit = () => {
-    setShowProducts(false);
-    setShowForm(false);
-    setShowEdit(true)
-  }
-
-  // const buttonTest = document.querySelectorAll(".edit-btn")
-  // console.log(buttonTest)
-
-  // buttonTest.map((elem) => elem.addEventListener("click", clickShowEdit))
-
-  // const clickShowProducts = () => {
-  //   setShowForm(false);
-  //   setShowProducts(!showProducts);
-  // };
   const clickEdit = (event) => {
-    console.log(event.target.id)
-    setProduct(event.target.id)
+    setProduct(event.target.id);
     setShowProducts(false);
     setShowForm(false);
-    setShowEdit(true)
-  }
+    setShowEdit(true);
+  };
 
   const ProductList = products.map((product, key) => {
     return (
@@ -84,8 +69,9 @@ function AdminPage() {
             <Link to={`/product/${product._id}`} className="btn-4">
               View
             </Link>
-            <button id={product._id} onClick={clickEdit}>TESTER</button>
-            {/* <EditButton productId={product._id} /> */}
+            <button className="btn-4" id={product._id} onClick={clickEdit}>
+              Edit
+            </button>
           </div>
         </div>
       </>
@@ -93,16 +79,31 @@ function AdminPage() {
   });
 
   const UpdateSection = (props) => {
-    if (props) {
-      console.log(props)
-      return(
-        <EditButton productId={props.product.product}/>
-      )
+    const productId = props.product.product;
+
+    const { loading, data } = useQuery(GET_SINGLE_PRODUCT, {
+      variables: { productId },
+    });
+
+    const product = data
+      ? data.singleProduct
+      : {
+          id: "",
+          category: "",
+          description: "",
+          imageURL: "",
+          stock: 0,
+          price: 0,
+          name: "",
+          reviews: [],
+        };
+
+    if (loading) {
+      return <div className="loading">Loading...</div>;
     }
 
-  }
-
-
+    return <UpdateForm product={product} />;
+  };
 
   return (
     <>
@@ -120,9 +121,6 @@ function AdminPage() {
             <button className="btn-big" onClick={clickShowProducts}>
               Product List
             </button>
-            {/* <button className="btn-big" onClick={clickShowProducts}>
-              Edit Products
-            </button> */}
             <Link
               to="https://dashboard.stripe.com/test/dashboard"
               className="btn-big"
@@ -131,15 +129,7 @@ function AdminPage() {
             </Link>
           </div>
         </section>
-
-        {/* <section>
-          <UpdateForm product={product}/>
-        </section> */}
-        {showEdit && <UpdateSection product={{product}}/>}
-
-
-
-        {(showForm || showProducts) && (
+        
           <section>
             {showForm && <NewProductForm />}
             {showProducts && (
@@ -150,8 +140,9 @@ function AdminPage() {
                 </div>
               </>
             )}
+            {showEdit && <UpdateSection product={{ product }} />}
           </section>
-        )}
+       
       </section>
     </>
   );
