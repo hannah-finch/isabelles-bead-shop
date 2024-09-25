@@ -206,6 +206,8 @@ form {
   max-width: 800px;
   margin: auto;
   color: var(--blackish);
+  font-size: 18px;
+  font-family: Quicksand;
 }
 
 input,
@@ -216,6 +218,7 @@ select {
   padding: 6px 12px;
   outline: none;
   border: 2px solid var(--whitish);
+  color: var(--blackish);
 }
 
 input:focus,
@@ -246,6 +249,8 @@ form .button-container {
   max-width: 800px;
   padding: 20px;
   box-shadow: var(--shadow1);
+  font-family: Quicksand;
+  color: var(--blackish)
 }
 
 .narrow {
@@ -269,7 +274,4 @@ form label {
 textarea {
   height: 200px;
   resize: none;
-}
-
-.placeholder {
 }

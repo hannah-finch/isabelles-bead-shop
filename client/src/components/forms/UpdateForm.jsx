@@ -127,7 +127,7 @@ function UpdateForm(prop) {
           onChange={handleInputChange}
           type="number"
           min="0"
-          placeholder="Stock"
+          // placeholder="Stock"
         ></input>
         <label htmlFor="category">Category:</label>
         <select

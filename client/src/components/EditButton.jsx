@@ -36,11 +36,13 @@ function EditButton(props) {
       <button className="btn-4" onClick={handleOpen}>
         Edit
       </button>
-
-      <Dialog className="overflow-y-auto" open={open} handler={handleOpen}>
-        <div style={{ maxHeight: "90vh" }}>
+      
+      <Dialog  open={open} handler={handleOpen}>
+      <div className="spacer"></div>
+        <div className="overflow-y-scroll" style={{ maxHeight: "90vh" }}>
           <UpdateForm product={product} />
         </div>
+        <div className="spacer"></div>
       </Dialog>
     </>
   );
