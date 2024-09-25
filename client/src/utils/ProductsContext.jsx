@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "./queries";
 
@@ -17,11 +17,28 @@ const ProductsProvider = ({ children }) => {
   }, [data]);
 
   // Shopping cart state
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    // check local storage for cart items and initialize the cart (with the items if there are any) or return an empty array
+    const initializeCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    if  (initializeCart.length > 0) {
+      return initializeCart;
+    } else {
+      return [];
+    }  
+  });
 
   const [cartCounter, setCartCounter] = useState(0);
 
   useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    // check local storage for cart items. useEffect runs only once when the component mounts
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    if (savedCartItems.length > 0 && cartItems === undefined) {
+      setCartItems(savedCartItems);
+    }
     const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     setCartCounter(totalItems);
   }, [cartItems]);
@@ -39,9 +56,6 @@ const ProductsProvider = ({ children }) => {
         )
       : // Otherwise, add the item to the cart
         [...cartItems, { ...addItem, quantity: quantityToAdd }];
-
-    // set to local storage
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
 
     setCartItems(updatedCartItems);
   };
