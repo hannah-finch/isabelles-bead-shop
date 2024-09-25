@@ -4,7 +4,6 @@
   background-color: var(--white);
   box-shadow: var(--shadow1);
   border-radius: 6px;
-  padding:
 }
 
 .product-card p {
@@ -96,10 +95,4 @@
 /* necessary for the card content to stay together */
 .block {
   display: inline-block;
-}
-
-/* Admin stuff styles ------------------ */
-
-.admin-stuff-section {
-  background-color: var(--light-blue);
 }

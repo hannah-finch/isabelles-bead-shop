@@ -1,5 +1,3 @@
-//import { Link } from "react-router-dom";
-import "../assets/css/cart.css";
 import { useContext } from "react";
 import ShoppingCart from "../components/ShoppingCart";
 import CheckoutButton from "../components/CheckoutButton";
