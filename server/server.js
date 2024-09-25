@@ -50,8 +50,7 @@ const startApolloServer = async () => {
   // STRIPE CHECKOUT ROUTES
   app.post("/create-checkout-session", async (req, res) => {
     try {
-      const baseUrl = process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_URL;
-
+      console.log("line_items", req.body.items);
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: req.body.items,
@@ -59,8 +58,8 @@ const startApolloServer = async () => {
         shipping_address_collection: {
           allowed_countries: ["US", "CA"], // Specify the allowed countries for shipping
         },
-        success_url: `${baseUrl}/return?success=true&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${baseUrl}/cart`,
+        success_url: `${req.headers.origin}/return?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/cart`,
       });
       res.json({ sessionId: session.id });
     } catch (error) {

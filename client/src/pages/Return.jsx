@@ -12,7 +12,7 @@ const ReturnPage = () => {
     const sessionId = query.get("session_id");
 
     if (sessionId) {
-      fetch(`${window.location.origin}/retrieve-checkout-session/${sessionId}`)
+      fetch(`${window.location.origin.replace('3000', '3001')}/create-checkout-session/${sessionId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");

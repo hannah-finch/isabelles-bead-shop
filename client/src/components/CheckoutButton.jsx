@@ -18,9 +18,8 @@ const CheckoutButton = ({ cartItems }) => {
       quantity: item.quantity,
     }));
 
-
     try {
-      const response = await fetch(`${window.location.origin}/create-checkout-session`, {
+      const response = await fetch(`${window.location.origin.replace('3000', '3001')}/create-checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
