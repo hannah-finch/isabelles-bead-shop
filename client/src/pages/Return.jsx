@@ -49,6 +49,8 @@ const ReturnPage = () => {
                 console.log("Stock updated successfully");
                 // Set flag in localStorage to prevent multiple updates on refresh
                 localStorage.setItem(`stockUpdated_${sessionId}`, "true");
+                // Clear cart items from localStorage after successful purchase
+                localStorage.removeItem("cartItems");
               })
               .catch((error) => {
                 console.error("Error updating stock:", error);
@@ -80,12 +82,14 @@ const ReturnPage = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg my-10">
-      <h1 className="mb-6">
-        Order Receipt
-      </h1>
+      <h1 className="mb-6">Order Receipt</h1>
 
       <p className="text-lg text-gray-700 mb-4">
-        Thank you, <span className="font-semibold text-gray-900">{session.customer_details.name}</span>, for your purchase! We appreciate your business.
+        Thank you,{" "}
+        <span className="font-semibold text-gray-900">
+          {session.customer_details.name}
+        </span>
+        , for your purchase! We appreciate your business.
       </p>
 
       <p className="text-lg text-gray-700 mb-4">

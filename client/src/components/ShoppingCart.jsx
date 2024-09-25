@@ -48,8 +48,6 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
     setTotal(calculateTotal(cartItems));
   }, [cartItems]);
 
-  console.log(cartItems);
-
   return (
     <>
       <div>
