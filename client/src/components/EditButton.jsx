@@ -33,17 +33,20 @@ function EditButton(props) {
   }
   return (
     <>
-      <button className="btn-4" onClick={handleOpen}>
+      {open && <section className="form-holder">
+        <UpdateForm product={product} />
+      </section> }
+      <button className="btn-4 edit-btn" onClick={handleOpen}>
         Edit
       </button>
-      
-      <Dialog  open={open} handler={handleOpen}>
+
+      {/* <Dialog  open={open} handler={handleOpen}>
       <div className="spacer"></div>
         <div className="overflow-y-scroll" style={{ maxHeight: "90vh" }}>
           <UpdateForm product={product} />
         </div>
         <div className="spacer"></div>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 }

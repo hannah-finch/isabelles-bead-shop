@@ -6,10 +6,12 @@ import { GET_All_PRODUCTS } from "../utils/queries";
 import { toDecimal } from "../utils/math";
 import NewProductForm from "../components/forms/NewProductForm";
 import EditButton from "../components/EditButton.jsx";
+import UpdateForm from "../components/forms/UpdateForm.jsx";
 
 function AdminPage() {
   const [showForm, setShowForm] = useState(false);
-  const [showProducts, setShowProducts] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showProducts, setShowProducts] = useState(true);
   const { data } = useQuery(GET_All_PRODUCTS);
   //* return if you are not logged in, if you are the client, and if you are not admin
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
@@ -19,13 +21,31 @@ function AdminPage() {
 
   const clickShowForm = () => {
     setShowProducts(false);
-    setShowForm(!showForm);
+    setShowForm(true);
+    setShowEdit(false)
   };
 
   const clickShowProducts = () => {
+    setShowProducts(true);
     setShowForm(false);
-    setShowProducts(!showProducts);
+    setShowEdit(false)
   };
+
+  const clickShowEdit = () => {
+    setShowProducts(false);
+    setShowForm(false);
+    setShowEdit(true)
+  }
+
+  // const buttonTest = document.querySelectorAll(".edit-btn")
+  // console.log(buttonTest)
+
+  // buttonTest.map((elem) => elem.addEventListener("click", clickShowEdit))
+
+  // const clickShowProducts = () => {
+  //   setShowForm(false);
+  //   setShowProducts(!showProducts);
+  // };
 
   const ProductList = products.map((product, key) => {
     return (
@@ -62,6 +82,8 @@ function AdminPage() {
     );
   });
 
+
+
   return (
     <>
       <section className="admin-page">
@@ -76,8 +98,11 @@ function AdminPage() {
               + New Product
             </button>
             <button className="btn-big" onClick={clickShowProducts}>
-              Edit Products
+              Product List
             </button>
+            {/* <button className="btn-big" onClick={clickShowProducts}>
+              Edit Products
+            </button> */}
             <Link
               to="https://dashboard.stripe.com/test/dashboard"
               className="btn-big"
@@ -87,8 +112,15 @@ function AdminPage() {
           </div>
         </section>
 
+        {/* <section>
+          <UpdateForm product={product}/>
+        </section> */}
+
+
+
+
         {(showForm || showProducts) && (
-          <section className="admin-stuff-section">
+          <section>
             {showForm && <NewProductForm />}
             {showProducts && (
               <>
