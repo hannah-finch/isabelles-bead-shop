@@ -3,8 +3,14 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 
-//importing tailwind
-import "./index.css";
+//importing css
+import "./assets/css/index.css"
+import "./assets/css/header.css"
+import "./assets/css/shop.css"
+import "./assets/css/product-card.css"
+import "./assets/css/admin.css"
+import "./assets/css/about.css"
+import "./assets/css/cart.css"
 
 //Importing pages
 import HomePage from "./pages/Home.jsx";
@@ -51,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <AdminPage />,
-      }
+      },
       // Add more routes here...
     ],
   },

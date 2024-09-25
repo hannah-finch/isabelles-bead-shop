@@ -10,27 +10,25 @@
 
 .product-admin {
   display: grid;
-  grid-template-columns: 100px auto  100px;
+  grid-template-columns: 100px auto 150px;
   gap: 20px;
   border-bottom: 1px solid var(--gray);
-  padding: 20px 0;
-}
-
-.new-product-form {
-
+  padding: 20px;
+  height: 140px;
+  align-items: center;
+  /* position: relative; */
 }
 
 .btn-big {
   padding: 20px 40px;
-  background-color: var(--white);
+  background-color: var(--whitish);
   box-shadow: var(--shadow1);
-  border-radius: 4px;
-  transition: .2s;
-
+  border-radius: 40px;
+  transition: 0.2s;
 }
 
 .btn-big:hover {
-  background-color: var(--light-blue);
+  background-color: var(--blue);
 }
 
 .admin-page {
@@ -43,9 +41,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: var(--shadow1);
-  background-color: var(--white);
-  padding: 20px 10%;
+  /* box-shadow: var(--shadow1); */
+  /* background-color: var(--white); */
+  padding: 60px 10% 0;
 }
 
 .admin-welcome-section img {
@@ -55,4 +53,30 @@
 
 .admin-stuff-section {
   background-color: var(--light-blue);
+}
+
+.btn-4 {
+  background-color: var(--whitish);
+  padding: 10px;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow1);
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.btn-4:hover {
+  background-color: var(--mint);
+}
+
+/* .btn-5 {
+  background-color: var(--teal)
+} */
+
+.button-container-2 {
+  display: flex;
+  gap: 10px;
 }

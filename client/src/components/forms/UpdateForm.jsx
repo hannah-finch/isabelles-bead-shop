@@ -6,11 +6,12 @@ import { IntToCurrency, currencyToInt } from "../../utils/math.js";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
-  const { description, category, image, name, price, stock } = prop.product;
+  const { _id, description, category, image, name, price, stock } =
+    prop.product;
   const { productId } = useParams();
 
   const [formState, setFormState] = useState({
-    id: productId,
+    id: _id,
     name: name,
     price: IntToCurrency(price / 100),
     category: category,

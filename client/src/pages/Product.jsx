@@ -45,7 +45,7 @@ function ProductPage() {
   // set current available stock when the product is first rendered. (stock - quantity in cart)
   useEffect(() => {
     const checkCart = cartItems.find((item) => item._id === productId);
-    if (checkCart){
+    if (checkCart) {
       setCurrentAvailable(stock - checkCart.quantity);
     } else {
       setCurrentAvailable(stock);
