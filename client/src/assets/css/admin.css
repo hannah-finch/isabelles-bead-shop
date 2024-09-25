@@ -5,26 +5,54 @@
   align-items: center;
   border: 10px solid var(--white);
   box-shadow: var(--shadow1);
-  width: 135px;
+  width: 100px;
 }
 
 .product-admin {
   display: grid;
-  grid-template-columns: 135px auto;
-  gap: 10px;
+  grid-template-columns: 100px auto  100px;
+  gap: 20px;
   border-bottom: 1px solid var(--gray);
   padding: 20px 0;
 }
 
-.admin-product-section {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+.new-product-form {
+
 }
 
-.new-product-form {
-  /* remove auto margin */
-  margin: 0;
-  margin-right: 20px;
-  flex-shrink: 5;
+.btn-big {
+  padding: 20px 40px;
+  background-color: var(--white);
+  box-shadow: var(--shadow1);
+  border-radius: 4px;
+  transition: .2s;
+
+}
+
+.btn-big:hover {
+  background-color: var(--light-blue);
+}
+
+.admin-page {
+  background-color: var(--light-blue);
+  padding: 0;
+  height: 100vh;
+}
+
+.admin-welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow1);
+  background-color: var(--white);
+  padding: 20px 10%;
+}
+
+.admin-welcome-section img {
+  width: 80px;
+  margin: 20px;
+}
+
+.admin-stuff-section {
+  background-color: var(--light-blue);
 }

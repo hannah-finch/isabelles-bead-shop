@@ -5,18 +5,6 @@ import { useEffect, useState } from "react";
 const ShoppingCart = ({ cartItems, setCartItems }) => {
   const [total, setTotal] = useState(0);
 
-  // const groupItems = (items) => {
-  //   const groupedItems = items.reduce((acc, item) => {
-  //     if (acc[item._id]) {
-  //       acc[item._id].stock += 1;
-  //     } else {
-  //       acc[item._id] = { ...item, stock: 1 };
-  //     }
-  //     return acc;
-  //   }, {});
-  //   return Object.values(groupedItems);
-  // };
-
   function stockCheck() {
     cartItems.map((item) => {
       if (item.quantity > item.stock) {
@@ -59,10 +47,6 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
   useEffect(() => {
     setTotal(calculateTotal(cartItems));
   }, [cartItems]);
-
-  // useEffect(() => {
-  //   setTotal(calculateTotal(cartItems));
-  // }, [cartItems]);
 
   console.log(cartItems);
 
