@@ -8,7 +8,7 @@ function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
   const { _id, description, category, image, name, price, stock } =
     prop.product;
-  const { productId } = useParams();
+  // const { productId } = useParams();
 
   const [formState, setFormState] = useState({
     id: _id,
@@ -51,7 +51,7 @@ function UpdateForm(prop) {
     try {
       const { data } = await UpdateProduct({
         variables: {
-          id: productId,
+          id: _id,
           name,
           price: currencyToInt(price),
           category,
@@ -60,7 +60,12 @@ function UpdateForm(prop) {
           image,
         },
       });
-      console.log(data);
+
+      if (data != null) {
+        alert("Item updated");
+
+        window.location.reload();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -68,7 +73,7 @@ function UpdateForm(prop) {
 
   function revertEdit() {
     setFormState({
-      id: productId,
+      id: _id,
       name: name,
       price: price,
       category: category,
@@ -100,17 +105,21 @@ function UpdateForm(prop) {
           placeholder="Product name"
         ></input>
         <label htmlFor="price">Price:</label>
-        <input
-          value={formState.price}
-          name="price"
-          onChange={handleInputChange}
-          onBlur={(event) => {
-            const { value } = event.target;
-            setFormState({ ...formState, price: IntToCurrency(value) });
-          }}
-          type="text"
-          placeholder="Price"
-        ></input>
+        <div style={{ display: "flex", alignItems: "baseline" }}>
+          <p style={{ alignSelf: "baseline" }}>$ &nbsp;</p>
+          <input
+            style={{ width: "100%" }}
+            value={formState.price}
+            name="price"
+            onChange={handleInputChange}
+            onBlur={(event) => {
+              const { value } = event.target;
+              setFormState({ ...formState, price: IntToCurrency(value) });
+            }}
+            type="text"
+            placeholder="Price"
+          ></input>
+        </div>
         <label htmlFor="stock">Number in stock:</label>
         <input
           value={formState.stock}

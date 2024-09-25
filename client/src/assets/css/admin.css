@@ -34,7 +34,12 @@
 .admin-page {
   background-color: var(--light-blue);
   padding: 0;
-  height: 100vh;
+  min-height: calc(100vh - 90px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 100px;
 }
 
 .admin-welcome-section {
@@ -43,7 +48,7 @@
   align-items: center;
   /* box-shadow: var(--shadow1); */
   /* background-color: var(--white); */
-  padding: 60px 10% 0;
+  padding-bottom: 0;
 }
 
 .admin-welcome-section img {
@@ -79,4 +84,11 @@
 .button-container-2 {
   display: flex;
   gap: 10px;
+}
+
+.upload-img {
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow1);
+  margin: 10px auto;
+  max-width: 300px;
 }

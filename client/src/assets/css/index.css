@@ -45,12 +45,12 @@ section {
 }
 
 .center {
-  margin: auto
+  margin: auto;
 }
 
 .flex-row {
   display: flex;
-  gap: 20px
+  gap: 20px;
 }
 
 .flex-col {
@@ -84,14 +84,14 @@ section {
 }
 
 h1 {
-  font-family: 'Leckerli One';
+  font-family: "Leckerli One";
   font-size: 36px;
   line-height: 1;
 }
 
 h2 {
   font-family: Salsa;
-  font-size: 30px;;
+  font-size: 30px;
 }
 
 .like-btn-2 {
@@ -111,7 +111,7 @@ h2 {
   padding: 6px 20px;
   border-radius: 4px;
   box-shadow: var(--shadow1);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .btn-1:hover {
@@ -124,7 +124,7 @@ h2 {
   padding: 5px 19px;
   border-radius: 2px;
   box-shadow: var(--shadow1);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .btn-2:hover {
@@ -151,7 +151,7 @@ h2 {
   border: 1px solid var(--blackish);
   border-radius: 2px;
   box-shadow: var(--shadow1);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .btn-del:hover {
@@ -205,10 +205,12 @@ form {
   padding: 40px;
   max-width: 800px;
   margin: auto;
-  color: var(--blackish)
+  color: var(--blackish);
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   background-color: var(--whitish);
   margin: 6px 0;
   padding: 6px 12px;
@@ -216,14 +218,14 @@ input, textarea, select {
   border: 2px solid var(--whitish);
 }
 
-input:focus, textArea:focus {
+input:focus,
+textArea:focus {
   border: 2px solid var(--blue);
 }
 
 form h2 {
   padding-bottom: 20px;
   text-align: center;
-
 }
 
 form button {
@@ -254,7 +256,7 @@ form p {
   align-self: flex-end;
   font-size: 14px;
   padding-bottom: 6px;
-  line-height:.5
+  line-height: 0.5;
 }
 
 form label {
@@ -267,4 +269,7 @@ form label {
 textarea {
   height: 200px;
   resize: none;
+}
+
+.placeholder {
 }

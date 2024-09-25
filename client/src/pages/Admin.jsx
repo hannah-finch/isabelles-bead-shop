@@ -78,7 +78,12 @@ function AdminPage() {
             <button className="btn-big" onClick={clickShowProducts}>
               Edit Products
             </button>
-            <button className="btn-big">View Orders</button>
+            <Link
+              to="https://dashboard.stripe.com/test/dashboard"
+              className="btn-big"
+            >
+              View Orders
+            </Link>
           </div>
         </section>
 

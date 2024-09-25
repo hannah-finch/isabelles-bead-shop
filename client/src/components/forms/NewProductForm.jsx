@@ -98,7 +98,11 @@ function NewProductForm() {
   const myImage = cld.image(publicId);
   return (
     <>
-      <form onSubmit={(e) => e.preventDefault()} className="new-product-form">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="new-product-form"
+        id="NewProductForm"
+      >
         <h2>Add new product</h2>
         <label htmlFor="name">Name:</label>
         <input
@@ -109,18 +113,22 @@ function NewProductForm() {
         ></input>
         {/* //TODO FORCE THIS INTO DECIMAL AND MAKE FUNCTION TO CONVERT INTO DATABASE SHTUFF */}
         <label htmlFor="price">Price:</label>
-        <input
-          value={formState.price}
-          name="price"
-          onChange={handleInputChange}
-          onBlur={(event) => {
-            const { value } = event.target;
-            setFormState({ ...formState, price: IntToCurrency(value) });
-          }}
-          type="string"
-          max={2147483647}
-          min="0"
-        ></input>
+        <div style={{ display: "flex", alignItems: "baseline" }}>
+          <p style={{ alignSelf: "baseline" }}>$ &nbsp;</p>
+          <input
+            style={{ width: "100%" }}
+            value={formState.price}
+            name="price"
+            onChange={handleInputChange}
+            onBlur={(event) => {
+              const { value } = event.target;
+              setFormState({ ...formState, price: IntToCurrency(value) });
+            }}
+            type="string"
+            max={2147483647}
+            min="0"
+          ></input>
+        </div>
         <label htmlFor="stock">Number in stock:</label>
         <input
           value={formState.stock}
@@ -131,12 +139,20 @@ function NewProductForm() {
         ></input>
         <label htmlFor="category">Category:</label>
         {/* //TODO MAKE this a dropdown to limit CATEGORIES */}
-        <input
+        <select
           value={formState.category}
           name="category"
           onChange={handleInputChange}
-          type="text"
-        ></input>
+        >
+          <option value=""></option>
+          <option value="bracelet">bracelet</option>
+          <option value="earring">earring</option>
+          <option value="fidget">fidget</option>
+          <option value="keychain">key chain</option>
+          <option value="necklace">necklace</option>
+          <option value="trinket">trinket</option>
+          <option value="other">other</option>
+        </select>
         <label htmlFor="description">Description:</label>
         <textarea
           value={formState.description}
@@ -146,14 +162,16 @@ function NewProductForm() {
         ></textarea>
         {/* //! IMAGE STUFF HERE */}
         <label htmlFor="image">Image:</label>
-        <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
-        <div style={{ width: "200px" }}>
+        <div>
           <AdvancedImage
-            style={{ maxWidth: "100%" }}
+            className={publicId ? "upload-img" : ""}
+            // style={{ maxWidth: "100%" }}
             cldImg={myImage}
             plugins={[responsive(), placeholder()]}
           />
         </div>
+
+        <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
 
         <label htmlFor="imageId">
           ImageID: (you don&apos;t have to know what this means)
@@ -165,12 +183,16 @@ function NewProductForm() {
           name="image"
           disabled
         />
-        <button className="btn-1" onClick={handleFormSubmit}>
-          Submit
-        </button>
-
-        <div className="form-footer"></div>
       </form>
+      <div className="form-footer center">
+        <button
+          className="btn-1"
+          onClick={handleFormSubmit}
+          form="NewProductForm"
+        >
+          Save New Product
+        </button>
+      </div>
     </>
   );
 }
