@@ -15,10 +15,25 @@ const ReturnPage = () => {
     const sessionId = query.get("session_id");
     
     const fetchSessionData = async (sessionId) => {
-      const response = await fetch(`https://isabelles-bead-shop.onrender.com/retrieve-checkout-session/${sessionId}`);
-      // const response = await fetch(`http://localhost:3001/retrieve-checkout-session/${sessionId}`);
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
+      try {
+        const response = await fetch(`https://isabelles-bead-shop.onrender.com/retrieve-checkout-session/${sessionId}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7`,
+          }
+        });
+    
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+    
+        return response.json();
+      } catch (error) {
+        console.error("Error fetching session:", error);
+        throw error;
+      }
     };
     
     const updateStockAndClearCart = async (data, sessionId) => {

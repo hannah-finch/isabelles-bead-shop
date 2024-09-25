@@ -7,7 +7,7 @@ const { authMiddleware } = require("./utils/auth");
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
-const { add } = require("./models/reviews");
+const { add, method } = require("./models/reviews");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
@@ -20,6 +20,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const corsOptions = {
   //origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_URL,
   origin: 'https://isabelles-bead-shop.onrender.com',
+  methods: "GET,POST",
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
