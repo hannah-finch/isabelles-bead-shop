@@ -134,6 +134,7 @@ function ProductPage() {
 
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
+            &nbsp;&nbsp;( {stock} left in stock )
           </p>
           <p>{description}</p>
           <div className="spacer"></div>

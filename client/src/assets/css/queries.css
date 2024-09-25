@@ -14,13 +14,21 @@
   .review-grid {
     column-count: 3;
   }
+
+  .about-grid {
+    /* margin: 0 10%; */
+    box-shadow: var(--shadow1);
+    border: 180px solid var(--light-blue);
+    border-top: none;
+    border-bottom: none;
+  }
 }
 
 /* Smaller screens ------------------------- */
 
 @media screen and (max-width: 700px) {
   body {
-    background-color: red;
+    /* background-color: red; */
   }
 
   section {
@@ -95,6 +103,14 @@
 
   .review-card p {
     margin-top: 16px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .img-square-1 {
+    height: 80px;
   }
 }
 
