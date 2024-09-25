@@ -10,10 +10,9 @@ const ReturnPage = () => {
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const sessionId = query.get("session_id");
-    const apiUrl = import.meta.env.VITE_API_URL;
 
     if (sessionId) {
-      fetch(`${apiUrl}/retrieve-checkout-session/${sessionId}`)
+      fetch(`${window.location.origin}/retrieve-checkout-session/${sessionId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");

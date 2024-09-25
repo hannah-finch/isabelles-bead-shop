@@ -18,10 +18,9 @@ const CheckoutButton = ({ cartItems }) => {
       quantity: item.quantity,
     }));
 
-    const apiUrl = import.meta.env.VITE_API_URL;
 
     try {
-      const response = await fetch(`${apiUrl}/create-checkout-session`, {
+      const response = await fetch(`${window.location.origin}/create-checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
