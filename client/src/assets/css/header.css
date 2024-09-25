@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  box-shadow: var(--shadow3)
+  box-shadow: var(--shadow3);
 }
 
 /* The only point of this is to get announcement shadow to show*/
@@ -60,7 +60,7 @@ nav button {
   position: absolute;
   top: 130%;
   right: 0;
-  background-color: var(--white);
+  background-color: var(--whitish);
   padding: 26px;
   box-shadow: var(--shadow2);
   z-index: 1000;
@@ -118,5 +118,24 @@ nav button {
 
 .photo-cluster {
   width: 100%;
+  max-width: 750px;
   justify-self: right;
+}
+
+.menu {
+  background-color: var(--whitish);
+  position: fixed;
+  flex-direction: column;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  padding: 26px;
+  box-shadow: var(--shadow4);
+  display: none;
+}
+
+.hamburger {
+  font-size: 36px;
+  line-height: 0.5;
+  display: none;
 }

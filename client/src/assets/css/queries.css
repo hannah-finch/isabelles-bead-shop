@@ -1,0 +1,77 @@
+/* Large screens ------------------------- */
+
+@media screen and (min-width: 1200px) {
+  body {
+    background-color: blue;
+  }
+
+
+
+
+
+
+}
+
+/* Smaller screens ------------------------- */
+
+@media screen and (max-width: 700px) {
+  body {
+    background-color: red;
+  }
+
+/* Header --------- */
+  .photo-cluster {
+    display: none;
+  }
+
+  .banner-home {
+    display: flex;
+    flex-direction: column;
+    background-position: 40%;
+    padding: 20px 10%;
+  }
+
+  .logo-lg {
+    max-width: 400px;
+  }
+
+  .vertical-line {
+    display: none;
+  }
+
+  .hamburger, .menu {
+    display: flex
+  }
+
+  .btn-admin {
+    background-color: var(--mint);
+    padding: 4px 10px;
+  }
+
+  .cart-preview {
+    right: 0;
+    margin: none
+  }
+
+  nav {
+    justify-content: space-between;
+  }
+
+  #full-nav {
+    display: none
+  }
+
+}
+
+/* Phone screens */
+
+@media screen and (max-width: 450px) {
+  body {
+    background-color: green;
+  }
+
+
+
+
+
+}

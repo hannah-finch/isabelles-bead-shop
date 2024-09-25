@@ -11,6 +11,7 @@ import "./assets/css/product-card.css"
 import "./assets/css/admin.css"
 import "./assets/css/about.css"
 import "./assets/css/cart.css"
+import "./assets/css/queries.css"
 
 //Importing pages
 import HomePage from "./pages/Home.jsx";
