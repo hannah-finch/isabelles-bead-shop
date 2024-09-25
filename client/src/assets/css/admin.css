@@ -5,26 +5,83 @@
   align-items: center;
   border: 10px solid var(--white);
   box-shadow: var(--shadow1);
-  width: 135px;
+  width: 100px;
 }
 
 .product-admin {
   display: grid;
-  grid-template-columns: 135px auto;
-  gap: 10px;
+  grid-template-columns: 100px auto 150px;
+  gap: 20px;
   border-bottom: 1px solid var(--gray);
-  padding: 20px 0;
+  padding: 20px;
+  height: 140px;
+  align-items: center;
 }
 
-.admin-product-section {
+.btn-big {
+  padding: 20px 40px;
+  background-color: var(--whitish);
+  box-shadow: var(--shadow1);
+  border-radius: 40px;
+  transition: 0.2s;
+}
+
+.btn-big:hover {
+  background-color: var(--blue);
+}
+
+.admin-page {
+  background-color: var(--light-blue);
+  padding: 0;
+  /* Needs to be relative for edit form to be positioned */
+  position: relative;
+}
+
+.admin-welcome-section {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 230px;
+  padding-bottom: 0;
 }
 
-.new-product-form {
-  /* remove auto margin */
-  margin: 0;
-  margin-right: 20px;
-  flex-shrink: 5;
+.admin-welcome-section img {
+  width: 80px;
+  margin: 20px;
+}
+
+.btn-4 {
+  background-color: var(--whitish);
+  padding: 10px;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow1);
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.btn-4:hover {
+  background-color: var(--mint);
+}
+
+.button-container-2 {
+  display: flex;
+  gap: 10px;
+}
+
+.upload-img {
+  border: 10px solid var(--white);
+  box-shadow: var(--shadow1);
+  margin: 10px auto;
+  max-width: 300px;
+}
+
+.form-holder {
+  position: absolute;
+  width: 100%;
+  top: 230px;
+  left: 0;
 }

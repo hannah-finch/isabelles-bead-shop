@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../../utils/mutations";
+import { DELETE_PRODUCT } from "../../utils/mutations.js";
+
 import { IntToCurrency, currencyToInt } from "../../utils/math.js";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
-  const { description, category, image, name, price, stock } = prop.product;
-  const { productId } = useParams();
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
+  const { _id, description, category, image, name, price, stock } =
+    prop.product;
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [formState, setFormState] = useState({
-    id: productId,
+    id: _id,
     name: name,
     price: IntToCurrency(price / 100),
     category: category,
@@ -18,6 +21,27 @@ function UpdateForm(prop) {
     stock: stock,
     image: image,
   });
+
+  const clickConfirm = () => {
+    setShowConfirm(!showConfirm);
+  };
+
+  const deleteItem = async (event) => {
+    event.preventDefault;
+    try {
+      const { data } = await DeleteProduct({
+        variables: { id: _id },
+      });
+      if (data.deleteProduct) {
+        location.pathname === "/admin"
+          ? window.location.reload()
+          : window.location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setShowConfirm(false);
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,7 +74,7 @@ function UpdateForm(prop) {
     try {
       const { data } = await UpdateProduct({
         variables: {
-          id: productId,
+          id: _id,
           name,
           price: currencyToInt(price),
           category,
@@ -59,7 +83,12 @@ function UpdateForm(prop) {
           image,
         },
       });
-      console.log(data);
+
+      if (data != null) {
+        alert("Item updated");
+
+        window.location.reload();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -67,7 +96,7 @@ function UpdateForm(prop) {
 
   function revertEdit() {
     setFormState({
-      id: productId,
+      id: _id,
       name: name,
       price: price,
       category: category,
@@ -99,17 +128,21 @@ function UpdateForm(prop) {
           placeholder="Product name"
         ></input>
         <label htmlFor="price">Price:</label>
-        <input
-          value={formState.price}
-          name="price"
-          onChange={handleInputChange}
-          onBlur={(event) => {
-            const { value } = event.target;
-            setFormState({ ...formState, price: IntToCurrency(value) });
-          }}
-          type="text"
-          placeholder="Price"
-        ></input>
+        <div style={{ display: "flex", alignItems: "baseline" }}>
+          <p style={{ alignSelf: "baseline" }}>$ &nbsp;</p>
+          <input
+            style={{ width: "100%" }}
+            value={formState.price}
+            name="price"
+            onChange={handleInputChange}
+            onBlur={(event) => {
+              const { value } = event.target;
+              setFormState({ ...formState, price: IntToCurrency(value) });
+            }}
+            type="text"
+            placeholder="Price"
+          ></input>
+        </div>
         <label htmlFor="stock">Number in stock:</label>
         <input
           value={formState.stock}
@@ -117,7 +150,7 @@ function UpdateForm(prop) {
           onChange={handleInputChange}
           type="number"
           min="0"
-          placeholder="Stock"
+          // placeholder="Stock"
         ></input>
         <label htmlFor="category">Category:</label>
         <select
@@ -152,12 +185,32 @@ function UpdateForm(prop) {
       </form>
       <div className="form-footer center">
         <div className="button-container">
-          <button className="btn-2" onClick={revertEdit}>
-            Revert
-          </button>
-          <button className="btn-1" type="submit" form="UpdateForm">
-            Save Changes
-          </button>
+          {!showConfirm && (
+            <>
+              <button className="btn-del" onClick={clickConfirm}>
+                Delete
+              </button>
+              <button className="btn-2" onClick={revertEdit}>
+                Revert
+              </button>
+              <button className="btn-1" type="submit" form="UpdateForm">
+                Save Changes
+              </button>
+            </>
+          )}
+          {showConfirm && (
+            <>
+              <p>Are you sure? This can&apos;t be undone</p>
+              <div className="button-container">
+                <button className="btn-2" onClick={clickConfirm}>
+                  Never mind
+                </button>
+                <button className="btn-del" onClick={deleteItem}>
+                  Yes, Delete Product
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

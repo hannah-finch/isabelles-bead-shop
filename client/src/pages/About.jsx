@@ -1,5 +1,3 @@
-import "../assets/css/about.css";
-
 function AboutPage() {
   return (
     <>

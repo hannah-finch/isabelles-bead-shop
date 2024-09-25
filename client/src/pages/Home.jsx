@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import "../assets/css/shop.css";
 import ProductCard from "../components/product-card";
 import { ProductsContext } from "../utils/ProductsContext";
 

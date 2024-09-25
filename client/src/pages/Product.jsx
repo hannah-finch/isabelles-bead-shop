@@ -45,7 +45,7 @@ function ProductPage() {
   // set current available stock when the product is first rendered. (stock - quantity in cart)
   useEffect(() => {
     const checkCart = cartItems.find((item) => item._id === productId);
-    if (checkCart){
+    if (checkCart) {
       setCurrentAvailable(stock - checkCart.quantity);
     } else {
       setCurrentAvailable(stock);
@@ -145,7 +145,7 @@ function ProductPage() {
                 {showEdit ? "Cancel Edit" : "Edit Product"}
               </button>
               {!showConfirm && (
-                <button className="btn-2" onClick={clickConfirm}>
+                <button className="btn-del" onClick={clickConfirm}>
                   Delete Product
                 </button>
               )}
@@ -157,7 +157,7 @@ function ProductPage() {
                     <button className="btn-2" onClick={clickConfirm}>
                       Never mind
                     </button>
-                    <button className="btn-1" onClick={deleteItem}>
+                    <button className="btn-del" onClick={deleteItem}>
                       Yes, Delete Product
                     </button>
                   </div>
@@ -221,7 +221,7 @@ function ProductPage() {
         <>
           {Auth.isLoggedIn() ? (
             Auth.isAdmin() ? (
-              <section className="admin-stuff-section">
+              <section style={{ backgroundColor: "var(--light-blue)" }}>
                 <UpdateForm product={product} />
               </section>
             ) : null
@@ -235,7 +235,6 @@ function ProductPage() {
           <section className="review-section">
             <h2>Reviews</h2>
             <div className="review-grid">
-              {/* map through reviews and pass in info to make one card per review */}
               {reviews.map((review, index) => {
                 return <ReviewCard review={review} key={index} />;
               })}
@@ -243,14 +242,6 @@ function ProductPage() {
           </section>
         </>
       ) : null}
-
-      {/* {Auth.isLoggedIn() ? (
-        Auth.isAdmin() ? (
-          <section className="admin-stuff-section">
-            <UpdateForm product={product} />
-          </section>
-        ) : null
-      ) : null} */}
     </>
   );
 }
