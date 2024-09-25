@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server.js",
+    "start": "node server.js",
     "watch": "nodemon server.js --watch server.js",
     "seed": "node seeders/seed.js"
   },
