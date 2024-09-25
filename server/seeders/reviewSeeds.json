@@ -1,0 +1,62 @@
+[
+    {
+        "product": "Blob the keychain",
+       "username": "Mr_Pennysworth01",
+       "content": "Absolutely beautiful work!",
+       "rating": 5
+    },
+    {
+        "product": "Blob the keychain",
+        "username": "ForgotMyLunchbox",
+        "content": "This made me forget my lunchbox",
+        "rating": 3
+    },
+    {
+        "product": "Blob the keychain",
+        "username": "Genericnaem",
+       "content": "I don't like it but have nothing productive to say.",
+       "rating": 1
+    },
+    {
+        "product": "Pink Beaded Bracelet for Teens",
+        "username": "Anothergernericnaem",
+        "content": "Cute, would prefer more variety though.",
+        "rating": 3
+    },
+    {
+        "product": "Pink Beaded Bracelet for Teens",
+        "username": "NoUsirName",
+        "content": "My daughter loves it!",
+        "rating": 4
+    },
+    {
+        "product": "Bright Duo: Pink & Yellow Beaded Bracelet",
+        "username": "gettinglazywiththis",
+        "content": "I absolutely adore the Bright Duo bracelet! The vibrant pink and yellow beads are eye-catching and perfect for adding a pop of color to any outfit. The craftsmanship is fantastic, and it’s super comfortable to wear. I've received so many compliments! This bracelet is a fun, cheerful accessory that I highly recommend!",
+        "rating": 5
+    },
+    {
+        "product": "Teal Teardrop Earrings",
+        "username": "Fashionista22",
+        "content": "I had high hopes for the Teal Teardrop Earrings, but they didn’t quite meet my expectations. While the color is beautiful, the quality feels a bit cheap, and one of the earrings was misaligned right out of the box. They’re also heavier than I anticipated, making them uncomfortable for long wear. Unfortunately, I can’t recommend these.",
+        "rating": 2
+    },
+    {
+        "product": "Sunny Yellow Necklace",
+        "username": "JeweryLover89",
+        "content": "The Sunny Yellow Necklace is cheerful and bright, perfect for summer! However, the clasp is a bit flimsy, and I worry it won’t hold up over time. The design is lovely, but I expected better quality for the price. It’s nice for occasional wear, but I wouldn’t rely on it for everyday use.",
+        "rating": 3
+    },
+    {
+        "product": "Sunny Yellow Necklace",
+        "username": "TheLuckiestLlama",
+        "content": "Got this for my mom for mothers day. She loves yellow, and absolutely adores this necklace!",
+        "rating": 5
+    },
+    {
+        "product": "Sunny Yellow Necklace",
+        "username": "SunnyDae",
+        "content": "I really love the Sunny Yellow Necklace! The color is vibrant and instantly brightens up any outfit. The design is playful and stylish, making it a great statement piece. My only minor complaint is that the chain feels a bit lightweight, but overall, it’s a fantastic accessory. Definitely worth adding to your collection!",
+        "rating": 4
+    }
+]
