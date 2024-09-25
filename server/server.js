@@ -18,7 +18,8 @@ const server = new ApolloServer({
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_URL,
+  //origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_URL,
+  origin: 'https://isabelles-bead-shop.onrender.com',
 };
 
 app.use(cors(corsOptions));
