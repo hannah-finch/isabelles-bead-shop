@@ -145,17 +145,16 @@ h2 {
 }
 
 .btn-del {
-  height: 40px;
-  width: 40px;
-  color: var(--blackish);
-  border: 1px solid var(--blackish);
+  color: rgb(170, 38, 38);
+  border: 1px solid rgb(170, 38, 38);
+  padding: 5px 19px;
   border-radius: 2px;
   box-shadow: var(--shadow1);
   transition: 0.2s;
 }
 
 .btn-del:hover {
-  background-color: var(--blackish);
+  background-color: rgb(170, 38, 38);
   color: var(--whitish);
 }
 
@@ -250,7 +249,7 @@ form .button-container {
   padding: 20px;
   box-shadow: var(--shadow1);
   font-family: Quicksand;
-  color: var(--blackish)
+  color: var(--blackish);
 }
 
 .narrow {

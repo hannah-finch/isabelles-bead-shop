@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PRODUCT } from "../../utils/mutations";
+import { DELETE_PRODUCT } from "../../utils/mutations.js";
+
 import { IntToCurrency, currencyToInt } from "../../utils/math.js";
 
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
+  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { _id, description, category, image, name, price, stock } =
     prop.product;
-  // const { productId } = useParams();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [formState, setFormState] = useState({
     id: _id,
@@ -19,6 +21,27 @@ function UpdateForm(prop) {
     stock: stock,
     image: image,
   });
+
+  const clickConfirm = () => {
+    setShowConfirm(!showConfirm);
+  };
+
+  const deleteItem = async (event) => {
+    event.preventDefault;
+    try {
+      const { data } = await DeleteProduct({
+        variables: { id: _id },
+      });
+      if (data.deleteProduct) {
+        location.pathname === "/admin"
+          ? window.location.reload()
+          : window.location.assign("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setShowConfirm(false);
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -162,12 +185,32 @@ function UpdateForm(prop) {
       </form>
       <div className="form-footer center">
         <div className="button-container">
-          <button className="btn-2" onClick={revertEdit}>
-            Revert
-          </button>
-          <button className="btn-1" type="submit" form="UpdateForm">
-            Save Changes
-          </button>
+          {!showConfirm && (
+            <>
+              <button className="btn-del" onClick={clickConfirm}>
+                Delete
+              </button>
+              <button className="btn-2" onClick={revertEdit}>
+                Revert
+              </button>
+              <button className="btn-1" type="submit" form="UpdateForm">
+                Save Changes
+              </button>
+            </>
+          )}
+          {showConfirm && (
+            <>
+              <p>Are you sure? This can&apos;t be undone</p>
+              <div className="button-container">
+                <button className="btn-2" onClick={clickConfirm}>
+                  Never mind
+                </button>
+                <button className="btn-del" onClick={deleteItem}>
+                  Yes, Delete Product
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

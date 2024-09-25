@@ -22,6 +22,7 @@ function AdminPage() {
   }
   const { products } = data ? data : [];
 
+  // I am sure there's a dryer way to write these, but I'm too tired to look up a reference
   const clickShowForm = () => {
     setShowProducts(false);
     setShowForm(true);
@@ -101,7 +102,6 @@ function AdminPage() {
     if (loading) {
       return <div className="loading">Loading...</div>;
     }
-
     return <UpdateForm product={product} />;
   };
 
@@ -110,10 +110,9 @@ function AdminPage() {
       <section className="admin-page">
         <section className="admin-welcome-section">
           <h1>Hi Isabelle!</h1>
-
           <h2>What would you like to do?</h2>
-
           <div className="spacer"></div>
+
           <div className="button-container">
             <button className="btn-big" onClick={clickShowForm}>
               + New Product
@@ -129,20 +128,19 @@ function AdminPage() {
             </Link>
           </div>
         </section>
-        
-          <section>
-            {showForm && <NewProductForm />}
-            {showProducts && (
-              <>
-                <div className="white-container">
-                  <h2 className="text-center">Products:</h2>
-                  {ProductList}
-                </div>
-              </>
-            )}
-            {showEdit && <UpdateSection product={{ product }} />}
-          </section>
-       
+
+        <section>
+          {showForm && <NewProductForm />}
+          {showProducts && (
+            <>
+              <div className="white-container">
+                <h2 className="text-center">Products:</h2>
+                {ProductList}
+              </div>
+            </>
+          )}
+          {showEdit && <UpdateSection product={{ product }} />}
+        </section>
       </section>
     </>
   );

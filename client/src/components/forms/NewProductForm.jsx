@@ -8,7 +8,7 @@ import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
 function NewProductForm() {
   const [addProduct] = useMutation(ADD_PRODUCT);
-  // TODO SEND INT TO DATABASE
+
   const [formState, setFormState] = useState({
     name: "",
     price: IntToCurrency(5.99),
@@ -38,7 +38,6 @@ function NewProductForm() {
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(formState);
     // if the value is suppose to be an int, make it an int
     switch (name) {
       case "price":
@@ -111,7 +110,6 @@ function NewProductForm() {
           onChange={handleInputChange}
           type="text"
         ></input>
-        {/* //TODO FORCE THIS INTO DECIMAL AND MAKE FUNCTION TO CONVERT INTO DATABASE SHTUFF */}
         <label htmlFor="price">Price:</label>
         <div style={{ display: "flex", alignItems: "baseline" }}>
           <p style={{ alignSelf: "baseline" }}>$ &nbsp;</p>
@@ -138,7 +136,6 @@ function NewProductForm() {
           min="0"
         ></input>
         <label htmlFor="category">Category:</label>
-        {/* //TODO MAKE this a dropdown to limit CATEGORIES */}
         <select
           value={formState.category}
           name="category"

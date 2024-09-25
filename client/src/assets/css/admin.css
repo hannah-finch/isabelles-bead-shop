@@ -16,7 +16,6 @@
   padding: 20px;
   height: 140px;
   align-items: center;
-  /* position: relative; */
 }
 
 .btn-big {
@@ -36,12 +35,6 @@
   padding: 0;
   /* Needs to be relative for edit form to be positioned */
   position: relative;
-  /* min-height: calc(100vh - 90px);
-  height: 100%; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
-  /* padding-bottom: 100px; */
 }
 
 .admin-welcome-section {
@@ -49,8 +42,6 @@
   flex-direction: column;
   align-items: center;
   height: 230px;
-  /* box-shadow: var(--shadow1); */
-  /* background-color: var(--white); */
   padding-bottom: 0;
 }
 
@@ -76,10 +67,6 @@
   background-color: var(--mint);
 }
 
-/* .btn-5 {
-  background-color: var(--teal)
-} */
-
 .button-container-2 {
   display: flex;
   gap: 10px;
@@ -94,7 +81,7 @@
 
 .form-holder {
   position: absolute;
-  width:100%;
+  width: 100%;
   top: 230px;
-  left: 0
+  left: 0;
 }
