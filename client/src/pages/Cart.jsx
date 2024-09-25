@@ -10,7 +10,7 @@ export default function Cart() {
       <section className="cart-section">
         <h2>Shopping cart</h2>
         <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
-        <CheckoutButton cartItems={cartItems}/>
+        <CheckoutButton cartItems={cartItems} />
       </section>
     </>
   );

@@ -20,9 +20,9 @@ import AccountPage from "./pages/Account.jsx";
 import Cart from "./pages/Cart.jsx";
 import ProductPage from "./pages/Product.jsx";
 import AdminPage from "./pages/Admin.jsx";
+import ReturnPage from "./pages/Return.jsx";
 
 import { ThemeProvider } from "@material-tailwind/react";
-
 
 const router = createBrowserRouter([
   {
@@ -57,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <AdminPage />,
+      },
+      {
+        path: "/return",
+        element: <ReturnPage />,
       },
       // Add more routes here...
     ],

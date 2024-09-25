@@ -88,7 +88,37 @@ const resolvers = {
       ).populate([{ path: "username", strictPopulate: false }]);
       return updProduct;
     },
+
+    //* Order Mutations
+    //********************************* */
+    updateStock: async (_, { products }) => {
+      try {
+        for (const product of products) {
+          console.log("product.name", product.name);
+          // Assuming you have a way to map Stripe line product IDs to MongoDB ObjectIds
+          const productId = await mapStripeIdToMongoId(product.name);
+          console.log("productId", productId);
+          console.log("productId._id", productId._id);
+          await Product.findByIdAndUpdate(productId, {
+            $inc: { stock: -product.quantity },
+          });
+          
+        }
+        return true;
+      } catch (error) {
+        console.error("Error updating stock:", error);
+        return false;
+      }
+    },
   },
 };
 
+const mapStripeIdToMongoId = async (productName) => {
+  const product = await Product.findOne({ name: productName });
+  if (!product) {
+    console.error(`Product with name ${productName} not found`);
+    return null;
+  }
+  return product._id;
+};
 module.exports = resolvers;
