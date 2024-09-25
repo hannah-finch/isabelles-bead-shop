@@ -33,12 +33,14 @@ function EditButton(props) {
   }
   return (
     <>
-      {open && <section className="form-holder">
+      {/* {open && <section className="form-holder">
         <UpdateForm product={product} />
       </section> }
       <button className="btn-4 edit-btn" onClick={handleOpen}>
         Edit
-      </button>
+      </button> */}
+
+<UpdateForm product={product} />
 
       {/* <Dialog  open={open} handler={handleOpen}>
       <div className="spacer"></div>

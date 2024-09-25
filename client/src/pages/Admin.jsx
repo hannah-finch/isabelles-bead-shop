@@ -13,6 +13,8 @@ function AdminPage() {
   const [showEdit, setShowEdit] = useState(false);
   const [showProducts, setShowProducts] = useState(true);
   const { data } = useQuery(GET_All_PRODUCTS);
+
+  const [product, setProduct] = useState()
   //* return if you are not logged in, if you are the client, and if you are not admin
   if (!Auth.isLoggedIn() || Auth.isClient() || !Auth.isAdmin()) {
     return <h1>you are not authorized to view this page</h1>;
@@ -46,6 +48,13 @@ function AdminPage() {
   //   setShowForm(false);
   //   setShowProducts(!showProducts);
   // };
+  const clickEdit = (event) => {
+    console.log(event.target.id)
+    setProduct(event.target.id)
+    setShowProducts(false);
+    setShowForm(false);
+    setShowEdit(true)
+  }
 
   const ProductList = products.map((product, key) => {
     return (
@@ -75,12 +84,23 @@ function AdminPage() {
             <Link to={`/product/${product._id}`} className="btn-4">
               View
             </Link>
-            <EditButton productId={product._id} />
+            <button id={product._id} onClick={clickEdit}>TESTER</button>
+            {/* <EditButton productId={product._id} /> */}
           </div>
         </div>
       </>
     );
   });
+
+  const UpdateSection = (props) => {
+    if (props) {
+      console.log(props)
+      return(
+        <EditButton productId={props.product.product}/>
+      )
+    }
+
+  }
 
 
 
@@ -115,7 +135,7 @@ function AdminPage() {
         {/* <section>
           <UpdateForm product={product}/>
         </section> */}
-
+        {showEdit && <UpdateSection product={{product}}/>}
 
 
 
