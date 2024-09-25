@@ -39,6 +39,10 @@ const ProductsProvider = ({ children }) => {
         )
       : // Otherwise, add the item to the cart
         [...cartItems, { ...addItem, quantity: quantityToAdd }];
+
+    // set to local storage
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
     setCartItems(updatedCartItems);
   };
 
