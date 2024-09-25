@@ -50,7 +50,7 @@ const ReturnPage = () => {
                 // Set flag in localStorage to prevent multiple updates on refresh
                 localStorage.setItem(`stockUpdated_${sessionId}`, "true");
                 // Clear cart items from localStorage after successful purchase
-                localStorage.removeItem("cartItems");
+                localStorage.setItem("cartItems", JSON.stringify([]));
               })
               .catch((error) => {
                 console.error("Error updating stock:", error);
