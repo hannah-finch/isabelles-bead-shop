@@ -111,14 +111,13 @@ nav button {
 
 .logo-lg {
   width: 100%;
-  max-width: 560px;
+  max-width: 500px;
   justify-self: center;
-  padding: 10px;
 }
 
 .photo-cluster {
   width: 100%;
-  max-width: 750px;
+  max-width: 740px;
   justify-self: right;
 }
 
@@ -129,6 +128,7 @@ nav button {
   left: 0;
   top: 0;
   height: 100vh;
+  width: 210px;
   padding: 26px;
   box-shadow: var(--shadow4);
   display: none;

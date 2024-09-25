@@ -5,11 +5,11 @@
     background-color: blue;
   }
 
+  /* Shop page --------- */
 
-
-
-
-
+  .product-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 /* Smaller screens ------------------------- */
@@ -19,7 +19,7 @@
     background-color: red;
   }
 
-/* Header --------- */
+  /* Header --------- */
   .photo-cluster {
     display: none;
   }
@@ -39,8 +39,9 @@
     display: none;
   }
 
-  .hamburger, .menu {
-    display: flex
+  .hamburger,
+  .menu {
+    display: flex;
   }
 
   .btn-admin {
@@ -50,16 +51,25 @@
 
   .cart-preview {
     right: 0;
-    margin: none
+    margin: none;
   }
 
   nav {
     justify-content: space-between;
   }
 
-  #full-nav {
-    display: none
+  /* Shop page --------- */
+
+  .product-grid {
+    grid-template-columns: 1fr 1fr;
   }
+
+  .category-banner {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 20px;
+  }
+
 
 }
 
@@ -69,9 +79,13 @@
   body {
     background-color: green;
   }
+ 
+  section {
+    padding: 40px 5%;
+  }
 
-
-
-
+  footer {
+    height: 240px;
+  }
 
 }

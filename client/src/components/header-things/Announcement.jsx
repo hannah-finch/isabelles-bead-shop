@@ -10,8 +10,10 @@ function Announcement() {
         {/* this hack div gets shadow to show */}
         <div className="hack">
           <div className="announcement">
-            <span className="bold">{announcementTitle}&nbsp;</span>{" "}
-            {announcement}
+            <p className="text-center">
+              <span className="bold">{announcementTitle}&nbsp;</span>{" "}
+              {announcement}
+            </p>
           </div>
         </div>
       </>

@@ -109,7 +109,15 @@ function Navbar() {
             <div className="spacer"></div>
             <NavLinks />
 
-            <img style={{width: "60px", alignSelf: "center",  position: "absolute", bottom: "60px",}}src="/images/icons/cluster-1.svg"></img>
+            <img
+              style={{
+                width: "60px",
+                alignSelf: "center",
+                position: "absolute",
+                bottom: "40px",
+              }}
+              src="/images/icons/cluster-1.svg"
+            ></img>
           </div>
         )}
         <button className="hamburger" onClick={toggleMenu}>
