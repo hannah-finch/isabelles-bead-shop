@@ -1,0 +1,154 @@
+/* Large screens ------------------------- */
+
+@media screen and (min-width: 1200px) {
+
+  .product-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .review-grid {
+    column-count: 3;
+  }
+
+  .about-grid {
+    box-shadow: var(--shadow1);
+    border: 180px solid var(--light-blue);
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+/* Smaller screens ------------------------- */
+
+@media screen and (max-width: 700px) {
+  section {
+    padding: 40px;
+  }
+
+  /* Header --------- */
+  .photo-cluster {
+    display: none;
+  }
+
+  .banner-home {
+    display: flex;
+    flex-direction: column;
+    background-position: 40%;
+    padding: 20px 10%;
+  }
+
+  .logo-lg {
+    max-width: 400px;
+  }
+
+  .vertical-line {
+    display: none;
+  }
+
+  .hamburger,
+  .menu {
+    display: flex;
+  }
+
+  .btn-admin {
+    background-color: var(--mint);
+    padding: 4px 10px;
+  }
+
+  .cart-preview {
+    right: 0;
+    margin: none;
+  }
+
+  nav {
+    justify-content: space-between;
+  }
+
+  /* Shop page --------- */
+
+  .product-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .category-banner {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 20px;
+  }
+
+  /* Product page -------- */
+
+  .product-section {
+    flex-direction: column;
+  }
+
+  .product-img {
+    align-self: center;
+    margin-bottom: 40px;
+  }
+
+  .review-card {
+    padding: 20px;
+  }
+
+  .review-card p {
+    margin-top: 16px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .img-square-1 {
+    height: 80px;
+  }
+
+  .cart-item {
+    gap: 10px;
+  }
+  .cart-section {
+    padding: 40px 0;
+  }
+
+  .product-admin {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Phone screens */
+
+@media screen and (max-width: 450px) {
+  .product-img {
+    margin-bottom: 20px;
+  }
+
+  footer {
+    height: 240px;
+  }
+
+  .banner a {
+    margin: 20px;
+  }
+
+  .button-container-product {
+    margin: 0 -20px;
+  }
+
+  .flex-row {
+    flex-direction: column;
+  }
+
+  .review-grid {
+    column-count: 1;
+  }
+
+  .product-img-cart {
+    width: 120px;
+  }
+
+  .btn-big {
+    padding: 16px;
+  }
+}

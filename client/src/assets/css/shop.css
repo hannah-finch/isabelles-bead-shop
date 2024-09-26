@@ -1,7 +1,7 @@
 /* Category banner styles --------------------------- */
 
 .category-banner {
-  padding: 60px 0;
+  padding: 40px 0;
   background-image: url("/images/banner-1.png");
   background-size: cover;
   background-position: 50% 50%;
@@ -14,7 +14,7 @@
 .category-btn {
   background-color: var(--whitish);
   box-shadow: var(--shadow1);
-  width: 160px;
+  width: 140px;
   height: 120px;
   padding: 30px;
   text-align: center;
@@ -50,18 +50,18 @@
 }
 
 .category-link {
-  margin: 10px;
+  margin: 0 10px;
 }
 
 .category-link-active {
   border-bottom: 1px solid var(--blackish);
-  margin: 10px;
+  margin: 0 10px;
 }
 
 .product-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
-  margin: 40px 0;
+  margin-top: 40px;
   min-height: 535px;
 }
