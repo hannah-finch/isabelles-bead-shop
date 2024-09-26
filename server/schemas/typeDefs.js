@@ -75,7 +75,7 @@ type Checkout {
 }
 
 input UpdateStockInput {
-    name: String!
+    _id: ID!
     quantity: Int!
   }
 `;
