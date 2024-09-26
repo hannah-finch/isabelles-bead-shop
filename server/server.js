@@ -7,7 +7,7 @@ const { authMiddleware } = require("./utils/auth");
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
-const { add } = require("./models/reviews");
+const { add, method } = require("./models/reviews");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
@@ -18,7 +18,10 @@ const server = new ApolloServer({
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_RL,
+  //origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_URL,
+  origin: 'https://isabelles-bead-shop.onrender.com',
+  methods: "GET,POST",
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -68,17 +71,13 @@ const startApolloServer = async () => {
     }
   });
 
-  app.get("/retrieve-checkout-session/:sessionId", async (req, res) => {
-    const sessionId = req.params.sessionId;
-
+  app.get('/retrieve-checkout-session/:sessionId', async (req, res) => {
     try {
-      const session = await stripe.checkout.sessions.retrieve(sessionId, {
-        expand: ["line_items"],
-      });
+      const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
       res.json(session);
     } catch (error) {
-      console.error("Error retrieving session:", error);
-      res.status(500).json({ error: error.message });
+      console.error('Error retrieving checkout session:', error);
+      res.status(500).json({ error: 'Failed to retrieve session' });
     }
   });
 
