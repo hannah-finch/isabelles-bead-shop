@@ -71,17 +71,13 @@ const startApolloServer = async () => {
     }
   });
 
-  app.get("/retrieve-checkout-session/:sessionId", async (req, res) => {
-    const sessionId = req.params.sessionId;
-
+  app.get('/retrieve-checkout-session/:sessionId', async (req, res) => {
     try {
-      const session = await stripe.checkout.sessions.retrieve(sessionId, {
-        expand: ["line_items"],
-      });
+      const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
       res.json(session);
     } catch (error) {
-      console.error("Error retrieving session:", error);
-      res.status(500).json({ error: error.message });
+      console.error('Error retrieving checkout session:', error);
+      res.status(500).json({ error: 'Failed to retrieve session' });
     }
   });
 
