@@ -19,7 +19,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const corsOptions = {
   //origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URL : process.env.PROD_URL,
-  origin: 'https://isabelles-bead-shop.onrender.com',
+  origin: "*",
   methods: "GET,POST",
   credentials: true,
 };
@@ -67,19 +67,19 @@ const startApolloServer = async () => {
       res.json({ sessionId: session.id });
     } catch (error) {
       console.error("Error creating checkout session:", error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: "Internal Server Error" });
     }
   });
 
-  app.get('/retrieve-checkout-session/:sessionId', async (req, res) => {
-    try {
-      const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
-      res.json(session);
-    } catch (error) {
-      console.error('Error retrieving checkout session:', error);
-      res.status(500).json({ error: 'Failed to retrieve session' });
-    }
-  });
+  // app.get('/retrieve-checkout-session/:sessionId', async (req, res) => {
+  //   try {
+  //     const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
+  //     res.json(session);
+  //   } catch (error) {
+  //     console.error('Error retrieving checkout session:', error);
+  //     res.status(500).json({ error: 'Failed to retrieve session' });
+  //   }
+  // });
 
   db.once("open", () => {
     app.listen(PORT, () =>

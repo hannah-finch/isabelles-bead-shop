@@ -18,16 +18,30 @@ const CheckoutButton = ({ cartItems }) => {
       quantity: item.quantity,
     }));
 
+    // set the stripeItems to local storage
+    localStorage.setItem("stripeItems", JSON.stringify(stripeItems));
+    // map a new array, add the cartItem's _id to local storage with the quantity
+    const cartItemsWithId = cartItems.map((item) => ({
+      _id: item._id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+    }));
+    localStorage.setItem("cartItemsWithId", JSON.stringify(cartItemsWithId));
+    console.log("stripeItems", stripeItems);
+    console.log("cartItemsWithId", cartItemsWithId);
+
     try {
       const response = await fetch("https://isabelles-bead-shop.onrender.com/create-checkout-session", {
-        // const response = await fetch("http://localhost:3001/create-checkout-session", {  
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7`,
-        },
-        body: JSON.stringify({ items: stripeItems }),
-      });
+      //const response = await fetch("http://localhost:3001/create-checkout-session",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7`,
+          },
+          body: JSON.stringify({ items: stripeItems }),
+        }
+      );
 
       const session = await response.json();
 

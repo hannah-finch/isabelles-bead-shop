@@ -146,8 +146,8 @@ function ProductPage() {
                 +
               </button>
 
-              {currentAvailable == 0 ? (
-                <p className="bold">NO MORE AVAIlABLE</p>
+              {currentAvailable <= 0 ? (
+                <p className="bold">NO MORE AVAIABLE</p>
               ) : (
                 <button
                   onClick={() => {
