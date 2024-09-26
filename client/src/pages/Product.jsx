@@ -192,7 +192,7 @@ function ProductPage() {
                 +
               </button>
 
-              {currentAvailable == 0 ? (
+              {currentAvailable <= 0 ? (
                 <p className="bold">NO MORE AVAIABLE</p>
               ) : (
                 <button

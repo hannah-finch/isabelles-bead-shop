@@ -19,14 +19,19 @@ const ProductsProvider = ({ children }) => {
   // Shopping cart state
   const [cartItems, setCartItems] = useState(() => {
     // check local storage for cart items and initialize the cart (with the items if there are any) or return an empty array
-    const initializeCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    if  (initializeCart.length > 0) {
-      return initializeCart;
-    } else {
+    try {
+      const initializeCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+      if  (initializeCart.length > 0) {
+        return initializeCart;
+      } else {
+        return [];
+      }  
+    } catch (error) {
+      console.error(error);
       return [];
-    }  
+    }
   });
-
+     
   const [cartCounter, setCartCounter] = useState(0);
 
   useEffect(() => {
