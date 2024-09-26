@@ -1,7 +1,6 @@
 /* Large screens ------------------------- */
 
 @media screen and (min-width: 1200px) {
-  /* Shop page --------- */
 
   .product-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -12,7 +11,6 @@
   }
 
   .about-grid {
-    /* margin: 0 10%; */
     box-shadow: var(--shadow1);
     border: 180px solid var(--light-blue);
     border-top: none;

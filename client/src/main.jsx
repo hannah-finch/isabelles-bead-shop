@@ -43,10 +43,10 @@ const router = createBrowserRouter([
         path: "/about",
         element: <AboutPage />,
       },
-      {
-        path: "/account/:userId",
-        element: <AccountPage />,
-      },
+      // {
+      //   path: "/account/:userId",
+      //   element: <AccountPage />,
+      // },
       {
         path: "/cart",
         element: <Cart />,

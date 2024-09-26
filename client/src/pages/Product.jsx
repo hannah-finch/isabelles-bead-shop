@@ -1,10 +1,7 @@
-// refactor/stockTest
-
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
-import { DELETE_PRODUCT } from "../utils/mutations.js";
 import { toDecimal } from "../utils/math.js";
 import { useContext } from "react";
 import Auth from "../utils/auth";
@@ -34,11 +31,9 @@ function ProductPage() {
       };
 
   const { description, imageURL, stock, price, name, reviews } = product;
-  const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { addToCart, cartItems } = useContext(ShoppingCartContext);
   const [addClicked, setAddClicked] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
   const [currentAvailable, setCurrentAvailable] = useState(stock);
   const [quantityToAdd, setQuantityToAdd] = useState(1);
 
@@ -62,10 +57,6 @@ function ProductPage() {
 
   const clickEdit = () => {
     setShowEdit(!showEdit);
-  };
-
-  const clickConfirm = () => {
-    setShowConfirm(!showConfirm);
   };
 
   const handleIncrement = () => {
@@ -104,21 +95,6 @@ function ProductPage() {
     );
   };
 
-  const deleteItem = async (event) => {
-    event.preventDefault;
-    try {
-      const { data } = await DeleteProduct({
-        variables: { id: productId },
-      });
-      if (data.deleteProduct) {
-        window.location.assign("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setShowConfirm(false);
-  };
-
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
@@ -140,42 +116,19 @@ function ProductPage() {
           <div className="spacer"></div>
 
           {Auth.isLoggedIn() && Auth.isAdmin() ? (
-            <>
-              <div className="spacer"></div>
-              <button className="btn-3" onClick={clickEdit}>
-                {showEdit ? "Cancel Edit" : "Edit Product"}
-              </button>
-              {!showConfirm && (
-                <button className="btn-del" onClick={clickConfirm}>
-                  Delete Product
-                </button>
-              )}
-
-              {showConfirm && (
-                <>
-                  <p>Are you sure? This can&apos;t be undone</p>
-                  <div className="button-container">
-                    <button className="btn-2" onClick={clickConfirm}>
-                      Never mind
-                    </button>
-                    <button className="btn-del" onClick={deleteItem}>
-                      Yes, Delete Product
-                    </button>
-                  </div>
-                </>
-              )}
-            </>
+            <button className="btn-edit" onClick={clickEdit}>
+              {showEdit ? "X" : "Edit"}
+            </button>
           ) : (
             <div className="button-container button-container-product">
               <button
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2  rounded-full"
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
                 onClick={() => {
                   handleDecrement();
                 }}
               >
                 -
               </button>
-
               {stock > 0 ? (
                 <div className="like-btn-2 ">
                   <p id="quantity">{quantityToAdd}</p>
@@ -194,7 +147,7 @@ function ProductPage() {
               </button>
 
               {currentAvailable == 0 ? (
-                <p className="bold">NO MORE AVAIABLE</p>
+                <p className="bold">NO MORE AVAIlABLE</p>
               ) : (
                 <button
                   onClick={() => {

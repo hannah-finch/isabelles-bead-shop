@@ -16,7 +16,7 @@
   --pink: #e0b4b4;
   --yellow: #e6cd8c;
   --shadow1: 0 0 3px #8d8d8d3f;
-  --shadow2: 0 0 16px #8d8d8d3f;
+  --shadow2: 0 0 8px #8d8d8d3f;
   --shadow3: 0 0 16px #8d8d8d3f;
   --shadow4: 0 0 100px #4e4e4e3e;
 }
@@ -157,6 +157,23 @@ h2 {
 .btn-del:hover {
   background-color: rgb(170, 38, 38);
   color: var(--whitish);
+}
+
+.btn-edit {
+  background-color: var(--teal);
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  box-shadow: var(--shadow2);
+  border: 6px solid var(--white);
+  transition: .2s;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn-edit:hover {
+  background-color: var(--blue);
 }
 
 .button-container {
