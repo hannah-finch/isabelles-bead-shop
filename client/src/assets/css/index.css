@@ -16,8 +16,9 @@
   --pink: #e0b4b4;
   --yellow: #e6cd8c;
   --shadow1: 0 0 3px #8d8d8d3f;
-  --shadow2: 0 0 16px #8d8d8d3f;
+  --shadow2: 0 0 8px #8d8d8d3f;
   --shadow3: 0 0 16px #8d8d8d3f;
+  --shadow4: 0 0 100px #4e4e4e3e;
 }
 
 body {
@@ -158,11 +159,32 @@ h2 {
   color: var(--whitish);
 }
 
+.btn-edit {
+  background-color: var(--teal);
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  box-shadow: var(--shadow2);
+  border: 6px solid var(--white);
+  transition: .2s;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn-edit:hover {
+  background-color: var(--blue);
+}
+
 .button-container {
   display: flex;
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.button-container-product {
+  flex-wrap: nowrap;
 }
 
 /* Footer styles ---------------------------- */
@@ -205,7 +227,7 @@ form {
   max-width: 800px;
   margin: auto;
   color: var(--blackish);
-  font-size: 18px;
+  font-size: 16px;
   font-family: Quicksand;
 }
 
@@ -271,6 +293,6 @@ form label {
 }
 
 textarea {
-  height: 200px;
+  height: 160px;
   resize: none;
 }

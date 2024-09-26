@@ -14,7 +14,7 @@
   gap: 20px;
   border-bottom: 1px solid var(--gray);
   padding: 20px;
-  height: 140px;
+  min-height: 140px;
   align-items: center;
 }
 
@@ -43,6 +43,7 @@
   align-items: center;
   height: 230px;
   padding-bottom: 0;
+  text-align: center;
 }
 
 .admin-welcome-section img {

@@ -113,7 +113,7 @@ function AdminPage() {
           <h2>What would you like to do?</h2>
           <div className="spacer"></div>
 
-          <div className="button-container">
+          <div className="button-container button-container-product">
             <button className="btn-big" onClick={clickShowForm}>
               + New Product
             </button>
@@ -122,6 +122,7 @@ function AdminPage() {
             </button>
             <Link
               to="https://dashboard.stripe.com/test/dashboard"
+              target="_blank"
               className="btn-big"
             >
               View Orders

@@ -5,21 +5,22 @@
   align-items: center;
   border: 10px solid var(--white);
   box-shadow: var(--shadow1);
-  width: 100px;
+  max-width: 90px;
 }
 
 .cart-item {
-  display: grid;
-  grid-template-columns: 100px auto 130px;
-  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   gap: 40px;
   border-bottom: 1px solid var(--gray);
   padding: 20px 0;
+
 }
 
 .item-text-box {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
   width: 100%;
 }
 
