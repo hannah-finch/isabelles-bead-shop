@@ -62,11 +62,11 @@ const resolvers = {
     },
     updateProduct: async (
       _,
-      { _id, name, price, description, image, category }
+      { _id, name, price, description, image, category, stock }
     ) => {
       const product = await Product.findByIdAndUpdate(
         { _id },
-        { name, price, description, image, category },
+        { name, price, description, image, category, stock },
         { new: true }
       );
       return product;
@@ -102,7 +102,6 @@ const resolvers = {
           await Product.findByIdAndUpdate(productId, {
             $inc: { stock: -product.quantity },
           });
-          
         }
         return true;
       } catch (error) {
