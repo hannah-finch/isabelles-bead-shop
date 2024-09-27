@@ -9,13 +9,11 @@ function HomePage() {
   const [hoveredCategory, setHoveredCategory] = useState("");
   const shopSection = useRef(null);
 
-  const Icon = ({ category }) => {
-    return <img src={`/images/icons/${category}.svg`}></img>;
-  };
+  const nonUniqCategories = allProducts.map((product) => product.category);
+  const Categories = [...new Set(nonUniqCategories)];
 
-  const IconSelected = ({ category }) => {
-    return <img src={`/images/icons/${category}-color.svg`}></img>;
-  };
+  const Icon = ({ category }) => <img src={`/images/icons/${category}.svg`}></img>;
+  const IconSelected = ({ category }) => <img src={`/images/icons/${category}-color.svg`}></img>;
 
   useEffect(() => {
     if (selectedCategory === "all") {
@@ -34,12 +32,8 @@ function HomePage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
-  const nonUniqCategories = allProducts.map((product) => {
-    return product.category;
-  });
-  const Categories = [...new Set(nonUniqCategories)];
 
-  function HomeBanner() {
+  function CategoryBanner() {
     return (
       <section className="category-banner">
         {Categories.map((category, key) => (
@@ -60,22 +54,21 @@ function HomePage() {
             ) : (
               <Icon category={category} />
             )}
-            <p>{category}</p>
+            <p>{category === "other" ? "other" : `${category}s`}</p>
           </button>
         ))}
       </section>
     );
   }
 
-  function ShopSelection() {
+  function ShopHeader() {
     return (
       <>
         <h2>
-          {selectedCategory === "all" ? "Shop " : ""}
-          {selectedCategory === "all" || selectedCategory === "other"
-            ? `${capitalizeWords(selectedCategory)}`
-            : `${capitalizeWords(selectedCategory)}s`}
+          {selectedCategory === "all" ? "Shop All" : selectedCategory === "other" ? "Other"
+          : `${capitalizeWords(selectedCategory)}s`}
         </h2>
+        <div className="spacer"></div>
         <button
           onClick={() => setSelectedCategory("all")}
           className={
@@ -105,9 +98,9 @@ function HomePage() {
     );
   }
   function ProductsGrid() {
-    const [displayNum, setDisplayNum] = useState(15);
+    const [displayNum, setDisplayNum] = useState(24);
     const showMore = () => {
-      setDisplayNum(displayNum + 15);
+      setDisplayNum(displayNum + 24);
     };
     return (
       <>
@@ -138,9 +131,9 @@ function HomePage() {
   }
   return (
     <>
-      <HomeBanner />
+      <CategoryBanner />
       <section className="shop-section" ref={shopSection}>
-        <ShopSelection />
+        <ShopHeader />
         <ProductsGrid />
       </section>
     </>
