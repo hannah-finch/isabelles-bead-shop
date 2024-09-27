@@ -6,6 +6,15 @@ function HomePage() {
   const { allProducts } = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [hoveredCategory, setHoveredCategory] = useState("");
+
+  const Icon = ({ category }) => {
+    return <img src={`/images/icons/${category}.svg`}></img>;
+  };
+
+  const IconSelected = ({ category }) => {
+    return <img src={`/images/icons/${category}-color.svg`}></img>;
+  };
 
   useEffect(() => {
     if (selectedCategory === "all") {
@@ -28,44 +37,24 @@ function HomePage() {
     return product.category;
   });
   const Categories = [...new Set(nonUniqCategories)];
-  const [hoveredCategory, setHoveredCategory] = useState("");
-
-  // This function sets the icon for categories, normal and hovered. If the category is not in categoriesToCheck, it will set the icon as a square
-  function iconSrc(category) {
-    const categoriesToCheck = new Set([
-      "bracelet",
-      "earring",
-      "fidget",
-      "keychain",
-      "necklace",
-      "other",
-    ]);
-
-    if (!categoriesToCheck.has(category)) {
-      return hoveredCategory === category || selectedCategory === category
-        ? `/images/icons/uncategorized-color.svg`
-        : `/images/icons/uncategorized.svg`;
-    } else {
-      return hoveredCategory === category || selectedCategory === category
-        ? `/images/icons/${category}-color.svg`
-        : `/images/icons/${category}.svg`;
-    }
-  }
 
   function HomeBanner() {
     return (
       <section className="category-banner">
         {Categories.map((category, key) => (
-          <button key={key}>
-            <div
-              onClick={() => setSelectedCategory(category)}
-              className="category-btn"
-              onMouseEnter={() => setHoveredCategory(category)}
-              onMouseLeave={() => setHoveredCategory("")}
-            >
-              <img src={iconSrc(category)}></img>
-              {category === "other" ? category : `${category}s`}
-            </div>
+          <button
+            key={key}
+            onClick={() => setSelectedCategory(category)}
+            className="category-btn"
+            onMouseEnter={() => setHoveredCategory(category)}
+            onMouseLeave={() => setHoveredCategory()}
+          >
+            {hoveredCategory === category || selectedCategory === category ? (
+              <IconSelected category={category} />
+            ) : (
+              <Icon category={category} />
+            )}
+            <p>{category}</p>
           </button>
         ))}
       </section>

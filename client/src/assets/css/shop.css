@@ -25,9 +25,17 @@
   border-radius: 6px;
 }
 
+.category-btn p {
+  /* Come back to this to make text not flash */
+  position: absolute;
+  bottom: -10px;
+
+}
+
 .category-btn img {
   width: 60px;
   padding-bottom: 6px;
+  /* display: none */
 }
 
 .category-btn:hover {
