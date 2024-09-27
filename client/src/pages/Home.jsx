@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import ProductCard from "../components/product-card";
 import { ProductsContext } from "../utils/ProductsContext";
 
@@ -7,6 +7,7 @@ function HomePage() {
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [hoveredCategory, setHoveredCategory] = useState("");
+  const shopSection = useRef(null);
 
   const Icon = ({ category }) => {
     return <img src={`/images/icons/${category}.svg`}></img>;
@@ -44,7 +45,12 @@ function HomePage() {
         {Categories.map((category, key) => (
           <button
             key={key}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => {
+              setSelectedCategory(category);
+              if (shopSection.current) {
+                shopSection.current.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             className="category-btn"
             onMouseEnter={() => setHoveredCategory(category)}
             onMouseLeave={() => setHoveredCategory()}
@@ -133,7 +139,7 @@ function HomePage() {
   return (
     <>
       <HomeBanner />
-      <section className="shop-section">
+      <section className="shop-section" ref={shopSection}>
         <ShopSelection />
         <ProductsGrid />
       </section>

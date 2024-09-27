@@ -23,19 +23,18 @@
   flex-direction: column;
   align-items: center;
   border-radius: 6px;
+  /* Position relative so p can position correct */
+  position: relative;
 }
 
 .category-btn p {
-  /* Come back to this to make text not flash */
   position: absolute;
-  bottom: -10px;
-
+  bottom: 30px;
 }
 
 .category-btn img {
   width: 60px;
   padding-bottom: 6px;
-  /* display: none */
 }
 
 .category-btn:hover {
