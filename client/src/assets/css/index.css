@@ -181,14 +181,6 @@ font-size: 20px;
   background-color: var(--blue);
 }
 
-.btn-sort {
-
-}
-
-.btn-sort:hover{
-  
-}
-
 .button-container {
   display: flex;
   gap: 12px;

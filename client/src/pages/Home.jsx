@@ -132,9 +132,11 @@ function HomePage() {
                 </button>
               );
             })}
+            <div className="spacer"></div>
             <h3>Sort by:</h3>
 
-            <select value={sortChoice} onChange={(e) => setSortChoice(e.target.value)}>
+
+            <select value={sortChoice} onChange={(e) => setSortChoice(e.target.value)} style={{textAlign: "center", border: "1px solid var(--blackish)"}}>
               <option value="new-old">New to old</option>
               <option value="old-new">Old to new</option>
               <option value="low-high">Price low to high</option>
@@ -181,7 +183,8 @@ function HomePage() {
             </h2>
             <ProductsGrid />
             {filteredProducts.length > displayNum ? (
-              <button onClick={showMore} className="btn-2">
+              <button onClick={showMore} className="btn-2"
+              style={{alignSelf: "center"}}>
                 Show More
               </button>
             ) : null}
