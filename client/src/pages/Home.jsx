@@ -68,28 +68,37 @@ function HomePage() {
   function ShopSection() {
     const [displayNum, setDisplayNum] = useState(24);
     const [sortedProducts, setSortedProducts] = useState(filteredProducts);
+    const [sortChoice, setSortChoice] = useState("new-old")
     const showMore = () => {
       setDisplayNum(displayNum + 24);
     };
 
-    // sorts by index, I'd like to add a timestamp to the db and sort with that instead
-    function newToOld() {
-      const products = filteredProducts
-        .map((value, index) => [index, value])
-        .sort((a, b) => b[0] - a[0])
-        .map((pair) => pair[1]);
-      setSortedProducts(products);
-    }
-
-    function highToLow() {
-      const products = [...filteredProducts].sort((a, b) => b.price - a.price);
-      setSortedProducts(products);
-    }
-
-    function lowToHigh() {
-      const products = [...filteredProducts].sort((a, b) => a.price - b.price);
-      setSortedProducts(products);
-    }
+    useEffect(() => {
+        switch (sortChoice) {
+          case "new-old":
+            setSortedProducts(
+              filteredProducts
+                .map((value, index) => [index, value])
+                .sort((a, b) => b[0] - a[0])
+                .map((pair) => pair[1])
+            );
+            break;
+          case "old-new":
+            setSortedProducts(filteredProducts);
+            break;
+          case "low-high":
+            setSortedProducts(
+              [...filteredProducts].sort((a, b) => a.price - b.price)
+            );
+            break;
+          case "high-low":
+            setSortedProducts(
+              [...filteredProducts].sort((a, b) => b.price - a.price)
+            );
+            break;
+        }
+      
+    }, [sortChoice])
 
     const ShopSidebar = () => {
       return (
@@ -123,21 +132,15 @@ function HomePage() {
                 </button>
               );
             })}
-            <button className="btn-3" onClick={newToOld}>
-              New to Old
-            </button>
-            <button
-              className="btn-3"
-              onClick={() => setSortedProducts(filteredProducts)}
-            >
-              Old to New
-            </button>
-            <button className="btn-3" onClick={highToLow}>
-              Price high to low
-            </button>
-            <button className="btn-3" onClick={lowToHigh}>
-              Price low to high
-            </button>
+            <h3>Sort by:</h3>
+
+            <select value={sortChoice} onChange={(e) => setSortChoice(e.target.value)}>
+              <option value="new-old">New to old</option>
+              <option value="old-new">Old to new</option>
+              <option value="low-high">Price low to high</option>
+              <option value="high-low">Price high to low</option>
+            </select>
+
           </div>
         </>
       );
