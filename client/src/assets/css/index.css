@@ -95,6 +95,11 @@ h2 {
   font-size: 30px;
 }
 
+h3 {
+font-family: Salsa;
+font-size: 20px;
+}
+
 .like-btn-2 {
   border: 1px solid var(--blackish);
   border-radius: 2px;

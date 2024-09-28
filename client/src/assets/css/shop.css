@@ -53,16 +53,20 @@
 /* Shop section styles ---------------------- */
 
 .shop-section {
-  text-align: center;
+  /* text-align: center; */
+  display: grid;
+  grid-template-columns: 140px auto;
+  gap: 30px;
+  align-items: top;
 }
 
 .category-link {
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 
 .category-link-active {
   border-bottom: 1px solid var(--blackish);
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 
 .product-grid {
@@ -71,4 +75,24 @@
   gap: 20px;
   margin-top: 40px;
   min-height: 535px;
+}
+
+/* Shop sidebar --------------------------- */
+
+.shop-sidebar {
+  position: sticky;
+  top: 0;
+  height:400px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* align-items: flex-end; */
+  gap: 8px;
+  background-color: var(--white);
+}
+
+.shop-main {
+  border-left: 1px solid var(--blackish);
+  padding-left: 30px;
 }
