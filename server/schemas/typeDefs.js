@@ -1,3 +1,10 @@
+/** Similar to how you define your models in separate js files, 
+ * you can do the same with the type defs. Since your model is 
+ * not terribly unweildy it's completely optional but if in the 
+ * future your model gets more extensive, you might want to give
+ * it some thought. 
+ */
+
 const typeDefs = `
 type Query {
     me: User

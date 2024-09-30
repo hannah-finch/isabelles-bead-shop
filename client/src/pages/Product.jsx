@@ -81,6 +81,12 @@ function ProductPage() {
     delayClick();
   };
 
+  /** Just about any time where you are defining a function that is going to return a JSX component
+   * you want it to be in its own file to keep your code modular and manageable. 
+   * For organization purposes, more single-use would go in components folder, and re-usable in a lib folder,
+   * but either way, separate it out. 
+   * Check out https://www.baeldung.com/solid-principles , with particular regard to Single Responsibility 
+   */
   const ReviewCard = (prop) => {
     const { rating, content, username } = prop.review;
 

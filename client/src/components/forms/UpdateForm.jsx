@@ -85,6 +85,9 @@ function UpdateForm(prop) {
       });
 
       if (data != null) {
+        //avoid alert because it can/will be blocked by most pop-up blockers
+        //always prefer modals over alert even though it's more work, it pays for 
+        //itself in the long run
         alert("Item updated");
 
         window.location.reload();
