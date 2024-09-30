@@ -12,3 +12,8 @@ function AccountPage() {
 }
 
 export default AccountPage;
+
+/** If it's not used, get rid of it. Any stuff left hanging around just
+ * clutters up the place and potentially adds vulnerabilities because
+ * it's not on the radar for testing/maintenance, etc. 
+ */

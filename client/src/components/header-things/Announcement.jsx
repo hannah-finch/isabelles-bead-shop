@@ -1,6 +1,9 @@
 function Announcement() {
   // later, use state instead and let admin edit the title and announcement, save in db
   const announcementTitle = "NOTICE: ";
+
+
+  /* ----> BUT I REALLY WAN'T TO BECAUSE IT'S SO COOL!!! */
   const announcement =
     "This website is currently under construction. DON'T USE IT";
 

@@ -1,4 +1,10 @@
 function AboutPage() {
+  /* enhancement request: get this information from the database
+  Any time you have data subject to change you want to make it easy to do that.
+  Changing code requires an enormous amount of technical energy more than creating
+  a CRUD functionality for it especially since you already have the database in 
+  your overall architecture
+  */
   return (
     <>
       <div className="about-grid">

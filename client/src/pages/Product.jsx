@@ -181,6 +181,9 @@ function ProductPage() {
         <>
           {Auth.isLoggedIn() ? (
             Auth.isAdmin() ? (
+              // one should pick a 
+              // css library or css. There are some exceptions for style{} but it
+              // always comes with the cost of technical debt/maintenance
               <section style={{ backgroundColor: "var(--light-blue)" }}>
                 <UpdateForm product={product} />
               </section>

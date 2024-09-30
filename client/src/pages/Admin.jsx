@@ -23,6 +23,7 @@ function AdminPage() {
   const { products } = data ? data : [];
 
   // I am sure there's a dryer way to write these, but I'm too tired to look up a reference
+  //it works, it's readable, it doesn't immediately fail the smell test so it's fine
   const clickShowForm = () => {
     setShowProducts(false);
     setShowForm(true);
@@ -79,6 +80,7 @@ function AdminPage() {
     );
   });
 
+  //again, all the functions that are returning JSX should be their own components
   const UpdateSection = (props) => {
     const productId = props.product.product;
 

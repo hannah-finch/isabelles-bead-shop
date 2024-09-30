@@ -32,6 +32,7 @@ function HomePage() {
 
   // This function sets the icon for categories, normal and hovered. If the category is not in categoriesToCheck, it will set the icon as a square
   function iconSrc(category) {
+    //again, just be careful about hard-coding values that are volatile
     const categoriesToCheck = new Set([
       'bracelet',
       'earring',
@@ -41,6 +42,7 @@ function HomePage() {
       'other',
     ]);
 
+    // a challenge for you: re-write without the if/else, just use ternary :-)
     if (!categoriesToCheck.has(category)) {
       return hoveredCategory === category || selectedCategory === category
         ? `/images/icons/uncategorized-color.svg`
@@ -50,6 +52,8 @@ function HomePage() {
         ? `/images/icons/${category}-color.svg`
         : `/images/icons/${category}.svg`;
     }
+
+    
   }
 
   function HomeBanner() {
