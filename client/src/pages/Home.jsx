@@ -1,14 +1,14 @@
-import { useEffect, useState, useContext } from "react";
-import ProductCard from "../components/product-card";
-import { ProductsContext } from "../utils/ProductsContext";
+import { useEffect, useState, useContext } from 'react';
+import ProductCard from '../components/product-card';
+import { ProductsContext } from '../utils/ProductsContext';
 
 function HomePage() {
   const { allProducts } = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    if (selectedCategory === "all") {
+    if (selectedCategory === 'all') {
       setFilteredProducts(allProducts);
     } else {
       setFilteredProducts(
@@ -20,25 +20,25 @@ function HomePage() {
   // Capitalize the first letter of each word in the category
   const capitalizeWords = (category) => {
     return category
-      .split(" ")
+      .split(' ')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+      .join(' ');
   };
   const nonUniqCategories = allProducts.map((product) => {
     return product.category;
   });
   const Categories = [...new Set(nonUniqCategories)];
-  const [hoveredCategory, setHoveredCategory] = useState("");
+  const [hoveredCategory, setHoveredCategory] = useState('');
 
   // This function sets the icon for categories, normal and hovered. If the category is not in categoriesToCheck, it will set the icon as a square
   function iconSrc(category) {
     const categoriesToCheck = new Set([
-      "bracelet",
-      "earring",
-      "fidget",
-      "keychain",
-      "necklace",
-      "other",
+      'bracelet',
+      'earring',
+      'fidget',
+      'keychain',
+      'necklace',
+      'other',
     ]);
 
     if (!categoriesToCheck.has(category)) {
@@ -54,17 +54,16 @@ function HomePage() {
 
   function HomeBanner() {
     return (
-      <section className="category-banner">
+      <section className='category-banner'>
         {Categories.map((category, key) => (
           <button key={key}>
             <div
               onClick={() => setSelectedCategory(category)}
-              className="category-btn"
+              className='category-btn'
               onMouseEnter={() => setHoveredCategory(category)}
-              onMouseLeave={() => setHoveredCategory("")}
-            >
+              onMouseLeave={() => setHoveredCategory('')}>
               <img src={iconSrc(category)}></img>
-              {category === "other" ? category : `${category}s`}
+              {category === 'other' ? category : `${category}s`}
             </div>
           </button>
         ))}
@@ -73,22 +72,36 @@ function HomePage() {
   }
 
   function ShopSelection() {
+    /** Any time you have logic that uses string values more than once,
+     * you really should consider replacing with a const or object to
+     * account for ease of change and reducing probability of bugs due
+     * to typo, and in some cases, reduce the amount of typing
+     */
+    //via const (note: ALL UPPERCASE SYNTAX)
+    const ALL = 'all';
+    //via object (better for use cases where there are a number of items
+    // that can be classified similarly as with the categories used in this function
+    const MY_CATEGORIES = {
+      ALL: ALL, // since ALL was already defined, we can re-use it as value here
+      SHOP: 'shop',
+      NONE: '',
+      OTHER: 'other',
+      LINK_ACTIVE: 'category-link-active',
+      LINK: 'category-link',
+    };
     return (
       <>
         <h2>
-          {selectedCategory === "all" ? "Shop " : ""}
-          {selectedCategory === "all" || selectedCategory === "other"
+          {selectedCategory === ALL ? MY_CATEGORIES.SHOP : MY_CATEGORIES.NONE}
+          {selectedCategory === ALL || selectedCategory === MY_CATEGORIES.OTHER
             ? `${capitalizeWords(selectedCategory)}`
             : `${capitalizeWords(selectedCategory)}s`}
         </h2>
         <button
-          onClick={() => setSelectedCategory("all")}
+          onClick={() => setSelectedCategory(ALL)}
           className={
-            selectedCategory === "all"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
+            selectedCategory === ALL ? MY_CATEGORIES.LINK_ACTIVE : MY_CATEGORIES.LINK
+          }>
           shop all
         </button>
         {Categories.map((category, key) => {
@@ -98,11 +111,10 @@ function HomePage() {
               onClick={() => setSelectedCategory(category)}
               className={
                 selectedCategory === category
-                  ? "category-link-active"
-                  : "category-link"
-              }
-            >
-              {category === "other" ? category : `${category}s`}
+                  ? MY_CATEGORIES.LINK_ACTIVE
+                  : MY_CATEGORIES.LINK
+              }>
+              {category === MY_CATEGORIES.OTHER ? category : `${category}s`}
             </button>
           );
         })}
@@ -116,7 +128,7 @@ function HomePage() {
     };
     return (
       <>
-        <div className="product-grid">
+        <div className='product-grid'>
           {/* This checks if the product query is empty and done loading.*/}
           {filteredProducts && filteredProducts.length > 0 ? (
             filteredProducts
@@ -134,7 +146,7 @@ function HomePage() {
         </div>
 
         {filteredProducts.length > displayNum ? (
-          <button onClick={showMore} className="btn-2">
+          <button onClick={showMore} className='btn-2'>
             Show More
           </button>
         ) : null}
@@ -144,7 +156,7 @@ function HomePage() {
   return (
     <>
       <HomeBanner />
-      <section className="shop-section">
+      <section className='shop-section'>
         <ShopSelection />
         <ProductsGrid />
       </section>
