@@ -21,15 +21,19 @@
 /* Smaller screens ------------------------- */
 
 @media screen and (max-width: 700px) {
+  .hide-small {
+    display: none;
+  }
+
+  .show-small {
+    display: block;
+  }
+
   section {
     padding: 40px;
   }
 
   /* Header --------- */
-  .photo-cluster {
-    display: none;
-  }
-
   .banner-home {
     display: flex;
     flex-direction: column;
@@ -39,10 +43,6 @@
 
   .logo-lg {
     max-width: 400px;
-  }
-
-  .vertical-line {
-    display: none;
   }
 
   .hamburger,
@@ -74,6 +74,23 @@
     display: grid;
     grid-template-columns: auto auto;
     padding: 20px;
+  }
+
+  .shop-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shop-main {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .shop-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
   }
 
   /* Product page -------- */

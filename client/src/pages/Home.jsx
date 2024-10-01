@@ -68,37 +68,36 @@ function HomePage() {
   function ShopSection() {
     const [displayNum, setDisplayNum] = useState(24);
     const [sortedProducts, setSortedProducts] = useState(filteredProducts);
-    const [sortChoice, setSortChoice] = useState("new-old")
+    const [sortChoice, setSortChoice] = useState("new-old");
     const showMore = () => {
       setDisplayNum(displayNum + 24);
     };
 
     useEffect(() => {
-        switch (sortChoice) {
-          case "new-old":
-            setSortedProducts(
-              filteredProducts
-                .map((value, index) => [index, value])
-                .sort((a, b) => b[0] - a[0])
-                .map((pair) => pair[1])
-            );
-            break;
-          case "old-new":
-            setSortedProducts(filteredProducts);
-            break;
-          case "low-high":
-            setSortedProducts(
-              [...filteredProducts].sort((a, b) => a.price - b.price)
-            );
-            break;
-          case "high-low":
-            setSortedProducts(
-              [...filteredProducts].sort((a, b) => b.price - a.price)
-            );
-            break;
-        }
-      
-    }, [sortChoice])
+      switch (sortChoice) {
+        case "new-old":
+          setSortedProducts(
+            filteredProducts
+              .map((value, index) => [index, value])
+              .sort((a, b) => b[0] - a[0])
+              .map((pair) => pair[1])
+          );
+          break;
+        case "old-new":
+          setSortedProducts(filteredProducts);
+          break;
+        case "low-high":
+          setSortedProducts(
+            [...filteredProducts].sort((a, b) => a.price - b.price)
+          );
+          break;
+        case "high-low":
+          setSortedProducts(
+            [...filteredProducts].sort((a, b) => b.price - a.price)
+          );
+          break;
+      }
+    }, [sortChoice]);
 
     const ShopSidebar = () => {
       return (
@@ -106,17 +105,23 @@ function HomePage() {
           <div className="shop-sidebar">
             <button
               onClick={() => setSelectedCategory("all")}
-              className={
-                selectedCategory === "all"
-                  ? "category-link-active btn-2"
-                  : "category-link btn-2"
-              }
+              className="btn-2 hide-small"
             >
               shop all
             </button>
 
             <div className="spacer"></div>
-            <h3>Categories:</h3>
+            <h3 className="hide-small">Categories:</h3>
+            <button
+              onClick={() => setSelectedCategory("all")}
+              className={
+                selectedCategory === "all"
+                      ? "category-link-active hide show-small"
+                      : "category-link hide show-small"
+              }
+            >
+              shop all
+            </button>
             {Categories.map((category, key) => {
               return (
                 <button
@@ -132,17 +137,19 @@ function HomePage() {
                 </button>
               );
             })}
-            <div className="spacer"></div>
-            <h3>Sort by:</h3>
+            <div className="spacer hide-small"></div>
+            <h3 className="hide-small">Sort by:</h3>
 
-
-            <select value={sortChoice} onChange={(e) => setSortChoice(e.target.value)} style={{textAlign: "center", border: "1px solid var(--blackish)"}}>
-              <option value="new-old">New to old</option>
-              <option value="old-new">Old to new</option>
-              <option value="low-high">Price low to high</option>
-              <option value="high-low">Price high to low</option>
+            <select
+              value={sortChoice}
+              onChange={(e) => setSortChoice(e.target.value)}
+              style={{ border: "1px solid var(--blackish)" }}
+            >
+              <option value="new-old">Newest</option>
+              <option value="old-new">Oldest</option>
+              <option value="low-high">Cheapest</option>
+              <option value="high-low">Priciest</option>
             </select>
-
           </div>
         </>
       );
@@ -171,23 +178,30 @@ function HomePage() {
     };
     return (
       <>
-        <section className="shop-section" ref={shopSection}>
-          <ShopSidebar />
-          <div className="shop-main">
-            <h2>
-              {selectedCategory === "all"
-                ? "Shop All"
-                : selectedCategory === "other"
-                ? "Other"
-                : `${capitalizeWords(selectedCategory)}s`}
-            </h2>
-            <ProductsGrid />
-            {filteredProducts.length > displayNum ? (
-              <button onClick={showMore} className="btn-2"
-              style={{alignSelf: "center"}}>
-                Show More
-              </button>
-            ) : null}
+        <section ref={shopSection}>
+          <h2 className="text-center">
+            {selectedCategory === "all"
+              ? "Shop All"
+              : selectedCategory === "other"
+              ? "Other"
+              : `${capitalizeWords(selectedCategory)}s`}
+          </h2>
+
+          <div className="shop-section">
+            <ShopSidebar />
+            <div className="vertical-line-2 hide-small"></div>
+            <div className="shop-main">
+              <ProductsGrid />
+              {filteredProducts.length > displayNum ? (
+                <button
+                  onClick={showMore}
+                  className="btn-2"
+                  style={{ alignSelf: "center" }}
+                >
+                  Show More
+                </button>
+              ) : null}
+            </div>
           </div>
         </section>
       </>

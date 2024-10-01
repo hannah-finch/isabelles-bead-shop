@@ -29,7 +29,7 @@ body {
 }
 
 section {
-  padding: 60px 10%;
+  padding: 80px 10%;
 }
 
 /*  General Styles ------------------------ */
@@ -47,6 +47,10 @@ section {
 
 .center {
   margin: auto;
+}
+
+.hide {
+  display: none;
 }
 
 .flex-row {
