@@ -29,7 +29,7 @@ body {
 }
 
 section {
-  padding: 60px 10%;
+  padding: 80px 10%;
 }
 
 /*  General Styles ------------------------ */
@@ -47,6 +47,10 @@ section {
 
 .center {
   margin: auto;
+}
+
+.hide {
+  display: none;
 }
 
 .flex-row {
@@ -93,6 +97,11 @@ h1 {
 h2 {
   font-family: Salsa;
   font-size: 30px;
+}
+
+h3 {
+font-family: Salsa;
+font-size: 20px;
 }
 
 .like-btn-2 {

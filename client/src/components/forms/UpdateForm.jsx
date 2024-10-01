@@ -161,7 +161,7 @@ function UpdateForm(prop) {
           <option value="bracelet">bracelet</option>
           <option value="earring">earring</option>
           <option value="fidget">fidget</option>
-          <option value="keychain">key chain</option>
+          <option value="keychain">keychain</option>
           <option value="necklace">necklace</option>
           <option value="trinket">trinket</option>
           <option value="other">other</option>

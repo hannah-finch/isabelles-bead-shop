@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import ProductCard from "../components/product-card";
 import { ProductsContext } from "../utils/ProductsContext";
 
@@ -6,6 +6,18 @@ function HomePage() {
   const { allProducts } = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [hoveredCategory, setHoveredCategory] = useState("");
+  const shopSection = useRef(null);
+
+  const nonUniqCategories = allProducts.map((product) => product.category);
+  const Categories = [...new Set(nonUniqCategories)];
+
+  const Icon = ({ category }) => (
+    <img src={`/images/icons/${category}.svg`}></img>
+  );
+  const IconSelected = ({ category }) => (
+    <img src={`/images/icons/${category}-color.svg`}></img>
+  );
 
   useEffect(() => {
     if (selectedCategory === "all") {
@@ -24,130 +36,183 @@ function HomePage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
-  const nonUniqCategories = allProducts.map((product) => {
-    return product.category;
-  });
-  const Categories = [...new Set(nonUniqCategories)];
-  const [hoveredCategory, setHoveredCategory] = useState("");
 
-  // This function sets the icon for categories, normal and hovered. If the category is not in categoriesToCheck, it will set the icon as a square
-  function iconSrc(category) {
-    const categoriesToCheck = new Set([
-      "bracelet",
-      "earring",
-      "fidget",
-      "keychain",
-      "necklace",
-      "other",
-    ]);
-
-    if (!categoriesToCheck.has(category)) {
-      return hoveredCategory === category || selectedCategory === category
-        ? `/images/icons/uncategorized-color.svg`
-        : `/images/icons/uncategorized.svg`;
-    } else {
-      return hoveredCategory === category || selectedCategory === category
-        ? `/images/icons/${category}-color.svg`
-        : `/images/icons/${category}.svg`;
-    }
-  }
-
-  function HomeBanner() {
+  function CategoryBanner() {
     return (
       <section className="category-banner">
         {Categories.map((category, key) => (
-          <button key={key}>
-            <div
-              onClick={() => setSelectedCategory(category)}
-              className="category-btn"
-              onMouseEnter={() => setHoveredCategory(category)}
-              onMouseLeave={() => setHoveredCategory("")}
-            >
-              <img src={iconSrc(category)}></img>
-              {category === "other" ? category : `${category}s`}
-            </div>
+          <button
+            key={key}
+            onClick={() => {
+              setSelectedCategory(category);
+              if (shopSection.current) {
+                shopSection.current.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="category-btn"
+            onMouseEnter={() => setHoveredCategory(category)}
+            onMouseLeave={() => setHoveredCategory()}
+          >
+            {hoveredCategory === category || selectedCategory === category ? (
+              <IconSelected category={category} />
+            ) : (
+              <Icon category={category} />
+            )}
+            <p>{category === "other" ? "other" : `${category}s`}</p>
           </button>
         ))}
       </section>
     );
   }
 
-  function ShopSelection() {
-    return (
-      <>
-        <h2>
-          {selectedCategory === "all" ? "Shop " : ""}
-          {selectedCategory === "all" || selectedCategory === "other"
-            ? `${capitalizeWords(selectedCategory)}`
-            : `${capitalizeWords(selectedCategory)}s`}
-        </h2>
-        <button
-          onClick={() => setSelectedCategory("all")}
-          className={
-            selectedCategory === "all"
-              ? "category-link-active"
-              : "category-link"
-          }
-        >
-          shop all
-        </button>
-        {Categories.map((category, key) => {
-          return (
+  function ShopSection() {
+    const [displayNum, setDisplayNum] = useState(24);
+    const [sortedProducts, setSortedProducts] = useState(filteredProducts);
+    const [sortChoice, setSortChoice] = useState("new-old");
+    const showMore = () => {
+      setDisplayNum(displayNum + 24);
+    };
+
+    useEffect(() => {
+      switch (sortChoice) {
+        case "new-old":
+          setSortedProducts(
+            filteredProducts
+              .map((value, index) => [index, value])
+              .sort((a, b) => b[0] - a[0])
+              .map((pair) => pair[1])
+          );
+          break;
+        case "old-new":
+          setSortedProducts(filteredProducts);
+          break;
+        case "low-high":
+          setSortedProducts(
+            [...filteredProducts].sort((a, b) => a.price - b.price)
+          );
+          break;
+        case "high-low":
+          setSortedProducts(
+            [...filteredProducts].sort((a, b) => b.price - a.price)
+          );
+          break;
+      }
+    }, [sortChoice]);
+
+    const ShopSidebar = () => {
+      return (
+        <>
+          <div className="shop-sidebar">
             <button
-              key={key}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory("all")}
+              className="btn-2 hide-small"
+            >
+              shop all
+            </button>
+
+            <div className="spacer hide-small"></div>
+            <h3 className="hide-small">Categories:</h3>
+            <button
+              onClick={() => setSelectedCategory("all")}
               className={
-                selectedCategory === category
-                  ? "category-link-active"
-                  : "category-link"
+                selectedCategory === "all"
+                      ? "category-link-active hide show-small"
+                      : "category-link hide show-small"
               }
             >
-              {category === "other" ? category : `${category}s`}
+              shop all
             </button>
-          );
-        })}
-      </>
-    );
-  }
-  function ProductsGrid() {
-    const [displayNum, setDisplayNum] = useState(15);
-    const showMore = () => {
-      setDisplayNum(displayNum + 15);
+            {Categories.map((category, key) => {
+              return (
+                <button
+                  key={key}
+                  onClick={() => setSelectedCategory(category)}
+                  className={
+                    selectedCategory === category
+                      ? "category-link-active"
+                      : "category-link"
+                  }
+                >
+                  {category === "other" ? category : `${category}s`}
+                </button>
+              );
+            })}
+            
+            <div className="spacer hide-small"></div>
+            <h3 className="hide-small">Sort by:</h3>
+
+            <select
+              value={sortChoice}
+              onChange={(e) => setSortChoice(e.target.value)}
+              style={{ border: "1px solid var(--blackish)" }}
+            >
+              <option value="new-old">Newest</option>
+              <option value="old-new">Oldest</option>
+              <option value="low-high">Cheapest</option>
+              <option value="high-low">Priciest</option>
+            </select>
+          </div>
+        </>
+      );
+    };
+
+    const ProductsGrid = () => {
+      return (
+        <>
+          <div className="product-grid">
+            {filteredProducts.length ? (
+              sortedProducts
+                .slice(0, displayNum)
+                .map((product) => (
+                  <ProductCard
+                    product={product}
+                    key={product._id}
+                    selected={selectedCategory}
+                  />
+                ))
+            ) : (
+              <p>No products available</p>
+            )}
+          </div>
+        </>
+      );
     };
     return (
       <>
-        <div className="product-grid">
-          {/* This checks if the product query is empty and done loading.*/}
-          {filteredProducts && filteredProducts.length > 0 ? (
-            filteredProducts
-              .slice(0, displayNum)
-              .map((product) => (
-                <ProductCard
-                  product={product}
-                  key={product._id}
-                  selected={selectedCategory}
-                />
-              ))
-          ) : (
-            <p>No products available</p>
-          )}
-        </div>
+        <section ref={shopSection}>
+          <h2 className="text-center">
+            {selectedCategory === "all"
+              ? "Shop All"
+              : selectedCategory === "other"
+              ? "Other"
+              : `${capitalizeWords(selectedCategory)}s`}
+          </h2>
 
-        {filteredProducts.length > displayNum ? (
-          <button onClick={showMore} className="btn-2">
-            Show More
-          </button>
-        ) : null}
+          <div className="shop-section">
+            <ShopSidebar />
+            <div className="vertical-line-2 hide-small"></div>
+            <div className="shop-main">
+              <ProductsGrid />
+              {filteredProducts.length > displayNum ? (
+                <button
+                  onClick={showMore}
+                  className="btn-2"
+                  style={{ alignSelf: "center" }}
+                >
+                  Show More
+                </button>
+              ) : null}
+            </div>
+          </div>
+        </section>
       </>
     );
   }
+
   return (
     <>
-      <HomeBanner />
-      <section className="shop-section">
-        <ShopSelection />
-        <ProductsGrid />
-      </section>
+      <CategoryBanner />
+      <ShopSection />
     </>
   );
 }
