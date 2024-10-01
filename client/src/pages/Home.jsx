@@ -110,7 +110,7 @@ function HomePage() {
               shop all
             </button>
 
-            <div className="spacer"></div>
+            <div className="spacer hide-small"></div>
             <h3 className="hide-small">Categories:</h3>
             <button
               onClick={() => setSelectedCategory("all")}
@@ -137,6 +137,7 @@ function HomePage() {
                 </button>
               );
             })}
+            
             <div className="spacer hide-small"></div>
             <h3 className="hide-small">Sort by:</h3>
 

@@ -3,7 +3,8 @@
 @media screen and (min-width: 1200px) {
 
   .product-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
   }
 
   .review-grid {
@@ -30,7 +31,7 @@
   }
 
   section {
-    padding: 40px;
+    padding: 60px 5%;
   }
 
   /* Header --------- */
@@ -68,6 +69,8 @@
 
   .product-grid {
     grid-template-columns: 1fr 1fr;
+    min-height: 200px;
+    /* margin-bottom: 0 */
   }
 
   .category-banner {
@@ -79,11 +82,8 @@
   .shop-section {
     display: flex;
     flex-direction: column;
-  }
-
-  .shop-main {
-    border-left: none;
-    padding-left: 0;
+    gap: 20px;
+    margin: 10px 0;
   }
 
   .shop-sidebar {
@@ -91,6 +91,10 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 20px;
+    justify-content: center;
+    border-bottom: 1px solid var(--blackish);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
   }
 
   /* Product page -------- */
