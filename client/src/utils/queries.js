@@ -46,3 +46,16 @@ export const GET_SINGLE_PRODUCT = gql`
     }
   }
 `;
+
+export const GET_INFO = gql`
+  query Info {
+    info {
+      id
+      announcement
+      about1Title
+      about1Text
+      about2Title
+      about2Text
+    }
+  }
+`;

@@ -1,3 +1,5 @@
+
+
 function Announcement() {
   // later, use state instead and let admin edit the title and announcement, save in db
   const announcementTitle = "NOTICE: ";
