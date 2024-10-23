@@ -6,12 +6,23 @@ import { GET_All_PRODUCTS } from "../utils/queries";
 import { toDecimal } from "../utils/math";
 import NewProductForm from "../components/forms/NewProductForm";
 import UpdateForm from "../components/forms/UpdateForm.jsx";
+import UpdateSiteForm from "../components/forms/UpdateSiteForm.jsx";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
+
+const UpdateSiteSection = () => {
+  return (
+    <>
+      <UpdateSiteForm></UpdateSiteForm>
+    </>
+  );
+};
 
 function AdminPage() {
   const [showForm, setShowForm] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showProducts, setShowProducts] = useState(true);
+  const [showEditSite, setShowEditSite] = useState(false);
+
   const { data } = useQuery(GET_All_PRODUCTS);
 
   const [product, setProduct] = useState();
@@ -22,7 +33,6 @@ function AdminPage() {
   }
   const { products } = data ? data : [];
 
-  // I am sure there's a dryer way to write these, but I'm too tired to look up a reference
   const clickShowForm = () => {
     setShowProducts(false);
     setShowForm(true);
@@ -120,6 +130,7 @@ function AdminPage() {
             <button className="btn-big" onClick={clickShowProducts}>
               Product List
             </button>
+            <button className="btn-big">Update Site Text</button>
             <Link
               to="https://dashboard.stripe.com/test/dashboard"
               target="_blank"
@@ -131,6 +142,7 @@ function AdminPage() {
         </section>
 
         <section>
+          <UpdateSiteSection></UpdateSiteSection>
           {showForm && <NewProductForm />}
           {showProducts && (
             <>
