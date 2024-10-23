@@ -35,11 +35,12 @@ const resolvers = {
   Mutation: {
     updateInfo: async (
       _,
-      { announcement, about1Title, about1Text, about2Title, about2Text }
+      { announcementTitle, announcement, about1Title, about1Text, about2Title, about2Text }
     ) => {
       const info = await Info.findOneAndUpdate(
         {id: 0},
         {
+          announcementTitle: announcementTitle,
           announcement: announcement,
           about1Title: about1Title,
           about1Text: about1Text,

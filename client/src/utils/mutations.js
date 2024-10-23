@@ -115,8 +115,9 @@ export const UPDATE_STOCK = gql`
 `;
 
 export const UPDATE_INFO = gql`
-  mutation UpdateInfo($announcement: String, $about1Title: String, $about1Text: String, $about2Title: String, $about2Text: String) {
-    updateInfo(announcement: $announcement, about1Title: $about1Title, about1Text: $about1Text, about2Title: $about2Title, about2Text: $about2Text) {
+  mutation UpdateInfo($announcementTitle: String, $announcement: String, $about1Title: String, $about1Text: String, $about2Title: String, $about2Text: String) {
+    updateInfo(announcementTitle: $announcementTitle, announcement: $announcement, about1Title: $about1Title, about1Text: $about1Text, about2Title: $about2Title, about2Text: $about2Text) {
+      announcementTitle
       announcement
       about1Title
       about1Text

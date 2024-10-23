@@ -6,6 +6,9 @@ const infoSchema = new Schema({
     type: Number,
     default: 0
   },
+  announcementTitle: {
+    type: String,
+  },
   announcement: {
     type: String,
   },

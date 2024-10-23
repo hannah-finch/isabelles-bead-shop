@@ -18,7 +18,7 @@ type Mutation {
     addOrder(products: [ID]!): Order
     addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
     updateStock(products: [UpdateStockInput!]!): Boolean   
-    updateInfo(id: Int, announcement: String, about1Title: String, about1Text: String, about2Title: String, about2Text: String): Info
+    updateInfo(id: Int, announcementTitle: String, announcement: String, about1Title: String, about1Text: String, about2Title: String, about2Text: String): Info
 }
 type Auth {
     token: ID!,
@@ -83,6 +83,7 @@ input UpdateStockInput {
 
 type Info {
     id: Int,
+    announcementTitle: String,
     announcement: String,
     about1Title: String,
     about1Text: String,
