@@ -3,9 +3,7 @@ import { GET_INFO } from "../../utils/queries";
 
 function Announcement() {
   const { data } = useQuery(GET_INFO)
-  console.log(data)
-  // later, use state instead and let admin edit the title and announcement, save in db
-  const announcementTitle = "NOTICE: ";
+  const announcementTitle = data?.info[0].announcementTitle;
   const announcement = data?.info[0].announcement;
 
   if (announcement !== "") {
@@ -15,7 +13,7 @@ function Announcement() {
         <div className="hack">
           <div className="announcement">
             <p className="text-center">
-              <span className="bold">{announcementTitle}&nbsp;</span>{" "}
+              <span className="bold">{announcementTitle}:&nbsp;</span>{" "}
               {announcement}
             </p>
           </div>
