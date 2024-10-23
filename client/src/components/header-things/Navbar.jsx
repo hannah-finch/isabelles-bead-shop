@@ -73,18 +73,6 @@ function Navbar() {
           about
         </NavLink>
 
-{/* Commenting out About page until it gets built */}
-        {/* {Auth.isLoggedIn() ? (
-          Auth.isClient() ? (
-            <NavLink
-              to={"/account/userId"}
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              account
-            </NavLink>
-          ) : null
-        ) : null} */}
-
         {Auth.isLoggedIn() ? (
           <button onClick={Auth.logout}>logout</button>
         ) : (

@@ -6,6 +6,7 @@ type Query {
     singleProduct(productId: ID!): Product
     order(_id: ID!): Order
     checkout(products: [ProductInput]): Checkout
+    info: [Info]
 }
 
 type Mutation {
@@ -16,7 +17,8 @@ type Mutation {
     deleteProduct(_id:ID!): Product
     addOrder(products: [ID]!): Order
     addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
-    updateStock(products: [UpdateStockInput!]!): Boolean
+    updateStock(products: [UpdateStockInput!]!): Boolean   
+    updateInfo(id: Int, announcement: String, about1Title: String, about1Text: String, about2Title: String, about2Text: String): Info
 }
 type Auth {
     token: ID!,
@@ -78,5 +80,14 @@ input UpdateStockInput {
     _id: ID!
     quantity: Int!
   }
+
+type Info {
+    id: Int,
+    announcement: String,
+    about1Title: String,
+    about1Text: String,
+    about2Title: String,
+    about2Text: String,
+}
 `;
 module.exports = typeDefs;

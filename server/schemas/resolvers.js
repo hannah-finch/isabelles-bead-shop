@@ -1,6 +1,7 @@
-const { User, Product } = require("../models");
+const { User, Product, Info } = require("../models");
 //TODO import auths
 const { signToken, AuthenticationError } = require("../utils/auth");
+
 const resolvers = {
   //! QUERIES
   Query: {
@@ -23,11 +24,34 @@ const resolvers = {
       const product = await Product.findOne({ _id: productId });
       return product;
     },
+    info: async (_) => {
+      const info = await Info.find();
+      return info;
+    },
   },
 
   //! MUTATIONS
   // ********************************
   Mutation: {
+    updateInfo: async (
+      _,
+      { announcement, about1Title, about1Text, about2Title, about2Text }
+    ) => {
+      const info = await Info.findOneAndUpdate(
+        {id: 0},
+        {
+          announcement: announcement,
+          about1Title: about1Title,
+          about1Text: about1Text,
+          about2Title: about2Title,
+          about2Text: about2Text,
+        },
+        { new: true }
+      );
+      if (info) {
+        return info;
+      }
+    },
     //* Authentication Mutations
     //********************************* */
     //* Sign Up Mutation
@@ -94,11 +118,6 @@ const resolvers = {
     updateStock: async (_, { products }) => {
       try {
         for (const product of products) {
-          //console.log("product.name", product.name);
-          // Assuming you have a way to map Stripe line product IDs to MongoDB ObjectIds
-          //const productId = await mapStripeIdToMongoId(product.name);
-          //console.log("productId", productId);
-          //console.log("productId._id", productId._id);
           await Product.findByIdAndUpdate(product._id, {
             $inc: { stock: -product.quantity },
           });
@@ -112,12 +131,4 @@ const resolvers = {
   },
 };
 
-// const mapStripeIdToMongoId = async (productName) => {
-//   const product = await Product.findOne({ name: productName });
-//   if (!product) {
-//     console.error(`Product with name ${productName} not found`);
-//     return null;
-//   }
-//   return product._id;
-// };
 module.exports = resolvers;
