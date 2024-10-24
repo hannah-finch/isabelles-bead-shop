@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_INFO } from "../../utils/queries";
+import { UPDATE_INFO } from "../../utils/mutations";
 
 function UpdateSiteForm() {
   const { data } = useQuery(GET_INFO);
+  const [UpdateInfo] = useMutation(UPDATE_INFO);
 
-  const [formState, setFormState] = useState({
+  const initialValues = {
     announcementTitle: data?.info[0].announcementTitle,
     announcement: data?.info[0].announcement,
     about1Title: data?.info[0].about1Title,
     about1Text: data?.info[0].about1Text,
     about2Title: data?.info[0].about2Title,
     about2Text: data?.info[0].about2Text,
-  });
+  };
+
+  const [formState, setFormState] = useState(initialValues);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,23 +29,38 @@ function UpdateSiteForm() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("submit");
+    const {
+      announcementTitle,
+      announcement,
+      about1Title,
+      about1Text,
+      about2Title,
+      about2Text,
+    } = formState;
+
+    try {
+      const { data } = await UpdateInfo({
+        variables: {
+          announcementTitle,
+          announcement,
+          about1Title,
+          about1Text,
+          about2Title,
+          about2Text,
+        },
+      });
+
+      if (data) {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
-  
+
   return (
     <>
-      {formState.announcementTitle}
-      <br></br>
-      {formState.announcement}
-      <br></br>
-      {formState.about1Title}
-      <br></br>
-      {formState.about1Text}
-      <br></br>
-      {formState.about2Title}
-      <br></br>
-      {formState.about2Text}
-
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} id="UpdateSiteForm">
         <h2>Update Site Text</h2>
 
         <h3>Shop Announcement:</h3>
@@ -65,7 +84,7 @@ function UpdateSiteForm() {
 
         <h3>About Paragraph #1:</h3>
 
-        <label htmlFor="about1Title">About Paragraph #1 Title:</label>
+        <label htmlFor="about1Title">Title:</label>
         <input
           value={formState.about1Title}
           name="about1Title"
@@ -73,7 +92,7 @@ function UpdateSiteForm() {
           type="text"
         ></input>
 
-        <label htmlFor="about1Text">About Paragraph #1 Text:</label>
+        <label htmlFor="about1Text">Text:</label>
         <textarea
           value={formState.about1Text}
           name="about1Text"
@@ -85,7 +104,7 @@ function UpdateSiteForm() {
 
         <h3>About Paragraph #2:</h3>
 
-        <label htmlFor="about2Title">About Paragraph #2 Title:</label>
+        <label htmlFor="about2Title">Title:</label>
         <input
           value={formState.about2Title}
           name="about2Title"
@@ -93,7 +112,7 @@ function UpdateSiteForm() {
           type="text"
         ></input>
 
-        <label htmlFor="about2Text">About Paragraph #2 Text:</label>
+        <label htmlFor="about2Text">Text:</label>
         <textarea
           value={formState.about2Text}
           name="about2Text"
@@ -101,6 +120,16 @@ function UpdateSiteForm() {
           type="text"
         ></textarea>
       </form>
+      <div className="form-footer center">
+        <div className="button-container">
+        <button className="btn-2" onClick={() => window.location.reload()}>
+            Cancel
+          </button>
+          <button className="btn-1" type="submit" form="UpdateSiteForm">
+            Save Changes
+          </button>
+        </div>
+      </div>
     </>
   );
 }

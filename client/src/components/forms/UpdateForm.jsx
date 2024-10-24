@@ -8,11 +8,11 @@ import { IntToCurrency, currencyToInt } from "../../utils/math.js";
 function UpdateForm(prop) {
   const [UpdateProduct] = useMutation(UPDATE_PRODUCT);
   const [DeleteProduct] = useMutation(DELETE_PRODUCT);
-  const { _id, description, category, image, name, price, stock } =
+  const { _id, description, category, image, imageURL, name, price, stock } =
     prop.product;
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const [formState, setFormState] = useState({
+  const initialValues = {
     id: _id,
     name: name,
     price: IntToCurrency(price / 100),
@@ -20,7 +20,9 @@ function UpdateForm(prop) {
     description: description,
     stock: stock,
     image: image,
-  });
+  };
+  
+  const [formState, setFormState] = useState(initialValues);
 
   const clickConfirm = () => {
     setShowConfirm(!showConfirm);
@@ -69,7 +71,6 @@ function UpdateForm(prop) {
   //TODO This function runs when you click the upload button when the page is first loaded
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("submit");
     const { name, price, category, description, stock, image } = formState;
     try {
       const { data } = await UpdateProduct({
@@ -85,8 +86,6 @@ function UpdateForm(prop) {
       });
 
       if (data != null) {
-        alert("Item updated");
-
         window.location.reload();
       }
     } catch (err) {
@@ -94,31 +93,20 @@ function UpdateForm(prop) {
     }
   };
 
-  function revertEdit() {
-    setFormState({
-      id: _id,
-      name: name,
-      price: price,
-      category: category,
-      description: description,
-      stock: stock,
-      image: image,
-    });
-  }
-
+  console.log(imageURL);
   return (
     <>
       <form onSubmit={handleFormSubmit} id="UpdateForm">
         <h2>Edit product</h2>
 
-        <label htmlFor="productId">Product ID: (editing disabled)</label>
-        <input
-          value={formState.id}
-          onChange={handleInputChange}
-          type="text"
-          placeholder="Product id"
-          disabled
-        ></input>
+        <figure className="product-img-admin center">
+          <img
+            src={imageURL}
+            alt={image.description}
+            className="crop-img"
+          ></img>
+        </figure>
+
         <label htmlFor="name">Name:</label>
         <input
           value={formState.name}
@@ -150,7 +138,6 @@ function UpdateForm(prop) {
           onChange={handleInputChange}
           type="number"
           min="0"
-          // placeholder="Stock"
         ></input>
         <label htmlFor="category">Category:</label>
         <select
@@ -174,14 +161,7 @@ function UpdateForm(prop) {
           type="text"
           placeholder="Description"
         ></textarea>
-        <label htmlFor="image">Image: (editing disabled)</label>
-        <input
-          value={formState.image}
-          name="image"
-          onChange={handleInputChange}
-          type="text"
-          disabled
-        ></input>
+
       </form>
       <div className="form-footer center">
         <div className="button-container">
@@ -190,8 +170,8 @@ function UpdateForm(prop) {
               <button className="btn-del" onClick={clickConfirm}>
                 Delete
               </button>
-              <button className="btn-2" onClick={revertEdit}>
-                Revert
+              <button className="btn-2" onClick={() => window.location.reload()}>
+                Cancel
               </button>
               <button className="btn-1" type="submit" form="UpdateForm">
                 Save Changes

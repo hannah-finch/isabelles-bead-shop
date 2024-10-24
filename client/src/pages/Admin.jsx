@@ -9,18 +9,10 @@ import UpdateForm from "../components/forms/UpdateForm.jsx";
 import UpdateSiteForm from "../components/forms/UpdateSiteForm.jsx";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
 
-const UpdateSiteSection = () => {
-  return (
-    <>
-      <UpdateSiteForm></UpdateSiteForm>
-    </>
-  );
-};
-
 function AdminPage() {
   const [showForm, setShowForm] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const [showProducts, setShowProducts] = useState(true);
+  const [showProducts, setShowProducts] = useState(false);
   const [showEditSite, setShowEditSite] = useState(false);
 
   const { data } = useQuery(GET_All_PRODUCTS);
@@ -37,12 +29,14 @@ function AdminPage() {
     setShowProducts(false);
     setShowForm(true);
     setShowEdit(false);
+    setShowEditSite(false);
   };
 
   const clickShowProducts = () => {
     setShowProducts(true);
     setShowForm(false);
     setShowEdit(false);
+    setShowEditSite(false);
   };
 
   const clickEdit = (event) => {
@@ -50,6 +44,14 @@ function AdminPage() {
     setShowProducts(false);
     setShowForm(false);
     setShowEdit(true);
+    setShowEditSite(false);
+  };
+
+  const clickShowEditSite = () => {
+    setShowProducts(false);
+    setShowForm(false);
+    setShowEdit(false);
+    setShowEditSite(true);
   };
 
   const ProductList = products.map((product, key) => {
@@ -57,7 +59,7 @@ function AdminPage() {
       <>
         <div className="product-admin" key={key}>
           <figure className="product-img-admin">
-            <img src={product.imageURL}></img>
+            <img src={product.imageURL} className="crop-img"></img>
           </figure>
           <div className="item-text-box-admin">
             <p>
@@ -117,20 +119,35 @@ function AdminPage() {
 
   return (
     <>
+      <div className="blue-background"></div>
       <section className="admin-page">
         <section className="admin-welcome-section">
           <h1>Hi Isabelle!</h1>
           <h2>What would you like to do?</h2>
           <div className="spacer"></div>
 
-          <div className="button-container button-container-product">
-            <button className="btn-big" onClick={clickShowForm}>
+          <div className="button-container-2">
+            <button
+              className="btn-big"
+              onClick={clickShowForm}
+              style={{ backgroundColor: showForm && "var(--blue)" }}
+            >
               + New Product
             </button>
-            <button className="btn-big" onClick={clickShowProducts}>
-              Product List
+            <button
+              className="btn-big"
+              onClick={clickShowProducts}
+              style={{ backgroundColor: showProducts && "var(--blue)" }}
+            >
+              Edit Products
             </button>
-            <button className="btn-big">Update Site Text</button>
+            <button
+              className="btn-big"
+              onClick={clickShowEditSite}
+              style={{ backgroundColor: showEditSite && "var(--blue)" }}
+            >
+              Update Site Text
+            </button>
             <Link
               to="https://dashboard.stripe.com/test/dashboard"
               target="_blank"
@@ -142,7 +159,7 @@ function AdminPage() {
         </section>
 
         <section>
-          <UpdateSiteSection></UpdateSiteSection>
+          {showEditSite && <UpdateSiteForm />}
           {showForm && <NewProductForm />}
           {showProducts && (
             <>
