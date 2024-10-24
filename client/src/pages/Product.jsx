@@ -35,7 +35,6 @@ function ProductPage() {
   const [addClicked, setAddClicked] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [currentAvailable, setCurrentAvailable] = useState(stock);
-  const [quantityToAdd, setQuantityToAdd] = useState(1);
 
   // set current available stock when the product is first rendered. (stock - quantity in cart)
   useEffect(() => {
@@ -59,26 +58,12 @@ function ProductPage() {
     setShowEdit(!showEdit);
   };
 
-  const handleIncrement = () => {
-    if (quantityToAdd < currentAvailable) {
-      setQuantityToAdd(quantityToAdd + 1);
+  const handleClaimItem = () => {
+    if (currentAvailable > 0) {
+      addToCart(product, 1);
+      setCurrentAvailable(currentAvailable - 1);
+      delayClick();
     }
-  };
-
-  const handleDecrement = () => {
-    if (quantityToAdd > 1) {
-      setQuantityToAdd(quantityToAdd - 1);
-    }
-  };
-
-  // add product to cart
-  // update available stock
-  // reset quantity to add
-  const handleAddToCart = () => {
-    addToCart(product, parseInt(quantityToAdd, 10));
-    setCurrentAvailable(currentAvailable - quantityToAdd);
-    setQuantityToAdd(1);
-    delayClick();
   };
 
   const ReviewCard = (prop) => {
@@ -107,14 +92,12 @@ function ProductPage() {
 
         <div className="product-info">
           <h2>{name}</h2>
-
           <p>
             Price: <span className="price">${toDecimal(price)}</span>
-            &nbsp;&nbsp;( {stock} left in stock )
           </p>
           <p>{description}</p>
+          <div className="spacer"></div>( {currentAvailable} available )
           <div className="spacer"></div>
-
           {Auth.isLoggedIn() && Auth.isAdmin() ? (
             <button className="btn-edit" onClick={clickEdit}>
               {showEdit ? "X" : "Edit"}
@@ -122,48 +105,27 @@ function ProductPage() {
           ) : (
             <div className="button-container button-container-product">
               <button
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
                 onClick={() => {
-                  handleDecrement();
+                  handleClaimItem();
+                }}
+                className="btn-1 add-cart-btn"
+                style={{
+                  transition: ".5s",
+                  backgroundColor: addClicked
+                    ? "var(--blue)"
+                    : currentAvailable < 1
+                    ? "var(--gray)"
+                    : "var(--blackish)",
+                  color: addClicked && "var(--blackish)",
+                  cursor: currentAvailable < 1 && "default",
                 }}
               >
-                -
+                {addClicked
+                  ? "Added to Cart!"
+                  : currentAvailable < 1
+                  ? "None Available"
+                  : "Add to Cart"}
               </button>
-              {stock > 0 ? (
-                <div className="like-btn-2 ">
-                  <p id="quantity">{quantityToAdd}</p>
-                </div>
-              ) : (
-                <p className="bold">OUT OF STOCK</p>
-              )}
-
-              <button
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-0 px-2 rounded-full"
-                onClick={() => {
-                  handleIncrement();
-                }}
-              >
-                +
-              </button>
-
-              {currentAvailable <= 0 ? (
-                <p className="bold">NO MORE AVAIABLE</p>
-              ) : (
-                <button
-                  onClick={() => {
-                    handleAddToCart();
-                  }}
-                  className="btn-1 add-cart-btn"
-                  style={{
-                    transition: ".5s",
-                    backgroundColor: addClicked
-                      ? "var(--blue)"
-                      : "var(--blackish)",
-                  }}
-                >
-                  {addClicked ? "Added to Cart!" : "Add to Cart"}
-                </button>
-              )}
 
               <ReviewForm />
             </div>
