@@ -54,9 +54,9 @@ function Navbar() {
                   isActive ? "active-link btn-admin" : "btn-admin"
                 }
               >
-                Admin Panel
+                admin panel
               </NavLink>
-              <div className="vertical-line"></div>
+              <div className="vertical-line hide-small"></div>
             </>
           ) : null
         ) : null}
@@ -83,7 +83,7 @@ function Navbar() {
             login
           </NavLink>
         )}
-        <div className="vertical-line"></div>
+        <div className="vertical-line hide-small"></div>
       </>
     );
   };
@@ -103,7 +103,7 @@ function Navbar() {
                 width: "60px",
                 alignSelf: "center",
                 position: "absolute",
-                bottom: "40px",
+                bottom: "60px",
               }}
               src="/images/icons/cluster-1.svg"
             ></img>
@@ -130,9 +130,6 @@ function Navbar() {
           {isHovered && <CartPreview items={cartItems} />}
         </NavLink>
       </nav>
-      {/* <div className="menu">
-        <NavLinks />
-      </div> */}
     </>
   );
 }
