@@ -10,20 +10,23 @@ function Footer() {
           Made with love,<br></br> by Isabelle
         </h1>
         <div className="spacer"></div>
-        {location.pathname !== "/about" && (
+        {location.pathname === "/about" ? (
+          <Link className="btn-1" to="/">
+            shop
+          </Link>
+        ) : (
           <Link className="btn-1" to="/about">
             about
           </Link>
         )}
       </footer>
       <section className="sub-footer">
-        {/* TODO: add our names and GitHub links */}
         Website built by:{" "}
         <a href="https://github.com/hannahschwen" target="_blank">
           Hannah Schwen,
         </a>{" "}
         <a href="https://github.com/Kalink52" target="_blank">
-          Micah Cox, 
+          Micah Cox,
         </a>{" "}
         <a href="https://github.com/swokamoto" target="_blank">
           Scott Okamoto,

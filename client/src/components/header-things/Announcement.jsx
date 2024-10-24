@@ -1,8 +1,10 @@
+import { useQuery } from "@apollo/client";
+import { GET_INFO } from "../../utils/queries";
+
 function Announcement() {
-  // later, use state instead and let admin edit the title and announcement, save in db
-  const announcementTitle = "NOTICE: ";
-  const announcement =
-    "This website is currently under construction. DON'T USE IT";
+  const { data } = useQuery(GET_INFO)
+  const announcementTitle = data?.info[0].announcementTitle;
+  const announcement = data?.info[0].announcement;
 
   if (announcement !== "") {
     return (
@@ -11,7 +13,7 @@ function Announcement() {
         <div className="hack">
           <div className="announcement">
             <p className="text-center">
-              <span className="bold">{announcementTitle}&nbsp;</span>{" "}
+              <span className="bold">{announcementTitle}:&nbsp;</span>{" "}
               {announcement}
             </p>
           </div>

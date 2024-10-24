@@ -19,19 +19,30 @@
 }
 
 .btn-big {
-  padding: 20px 40px;
-  background-color: var(--whitish);
+  width: 170px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
   box-shadow: var(--shadow1);
-  border-radius: 40px;
+  border-radius: 6px;
   transition: 0.2s;
 }
 
 .btn-big:hover {
-  background-color: var(--blue);
+  background-color: var(--mint);
+}
+.blue-background {
+  background-color: var(--light-blue);
+  position: fixed;
+  top:0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1000;
 }
 
 .admin-page {
-  background-color: var(--light-blue);
   padding: 0;
   /* Needs to be relative for edit form to be positioned */
   position: relative;
@@ -41,8 +52,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 230px;
   padding-bottom: 0;
+  margin-bottom: -40px;
   text-align: center;
 }
 
@@ -69,7 +80,8 @@
 }
 
 .button-container-2 {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
   gap: 10px;
 }
 
