@@ -121,10 +121,10 @@ function ProductPage() {
                 }}
               >
                 {addClicked
-                  ? "Item claimed!"
+                  ? "Added to Cart!"
                   : currentAvailable < 1
                   ? "None Available"
-                  : "Claim This"}
+                  : "Add to Cart"}
               </button>
 
               <ReviewForm />

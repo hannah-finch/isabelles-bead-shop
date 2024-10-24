@@ -32,8 +32,8 @@ const CheckoutButton = ({ cartItems }) => {
     console.log("cartItemsWithId", cartItemsWithId);
 
     try {
-      const response = await fetch("https://isabelles-bead-shop.onrender.com/create-checkout-session", {
-      //const response = await fetch("http://localhost:3001/create-checkout-session",{
+      const response = await fetch("https://isabellesbeadshop.onrender.com/create-checkout-session", {
+
           method: "POST",
           headers: {
             "Content-Type": "application/json",
