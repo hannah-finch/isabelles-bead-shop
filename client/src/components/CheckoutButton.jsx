@@ -37,7 +37,7 @@ const CheckoutButton = ({ cartItems }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7`,
+            Authorization: `Bearer pk_live_51QDtchLgUyYj4eXz7RxtTO0xsFbttatLn6uAHCWRfK39TtBeEsWuumjnWvwz7c5uQHK1vEId59gDCM7uYy9eBGr400Ujqjckoq`,
           },
           body: JSON.stringify({ items: stripeItems }),
         }
