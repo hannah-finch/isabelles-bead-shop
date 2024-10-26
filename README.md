@@ -5,7 +5,7 @@ E-commerce site for a small jewelry shop
   - [Installation](#installation)
   - [Resources](#resources)
 ## Deployed Application  
-https://isabelles-bead-shop.onrender.com/cart
+https://isabellesbeadshop.onrender.com/
 ## Installation
 
 1. download and install node
