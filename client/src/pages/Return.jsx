@@ -11,30 +11,6 @@ const ReturnPage = () => {
   const [updateStock] = useMutation(UPDATE_STOCK);
 
   useEffect(() => {
-    // const query = new URLSearchParams(location.search);
-    // const sessionId = query.get("session_id");
-
-    // const fetchSessionData = async (sessionId) => {
-    //   try {
-    //     const response = await fetch(`https://isabelles-bead-shop.onrender.com/retrieve-checkout-session/${sessionId}`, {
-    //       method: 'GET',
-    //       mode: 'cors',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7`,
-    //       }
-    //     });
-
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-
-    //     return response.json();
-    //   } catch (error) {
-    //     console.error("Error fetching session:", error);
-    //     throw error;
-    //   }
-    // };
 
     const updateStockAndClearCart = async (items, sessionId) => {
       const stockUpdated = localStorage.getItem(`stockUpdated_${sessionId}`);
@@ -105,12 +81,6 @@ const ReturnPage = () => {
       <p className="text-lg text-gray-700 mb-4">
         Thank you for your purchase! We appreciate your business.
       </p>
-      {/* <p className="text-lg text-gray-700 mb-4">
-        <span className="font-semibold">Payment Status:</span>{" "}
-        <span className={`${session.payment_status === "paid" ? "text-green-600" : "text-red-600"}`}>
-          {session.payment_status}
-        </span>
-      </p> */}
       <h2 className="text-xl font-semibold text-gray-800 mb-4">
         Items Purchased:
       </h2>

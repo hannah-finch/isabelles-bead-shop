@@ -2,7 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const CheckoutButton = ({ cartItems }) => {
   const stripePromise = loadStripe(
-    "pk_test_51Q2G162MBbXhKSWl5DEAnWv59xawhXsLx1ezVYquN9XdN3PkOB8yt71UBZbzXwCZVJIjYIfQZmxkT2GS4ekGLVq900JJH1kTY7"
+    "pk_live_51QDtchLgUyYj4eXz7RxtTO0xsFbttatLn6uAHCWRfK39TtBeEsWuumjnWvwz7c5uQHK1vEId59gDCM7uYy9eBGr400Ujqjckoq"
   );
 
   // Create a Stripe checkout session and redirect
