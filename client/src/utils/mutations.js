@@ -30,6 +30,7 @@ export const ADD_PRODUCT = gql`
     $price: Int!
     $description: String!
     $category: String!
+    $featured: Boolean
     $stock: Int!
     $image: String!
   ) {
@@ -38,12 +39,15 @@ export const ADD_PRODUCT = gql`
       price: $price
       description: $description
       category: $category
+      featured: $featured
       stock: $stock
       image: $image
     ) {
       _id
       name
       price
+      featured
+      originalPrice
       description
       image
       category
@@ -58,7 +62,9 @@ export const UPDATE_PRODUCT = gql`
     $description: String!
     $image: String!
     $category: String!
+    $featured: Boolean
     $stock: Int!
+    $endSale: Boolean
     $id: ID!
   ) {
     updateProduct(
@@ -67,12 +73,16 @@ export const UPDATE_PRODUCT = gql`
       description: $description
       image: $image
       category: $category
+      featured: $featured
       stock: $stock
+      endSale: $endSale
       _id: $id
     ) {
       _id
       name
       price
+      featured
+      originalPrice
       description
       image
       imageURL
@@ -95,6 +105,8 @@ export const ADD_REVIEW = gql`
       _id
       name
       price
+      featured
+      originalPrice
       description
       category
       stock

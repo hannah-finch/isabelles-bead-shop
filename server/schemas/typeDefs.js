@@ -12,8 +12,8 @@ type Query {
 type Mutation {
     createUser(username: String!, email: String!, password: String!, role: String): Auth
     login(username: String!, password: String!): Auth
-    createProduct(name: String!, price: Int!, description: String!, image: String!, category: String!, stock: Int!): Product
-    updateProduct(_id:ID!, name: String!, price: Int!, description: String!, image: String!, category: String!, stock: Int!): Product
+    createProduct(name: String!, price: Int!, description: String!, image: String!, category: String!, stock: Int!, featured: Boolean): Product
+    updateProduct(endSale: Boolean, _id:ID!, name: String!, price: Int!, description: String!, image: String!, category: String!, stock: Int!, featured: Boolean): Product
     deleteProduct(_id:ID!): Product
     addOrder(products: [ID]!): Order
     addReview(_id:ID!, ReviewDetails: ReviewDetailsInput ): Product
@@ -40,6 +40,8 @@ type Product {
     price: Int!
     description: String!
     image: String!
+    featured: Boolean
+    originalPrice: Int
     imageURL: String!
     category: String!
     stock: Int!

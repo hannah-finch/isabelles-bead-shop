@@ -7,6 +7,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "../../utils/CloudinaryUploadWidget";
 function NewProductForm() {
+  const [saveError, setSaveError] = useState("");
   const [addProduct] = useMutation(ADD_PRODUCT);
 
   const [formState, setFormState] = useState({
@@ -15,6 +16,7 @@ function NewProductForm() {
     category: "",
     description: "",
     stock: 1,
+    featured: false,
     image: "",
   });
 
@@ -26,7 +28,11 @@ function NewProductForm() {
     uploadPreset,
   });
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setFormState({ ...formState, [name]: checked });
+      return;
+    }
     // if the value is suppose to be an int, make it an int
     switch (name) {
       case "price":
@@ -58,6 +64,7 @@ function NewProductForm() {
         data: { createProduct },
       } = await addProduct({
         variables: {
+          featured: formState.featured,
           name,
           price: currencyToInt(price),
           category,
@@ -73,7 +80,7 @@ function NewProductForm() {
         //TODO FIX BUG FROM CAUSING FORMS FROM AUTO SUBMITTING
       }
     } catch (err) {
-      console.log(err);
+      setSaveError("Could not save this product. Check the price and try again.");
     }
   };
 
@@ -92,6 +99,7 @@ function NewProductForm() {
         id="NewProductForm"
       >
         <h2>Add new product</h2>
+        {saveError && <div role="alert">{saveError}</div>}
         <label htmlFor="name">Name:</label>
         <input
           value={formState.name}
@@ -116,6 +124,10 @@ function NewProductForm() {
             min="0"
           ></input>
         </div>
+        <label className="product-option">
+          <input type="checkbox" name="featured" checked={formState.featured} onChange={handleInputChange} />
+          Feature this product on the homepage
+        </label>
         <label htmlFor="stock">Number in stock:</label>
         <input
           value={formState.stock}

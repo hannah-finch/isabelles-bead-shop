@@ -212,6 +212,16 @@ function HomePage() {
   return (
     <>
       <CategoryBanner />
+      {allProducts.some((product) => product.featured) && (
+        <section className="featured-section">
+          <h2 className="text-center">Featured Products</h2>
+          <div className="product-grid">
+            {allProducts.filter((product) => product.featured).map((product) => (
+              <ProductCard key={product._id} product={product} selected="all" />
+            ))}
+          </div>
+        </section>
+      )}
       <ShopSection />
     </>
   );

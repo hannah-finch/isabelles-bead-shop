@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
 import { GET_All_PRODUCTS } from "../utils/queries";
-import { toDecimal } from "../utils/math";
+import ProductPrice from "../components/ProductPrice";
 import NewProductForm from "../components/forms/NewProductForm";
 import UpdateForm from "../components/forms/UpdateForm.jsx";
 import UpdateSiteForm from "../components/forms/UpdateSiteForm.jsx";
@@ -64,10 +64,10 @@ function AdminPage() {
           <div className="item-text-box-admin">
             <p>
               <span className="bold">Name: </span>
-              {product.name}
+              {product.name} {product.featured && <span className="product-badge">Featured</span>}
             </p>
             <p>
-              <span className="bold">Price: </span>${toDecimal(product.price)}
+              <span className="bold">Price: </span><ProductPrice price={product.price} originalPrice={product.originalPrice} />
             </p>
             <p>
               <span className="bold">Category: </span>

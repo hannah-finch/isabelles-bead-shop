@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PRODUCT } from "../utils/queries.js";
-import { toDecimal } from "../utils/math.js";
+import ProductPrice from "../components/ProductPrice";
 import { useContext } from "react";
 import Auth from "../utils/auth";
 
@@ -93,7 +93,7 @@ function ProductPage() {
         <div className="product-info">
           <h2>{name}</h2>
           <p>
-            Price: <span className="price">${toDecimal(price)}</span>
+            Price: <span className="price"><ProductPrice price={price} originalPrice={product.originalPrice} /></span>
           </p>
           <p>{description}</p>
           <div className="spacer"></div>( {currentAvailable} available )
