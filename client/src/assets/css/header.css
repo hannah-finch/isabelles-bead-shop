@@ -102,10 +102,10 @@ nav button {
   background-size: cover;
   background-position: 100% 100%;
   display: grid;
-  grid-template-columns: 45% 60%;
+  grid-template-columns: 1fr;
   overflow: hidden;
   align-items: center;
-  padding: 20px 0 20px 10%;
+  padding: 40px 10%;
   gap: 40px;
 }
 
@@ -113,12 +113,6 @@ nav button {
   width: 100%;
   max-width: 500px;
   justify-self: center;
-}
-
-.photo-cluster {
-  width: 100%;
-  max-width: 740px;
-  justify-self: right;
 }
 
 .menu {

@@ -99,3 +99,19 @@
 .block {
   display: inline-block;
 }
+
+.product-badge {
+  display: inline-block;
+  background-color: var(--mint);
+  color: var(--blackish);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.product-price { display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.original-price { color: var(--blackish); font-weight: normal; }
+.featured-section { background-color: var(--light-blue); }
+.featured-section .product-grid { margin-top: 30px; min-height: 0; }
+.product-option { display: flex; align-items: center; gap: 10px; color: var(--blackish); }
+.product-help { margin: 8px 0; }

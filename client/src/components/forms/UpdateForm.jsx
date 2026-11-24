@@ -10,6 +10,8 @@ function UpdateForm(prop) {
   const [DeleteProduct] = useMutation(DELETE_PRODUCT);
   const { _id, description, category, image, imageURL, name, price, stock } =
     prop.product;
+  const [endSale, setEndSale] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
 
   const initialValues = {
@@ -19,6 +21,7 @@ function UpdateForm(prop) {
     category: category,
     description: description,
     stock: stock,
+    featured: prop.product.featured ?? false,
     image: image,
   };
   
@@ -46,7 +49,11 @@ function UpdateForm(prop) {
   };
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, type, checked } = event.target;
+    if (type === "checkbox") {
+      setFormState({ ...formState, [name]: checked });
+      return;
+    }
     switch (name) {
       case "price":
         setFormState({
@@ -75,7 +82,9 @@ function UpdateForm(prop) {
     try {
       const { data } = await UpdateProduct({
         variables: {
+          endSale,
           id: _id,
+          featured: formState.featured,
           name,
           price: currencyToInt(price),
           category,
@@ -89,7 +98,7 @@ function UpdateForm(prop) {
         window.location.reload();
       }
     } catch (err) {
-      console.log(err);
+      setSaveError("Could not save this product. Please try again.");
     }
   };
 
@@ -102,7 +111,7 @@ function UpdateForm(prop) {
         <figure className="product-img-admin center">
           <img
             src={imageURL}
-            alt={image.description}
+            alt={name}
             className="crop-img"
           ></img>
         </figure>
@@ -131,6 +140,18 @@ function UpdateForm(prop) {
             placeholder="Price"
           ></input>
         </div>
+        <div className="product-help">Lower the price to show the original price and sale price automatically.</div>
+        {prop.product.originalPrice > price && (
+          <label className="product-option">
+            <input type="checkbox" checked={endSale} onChange={(event) => setEndSale(event.target.checked)} />
+            End sale and restore ${ (prop.product.originalPrice / 100).toFixed(2) }
+          </label>
+        )}
+        {saveError && <div role="alert">{saveError}</div>}
+        <label className="product-option">
+          <input type="checkbox" name="featured" checked={formState.featured} onChange={handleInputChange} />
+          Feature this product on the homepage
+        </label>
         <label htmlFor="stock">Number in stock:</label>
         <input
           value={formState.stock}

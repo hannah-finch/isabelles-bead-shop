@@ -40,12 +40,10 @@ export function IntToCurrency(v) {
   return amount;
 }
 
-export function currencyToInt(v) {
-  let value = "";
-  if (typeof v !== "string") {
-    value = `${v}`;
-  } else {
-    value = v;
+export function currencyToInt(value) {
+  const dollars = String(value).replace(/,/g, "").trim();
+  if (!/^\d+(\.\d{1,2})?$/.test(dollars)) {
+    throw new Error("Enter a valid price with no more than two decimal places");
   }
-  return +value.replace(/,/g, "").replace(/\./g, "");
+  return Math.round(Number(dollars) * 100);
 }

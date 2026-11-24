@@ -17,6 +17,8 @@ export const GET_All_PRODUCTS = gql`
       _id
       name
       price
+      featured
+      originalPrice
       description
       image
       imageURL
@@ -32,6 +34,8 @@ export const GET_SINGLE_PRODUCT = gql`
       _id
       name
       price
+      featured
+      originalPrice
       description
       image
       imageURL

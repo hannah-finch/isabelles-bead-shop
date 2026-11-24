@@ -2,6 +2,8 @@ const { User, Product, Info } = require("../models");
 //TODO import auths
 const { signToken, AuthenticationError } = require("../utils/auth");
 
+const { salePricing } = require("../utils/salePricing");
+
 const resolvers = {
   //! QUERIES
   Query: {
@@ -87,12 +89,15 @@ const resolvers = {
     },
     updateProduct: async (
       _,
-      { _id, name, price, description, image, category, stock }
+      { _id, name, price, description, image, category, stock, featured, endSale }
     ) => {
+      const current = await Product.findById(_id);
+      if (!current) throw new Error("Product not found");
+      const pricing = salePricing(current, price, endSale);
       const product = await Product.findByIdAndUpdate(
-        { _id },
-        { name, price, description, image, category, stock },
-        { new: true }
+        _id,
+        { name, ...pricing, description, image, category, stock, ...(featured !== undefined && { featured }) },
+        { new: true, runValidators: true }
       );
       return product;
     },

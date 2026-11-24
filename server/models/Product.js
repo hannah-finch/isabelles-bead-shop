@@ -10,6 +10,8 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
+    featured: { type: Boolean, default: false },
+    originalPrice: { type: Number, default: null, min: 0 },
     description: {
       type: String,
       required: true,
